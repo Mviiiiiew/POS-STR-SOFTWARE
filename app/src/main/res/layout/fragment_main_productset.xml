@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#263238"
+              android:orientation="vertical"
+              android:padding="50dp"
+              android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_unit_add_white_48dp"
+            />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_group_add_white_48dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_add_shopping_cart_white_48dp"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        >
+
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/btn_Set_Unit"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Set Unit"
+            android:textSize="16sp"
+            />
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/btn_Set_Group"
+
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="Set Group"
+            android:textSize="16sp"
+
+            />
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/btn_Set_Product"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Set Product"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
