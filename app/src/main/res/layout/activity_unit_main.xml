@@ -2,18 +2,15 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_unit_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.posstrsoftware.posstrsoftware.activity.MainActivity">
+    tools:context="com.example.posstrsoftware.posstrsoftware.activity.UnitMainActivity">
 
 
     <FrameLayout
-        android:id="@+id/contentContainer"
+        android:id="@+id/contentContainerUnit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
-
+        android:layout_height="match_parent"></FrameLayout>
 </LinearLayout>
