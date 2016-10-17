@@ -16,14 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-          <activity android:name=".activity.UnitMainActivity">
+        <activity android:name=".activity.UnitMainActivity">
         </activity>
         <activity android:name=".activity.GroupMainActivity">
         </activity>
         <activity android:name=".activity.ProductMainActivity">
         </activity>
         <activity android:name=".activity.AddUnitActivity">
+        </activity>
+        <activity android:name=".activity.AddProductActivity">
         </activity>
     </application>
 

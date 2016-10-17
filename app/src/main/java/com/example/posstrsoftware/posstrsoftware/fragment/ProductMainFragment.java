@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,9 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.activity.AddProductActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.ProductAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
+import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,8 +33,12 @@ import java.util.Arrays;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class ProductMainFragment extends Fragment {
-Toolbar my_toolbar;
+public class ProductMainFragment extends Fragment implements View.OnClickListener {
+    Toolbar my_toolbar;
+    SearchView searchViewProduct;
+    ListView listView_Product;
+    ImageButton btn_back;
+    ImageButton btn_add_product;
 
 
     public ProductMainFragment() {
@@ -52,18 +63,35 @@ Toolbar my_toolbar;
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        searchViewProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
+        searchViewProduct.setQueryHint("Search..");
 
-
-
+        listView_Product = (ListView)rootView.findViewById(R.id.listView_Product);
+        btn_add_product = (ImageButton) rootView.findViewById(R.id.btn_add_product);
+        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
+        btn_add_product.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
 
 
     }
 
 
-
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final ProductDAO productDAO = new ProductDAO(getActivity());
+        productDAO.open();
+        final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
+        productDAO.close();
+        final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
+        listView_Product.setAdapter(objAdapter);
+
+
     }
 
     @Override
@@ -88,6 +116,17 @@ Toolbar my_toolbar;
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             // Restore Instance State here
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (btn_back == v) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        } else if (btn_add_product == v) {
+            Intent intent = new Intent(getActivity(), AddProductActivity.class);
+            startActivity(intent);
         }
     }
 }

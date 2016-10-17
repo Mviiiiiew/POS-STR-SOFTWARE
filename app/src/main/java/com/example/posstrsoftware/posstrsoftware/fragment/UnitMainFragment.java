@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,14 @@ import android.widget.ListView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.AddUnitActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.UnitAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 
 import java.util.ArrayList;
+
+import static com.example.posstrsoftware.posstrsoftware.R.id.btn_back;
 
 
 /**
@@ -27,6 +31,8 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
     ListView listView_Unit;
     ImageButton btn_add_unit;
     Toolbar my_toolbar;
+    ImageButton btn_back;
+    SearchView searchViewUnit;
 
     public UnitMainFragment() {
         super();
@@ -46,14 +52,18 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
 
 
-
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         listView_Unit = (ListView) rootView.findViewById(R.id.listView_Unit);
-        btn_add_unit = (ImageButton)rootView.findViewById(R.id.btn_add_unit);
+
+        btn_add_unit = (ImageButton) rootView.findViewById(R.id.btn_add_unit);
+        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
+        searchViewUnit = (SearchView)rootView.findViewById(R.id.searchViewUnit);
+        searchViewUnit.setQueryHint("Search..");
+        btn_back.setOnClickListener(this);
         btn_add_unit.setOnClickListener(this);
 
 
@@ -73,7 +83,7 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
     /*
      * Save Instance State Here
      */
-        @Override
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save Instance State here
@@ -95,17 +105,20 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         final UnitDAO unitDAO = new UnitDAO(getActivity());
         unitDAO.open();
-        final ArrayList<UnitList> unitLists  =  unitDAO.getAllUnitList();
+        final ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();
         unitDAO.close();
-        final UnitAdapter adapter = new UnitAdapter(getActivity(),unitLists);
+        final UnitAdapter adapter = new UnitAdapter(getActivity(), unitLists);
         listView_Unit.setAdapter(adapter);
 
     }
 
     @Override
     public void onClick(View v) {
-        if(btn_add_unit == v){
+        if (btn_add_unit == v) {
             Intent intent = new Intent(getActivity(), AddUnitActivity.class);
+            startActivity(intent);
+        }else if (btn_back == v){
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         }
 

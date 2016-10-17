@@ -1,6 +1,7 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -8,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.activity.UnitMainActivity;
 import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
@@ -24,6 +27,7 @@ import com.gc.materialdesign.views.ButtonRectangle;
 public class AddUnitFragment extends Fragment implements View.OnClickListener {
     EditText editText_Unit;
     ButtonRectangle btn_add;
+    ImageButton btn_back;
 
     public AddUnitFragment() {
         super();
@@ -48,8 +52,10 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
         // Init 'View' instance(s) with rootView.findViewById here
         editText_Unit = (EditText) rootView.findViewById(R.id.editText_Unit);
         btn_add = (ButtonRectangle) rootView.findViewById(R.id.btn_add);
+        btn_back = (ImageButton ) rootView.findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(this);
         btn_add.setOnClickListener(this);
-        btn_add.setRippleSpeed(28);
+        btn_add.setRippleSpeed(15);
     }
 
     @Override
@@ -86,30 +92,33 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int ex = 0;
         if (v == btn_add) {
-            if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "Not Name Unit", Toast.LENGTH_SHORT).show();
-            } else {
-                UnitList unitList = new UnitList();
-                unitList.setUnitText(Util_String.getGennerlateString(editText_Unit.getText().toString()));
-                UnitDAO unitDAO = new UnitDAO(getActivity());
-                unitDAO.open();
-                ex = unitDAO.add(unitList);
-                unitDAO.close();
-                if (ex == 0) {
-                    AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("Repeat Unit");
-                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                    if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
+                        Toast.makeText(getActivity(), "Not Name Unit", Toast.LENGTH_SHORT).show();
+                    } else {
+                        UnitList unitList = new UnitList();
+                        unitList.setUnitText(Util_String.getGennerlateString(editText_Unit.getText().toString()));
+                        UnitDAO unitDAO = new UnitDAO(getActivity());
+                        unitDAO.open();
+                        ex = unitDAO.add(unitList);
+                        unitDAO.close();
+                        if (ex == 0) {
+                            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                            alertDialogder.setMessage("Repeat Unit");
+                            alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            alertDialogder.show();
+                        } else {
+                            getActivity().finish();
                         }
-                    });
-                    AlertDialog alertDialog = alertDialogder.create();
-                    alertDialogder.show();
-                } else {
-                    getActivity().finish();
-                }
             }
+        }else if (v == btn_back){
+            Intent intent = new Intent(getActivity(), UnitMainActivity.class);
+            startActivity(intent);
         }
 
 
