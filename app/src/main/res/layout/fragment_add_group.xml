@@ -5,7 +5,7 @@
               android:layout_height="match_parent">
     <include
         android:id="@+id/my_toolbar"
-        layout="@layout/toolbarproduct"/>
+        layout="@layout/toolbargroup"/>
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -24,17 +24,17 @@
         android:layout_alignTop="@+id/btn_back"
         android:layout_toRightOf="@+id/btn_back"
         android:paddingLeft="25dp"
-        android:src="@drawable/ic_add_shopping_cart_black_48dp"
+        android:src="@drawable/ic_group_add_black_48dp"
         />
 
     <EditText
 
-        android:id="@+id/editText_Product"
-        android:hint="Product Name"
+        android:id="@+id/editText_Unit"
         android:layout_width="600dp"
+        android:hint="Unit Name"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="130dp"
         android:layout_marginTop="50dp"
         android:background="@color/thumbColor"
         android:padding="20dp"
@@ -44,12 +44,12 @@
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_add"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_Product"
+        android:layout_alignTop="@+id/editText_Unit"
         android:layout_marginLeft="60dp"
-        android:layout_toRightOf="@+id/editText_Product"
-        android:text="Add Product OK "
+        android:layout_toRightOf="@+id/editText_Unit"
+        android:text="Add Unit OK "
 
         >
 

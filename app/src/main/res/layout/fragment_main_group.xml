@@ -1,12 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
 
+    <include
+        android:id="@+id/my_toolbar"
+        layout="@layout/toolbargroup"/>
+
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:background="@android:color/transparent"
+        android:paddingLeft="5dp"
+        android:src="@drawable/ic_arrow_back"
+        />
+
+
+    <ImageButton
+        android:id="@+id/btn_add_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="12dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_add"
+
+        />
+
+    <ImageView
+        android:id="@+id/image_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_back"
+        android:layout_toRightOf="@+id/btn_back"
+        android:paddingLeft="25dp"
+
+        android:src="@drawable/ic_group_add_black_48dp"
+        />
+
     <TextView
+        android:id="@+id/txt_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_back"
+        android:layout_toRightOf="@+id/image_group"
+        android:paddingLeft="40dp"
+        android:text="Group List"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        />
+
+
+    <ListView
+
+        android:id="@+id/listView_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/my_toolbar"
+        android:padding="12dp">
+
+    </ListView>
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchViewGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Group"/>
-</LinearLayout>
+        android:layout_toRightOf="@+id/txt_list"
+        android:layout_alignTop="@+id/btn_back"
+        android:paddingLeft="60dp"
+        android:paddingRight="100dp"
+
+        >
+
+    </android.support.v7.widget.SearchView>
+</RelativeLayout>
