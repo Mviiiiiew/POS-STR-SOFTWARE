@@ -1,18 +1,33 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.activity.GroupMainActivity;
+import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
+import com.example.posstrsoftware.posstrsoftware.model.GroupList;
+import com.example.posstrsoftware.posstrsoftware.util.Util_String;
+import com.gc.materialdesign.views.ButtonRectangle;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class AddGroupFragment extends Fragment {
+public class AddGroupFragment extends Fragment implements View.OnClickListener {
+    ImageButton btn_back;
+    EditText editText_Group;
+    ButtonRectangle btn_add;
+
 
     public AddGroupFragment() {
         super();
@@ -35,6 +50,11 @@ public class AddGroupFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btn_add = (ButtonRectangle) rootView.findViewById(R.id.btn_add);
+        editText_Group = (EditText) rootView.findViewById(R.id.editText_Group);
+        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
+        btn_add.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +84,40 @@ public class AddGroupFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             // Restore Instance State here
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int ex = 0;
+        if (v == btn_add) {
+            if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
+                Toast.makeText(getActivity(), "No Name Group", Toast.LENGTH_SHORT).show();
+            } else {
+                GroupList groupList = new GroupList();
+                groupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
+                GroupDAO groupDAO = new GroupDAO(getActivity());
+                groupDAO.open();
+                ex = groupDAO.add(groupList);
+                groupDAO.close();
+                if (ex == 0) {
+                    AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                    alertDialogder.setMessage("Repeat Unit");
+                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alertDialogder.show();
+                } else {
+                    getActivity().finish();
+                }
+            }
+        } else if (v == btn_back) {
+            Intent intent = new Intent(getActivity(), GroupMainActivity.class);
+            startActivity(intent);
         }
     }
 }

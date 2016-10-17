@@ -21,12 +21,19 @@ public class DbHelper extends SQLiteOpenHelper {
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
 
+    private static final String tableGroupCreateSQL = "CREATE TABLE group_list("
+            +"id_group INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"group_text TEXT NOT NULL,"
+            +"delete_flag TEXT DEFAULT 'N'"
+            +");";
+
     private static final String tableProductCreateSQL = "CREATE TABLE product_list("
             +"id_product INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"product_text TEXT NOT NULL,"
             +"id_unit INTEGER,"
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
+
 
 
 
@@ -42,6 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(tableUnitCreateSQL);
         db.execSQL(tableProductCreateSQL);
+        db.execSQL(tableGroupCreateSQL);
 
     }
 

@@ -29,9 +29,9 @@
 
     <EditText
 
-        android:id="@+id/editText_Unit"
+        android:id="@+id/editText_Group"
         android:layout_width="600dp"
-        android:hint="Unit Name"
+        android:hint="Group Name"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="130dp"
@@ -46,10 +46,10 @@
         android:id="@+id/btn_add"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_Unit"
+        android:layout_alignTop="@+id/editText_Group"
         android:layout_marginLeft="60dp"
-        android:layout_toRightOf="@+id/editText_Unit"
-        android:text="Add Unit OK "
+        android:layout_toRightOf="@+id/editText_Group"
+        android:text="Add Group OK "
 
         >
 
