@@ -32,6 +32,7 @@ public class DbHelper extends SQLiteOpenHelper {
             +"product_text TEXT NOT NULL,"
             +"price_text TEXT NOT NULL,"
             +"id_unit INTEGER,"
+            +"id_group INTEGER,"
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
 

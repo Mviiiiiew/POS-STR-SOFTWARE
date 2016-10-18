@@ -35,7 +35,7 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select pl.id_product,pl.product_text,pl.id_unit,ul.unit_text from product_list pl " +
+        Cursor cursor = database.rawQuery("select pl.id_product,pl.product_text,pl.price_text,pl.id_unit,ul.unit_text from product_list pl " +
                 "inner join  unit_list ul on pl.id_unit = ul.id_unit and   ul.delete_flag = 'N' " +
                         "where pl.delete_flag = 'N';",null);
         cursor.moveToFirst();
@@ -44,7 +44,7 @@ public class ProductDAO {
             productList1.setId(cursor.getInt(0));
             productList1.setProductText(cursor.getString(1));
             productList1.setProductprice(cursor.getInt(2));
-            productList1.setUnitList(new UnitList(cursor.getInt(3),cursor.getString(3)));
+            productList1.setUnitList(new UnitList(cursor.getInt(3),cursor.getString(4)));
             productList.add(productList1);
             cursor.moveToNext();
         }
