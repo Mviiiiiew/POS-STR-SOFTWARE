@@ -48,23 +48,34 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
-        android:inputType="number"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
         android:layout_toRightOf="@+id/editText_Product"
         android:background="@color/thumbColor"
         android:hint="Price"
+        android:inputType="number"
         android:padding="20dp"
         />
+
+    <Spinner
+        android:id="@+id/spinner_unit"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/editText_Price"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/editText_Price"
+        android:animateLayoutChanges="true"
+
+        android:spinnerMode="dropdown"/>
 
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_save"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_Product"
+        android:layout_alignTop="@+id/spinner_unit"
         android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/editText_Price"
+        android:layout_toRightOf="@+id/spinner_unit"
         android:text="@string/save"
 
         >

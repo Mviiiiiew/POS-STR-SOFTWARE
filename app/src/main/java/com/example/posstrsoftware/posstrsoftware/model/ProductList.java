@@ -9,6 +9,7 @@ public class ProductList {
     private int id;
     private String productText;
     private int productprice;
+    private UnitList unitList;
 
     public int getProductprice() {
         return productprice;
@@ -17,8 +18,6 @@ public class ProductList {
     public void setProductprice(int productprice) {
         this.productprice = productprice;
     }
-
-    private UnitList unitList;
 
     public int getId() {
         return id;
@@ -36,10 +35,8 @@ public class ProductList {
         this.productText = productText;
     }
 
-    public UnitList getUnitList() {
-        return unitList;
-    }
 
+    public UnitList getUnitList() {    return unitList;    }
     public void setUnitList(UnitList unitList) {
         this.unitList = unitList;
     }

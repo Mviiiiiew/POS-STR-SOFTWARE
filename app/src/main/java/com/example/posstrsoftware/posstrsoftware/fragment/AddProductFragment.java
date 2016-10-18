@@ -8,28 +8,37 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ProductMainActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.gc.materialdesign.views.ButtonRectangle;
+
+import java.util.ArrayList;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class AddProductFragment extends Fragment implements View.OnClickListener {
+public class AddProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     EditText editText_Product;
     ImageButton btn_back;
     ButtonRectangle btn_save;
     ButtonRectangle btn_clear;
     EditText editText_Price;
-
+    Spinner spinner_unit;
+    private spinnerUnitAdapter mSpinnerUnitAdapter;
+    private UnitList mSelectedUnit;
     public AddProductFragment() {
         super();
     }
@@ -46,6 +55,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_product, container, false);
         initInstances(rootView);
+        final UnitDAO mUnitDAO = new UnitDAO(getActivity());
+        mUnitDAO.open();
+        final ArrayList<UnitList> unitList = mUnitDAO.getAllUnitList();
+        mUnitDAO.close();
+        mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(),unitList);
+        spinner_unit.setAdapter(mSpinnerUnitAdapter);
         return rootView;
     }
 
@@ -56,10 +71,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
         editText_Price = (EditText)rootView.findViewById(R.id.editText_Price);
+        spinner_unit = (Spinner)rootView.findViewById(R.id.spinner_unit);
         btn_save.setRippleSpeed(15);
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
+        spinner_unit.setOnItemSelectedListener(this);
         btn_clear.setRippleSpeed(15);
 
 
@@ -108,6 +125,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             else {
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
+                productList.setUnitList(new UnitList(mSelectedUnit.getId(),""));
                 productList.setProductprice(Integer.parseInt(editText_Price.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -135,5 +153,16 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         }else if(btn_clear == v){
             editText_Product.setText("");
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

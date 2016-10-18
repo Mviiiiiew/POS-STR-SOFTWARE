@@ -51,10 +51,13 @@ public class ProductAdapter extends BaseAdapter {
         TextView textview = (TextView) v.findViewById(R.id.txt_name_product);
         TextView textview1 = (TextView)  v.findViewById(R.id.txt_id_product);
         TextView textview2 = (TextView) v.findViewById(R.id.txt_name_price);
+        TextView textview3 = (TextView)v.findViewById(R.id.txt_name_unit);
         ProductList productList = mProductList.get(position);
         textview.setText(productList.getProductText());
         textview1.setText(productList.getId()+"");
         textview2.setText(productList.getProductprice()+"");
+        textview3.setText(productList.getUnitList().getUnitText());
+
         return v;
     }
 }

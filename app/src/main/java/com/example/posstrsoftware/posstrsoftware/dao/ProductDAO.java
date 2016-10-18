@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 
 import java.util.ArrayList;
 
@@ -34,13 +35,16 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N';",null);
+        Cursor cursor = database.rawQuery("select pl.id_product,pl.product_text,pl.id_unit,ul.unit_text from product_list pl " +
+                "inner join  unit_list ul on pl.id_unit = ul.id_unit and   ul.delete_flag = 'N' " +
+                        "where pl.delete_flag = 'N';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ProductList productList1 = new ProductList();
             productList1.setId(cursor.getInt(0));
             productList1.setProductText(cursor.getString(1));
             productList1.setProductprice(cursor.getInt(2));
+            productList1.setUnitList(new UnitList(cursor.getInt(3),cursor.getString(3)));
             productList.add(productList1);
             cursor.moveToNext();
         }
@@ -62,6 +66,7 @@ public class ProductDAO {
             ContentValues values = new ContentValues();
             values.put("product_text", productList.getProductText());
             values.put("price_text",productList.getProductprice());
+            values.put("id_unit",productList.getUnitList().getId());
             this.database.insert("product_list", null, values);
             return 1;
         }
