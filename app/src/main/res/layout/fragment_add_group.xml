@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
     <include
         android:id="@+id/my_toolbar"
         layout="@layout/toolbargroup"/>
@@ -17,6 +18,7 @@
         android:paddingLeft="5dp"
         android:src="@drawable/ic_arrow_back"
         />
+
     <ImageView
         android:id="@+id/image_unit"
         android:layout_width="wrap_content"
@@ -27,32 +29,45 @@
         android:src="@drawable/ic_group_add_black_48dp"
         />
 
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:id="@+id/btn_save"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editText_Group"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/editText_Group"
+        android:text="@string/save"
+
+        >
+
+    </com.gc.materialdesign.views.ButtonRectangle>
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:id="@+id/btn_clear"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_save"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/btn_save"
+        android:text="@string/cancel"
+
+        >
+
+    </com.gc.materialdesign.views.ButtonRectangle>
+
     <EditText
 
         android:id="@+id/editText_Group"
-        android:layout_width="600dp"
         android:hint="Group Name"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
-        android:layout_marginLeft="130dp"
+        android:layout_marginLeft="90dp"
         android:layout_marginTop="50dp"
         android:background="@color/thumbColor"
         android:padding="20dp"
 
 
         />
-
-    <com.gc.materialdesign.views.ButtonRectangle
-        android:id="@+id/btn_add"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_Group"
-        android:layout_marginLeft="60dp"
-        android:layout_toRightOf="@+id/editText_Group"
-        android:text="Add Group OK "
-
-        >
-
-    </com.gc.materialdesign.views.ButtonRectangle>
 
 </RelativeLayout>

@@ -16,7 +16,8 @@
         android:layout_margin="12dp"
         android:background="@android:color/transparent"
         android:paddingLeft="5dp"
-        android:src="@drawable/ic_arrow_back"
+        android:src="@drawable/selector_btn_back"
+
         />
 
     <ImageView

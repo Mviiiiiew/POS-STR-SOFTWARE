@@ -6,5 +6,7 @@
     <string name="menu_search">Search</string>
     <string name="menu_1">Option1</string>
     <string name="menu_2">Option2</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
 
 </resources>

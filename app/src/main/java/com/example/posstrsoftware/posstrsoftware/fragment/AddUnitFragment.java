@@ -26,8 +26,9 @@ import com.gc.materialdesign.views.ButtonRectangle;
  */
 public class AddUnitFragment extends Fragment implements View.OnClickListener {
     EditText editText_Unit;
-    ButtonRectangle btn_add;
+    ButtonRectangle btn_save;
     ImageButton btn_back;
+    ButtonRectangle btn_clear;
 
     public AddUnitFragment() {
         super();
@@ -51,11 +52,14 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         editText_Unit = (EditText) rootView.findViewById(R.id.editText_Unit);
-        btn_add = (ButtonRectangle) rootView.findViewById(R.id.btn_add);
+        btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         btn_back = (ImageButton ) rootView.findViewById(R.id.btn_back);
+        btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
+        btn_clear.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-        btn_add.setOnClickListener(this);
-        btn_add.setRippleSpeed(15);
+        btn_save.setOnClickListener(this);
+        btn_save.setRippleSpeed(15);
+        btn_clear.setRippleSpeed(15);
     }
 
     @Override
@@ -91,9 +95,9 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int ex = 0;
-        if (v == btn_add) {
+        if (v == btn_save) {
                     if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
-                        Toast.makeText(getActivity(), "Not Name Unit", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "< Please input Unit >", Toast.LENGTH_SHORT).show();
                     } else {
                         UnitList unitList = new UnitList();
                         unitList.setUnitText(Util_String.getGennerlateString(editText_Unit.getText().toString()));
@@ -103,7 +107,7 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
                         unitDAO.close();
                         if (ex == 0) {
                             AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                            alertDialogder.setMessage("Repeat Unit");
+                            alertDialogder.setMessage("< Please change nameunit because repeat >");
                             alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -120,6 +124,8 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
         }else if (v == btn_back){
             Intent intent = new Intent(getActivity(), UnitMainActivity.class);
             startActivity(intent);
+        }else if (btn_clear == v){
+            editText_Unit.setText("");
         }
 
 

@@ -26,8 +26,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
 public class AddProductFragment extends Fragment implements View.OnClickListener {
     EditText editText_Product;
     ImageButton btn_back;
-    ButtonRectangle btn_add;
-
+    ButtonRectangle btn_save;
+    ButtonRectangle btn_clear;
 
     public AddProductFragment() {
         super();
@@ -52,10 +52,13 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         // Init 'View' instance(s) with rootView.findViewById here
         editText_Product = (EditText) rootView.findViewById(R.id.editText_Product);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-        btn_add = (ButtonRectangle) rootView.findViewById(R.id.btn_add);
-        btn_add.setRippleSpeed(15);
-        btn_add.setOnClickListener(this);
+        btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
+        btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
+        btn_save.setRippleSpeed(15);
+        btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+        btn_clear.setOnClickListener(this);
+        btn_clear.setRippleSpeed(15);
 
 
     }
@@ -93,9 +96,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int ex = 0;
-        if (v == btn_add) {
+        if (v == btn_save) {
             if (editText_Product.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "No Name Product", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
             } else {
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
@@ -105,7 +108,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 productDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("Repeat Unit");
+                    alertDialogder.setMessage("< Please change nameproduct because repeat >");
                     alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -122,6 +125,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             Intent intent = new Intent(getActivity(), ProductMainActivity.class);
             startActivity(intent);
 
+        }else if(btn_clear == v){
+            editText_Product.setText("");
         }
     }
 }

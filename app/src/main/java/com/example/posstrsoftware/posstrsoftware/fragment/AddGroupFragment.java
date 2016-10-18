@@ -26,7 +26,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
 public class AddGroupFragment extends Fragment implements View.OnClickListener {
     ImageButton btn_back;
     EditText editText_Group;
-    ButtonRectangle btn_add;
+    ButtonRectangle btn_save;
+    ButtonRectangle btn_clear;
 
 
     public AddGroupFragment() {
@@ -50,11 +51,14 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btn_add = (ButtonRectangle) rootView.findViewById(R.id.btn_add);
+        btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         editText_Group = (EditText) rootView.findViewById(R.id.editText_Group);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-        btn_add.setOnClickListener(this);
+        btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
+        btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+        btn_clear.setOnClickListener(this);
+        btn_clear.setRippleSpeed(15);
     }
 
     @Override
@@ -90,9 +94,9 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int ex = 0;
-        if (v == btn_add) {
+        if (v == btn_save) {
             if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "No Name Group", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), " < Please input Group >", Toast.LENGTH_SHORT).show();
             } else {
                 GroupList groupList = new GroupList();
                 groupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
@@ -102,7 +106,7 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
                 groupDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("Repeat Unit");
+                    alertDialogder.setMessage("< Please change namegroup because repeat >");
                     alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -118,6 +122,10 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
         } else if (v == btn_back) {
             Intent intent = new Intent(getActivity(), GroupMainActivity.class);
             startActivity(intent);
+        }else if (btn_clear == v){
+            editText_Group.setText("");
+
+
         }
     }
 }
