@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Wasabi on 10/18/2016.
  */
 
-/*public class spinnerGroupAdapter extends BaseAdapter {
+public class spinnerGroupAdapter extends BaseAdapter {
     private static Activity activity;
     private  static LayoutInflater inflater;
     ArrayList<GroupList> mGroupLists;
@@ -56,4 +56,4 @@ import java.util.ArrayList;
 
         return v;
     }
-}*/
+}

@@ -76,17 +76,16 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/txt_Unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_Price"
-                android:layout_below="@+id/txt_Price"
-                android:text="Unit"
-                android:textSize="20sp"
-                android:textStyle="bold"
+            android:id="@+id/txt_Unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txt_Price"
+            android:layout_below="@+id/txt_Price"
+            android:text="Unit"
+            android:textSize="20sp"
+            android:textStyle="bold"
 
-                />
-
+            />
 
             <TextView
                 android:id="@+id/txt_name_unit"
@@ -96,6 +95,29 @@
                 android:layout_alignTop="@+id/txt_Unit"
                 android:layout_toRightOf="@+id/txt_Unit"
                 android:text="Name unit"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_Group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_Unit"
+                android:layout_below="@+id/txt_Unit"
+                android:text="Group"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/txt_name_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_name_unit"
+                android:layout_alignTop="@+id/txt_Group"
+                android:layout_toRightOf="@+id/txt_Group"
+                android:text="Name group"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 

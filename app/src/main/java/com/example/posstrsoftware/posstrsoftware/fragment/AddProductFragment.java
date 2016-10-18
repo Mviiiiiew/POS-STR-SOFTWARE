@@ -16,9 +16,12 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ProductMainActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.spinnerGroupAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
+import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
@@ -37,8 +40,12 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     ButtonRectangle btn_clear;
     EditText editText_Price;
     Spinner spinner_unit;
+    Spinner spinner_group;
+    private spinnerGroupAdapter mSpinnerGroupAdapter;
+    private GroupList mSelectedGroup;
     private spinnerUnitAdapter mSpinnerUnitAdapter;
     private UnitList mSelectedUnit;
+
     public AddProductFragment() {
         super();
     }
@@ -59,8 +66,15 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         mUnitDAO.open();
         final ArrayList<UnitList> unitList = mUnitDAO.getAllUnitList();
         mUnitDAO.close();
-        mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(),unitList);
+        mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(), unitList);
         spinner_unit.setAdapter(mSpinnerUnitAdapter);
+
+        final GroupDAO mGroupDAO = new GroupDAO(getActivity());
+        mGroupDAO.open();
+        final ArrayList<GroupList> groupList = mGroupDAO.getAllGroupList();
+        mGroupDAO.close();
+        mSpinnerGroupAdapter = new spinnerGroupAdapter(getActivity(), groupList);
+        spinner_group.setAdapter(mSpinnerGroupAdapter);
         return rootView;
     }
 
@@ -69,9 +83,21 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         editText_Product = (EditText) rootView.findViewById(R.id.editText_Product);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
-        btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
-        editText_Price = (EditText)rootView.findViewById(R.id.editText_Price);
-        spinner_unit = (Spinner)rootView.findViewById(R.id.spinner_unit);
+        btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
+        editText_Price = (EditText) rootView.findViewById(R.id.editText_Price);
+        spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
+        spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
+        spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mSelectedGroup = (GroupList) mSpinnerGroupAdapter.getItem(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         btn_save.setRippleSpeed(15);
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
@@ -118,14 +144,13 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         if (v == btn_save) {
             if (editText_Product.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
-            } else if (editText_Price.getText().toString().matches("")){
+            } else if (editText_Price.getText().toString().matches("")) {
                 Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();
-            }
-
-            else {
+            } else {
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
-                productList.setUnitList(new UnitList(mSelectedUnit.getId(),""));
+                productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
+                productList.setGroupList(new GroupList(mSelectedGroup.getId(),""));
                 productList.setProductprice(Integer.parseInt(editText_Price.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -150,7 +175,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             Intent intent = new Intent(getActivity(), ProductMainActivity.class);
             startActivity(intent);
 
-        }else if(btn_clear == v){
+        } else if (btn_clear == v) {
             editText_Product.setText("");
         }
     }
@@ -158,7 +183,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+            mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+
     }
 
     @Override

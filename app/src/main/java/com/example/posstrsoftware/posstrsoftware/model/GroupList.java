@@ -10,6 +10,14 @@ public class GroupList implements Serializable{
     private  int id;
     private String groupText;
 
+    public GroupList(int id, String groupText) {
+        this.id = id;
+        this.groupText = groupText;
+    }
+    public GroupList(){
+
+    }
+
     public int getId() {
         return id;
     }
