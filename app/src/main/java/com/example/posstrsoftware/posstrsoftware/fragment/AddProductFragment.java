@@ -28,6 +28,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     ImageButton btn_back;
     ButtonRectangle btn_save;
     ButtonRectangle btn_clear;
+    EditText editText_Price;
 
     public AddProductFragment() {
         super();
@@ -54,6 +55,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
+        editText_Price = (EditText)rootView.findViewById(R.id.editText_Price);
         btn_save.setRippleSpeed(15);
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
@@ -99,9 +101,14 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         if (v == btn_save) {
             if (editText_Product.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
-            } else {
+            } else if (editText_Price.getText().toString().matches("")){
+                Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();
+            }
+
+            else {
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
+                productList.setProductprice(Integer.parseInt(editText_Price.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.add(productList);

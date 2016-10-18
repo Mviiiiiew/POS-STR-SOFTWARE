@@ -49,10 +49,12 @@ public class ProductAdapter extends BaseAdapter {
         View v = convertView;
         v = inflater.inflate(R.layout.list_item_product,null);
         TextView textview = (TextView) v.findViewById(R.id.txt_name_product);
-        TextView textView1 = (TextView)  v.findViewById(R.id.txt_id_product);
+        TextView textview1 = (TextView)  v.findViewById(R.id.txt_id_product);
+        TextView textview2 = (TextView) v.findViewById(R.id.txt_name_price);
         ProductList productList = mProductList.get(position);
         textview.setText(productList.getProductText());
-        textView1.setText(productList.getId()+"");
+        textview1.setText(productList.getId()+"");
+        textview2.setText(productList.getProductprice()+"");
         return v;
     }
 }

@@ -8,6 +8,16 @@ public class ProductList {
 
     private int id;
     private String productText;
+    private int productprice;
+
+    public int getProductprice() {
+        return productprice;
+    }
+
+    public void setProductprice(int productprice) {
+        this.productprice = productprice;
+    }
+
     private UnitList unitList;
 
     public int getId() {
@@ -33,4 +43,6 @@ public class ProductList {
     public void setUnitList(UnitList unitList) {
         this.unitList = unitList;
     }
+
+
 }

@@ -40,6 +40,7 @@ public class ProductDAO {
             ProductList productList1 = new ProductList();
             productList1.setId(cursor.getInt(0));
             productList1.setProductText(cursor.getString(1));
+            productList1.setProductprice(cursor.getInt(2));
             productList.add(productList1);
             cursor.moveToNext();
         }
@@ -49,7 +50,7 @@ public class ProductDAO {
 
 
     public int add(ProductList productList) {
-        String query = "Select count(*) from product_list where product_text = ? AND delete_flag = ?";
+        String query = "Select count(*) from product_list where product_text = ?  AND delete_flag = ? ";
         SQLiteStatement stmt = database.compileStatement(query);
         stmt.bindString(1, productList.getProductText());
         stmt.bindString(2, "N");
@@ -60,6 +61,7 @@ public class ProductDAO {
         } else {
             ContentValues values = new ContentValues();
             values.put("product_text", productList.getProductText());
+            values.put("price_text",productList.getProductprice());
             this.database.insert("product_list", null, values);
             return 1;
         }
