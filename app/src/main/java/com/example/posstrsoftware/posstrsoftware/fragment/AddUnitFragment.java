@@ -116,6 +116,7 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
                             getActivity().finish();
                         }
             }
+
         }else if (v == btn_back){
             Intent intent = new Intent(getActivity(), UnitMainActivity.class);
             startActivity(intent);

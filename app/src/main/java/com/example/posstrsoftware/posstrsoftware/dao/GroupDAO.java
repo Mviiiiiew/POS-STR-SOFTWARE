@@ -72,6 +72,26 @@ public class GroupDAO {
 
 
     }
+
+    public int update(GroupList groupList) {
+        String query = "Select count(*) from group_list where group_text = ? AND delete_flag = ?";
+        SQLiteStatement stmt = database.compileStatement(query);
+        stmt.bindString(1, groupList.getGroupText());
+        stmt.bindString(2, "N");
+        int count_row = (int) stmt.simpleQueryForLong();
+        if (stmt != null) stmt.close();
+        if (count_row != 0) {
+            return 0;
+        } else {
+            GroupList updateGroupList = groupList;
+            ContentValues values = new ContentValues();
+            values.put("group_text", updateGroupList.getGroupText());
+            values.put("id_group", updateGroupList.getId());
+            String where = "id_group=" + updateGroupList.getId();
+            this.database.update("group_list", values, where, null);
+            return 1;
+        }
+    }
     public void  delete(GroupList groupList){
 
         this.database.execSQL("UPDATE group_list set delete_flag = 'Y' where id_group = "+ groupList.getId());

@@ -9,16 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.AddUnitActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.FixUnitActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.UnitAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.example.posstrsoftware.posstrsoftware.R.id.btn_back;
@@ -103,12 +106,24 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        final UnitDAO unitDAO = new UnitDAO(getActivity());
+        UnitDAO unitDAO = new UnitDAO(getActivity());
         unitDAO.open();
-        final ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();
-        unitDAO.close();
+        ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();
         final UnitAdapter adapter = new UnitAdapter(getActivity(), unitLists);
         listView_Unit.setAdapter(adapter);
+        unitDAO.close();
+
+     listView_Unit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+             Intent editIntent = new Intent(getActivity(), FixUnitActivity.class);
+             editIntent.putExtra("editUnit", (Serializable) adapter.getItem(position));
+             startActivity(editIntent);
+         }
+     });
+
+
 
     }
 

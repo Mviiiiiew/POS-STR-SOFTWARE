@@ -1,10 +1,12 @@
 package com.example.posstrsoftware.posstrsoftware.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Wasabi on 10/17/2016.
  */
 
-public class GroupList {
+public class GroupList implements Serializable{
     private  int id;
     private String groupText;
 

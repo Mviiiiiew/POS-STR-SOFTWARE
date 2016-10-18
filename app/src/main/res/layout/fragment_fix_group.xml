@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/my_toolbar"
+        layout="@layout/toolbargroup"/>
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:background="@android:color/transparent"
+        android:paddingLeft="5dp"
+        android:src="@drawable/ic_arrow_back"
+        />
+
+    <ImageView
+        android:id="@+id/image_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_back"
+        android:layout_toRightOf="@+id/btn_back"
+        android:paddingLeft="25dp"
+        android:src="@drawable/ic_unit_add_black_48dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image_unit"
+        android:layout_toRightOf="@+id/image_unit"
+        android:paddingLeft="40dp"
+        android:text="Edit Group Name"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+
+        android:id="@+id/editText_Group"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/thumbColor"
+        android:hint="Edit Group Name"
+        android:padding="20dp"
+
+
+        />
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:id="@+id/btn_edit_group"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editText_Group"
+        android:layout_marginLeft="40dp"
+        android:layout_toRightOf="@+id/editText_Group"
+        android:text="Edit Group Name "
+
+        >
+
+    </com.gc.materialdesign.views.ButtonRectangle>
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:id="@+id/btn_delete"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editText_Group"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/btn_edit_group"
+        android:text=" Delete "
+
+        >
+
+    </com.gc.materialdesign.views.ButtonRectangle>
+
+</RelativeLayout>

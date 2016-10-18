@@ -28,6 +28,10 @@
         </activity>
         <activity android:name=".activity.AddGroupActivity">
         </activity>
+        <activity android:name=".activity.FixUnitActivity">
+        </activity>
+        <activity android:name=".activity.FixGroupActivity">
+        </activity>
     </application>
 
 </manifest>

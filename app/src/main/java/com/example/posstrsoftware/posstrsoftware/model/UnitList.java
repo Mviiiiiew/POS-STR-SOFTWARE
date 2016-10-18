@@ -1,10 +1,12 @@
 package com.example.posstrsoftware.posstrsoftware.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Wasabi on 10/14/2016.
  */
 
-public class UnitList {
+public class UnitList implements Serializable {
 
     private  int id;
     private String unitText;

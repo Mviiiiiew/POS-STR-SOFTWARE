@@ -7,16 +7,19 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.AddGroupActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.FixGroupActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.GroupAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
 import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -57,6 +60,7 @@ public class GroupMainFragment extends Fragment implements View.OnClickListener 
         searchViewGroup.setQueryHint("Search..");
         btn_add_group.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+
     }
 
     @Override
@@ -83,13 +87,15 @@ public class GroupMainFragment extends Fragment implements View.OnClickListener 
         groupDAO.close();
         final GroupAdapter adapter = new GroupAdapter(getActivity(),groupLists);
         listView_group.setAdapter(adapter);
+        listView_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent editIntent = new Intent(getActivity(), FixGroupActivity.class);
+                editIntent.putExtra("editGroup", (Serializable) adapter.getItem(position));
+                startActivity(editIntent);
+            }
+        });
 
-       /* final UnitDAO unitDAO = new UnitDAO(getActivity());
-        unitDAO.open();
-        final ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();
-        unitDAO.close();
-        final UnitAdapter adapter = new UnitAdapter(getActivity(), unitLists);
-        listView_Unit.setAdapter(adapter);*/
     }
 
     @Override
