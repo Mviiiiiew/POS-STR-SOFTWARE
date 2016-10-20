@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".activity.FixGroupActivity">
         </activity>
+        <activity android:name=".activity.FixProductActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -15,17 +15,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.AddProductActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.FixProductActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -90,6 +93,14 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         productDAO.close();
         final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
         listView_Product.setAdapter(objAdapter);
+        listView_Product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
+                editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
+                startActivity(editIntent);
+            }
+        });
 
 
     }
