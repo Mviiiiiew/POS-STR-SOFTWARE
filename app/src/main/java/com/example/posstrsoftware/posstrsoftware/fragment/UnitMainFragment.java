@@ -114,7 +114,7 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         listView_Unit.setAdapter(adapter);
         unitDAO.close();
 
-     listView_Unit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView_Unit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
          @Override
          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -136,7 +136,6 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
 
         }else if (btn_back == v){
-
         getActivity().finish();
 
         }

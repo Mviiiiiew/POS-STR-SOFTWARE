@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".activity.FixProductActivity">
         </activity>
+        <activity android:name=".activity.SaleProductActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -5,9 +5,57 @@
               android:background="#263238"
               android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sale"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:paddingTop="30dp"
+
+        >
+
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_store_white_48dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_Sale"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:text="Sale"
+                android:textSize="20sp"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

@@ -5,21 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.posstrsoftware.posstrsoftware.R;
-import com.example.posstrsoftware.posstrsoftware.fragment.FixGroupFragment;
+import com.example.posstrsoftware.posstrsoftware.fragment.SaleProductFragment;
 
-public class FixGroupActivity extends AppCompatActivity {
+public class SaleProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fix_group);
-
+        setContentView(R.layout.activity_sale_product);
 
         Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.contentContainerFixGroup);
-        if(fragment instanceof FixGroupFragment == false ) {
+                .findFragmentById(R.id.contentContainerSaleProduct);
+        if(fragment instanceof SaleProductFragment == false ) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainerFixGroup, FixGroupFragment.newInstance())
+                    .replace(R.id.contentContainerSaleProduct, SaleProductFragment.newInstance())
                     .commit();
         }
     }

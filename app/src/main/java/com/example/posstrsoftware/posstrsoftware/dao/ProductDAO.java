@@ -81,6 +81,19 @@ public class ProductDAO {
 
     }
 
+    public String SearchID(String ID){
+        String return_text = "No data Product";
+        Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            return_text = cursor.getString(2);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return return_text ;
+    }
+
     public void delete(ProductList productList) {
 
         this.database.execSQL("UPDATE product_list set delete_flag = 'Y' where id_product = " + productList.getId());
