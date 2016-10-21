@@ -38,7 +38,7 @@
         android:id="@+id/edit_Barcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_toolbar"
+        android:layout_below="@+id/listView_SaleProduct"
         android:inputType="number"
         android:hint="Barcode"
         android:textSize="30sp"/>
@@ -46,9 +46,17 @@
     <ListView
         android:id="@+id/listView_SaleProduct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_Barcode">
+        android:layout_height="300dp"
+        android:layout_below="@+id/my_toolbar">
 
     </ListView>
+    <TextView
+        android:id="@+id/txtTest"
+        android:layout_below="@+id/edit_Barcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:text="XXX"/>
+
 
 </RelativeLayout>

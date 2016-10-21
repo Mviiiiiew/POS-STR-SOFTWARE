@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
@@ -83,15 +84,17 @@ public class ProductDAO {
 
     public String SearchID(String ID){
         String return_text = "No data Product";
+
         Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            return_text = cursor.getString(2);
+            return_text = cursor.getString(2)+ "      "+cursor.getString(3);
             cursor.moveToNext();
         }
         cursor.close();
 
         return return_text ;
+
     }
 
     public void delete(ProductList productList) {
