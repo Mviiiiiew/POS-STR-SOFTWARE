@@ -131,8 +131,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
             }
 
         } else if (btn_back == v) {
-            Intent intent = new Intent(getActivity(), UnitMainActivity.class);
-            startActivity(intent);
+            getActivity().finish();
         } else if (btn_delete == v) {
             UnitDAO unitDAODel = new UnitDAO(getActivity());
             unitDAODel.open();

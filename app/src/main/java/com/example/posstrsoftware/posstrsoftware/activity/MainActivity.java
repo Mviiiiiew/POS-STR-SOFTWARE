@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentContainer, MainFragment.newInstance())
+                    .replace(R.id.contentContainer, MainFragment.newInstance())
                     .commit();
 
         }

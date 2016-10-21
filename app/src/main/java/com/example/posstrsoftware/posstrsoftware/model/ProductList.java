@@ -6,13 +6,22 @@ import java.io.Serializable;
  * Created by Wasabi on 10/14/2016.
  */
 
-public class ProductList implements Serializable{
+public class ProductList implements Serializable {
 
     private int id;
     private String productText;
     private int productprice;
     private GroupList groupList;
     private UnitList unitList;
+    private int barcode;
+
+    public int getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(int barcode) {
+        this.barcode = barcode;
+    }
 
     public GroupList getGroupList() {
         return groupList;

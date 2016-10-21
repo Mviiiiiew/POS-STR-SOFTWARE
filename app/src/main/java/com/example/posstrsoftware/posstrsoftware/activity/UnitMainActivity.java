@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,8 +14,13 @@ public class UnitMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unit_main);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.contentContainerUnit, UnitMainFragment.newInstance())
-                .commit();
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainerUnit);
+        if(fragment instanceof UnitMainFragment == false ) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainerUnit, UnitMainFragment.newInstance())
+                    .commit();
+        }
     }
 }

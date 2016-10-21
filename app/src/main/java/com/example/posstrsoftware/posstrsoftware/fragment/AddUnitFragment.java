@@ -122,8 +122,7 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
             }
 
         }else if (v == btn_back){
-            Intent intent = new Intent(getActivity(), UnitMainActivity.class);
-            startActivity(intent);
+           getActivity().finish();
         }else if (btn_clear == v){
             editText_Unit.setText("");
         }

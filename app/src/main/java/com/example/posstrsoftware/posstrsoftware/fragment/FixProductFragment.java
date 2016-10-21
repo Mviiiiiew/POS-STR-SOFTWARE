@@ -53,6 +53,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         editText_product = (EditText) rootView.findViewById(R.id.editText_product);
         btn_edit_product = (ButtonRectangle) rootView.findViewById(R.id.btn_edit_product);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
+        btn_back.setOnClickListener(this);
 
 
     }
@@ -89,6 +90,9 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        if (btn_back == v){
+            getActivity().finish();
+        }
 
     }
 }

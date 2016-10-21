@@ -118,8 +118,7 @@ public class GroupMainFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if(btn_back == v) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+            getActivity().finish();
         }else if (btn_add_group == v){
             Intent intent = new Intent(getActivity(), AddGroupActivity.class);
             startActivity(intent);

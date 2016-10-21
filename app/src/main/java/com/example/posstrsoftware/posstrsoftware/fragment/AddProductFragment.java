@@ -39,6 +39,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     ButtonRectangle btn_save;
     ButtonRectangle btn_clear;
     EditText editText_Price;
+    EditText editText_Barcode;
+
     Spinner spinner_unit;
     Spinner spinner_group;
     private spinnerGroupAdapter mSpinnerGroupAdapter;
@@ -85,6 +87,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
         editText_Price = (EditText) rootView.findViewById(R.id.editText_Price);
+        editText_Barcode = (EditText) rootView.findViewById(R.id.editText_Barcode);
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
         spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -149,8 +152,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             } else {
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
+                productList.setBarcode(Integer.parseInt(editText_Barcode.getText().toString()));
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
-                productList.setGroupList(new GroupList(mSelectedGroup.getId(),""));
+                productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
                 productList.setProductprice(Integer.parseInt(editText_Price.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -172,8 +176,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 }
             }
         } else if (btn_back == v) {
-            Intent intent = new Intent(getActivity(), ProductMainActivity.class);
-            startActivity(intent);
+            getActivity().finish();
 
         } else if (btn_clear == v) {
             editText_Product.setText("");
@@ -183,7 +186,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+        mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
 
     }
 

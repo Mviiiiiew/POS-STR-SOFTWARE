@@ -100,6 +100,7 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             // Restore Instance State here
+
         }
     }
 
@@ -130,11 +131,14 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (btn_add_unit == v) {
-            Intent intent = new Intent(getActivity(), AddUnitActivity.class);
-            startActivity(intent);
+
+                Intent intent = new Intent(getActivity(), AddUnitActivity.class);
+                startActivity(intent);
+
         }else if (btn_back == v){
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+
+        getActivity().finish();
+
         }
 
     }

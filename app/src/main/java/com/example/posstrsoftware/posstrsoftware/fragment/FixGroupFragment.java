@@ -129,8 +129,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
             }
 
         } else if (btn_back == v) {
-            Intent intent = new Intent(getActivity(), GroupMainActivity.class);
-            startActivity(intent);
+            getActivity().finish();
         }else if (btn_delete == v ){
             GroupDAO groupDAO = new GroupDAO(getActivity());
             groupDAO.open();

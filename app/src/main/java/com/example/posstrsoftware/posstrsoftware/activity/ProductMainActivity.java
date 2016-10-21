@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,10 +15,13 @@ public class ProductMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_main);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.contentContainerProduct, ProductMainFragment.newInstance())
-                .commit();
-
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainerProduct);
+        if(fragment instanceof ProductMainFragment == false ) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainerProduct, ProductMainFragment.newInstance())
+                    .commit();
+        }
 
     }
 

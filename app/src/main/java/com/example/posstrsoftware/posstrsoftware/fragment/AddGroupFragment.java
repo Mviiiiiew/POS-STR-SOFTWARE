@@ -120,8 +120,7 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
                 }
             }
         } else if (v == btn_back) {
-            Intent intent = new Intent(getActivity(), GroupMainActivity.class);
-            startActivity(intent);
+            getActivity().finish();
         }else if (btn_clear == v){
             editText_Group.setText("");
 

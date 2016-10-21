@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,8 +14,13 @@ public class AddGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.contentContainerAddGroup, AddGroupFragment.newInstance())
-                .commit();
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainerAddGroup);
+        if(fragment instanceof AddGroupFragment == false ) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainerAddGroup, AddGroupFragment.newInstance())
+                    .commit();
+        }
     }
 }

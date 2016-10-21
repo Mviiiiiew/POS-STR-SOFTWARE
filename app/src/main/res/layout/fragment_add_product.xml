@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_toRightOf="@+id/editText_Product"
         android:background="@color/thumbColor"
         android:hint="Price"
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spinner_unit"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="90dp"
         android:text="Unit"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -128,14 +128,27 @@
 
     <EditText
 
-        android:id="@+id/editText_Product"
+    android:id="@+id/editText_Product"
+    android:inputType="text"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_alignBaseline="@+id/editText_Price"
+    android:layout_alignBottom="@+id/editText_Price"
+    android:background="@color/thumbColor"
+    android:hint="Product Name"
+    android:padding="20dp"/>
+
+    <EditText
+        android:id="@+id/editText_Barcode"
+        android:inputType="number"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_alignBaseline="@+id/editText_Price"
-        android:layout_alignBottom="@+id/editText_Price"
+        android:layout_below="@+id/editText_Product"
         android:background="@color/thumbColor"
-        android:hint="Product Name"
+        android:hint="BARCODE"
         android:padding="20dp"/>
 
 </RelativeLayout>

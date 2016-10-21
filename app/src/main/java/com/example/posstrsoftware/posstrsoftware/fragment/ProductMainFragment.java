@@ -133,8 +133,7 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (btn_back == v) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+            getActivity().finish();
         } else if (btn_add_product == v) {
             Intent intent = new Intent(getActivity(), AddProductActivity.class);
             startActivity(intent);

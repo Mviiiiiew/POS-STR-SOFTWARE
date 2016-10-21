@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,9 +14,13 @@ public class FixProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_product);
 
-        getSupportFragmentManager().beginTransaction()
 
-                .add(R.id.contentContainerFixProduct, FixProductFragment.newInstance())
-                .commit();
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainerFixProduct);
+        if(fragment instanceof FixProductFragment == false ) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainerFixProduct, FixProductFragment.newInstance())
+                    .commit();
+        }
     }
 }
