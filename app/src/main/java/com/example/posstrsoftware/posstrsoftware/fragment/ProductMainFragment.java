@@ -44,6 +44,7 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
     ImageButton btn_add_product;
 
 
+
     public ProductMainFragment() {
         super();
     }
@@ -68,7 +69,6 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         // Init 'View' instance(s) with rootView.findViewById here
         searchViewProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
         searchViewProduct.setQueryHint("Search..");
-
         listView_Product = (ListView)rootView.findViewById(R.id.listView_Product);
         btn_add_product = (ImageButton) rootView.findViewById(R.id.btn_add_product);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
@@ -93,15 +93,6 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         productDAO.close();
         final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
         listView_Product.setAdapter(objAdapter);
-        listView_Product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
-                editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
-                startActivity(editIntent);
-            }
-        });
-
 
     }
 

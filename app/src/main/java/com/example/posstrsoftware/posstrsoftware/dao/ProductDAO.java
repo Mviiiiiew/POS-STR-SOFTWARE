@@ -90,7 +90,7 @@ public class ProductDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            return_text = cursor.getString(2);
+            return_text = cursor.getString(2) + "  " +cursor.getString(3);
             cursor.moveToNext();
         }
         cursor.close();

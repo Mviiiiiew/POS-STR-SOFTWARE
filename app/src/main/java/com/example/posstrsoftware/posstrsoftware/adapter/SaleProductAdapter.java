@@ -2,6 +2,7 @@ package com.example.posstrsoftware.posstrsoftware.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.model.SaleProductList;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,10 @@ public class SaleProductAdapter extends BaseAdapter {
     public SaleProductAdapter(Activity activity,ArrayList<ProductList> mSaleProductList) {
         this.mSaleProductList = mSaleProductList;
         this.activity = activity;
+        inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
+
 
     @Override
     public int getCount() {
@@ -45,10 +50,12 @@ public class SaleProductAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-        v = inflater.inflate(R.layout.list_item_saleproduct,null);
-        TextView textview = (TextView) v.findViewById(R.id.txt_id_barcode);
+        v = inflater.inflate(R.layout.list_item_productlist,null);
+        TextView textView1 = (TextView) v.findViewById(R.id.txt_name_product);
+        TextView textView2 = (TextView)v.findViewById(R.id.txt_name_price);
         ProductList productList = mSaleProductList.get(position);
-        textview.setText(productList.getProductText());
+        textView1.setText(productList.getProductText());
+        textView2.setText(productList.getProductprice()+"");
 
 
         return v;

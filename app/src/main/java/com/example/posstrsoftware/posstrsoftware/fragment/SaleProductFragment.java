@@ -14,7 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.adapter.SaleProductAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
+import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.util.ArrayList;
@@ -29,11 +31,12 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
     private ArrayAdapter<String> adapterx;
     String []  item ={};
-
     ListView listView_SaleProduct;
     ImageButton btn_back;
     EditText edit_Barcode;
-    TextView txtTest;
+    SaleProductAdapter saleProductAdapter;
+    ListView listView_Product;
+
     public SaleProductFragment() {
         super();
     }
@@ -52,6 +55,12 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         initInstances(rootView);
         arrayList = new ArrayList<>(Arrays.asList(item));
         adapterx = new ArrayAdapter<String>(getActivity(),R.layout.list_item_saleproduct,R.id.txt_id_barcode,arrayList);
+        final ProductDAO mProductDAO = new ProductDAO(getActivity());
+        mProductDAO.open();
+        final ArrayList<ProductList> productLists = mProductDAO.getAllProductList();
+        mProductDAO.close();
+        saleProductAdapter = new SaleProductAdapter(getActivity(), productLists);
+        listView_Product.setAdapter(saleProductAdapter);
 
         return rootView;
     }
@@ -61,7 +70,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         listView_SaleProduct = (ListView)rootView.findViewById(R.id.listView_SaleProduct);
         edit_Barcode = (EditText)rootView.findViewById(R.id.edit_Barcode);
-        txtTest = (TextView)rootView.findViewById(R.id.txtTest);
+        listView_Product = (ListView)rootView.findViewById(R.id.listView_Product);
         btn_back.setOnClickListener(this);
         edit_Barcode.setOnEditorActionListener(this);
 
@@ -109,7 +118,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         ProductDAO productDAO = new ProductDAO(getActivity());
         if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN){
-            txtTest.setText(edit_Barcode.getText());
+
             productDAO.open();
             arrayList.add(productDAO.SearchID(edit_Barcode.getText().toString()));
 
