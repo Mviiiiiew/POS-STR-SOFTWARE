@@ -13,13 +13,13 @@ public class ProductList implements Serializable {
     private int productprice;
     private GroupList groupList;
     private UnitList unitList;
-    private int barcode;
+    private String barcode;
 
-    public int getBarcode() {
+    public String getBarcode() {
         return barcode;
     }
 
-    public void setBarcode(int barcode) {
+    public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
 

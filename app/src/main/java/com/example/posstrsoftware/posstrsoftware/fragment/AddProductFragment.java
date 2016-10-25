@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ProductMainActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.SaleProductAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerGroupAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
@@ -46,6 +47,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private spinnerGroupAdapter mSpinnerGroupAdapter;
     private GroupList mSelectedGroup;
     private spinnerUnitAdapter mSpinnerUnitAdapter;
+
     private UnitList mSelectedUnit;
 
     public AddProductFragment() {
@@ -68,6 +70,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         mUnitDAO.open();
         final ArrayList<UnitList> unitList = mUnitDAO.getAllUnitList();
         mUnitDAO.close();
+
+
         mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(), unitList);
         spinner_unit.setAdapter(mSpinnerUnitAdapter);
 
@@ -75,6 +79,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         mGroupDAO.open();
         final ArrayList<GroupList> groupList = mGroupDAO.getAllGroupList();
         mGroupDAO.close();
+
         mSpinnerGroupAdapter = new spinnerGroupAdapter(getActivity(), groupList);
         spinner_group.setAdapter(mSpinnerGroupAdapter);
         return rootView;
@@ -152,7 +157,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             } else {
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
-                productList.setBarcode(Integer.parseInt(editText_Barcode.getText().toString()));
+                productList.setBarcode(editText_Barcode.getText().toString());
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
                 productList.setProductprice(Integer.parseInt(editText_Price.getText().toString()));

@@ -29,7 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String tableProductCreateSQL = "CREATE TABLE product_list("
             +"id_product INTEGER PRIMARY KEY AUTOINCREMENT,"
-            +"id_barcode INTEGER NOT NULL,"
+            +"id_barcode TEXT NOT NULL,"
             +"product_text TEXT NOT NULL,"
             +"price_text TEXT NOT NULL,"
             +"id_unit INTEGER,"
