@@ -36,7 +36,7 @@ import java.util.Arrays;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class ProductMainFragment extends Fragment implements View.OnClickListener {
+public class ProductMainFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     Toolbar my_toolbar;
     SearchView searchViewProduct;
     ListView listView_Product;
@@ -74,6 +74,7 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         btn_add_product.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+        listView_Product.setOnItemClickListener(this);
 
 
     }
@@ -129,5 +130,17 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
             Intent intent = new Intent(getActivity(), AddProductActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final ProductDAO productDAO = new ProductDAO(getActivity());
+        productDAO.open();
+        final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
+        productDAO.close();
+        final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
+        Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
+        editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
+        startActivity(editIntent);
     }
 }

@@ -36,6 +36,12 @@
         </activity>
         <activity android:name=".activity.SaleProductActivity">
         </activity>
+        <activity android:name=".activity.CompanyMainActivity">
+        </activity>
+        <activity android:name=".activity.UpdateCompanyActivity">
+        </activity>
+        <activity android:name=".activity.CompanySetActivity">
+        </activity>
     </application>
 
 </manifest>

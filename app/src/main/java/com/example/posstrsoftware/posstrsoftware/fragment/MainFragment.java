@@ -55,6 +55,8 @@ public class MainFragment extends Fragment {
                     case 1:
                         return ProductSetMainFragment.newInstance();
                     case 2:
+                        return  CompanyMainFragment.newInstance();
+                    case 3:
                         return ContactMainFragment.newInstance();
                     default:
                         return null;
@@ -63,7 +65,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public int getCount() {
-                return 3;
+                return 4;
             }
 
             @Override
@@ -74,7 +76,9 @@ public class MainFragment extends Fragment {
                     case 1:
                         return "         Product Setting       ";
                     case 2:
-                        return "             Contact             ";
+                        return "             Company             ";
+                    case 3:
+                        return "             Contact            ";
                     default:
                         return "";
                 }
