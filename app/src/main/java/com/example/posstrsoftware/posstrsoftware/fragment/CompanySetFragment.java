@@ -1,16 +1,27 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.UpdateCompanyActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.CompanyAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -18,8 +29,9 @@ import com.example.posstrsoftware.posstrsoftware.activity.UpdateCompanyActivity;
  */
 public class CompanySetFragment extends Fragment implements View.OnClickListener {
     Button btn_UpdateCompany;
-    TextView txt_CompanyName;
-    TextView txt_CompanyAddress;
+    ListView listview_Company;
+
+
 
     public CompanySetFragment() {
         super();
@@ -37,16 +49,35 @@ public class CompanySetFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_set_company, container, false);
         initInstances(rootView);
+
+
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btn_UpdateCompany = (Button)rootView.findViewById(R.id.btn_UpdateCompany);
-        txt_CompanyName = (TextView)rootView.findViewById(R.id.txt_CompanyName);
-        txt_CompanyAddress = (TextView)rootView.findViewById(R.id.txt_CompanyAddress);
+        listview_Company = (ListView)rootView.findViewById(R.id.listview_Company);
         btn_UpdateCompany.setOnClickListener(this);
+
     }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        final CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        final ArrayList<CompanyList> myCompanyLists = companyDAO.getAllCompany();
+
+        companyDAO.close();
+        final CompanyAdapter objAdapter = new CompanyAdapter(getActivity(),myCompanyLists);
+        listview_Company.setAdapter(objAdapter);
+
+
+    }
+
+
 
     @Override
     public void onStart() {
@@ -78,9 +109,19 @@ public class CompanySetFragment extends Fragment implements View.OnClickListener
         }
     }
 
+
+
     @Override
     public void onClick(View v) {
+        final CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        final ArrayList<CompanyList> myCompanyLists = companyDAO.getAllCompany();
+        companyDAO.close();
+        final CompanyAdapter objAdapter = new CompanyAdapter(getActivity(),myCompanyLists);
         Intent intent = new Intent(getActivity(), UpdateCompanyActivity.class);
+        intent.putExtra("editCompany", (Serializable) objAdapter.getItem(0));
         startActivity(intent);
+
+
     }
 }

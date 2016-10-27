@@ -12,6 +12,9 @@ import android.widget.EditText;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.CompanyMainActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.CompanySetActivity;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 
 
 /**
@@ -20,6 +23,7 @@ import com.example.posstrsoftware.posstrsoftware.activity.CompanyMainActivity;
 public class UpdateCompanyFragment extends Fragment implements View.OnClickListener {
     EditText editText_CompanyName;
     EditText editText_CompanyAddress;
+    EditText editText_Telephone;
     Button btn_UpdateCompany;
 
     public UpdateCompanyFragment() {
@@ -38,8 +42,10 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_update_company, container, false);
         initInstances(rootView);
-        String n = getActivity().getIntent().getStringExtra("Company");
-        editText_CompanyName.setText(n);
+        CompanyList editCompanyList = (CompanyList) getActivity().getIntent().getSerializableExtra("editCompany");
+        editText_CompanyName.setText(editCompanyList.getCompanyName());
+        editText_CompanyAddress.setText(editCompanyList.getCompanyAddress());
+        editText_Telephone.setText(editCompanyList.getTelephone());
         return rootView;
     }
 
@@ -47,6 +53,7 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
         // Init 'View' instance(s) with rootView.findViewById here
         editText_CompanyAddress = (EditText) rootView.findViewById(R.id.editText_CompanyAddress);
         editText_CompanyName = (EditText) rootView.findViewById(R.id.editText_CompanyName);
+        editText_Telephone = (EditText) rootView.findViewById(R.id.editText_Telephone);
         btn_UpdateCompany = (Button) rootView.findViewById(R.id.btn_UpdateCompany);
         btn_UpdateCompany.setOnClickListener(this);
 
@@ -85,10 +92,17 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent reture = new Intent();
-        reture.putExtra("result",editText_CompanyAddress.getText().toString());
-        getActivity().setResult(Activity.RESULT_OK,reture);
+        CompanyList companyList = new CompanyList();
+        companyList.setCompanyName(String.valueOf(editText_CompanyName.getText()));
+        companyList.setCompanyAddress(String.valueOf(editText_CompanyAddress.getText()));
+        companyList.setTelephone(String.valueOf(editText_Telephone.getText()));
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        companyDAO.update(companyList);
+        companyDAO.close();
         getActivity().finish();
+
+
 
 
     }

@@ -36,7 +36,19 @@ public class DbHelper extends SQLiteOpenHelper {
             +"id_group INTEGER,"
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
-
+    private static final String tableCompanyCreateSQL = "CREATE TABLE company_list("
+            +"id_company INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"CompanyName TEXT ,"
+            +"CompanyAddress TEXT ,"
+            +"Telephone TEXT ,"
+            +"TAXID TEXT ,"
+            +"DivisionName TEXT,"
+            +"POSMachineID TEXT ,"
+            +"RegisterID TEXT ,"
+            +"ENDbillText TEXT ,"
+            +"VATRate TEXT ,"
+            +"delete_flag TEXT DEFAULT 'N'"
+            +");";
 
 
 
@@ -53,6 +65,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableUnitCreateSQL);
         db.execSQL(tableProductCreateSQL);
         db.execSQL(tableGroupCreateSQL);
+        db.execSQL(tableCompanyCreateSQL);
+        String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','VATRate');";
+        db.execSQL(insertData);
+
+
+
 
     }
 
