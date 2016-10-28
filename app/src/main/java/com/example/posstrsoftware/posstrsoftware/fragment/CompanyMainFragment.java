@@ -13,6 +13,7 @@ import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.CompanySetActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.UpdateCompanyActivity;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.io.Serializable;
 
@@ -22,7 +23,7 @@ import java.io.Serializable;
  */
 public class CompanyMainFragment extends Fragment implements View.OnClickListener {
 
-    Button btn_SettingCompany;
+    ButtonRectangle btn_SettingCompany;
 
 
     public CompanyMainFragment() {
@@ -51,8 +52,9 @@ public class CompanyMainFragment extends Fragment implements View.OnClickListene
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
 
-        btn_SettingCompany = (Button)rootView.findViewById(R.id.btn_SettingCompany);
+        btn_SettingCompany = (ButtonRectangle)rootView.findViewById(R.id.btn_SettingCompany);
         btn_SettingCompany.setOnClickListener(this);
+        btn_SettingCompany.setRippleSpeed(25);
 
     }
 

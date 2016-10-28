@@ -1,26 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#263238"
-             android:weightSum="2">
-<ListView
-    android:id="@+id/listview_Company"
-    android:padding="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1.9"
-    ></ListView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ECEFF1"
+                android:orientation="vertical"
+    >
 
-    <Button
+
+    <include
+        android:id="@+id/my_toolbar"
+        layout="@layout/toolbarcompany"/>
+    <ImageButton
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_UpdateCompany"
-        android:text="Update"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:background="@android:color/transparent"
+        android:paddingLeft="5dp"
+        android:src="@drawable/ic_arrow_back"
+        />
+
+    <ImageView
+        android:id="@+id/image_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_back"
+        android:layout_toRightOf="@+id/btn_back"
+        android:paddingLeft="25dp"
+        android:src="@drawable/ic_home_black_48dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image_company"
+        android:layout_toRightOf="@+id/image_company"
+        android:paddingLeft="40dp"
+        android:text="Company"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
         />
 
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/listview_Company"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_margin="15dp"
+
+        ></ListView>
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:id="@+id/btn_UpdateCompany"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#795548"
+        android:text="Configuration"
+        android:textColor="#FF5722">
+
+    </com.gc.materialdesign.views.ButtonRectangle>
+
+
+
+
+</RelativeLayout>

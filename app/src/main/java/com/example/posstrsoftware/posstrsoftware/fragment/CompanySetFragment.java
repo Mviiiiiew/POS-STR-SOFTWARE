@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ import com.example.posstrsoftware.posstrsoftware.activity.UpdateCompanyActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.CompanyAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
+import com.gc.materialdesign.views.ButtonIcon;
+import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,8 +31,11 @@ import java.util.List;
  * Created by nuuneoi on 11/16/2014.
  */
 public class CompanySetFragment extends Fragment implements View.OnClickListener {
-    Button btn_UpdateCompany;
+    ButtonRectangle btn_UpdateCompany;
     ListView listview_Company;
+    ImageButton btn_back;
+
+
 
 
 
@@ -56,9 +62,12 @@ public class CompanySetFragment extends Fragment implements View.OnClickListener
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btn_UpdateCompany = (Button)rootView.findViewById(R.id.btn_UpdateCompany);
+        btn_UpdateCompany = (ButtonRectangle)rootView.findViewById(R.id.btn_UpdateCompany);
+        btn_back = (ImageButton)rootView.findViewById(R.id.btn_back);
         listview_Company = (ListView)rootView.findViewById(R.id.listview_Company);
         btn_UpdateCompany.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
+        btn_UpdateCompany.setRippleSpeed(25);
 
     }
 
@@ -113,14 +122,19 @@ public class CompanySetFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        final CompanyDAO companyDAO = new CompanyDAO(getActivity());
-        companyDAO.open();
-        final ArrayList<CompanyList> myCompanyLists = companyDAO.getAllCompany();
-        companyDAO.close();
-        final CompanyAdapter objAdapter = new CompanyAdapter(getActivity(),myCompanyLists);
-        Intent intent = new Intent(getActivity(), UpdateCompanyActivity.class);
-        intent.putExtra("editCompany", (Serializable) objAdapter.getItem(0));
-        startActivity(intent);
+        if(btn_UpdateCompany == v) {
+            final CompanyDAO companyDAO = new CompanyDAO(getActivity());
+            companyDAO.open();
+            final ArrayList<CompanyList> myCompanyLists = companyDAO.getAllCompany();
+            companyDAO.close();
+            final CompanyAdapter objAdapter = new CompanyAdapter(getActivity(), myCompanyLists);
+            Intent intent = new Intent(getActivity(), UpdateCompanyActivity.class);
+            intent.putExtra("editCompany", (Serializable) objAdapter.getItem(0));
+            startActivity(intent);
+
+        }else if(btn_back == v){
+            getActivity().finish();
+        }
 
 
     }

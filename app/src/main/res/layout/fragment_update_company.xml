@@ -3,250 +3,313 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#263238"
-              android:orientation="horizontal"
-              android:weightSum="2">
-
-
-    <RelativeLayout
-
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2">
-
-    </RelativeLayout>
-
+              android:orientation="vertical"
+    >
 
     <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1.6"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <include
+            android:id="@+id/my_toolbar"
+            layout="@layout/toolbarcompany"/>
 
-        <TextView
-            android:id="@+id/txt_NameCompany"
+        <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="60dp"
-            android:text="Company Name"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
+            android:layout_alignParentLeft="true"
+            android:layout_margin="12dp"
+            android:background="@android:color/transparent"
+            android:paddingLeft="5dp"
+            android:src="@drawable/ic_arrow_back"
             />
 
-        <EditText
-            android:id="@+id/editText_CompanyName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/txt_NameCompany"
-            android:layout_marginLeft="@dimen/layout_marginLeft_company_edittext"
-            android:layout_toRightOf="@+id/txt_NameCompany"
-            android:background="@drawable/btn_default_normal"
-            android:hint="Company Name"
-            android:textColorHint="#FFFFFF"
-
-            />
-
-        <TextView
-            android:id="@+id/txt_AddressCompany"
+        <ImageView
+            android:id="@+id/image_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_CompanyAddress"
-
-            android:text="Company Address"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            />
-
-
-        <EditText
-            android:id="@+id/editText_CompanyAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyName"
-            android:layout_below="@+id/editText_CompanyName"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:layout_toRightOf="@+id/txt_AddressCompany"
-            android:background="@drawable/btn_default_normal"
-            android:hint="Company Address"
-            android:textColorHint="#FFFFFF"
-
+            android:layout_alignTop="@+id/btn_back"
+            android:layout_toRightOf="@+id/btn_back"
+            android:paddingLeft="25dp"
+            android:src="@drawable/ic_home_black_48dp"
             />
 
 
         <TextView
-            android:id="@+id/txt_Telephone"
+            android:id="@+id/txt_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_Telephone"
-            android:text="Telephone"
-            android:textSize="20sp"
+            android:layout_alignTop="@+id/image_company"
+            android:layout_toRightOf="@+id/image_company"
+            android:paddingLeft="40dp"
+            android:text="Company"
+            android:textColor="#000000"
+            android:textSize="30sp"
             android:textStyle="bold"
 
             />
-
-
-        <EditText
-            android:id="@+id/editText_Telephone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyAddress"
-            android:layout_below="@+id/editText_CompanyAddress"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:background="@drawable/btn_default_normal"
-            android:hint="Telephone"
-
-            android:textColorHint="#FFFFFF"
-            />
-
-        <TextView
-            android:id="@+id/txt_NameTAXID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_Name_TAXID"
-            android:text="TAXID"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
-
-        <EditText
-            android:id="@+id/editText_Name_TAXID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyAddress"
-            android:layout_below="@+id/editText_Telephone"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:background="@drawable/btn_default_normal"
-            android:hint="TAXID"
-            android:textColorHint="#FFFFFF"
-            />
-
-        <TextView
-            android:id="@+id/txt_NameDivision"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_Name_Division"
-            android:text="Division Name"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            />
-
-
-        <EditText
-            android:id="@+id/editText_Name_Division"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyAddress"
-            android:layout_below="@+id/editText_Name_TAXID"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:background="@drawable/btn_default_normal"
-            android:hint="Division Name"
-            android:textColorHint="#FFFFFF"
-            />
-
-        <TextView
-            android:id="@+id/txt_NameRegisterID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_Name_RegisterID"
-            android:text="RegisterID"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            />
-
-
-        <EditText
-            android:id="@+id/editText_Name_RegisterID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyAddress"
-            android:layout_below="@+id/editText_Name_Division"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:background="@drawable/btn_default_normal"
-            android:hint="RegisterID"
-            android:textColorHint="#FFFFFF"
-            />
-
-        <TextView
-            android:id="@+id/txt_NameENDbillText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_Name_ENDbillText"
-            android:text="ENDbillText"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            />
-
-
-        <EditText
-            android:id="@+id/editText_Name_ENDbillText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyAddress"
-            android:layout_below="@+id/editText_Name_RegisterID"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:background="@drawable/btn_default_normal"
-            android:hint="ENDbillText"
-            android:textColorHint="#FFFFFF"
-            />
-
-        <TextView
-            android:id="@+id/txt_NameVATRate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txt_NameCompany"
-            android:layout_alignTop="@+id/editText_Name_VATRate"
-            android:text="VATRate"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            />
-
-
-        <EditText
-            android:id="@+id/editText_Name_VATRate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_CompanyAddress"
-            android:layout_below="@+id/editText_Name_ENDbillText"
-            android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-            android:background="@drawable/btn_default_normal"
-            android:hint="VATRate"
-            android:textColorHint="#FFFFFF"
-            />
-
-        <Button
+        <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/btn_UpdateCompany"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText_Name_VATRate"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:text="Update"
-            />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="#795548"
+            android:text="SAVE"
+            android:textColor="#FF5722">
 
-
+        </com.gc.materialdesign.views.ButtonRectangle>
     </RelativeLayout>
 
-    <RelativeLayout
 
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.2">
+        android:background="#263238"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+        </RelativeLayout>
 
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/txt_NameCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="Company Name"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+            <EditText
+                android:id="@+id/editText_CompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/txt_NameCompany"
+                android:layout_marginLeft="@dimen/layout_marginLeft_company_edittext"
+                android:layout_toRightOf="@+id/txt_NameCompany"
+                android:background="@drawable/btn_default_normal"
+                android:hint="Company Name"
+                android:textColorHint="#FFFFFF"
+
+                />
+
+            <TextView
+                android:id="@+id/txt_AddressCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_CompanyAddress"
+                android:text="Company Address"
+
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/editText_CompanyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyName"
+                android:layout_below="@+id/editText_CompanyName"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:layout_toRightOf="@+id/txt_AddressCompany"
+                android:background="@drawable/btn_default_normal"
+                android:hint="Company Address"
+                android:textColorHint="#FFFFFF"
+
+                />
+
+
+            <TextView
+                android:id="@+id/txt_Telephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_Telephone"
+                android:text="Telephone"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/editText_Telephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyAddress"
+                android:layout_below="@+id/editText_CompanyAddress"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:background="@drawable/btn_default_normal"
+                android:hint="Telephone"
+
+                android:textColorHint="#FFFFFF"
+                />
+
+            <TextView
+                android:id="@+id/txt_NameTAXID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_Name_TAXID"
+                android:text="TAXID"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/editText_Name_TAXID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyAddress"
+                android:layout_below="@+id/editText_Telephone"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:background="@drawable/btn_default_normal"
+                android:hint="TAXID"
+                android:textColorHint="#FFFFFF"
+                />
+
+            <TextView
+                android:id="@+id/txt_NameDivision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_Name_Division"
+                android:text="Division Name"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/editText_Name_Division"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyAddress"
+                android:layout_below="@+id/editText_Name_TAXID"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:background="@drawable/btn_default_normal"
+                android:hint="Division Name"
+                android:textColorHint="#FFFFFF"
+                />
+
+            <TextView
+                android:id="@+id/txt_NameRegisterID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_Name_RegisterID"
+                android:text="RegisterID"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/editText_Name_RegisterID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyAddress"
+                android:layout_below="@+id/editText_Name_Division"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:background="@drawable/btn_default_normal"
+                android:hint="RegisterID"
+                android:textColorHint="#FFFFFF"
+                />
+
+            <TextView
+                android:id="@+id/txt_NameENDbillText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_Name_ENDbillText"
+                android:text="ENDbillText"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/editText_Name_ENDbillText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyAddress"
+                android:layout_below="@+id/editText_Name_RegisterID"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:background="@drawable/btn_default_normal"
+                android:hint="ENDbillText"
+                android:textColorHint="#FFFFFF"
+                />
+
+            <TextView
+                android:id="@+id/txt_NameVATRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameCompany"
+                android:layout_alignTop="@+id/editText_Name_VATRate"
+                android:text="VATRate"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <EditText
+                android:id="@+id/editText_Name_VATRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editText_CompanyAddress"
+                android:layout_below="@+id/editText_Name_ENDbillText"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:background="@drawable/btn_default_normal"
+                android:hint="VATRate"
+                android:textColorHint="#FFFFFF"
+                />
+
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
