@@ -5,4 +5,6 @@
     <dimen name="textsize_company">20sp</dimen>
     <dimen name="layout_marginTop_company">5dp</dimen>
     <dimen name="layout_marginLeft_company">50dp</dimen>
+    <dimen name="layout_marginLeft_company_edittext">50dp</dimen>
+    <dimen name="layout_marginTop_company_edittext">5dp</dimen>
 </resources>

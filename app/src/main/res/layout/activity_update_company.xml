@@ -7,10 +7,17 @@
     android:layout_height="match_parent"
 
     tools:context="com.example.posstrsoftware.posstrsoftware.activity.UpdateCompanyActivity">
+ <ScrollView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+
 <FrameLayout
     android:id="@+id/contentContainerUpdateCompany"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
 </FrameLayout>
+ </ScrollView>
 </RelativeLayout>
