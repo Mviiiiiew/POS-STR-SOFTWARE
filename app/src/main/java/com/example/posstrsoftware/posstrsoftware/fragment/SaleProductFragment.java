@@ -67,6 +67,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_clear.setOnClickListener(this);
         btn_clear.setRippleSpeed(15);
         btn_back.setOnClickListener(this);
+
         edit_Barcode.setOnEditorActionListener(this);
 
 
@@ -133,6 +134,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
         }
     }
+
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
