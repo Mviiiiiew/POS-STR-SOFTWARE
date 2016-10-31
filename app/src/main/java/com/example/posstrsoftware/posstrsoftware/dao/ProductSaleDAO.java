@@ -57,6 +57,11 @@ public class ProductSaleDAO {
             this.database.insert("productsale_list",null,values);
 
     }
+    public void delete(ProductSaleList productSaleList) {
+
+        this.database.execSQL("Delete  From productsale_list" );
+
+    }
 
 
 

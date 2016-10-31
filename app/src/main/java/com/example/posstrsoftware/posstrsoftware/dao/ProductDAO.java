@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 
 import java.util.ArrayList;
@@ -89,7 +90,8 @@ public class ProductDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            return_text = cursor.getString(2) + "  " +cursor.getString(3);
+
+           return_text = cursor.getString(2);
             cursor.moveToNext();
         }
         cursor.close();
