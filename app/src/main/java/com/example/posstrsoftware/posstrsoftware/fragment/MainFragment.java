@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.inthecheesefactory.thecheeselibrary.view.SlidingTabLayout;
 
@@ -44,8 +46,12 @@ public class MainFragment extends Fragment {
     }
 
     private void initInstances(View rootView) {
+        CompanyList companyList = new CompanyList();
+
         // Init 'View' instance(s) with rootView.findViewById here
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
+
+
         viewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {

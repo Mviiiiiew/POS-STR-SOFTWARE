@@ -50,6 +50,12 @@ public class DbHelper extends SQLiteOpenHelper {
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
 
+    private static final String tableProductSaleCreateSQL = "CREATE TABLE productsale_list("
+            +"id_productsale INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"productsale_text TEXT NOT NULL,"
+            +"delete_flag TEXT DEFAULT 'N'"
+            +");";
+
 
 
 
@@ -66,6 +72,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableProductCreateSQL);
         db.execSQL(tableGroupCreateSQL);
         db.execSQL(tableCompanyCreateSQL);
+        db.execSQL(tableProductSaleCreateSQL);
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','VATRate');";
         db.execSQL(insertData);
 

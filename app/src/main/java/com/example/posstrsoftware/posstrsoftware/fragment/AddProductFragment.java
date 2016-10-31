@@ -1,7 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -15,8 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
-import com.example.posstrsoftware.posstrsoftware.activity.ProductMainActivity;
-import com.example.posstrsoftware.posstrsoftware.adapter.SaleProductAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerGroupAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;

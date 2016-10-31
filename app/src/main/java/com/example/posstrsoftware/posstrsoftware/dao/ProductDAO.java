@@ -86,7 +86,6 @@ public class ProductDAO {
 
     public String SearchID(String ID){
         String return_text = "No data Product";
-
         Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){

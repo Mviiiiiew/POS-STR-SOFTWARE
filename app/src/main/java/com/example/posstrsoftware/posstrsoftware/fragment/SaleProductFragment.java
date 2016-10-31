@@ -14,10 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
-import com.example.posstrsoftware.posstrsoftware.adapter.SaleProductAdapter;
+import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
-import com.example.posstrsoftware.posstrsoftware.model.ProductList;
-import com.gc.materialdesign.views.ButtonRectangle;
+import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
+import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,15 +27,15 @@ import java.util.Arrays;
  * Created by nuuneoi on 11/16/2014.
  */
 public class SaleProductFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
-    private  ArrayList<String> arrayList;
 
-    private ArrayAdapter<String> adapterx;
-    String []  item ={};
-    ListView listView_SaleProduct;
+
+
+   ListView listView_SaleProduct;
     ImageButton btn_back;
     EditText edit_Barcode;
-    SaleProductAdapter saleProductAdapter;
     ListView listView_Product;
+
+
 
     public SaleProductFragment() {
         super();
@@ -53,15 +53,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_saleproduct, container, false);
         initInstances(rootView);
-        arrayList = new ArrayList<>(Arrays.asList(item));
-        adapterx = new ArrayAdapter<String>(getActivity(),R.layout.list_item_saleproduct,R.id.txt_id_barcode,arrayList);
-        final ProductDAO mProductDAO = new ProductDAO(getActivity());
-        mProductDAO.open();
-        final ArrayList<ProductList> productLists = mProductDAO.getAllProductList();
-        mProductDAO.close();
-        saleProductAdapter = new SaleProductAdapter(getActivity(), productLists);
-        listView_Product.setAdapter(saleProductAdapter);
-
         return rootView;
     }
 
@@ -74,6 +65,18 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back.setOnClickListener(this);
         edit_Barcode.setOnEditorActionListener(this);
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        ArrayList<ProductSaleList> productSaleLists =productSaleDAO.getAllProductSaleList();
+        productSaleDAO.close();
+        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+        listView_SaleProduct.setAdapter(adapter);
 
     }
 
@@ -94,6 +97,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save Instance State here
+
     }
 
     /*
@@ -118,17 +122,25 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         ProductDAO productDAO = new ProductDAO(getActivity());
         if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN){
-
             productDAO.open();
-            arrayList.add(productDAO.SearchID(edit_Barcode.getText().toString()));
-
+            ProductSaleList productSaleList = new ProductSaleList();
+            productSaleList.setProductSale(productDAO.SearchID(String.valueOf(edit_Barcode.getText())));
             productDAO.close();
-            listView_SaleProduct.setAdapter(adapterx);
-            adapterx.notifyDataSetChanged();
+            ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+            productSaleDAO.open();
+            productSaleDAO.add(productSaleList);
+            ArrayList<ProductSaleList> productSaleLists =productSaleDAO.getAllProductSaleList();
+            final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+            listView_SaleProduct.setAdapter(adapter);
+
+            adapter.notifyDataSetChanged();
+            productSaleDAO.close();
             edit_Barcode.setText("");
             return true;
 
         }
         return false;
     }
+
+
 }
