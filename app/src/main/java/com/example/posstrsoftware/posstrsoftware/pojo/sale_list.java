@@ -7,7 +7,7 @@ package com.example.posstrsoftware.posstrsoftware.pojo;
 public class sale_list {
     private String product_name;
     private String product_price;
-    private String product_qty;
+
 
     public String getProduct_name() {
         return product_name;
@@ -25,11 +25,5 @@ public class sale_list {
         this.product_price = product_price;
     }
 
-    public String getProduct_qty() {
-        return product_qty;
-    }
 
-    public void setProduct_qty(String product_qty) {
-        this.product_qty = product_qty;
-    }
 }
