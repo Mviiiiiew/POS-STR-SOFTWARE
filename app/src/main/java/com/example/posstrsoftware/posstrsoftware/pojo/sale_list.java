@@ -7,7 +7,15 @@ package com.example.posstrsoftware.posstrsoftware.pojo;
 public class sale_list {
     private String product_name;
     private String product_price;
+    private String product_qrt;
 
+    public String getProduct_qrt() {
+        return product_qrt;
+    }
+
+    public void setProduct_qrt(String product_qrt) {
+        this.product_qrt = product_qrt;
+    }
 
     public String getProduct_name() {
         return product_name;
