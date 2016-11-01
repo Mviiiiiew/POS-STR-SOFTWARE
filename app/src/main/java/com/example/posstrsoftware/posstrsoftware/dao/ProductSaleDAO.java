@@ -38,6 +38,7 @@ public class ProductSaleDAO {
             ProductSaleList mProductSaleList = new ProductSaleList();
             mProductSaleList.setId(cursor.getInt(0));
             mProductSaleList.setProductSale(cursor.getString(1));
+            mProductSaleList.setPrice(cursor.getString(2));
             ProductSaleList.add(mProductSaleList);
             cursor.moveToNext();
 
@@ -54,6 +55,7 @@ public class ProductSaleDAO {
 
             ContentValues values = new ContentValues();
             values.put("productsale_text",productSaleList.getProductSale());
+            values.put("productprice_text",productSaleList.getPrice());
             this.database.insert("productsale_list",null,values);
 
     }

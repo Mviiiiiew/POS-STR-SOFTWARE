@@ -11,7 +11,7 @@ import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
-import com.example.posstrsoftware.posstrsoftware.pojo.sale_list;
+
 
 import java.util.ArrayList;
 
@@ -86,19 +86,19 @@ public class ProductDAO {
 
     }
 
-    public sale_list SearchID(String ID){
-        sale_list bean = new sale_list();
-        String return_text = "No data Product";
+    public ProductSaleList SearchID(String ID){
+
+        ProductSaleList bee = new ProductSaleList();
+
         Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            bean.setProduct_name(cursor.getString(2));
-            bean.setProduct_price(cursor.getString(3));
-           //return_text = cursor.getString(2);
+            bee.setProductSale(cursor.getString(2));
+            bee.setPrice(cursor.getString(3));
             cursor.moveToNext();
         }
         cursor.close();
-        return bean ;
+        return bee ;
 
     }
     public int update(ProductList productList) {

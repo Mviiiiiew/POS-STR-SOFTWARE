@@ -14,11 +14,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainer, MainFragment.newInstance())
-                    .commit();
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainer);
+        if(fragment instanceof MainFragment == false ) {
 
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentContainer, MainFragment.newInstance())
+
+                        .commit();
+
+            }
         }
     }
 

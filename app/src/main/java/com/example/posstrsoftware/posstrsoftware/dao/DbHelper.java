@@ -53,6 +53,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String tableProductSaleCreateSQL = "CREATE TABLE productsale_list("
             +"id_productsale INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"productsale_text TEXT NOT NULL,"
+            +"productprice_text TEXT NOT NULL,"
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
 
