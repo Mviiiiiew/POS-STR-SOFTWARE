@@ -85,16 +85,17 @@ android:id="@+id/contentContainerfragment2"
             android:layout_weight="0.5"
             android:orientation="vertical"
             android:weightSum="3"
+
             >
 
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_clear"
-
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="Clear"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
@@ -105,6 +106,7 @@ android:id="@+id/contentContainerfragment2"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="Pay"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
@@ -115,6 +117,7 @@ android:id="@+id/contentContainerfragment2"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="Discount"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>

@@ -42,9 +42,7 @@
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
-
         />
-
 
     <ListView
         android:id="@+id/listview_Company"
@@ -52,18 +50,18 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/my_toolbar"
         android:layout_margin="15dp"
-
         ></ListView>
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_UpdateCompany"
         android:layout_width="150dp"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="#795548"
+        android:background="@color/colorWhite"
         android:text="Configuration"
-        android:textColor="#FF5722">
+        android:textColor="#000000">
 
     </com.gc.materialdesign.views.ButtonRectangle>
 

@@ -49,15 +49,17 @@
             android:textStyle="bold"
 
             />
+
         <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/btn_UpdateCompany"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="#795548"
+            android:layout_margin="5dp"
+            android:background="@color/colorWhite"
             android:text="SAVE"
-            android:textColor="#FF5722">
+            android:textColor="#000000">
 
         </com.gc.materialdesign.views.ButtonRectangle>
     </RelativeLayout>
@@ -118,7 +120,6 @@
                 android:layout_alignLeft="@+id/txt_NameCompany"
                 android:layout_alignTop="@+id/editText_CompanyAddress"
                 android:text="Company Address"
-
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -295,8 +296,6 @@
                 android:hint="VATRate"
                 android:textColorHint="#FFFFFF"
                 />
-
-
 
 
         </RelativeLayout>

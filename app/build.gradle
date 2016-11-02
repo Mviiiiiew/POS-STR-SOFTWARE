@@ -28,5 +28,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':TheCheeseLibrary')
     compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    compile 'com.bigmercu.cBox:cbox:1.08'
 
 }

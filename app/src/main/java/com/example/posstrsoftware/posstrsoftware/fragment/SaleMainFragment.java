@@ -76,7 +76,9 @@ public class SaleMainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), SaleProductActivity.class);
-        startActivity(intent);
+
+            Intent intent = new Intent(getActivity(), SaleProductActivity.class);
+            startActivity(intent);
+
     }
 }

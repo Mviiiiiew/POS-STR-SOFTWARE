@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:weightSum="2">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorGray"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txt_Total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:text="Total"
+                android:textStyle="bold"
+                android:textSize="20sp"
+
+                />
+
+            <TextView
+
+                android:id="@+id/txt_NameTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/txt_Total"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="70dp"
+                android:inputType="text"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/txt_Total"
+                android:background="#000000"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/txt_NameCash"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_Total"
+                android:layout_below="@+id/txt_Total"
+                android:layout_marginTop="50dp"
+                android:text="Cash"
+                android:textSize="20sp"
+
+
+                />
+
+            <EditText
+                android:id="@+id/txt_cash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:layout_alignBottom="@+id/txt_NameCash"
+                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignRight="@+id/txt_NameTotal"
+                android:layout_toRightOf="@+id/txt_NameCash"
+                android:textSize="20sp"
+                android:inputType="number"
+
+                />
+
+            <TextView
+                android:id="@+id/txt_NameChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_Total"
+                android:layout_below="@+id/txt_NameCash"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"
+                android:text="Change"
+                android:textSize="20sp"
+
+
+                />
+
+            <TextView
+                android:id="@+id/txt_Chang"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignRight="@+id/txt_NameTotal"
+                android:layout_alignTop="@+id/txt_NameChange"
+                android:layout_toRightOf="@+id/txt_NameChange"
+                android:background="#000000"
+
+                android:textSize="30sp"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="4">
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="10"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_50"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="50"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_500"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="500"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="4">
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="5"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="20"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_100"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="100"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_1000"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="1,000"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.4dp"
+                android:background="#000000"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+               android:layout_marginTop="10dp"
+                android:checked="true"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:text="   Print"
+                android:textSize="15sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="Pay"
+                    android:textSize="@dimen/textsize_button">
+
+                </com.gc.materialdesign.views.ButtonRectangle>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="Back"
+                    android:textSize="@dimen/textsize_button">
+
+                </com.gc.materialdesign.views.ButtonRectangle>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

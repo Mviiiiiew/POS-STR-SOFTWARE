@@ -1,5 +1,7 @@
 package com.example.posstrsoftware.posstrsoftware.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.BaseAdapter;
 
 
@@ -12,6 +14,12 @@ public class ProductSaleList  {
 
     private  int id;
     private String ProductSale;
+
+public ProductSaleList()
+{}
+
+
+
 
     public String getPrice() {
         return price;
@@ -34,7 +42,6 @@ public class ProductSaleList  {
     public String getProductSale() {
         return ProductSale;
     }
-
 
     public void setProductSale(String prodcutSale){
         ProductSale = prodcutSale;
