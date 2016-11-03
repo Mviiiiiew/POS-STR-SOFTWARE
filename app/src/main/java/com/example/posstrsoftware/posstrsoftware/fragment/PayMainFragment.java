@@ -12,15 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
-import com.example.posstrsoftware.posstrsoftware.model.PayProduct;
-import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -156,7 +152,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_500.setOnClickListener(this);
         btn_cost_1000.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
-        btn_cost_1000.setRippleSpeed(40);
+        btn_cost_1000.setRippleSpeed(50);
         btn_cost_100.setRippleSpeed(40);
         btn_cost_10.setRippleSpeed(40);
         btn_cost_1.setRippleSpeed(40);
@@ -203,7 +199,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
 
 
         switch (v.getId()) {
