@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class ProductAdapter extends BaseAdapter {
         ProductList productList = mProductList.get(position);
         textview.setText(productList.getProductText());
         textView1.setText(productList.getId()+"");
-        textView2.setText(productList.getProductprice()+"");
+        textView2.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductprice()+"")));
         textView3.setText(productList.getUnitList().getUnitText());
         textView4.setText(productList.getGroupList().getGroupText());
         textView5.setText(productList.getBarcode()+"");

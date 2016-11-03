@@ -97,7 +97,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         Double x = 0.0;
         DecimalFormat money_format = new DecimalFormat("###,###,###.00");
         for (ProductSaleList bean : productSaleLists) {
-            x += Integer.parseInt(bean.getPrice());
+            x += Double.valueOf(bean.getPrice());
         }
         txt_cost.setText(money_format.format((x)));
 
@@ -185,7 +185,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             } else {
                 DecimalFormat money_format = new DecimalFormat("###,###,###.00");
                 for (ProductSaleList bean : productSaleLists) {
-                    total += Integer.parseInt(bean.getPrice());
+                    total +=  Double.valueOf(bean.getPrice());
 
                 }
                 txt_cost.setText(money_format.format((total)));

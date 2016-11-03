@@ -40,7 +40,7 @@
         android:layout_toRightOf="@+id/editText_Product"
         android:background="@color/thumbColor"
         android:hint="Price"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:padding="20dp"
         />
 

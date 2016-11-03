@@ -10,7 +10,7 @@ public class ProductList implements Serializable {
 
     private int id;
     private String productText;
-    private int productprice;
+    private Double productprice;
     private GroupList groupList;
     private UnitList unitList;
     private String barcode;
@@ -31,14 +31,13 @@ public class ProductList implements Serializable {
         this.groupList = groupList;
     }
 
-    public int getProductprice() {
+    public Double getProductprice() {
         return productprice;
     }
 
-    public void setProductprice(int productprice) {
+    public void setProductprice(Double productprice) {
         this.productprice = productprice;
     }
-
 
     public int getId() {
         return id;

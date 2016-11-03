@@ -157,7 +157,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 productList.setBarcode(editText_Barcode.getText().toString());
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
-                productList.setProductprice(Integer.parseInt(editText_Price.getText().toString()));
+                productList.setProductprice(Double.valueOf(editText_Price.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.add(productList);

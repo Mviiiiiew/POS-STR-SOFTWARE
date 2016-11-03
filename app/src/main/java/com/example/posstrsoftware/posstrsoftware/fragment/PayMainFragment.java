@@ -250,6 +250,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
                 break;
             case R.id.btn_Pay:
+
                 total = Double.valueOf((txt_NameTotal.getText().toString().replace(",", "")));
                 cash = Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""));
                 change = cash - total;

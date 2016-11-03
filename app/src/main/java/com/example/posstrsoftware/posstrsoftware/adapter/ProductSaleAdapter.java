@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ ArrayList<ProductSaleList> mProductSaleLists;
         TextView txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
         ProductSaleList productSaleList = mProductSaleLists.get(position);
         txt_name_productsale.setText(productSaleList.getProductSale());
-        txt_name_productprice.setText(productSaleList.getPrice());
+        txt_name_productprice.setText(formatAmount.formatAmountDouble(Double.valueOf(productSaleList.getPrice())));
 
         return v;
 

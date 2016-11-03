@@ -51,7 +51,7 @@ public class ProductDAO {
             productList1.setId(cursor.getInt(0));
             productList1.setBarcode(cursor.getString(1));
             productList1.setProductText(cursor.getString(2));
-            productList1.setProductprice(cursor.getInt(3));
+            productList1.setProductprice(cursor.getDouble(3));
             productList1.setUnitList(new UnitList(cursor.getInt(4),cursor.getString(5)));
             productList1.setGroupList(new GroupList(cursor.getInt(6),cursor.getString(7)));
             productList.add(productList1);
