@@ -7,7 +7,7 @@
     <dimen name="layout_marginLeft_company">50dp</dimen>
     <dimen name="layout_marginLeft_company_edittext">50dp</dimen>
     <dimen name="layout_marginTop_company_edittext">5dp</dimen>
-    <dimen name="layout_margin_button_pay">10dp</dimen>
+    <dimen name="layout_margin_button_pay">5dp</dimen>
     <dimen name="textsize_button_pay">20sp</dimen>
     <dimen name="textsize_button">20sp</dimen>
 </resources>

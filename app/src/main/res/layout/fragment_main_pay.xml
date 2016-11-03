@@ -27,7 +27,6 @@
                 android:text="Total"
                 android:textStyle="bold"
                 android:textSize="20sp"
-
                 />
 
             <TextView
@@ -60,7 +59,7 @@
                 />
 
             <EditText
-                android:id="@+id/txt_cash"
+                android:id="@+id/edit_txt_cash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
@@ -68,8 +67,11 @@
                 android:layout_alignLeft="@+id/txt_NameTotal"
                 android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_toRightOf="@+id/txt_NameCash"
-                android:textSize="20sp"
-                android:inputType="number"
+                android:textSize="30sp"
+                android:ems="10"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:inputType="numberDecimal"
 
                 />
 
@@ -88,11 +90,13 @@
                 />
 
             <TextView
-                android:id="@+id/txt_Chang"
+                android:id="@+id/txt_Change"
                 android:layout_width="match_parent"
                 android:inputType="text"
+                android:textColor="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_NameTotal"
+                android:gravity="center"
                 android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_alignTop="@+id/txt_NameChange"
                 android:layout_toRightOf="@+id/txt_NameChange"
@@ -122,7 +126,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:weightSum="4">
+                android:weightSum="5">
 
                 <com.gc.materialdesign.views.ButtonRectangle
                     android:id="@+id/btn_cost_1"
@@ -167,6 +171,16 @@
                     android:text="500"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/textsize_button_pay"/>
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_025"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="0.25"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
 
 
             </LinearLayout>
@@ -176,7 +190,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:weightSum="4">
+                android:weightSum="5">
 
                 <com.gc.materialdesign.views.ButtonRectangle
                     android:id="@+id/btn_cost_5"
@@ -222,6 +236,17 @@
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/textsize_button_pay"/>
 
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_cost_050"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_margin_button_pay"
+                    android:layout_weight="1"
+                    android:background="@color/colorOrange"
+                    android:text="0.50"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize_button_pay"/>
+
             </LinearLayout>
 
 
@@ -256,6 +281,7 @@
                 android:weightSum="2">
 
                 <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_Pay"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"

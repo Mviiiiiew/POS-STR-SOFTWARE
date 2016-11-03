@@ -32,7 +32,7 @@ import java.util.ArrayList;
  */
 public class SaleProductFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
-    private String total;
+    Double total;
     ButtonRectangle btn_Pay;
     ListView listView_SaleProduct;
     ImageButton btn_back;
@@ -131,7 +131,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             // Restore Instance State here
-            total = savedInstanceState.getString("x");
+            total = Double.valueOf(savedInstanceState.getString("x"));
 
         }
 
