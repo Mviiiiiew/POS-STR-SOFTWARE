@@ -18,12 +18,14 @@ public class ProductSaleDAO {
     private SQLiteDatabase database;
     private DbHelper dbHelperProductSale;
 
-    public  ProductSaleDAO(Context context){
+    public ProductSaleDAO(Context context) {
         dbHelperProductSale = new DbHelper(context);
     }
-    public void open(){
+
+    public void open() {
         database = dbHelperProductSale.getWritableDatabase();
     }
+
     public void close() {
         dbHelperProductSale.close();
     }
@@ -32,9 +34,9 @@ public class ProductSaleDAO {
 
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM productsale_list where delete_flag = 'N';",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM productsale_list where delete_flag = 'N';", null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             ProductSaleList mProductSaleList = new ProductSaleList();
             mProductSaleList.setId(cursor.getInt(0));
             mProductSaleList.setProductSale(cursor.getString(1));
@@ -49,23 +51,27 @@ public class ProductSaleDAO {
     }
 
 
+    public void add(ProductSaleList productSaleList) {
 
+        ContentValues values = new ContentValues();
+        values.put("productsale_text", productSaleList.getProductSale());
+        values.put("productprice_text", productSaleList.getPrice());
+        this.database.insert("productsale_list", null, values);
 
-    public void   add(ProductSaleList productSaleList){
-
-            ContentValues values = new ContentValues();
-            values.put("productsale_text",productSaleList.getProductSale());
-            values.put("productprice_text",productSaleList.getPrice());
-            this.database.insert("productsale_list",null,values);
 
     }
+
+    public void clear(ProductSaleList productSaleList) {
+
+        this.database.execSQL("Delete  From productsale_list");
+
+    }
+
     public void delete(ProductSaleList productSaleList) {
 
-        this.database.execSQL("Delete  From productsale_list" );
+        this.database.execSQL("UPDATE productsale_list set delete_flag = 'Y' where id_productsale = " + productSaleList.getId());
 
     }
-
-
 
 
 }

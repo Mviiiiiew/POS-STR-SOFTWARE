@@ -1,13 +1,16 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -37,9 +40,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     ListView listView_SaleProduct;
     ImageButton btn_back;
     EditText edit_Barcode;
-    ListView listView_Product;
     ButtonRectangle btn_clear;
     TextView txt_cost;
+
 
 
     public SaleProductFragment() {
@@ -59,9 +62,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_saleproduct, container, false);
         initInstances(rootView);
-        if (savedInstanceState != null) {
-            //Restore the fragment's instance
-        }
+
         return rootView;
     }
 
@@ -70,16 +71,15 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         listView_SaleProduct = (ListView) rootView.findViewById(R.id.listView_SaleProduct);
         edit_Barcode = (EditText) rootView.findViewById(R.id.edit_Barcode);
-        btn_Pay = (ButtonRectangle)rootView.findViewById(R.id.btn_Pay);
+        btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
-        listView_Product = (ListView) rootView.findViewById(R.id.listView_Product);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
         btn_Pay.setRippleSpeed(15);
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_clear.setRippleSpeed(15);
         btn_back.setOnClickListener(this);
-        edit_Barcode.setOnEditorActionListener(this);
+
 
 
     }
@@ -89,10 +89,53 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         super.onResume();
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+        final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
         productSaleDAO.close();
         final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+
         listView_SaleProduct.setAdapter(adapter);
+
+        listView_SaleProduct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle(" Delete Yes / No ?");
+                alertDialogder.setMessage("Do yo want Delete Item " + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+                alertDialogder.setCancelable(false);
+                alertDialogder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                });
+                alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ProductSaleList productSaleList1 = new ProductSaleList();
+                        productSaleList1.setId((int) adapter.getItemId(position));
+                        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                        productSaleDAO1.open();
+                        productSaleDAO1.delete(productSaleList1);
+                        productSaleDAO1.close();
+
+
+
+
+
+
+                    }
+
+                });
+
+                alertDialogder.show();
+
+
+                return false;
+            }
+        });
         edit_Barcode.setOnEditorActionListener(this);
         Double x = 0.0;
         DecimalFormat money_format = new DecimalFormat("###,###,###.00");
@@ -100,6 +143,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             x += Double.valueOf(bean.getPrice());
         }
         txt_cost.setText(money_format.format((x)));
+
 
 
     }
@@ -140,22 +184,21 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (btn_back == v) {
-         getActivity().finish();
+            getActivity().finish();
 
         } else if (btn_clear == v) {
             ProductSaleList productSaleList = new ProductSaleList();
             ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
             productSaleDAO.open();
-            productSaleDAO.delete(productSaleList);
+            productSaleDAO.clear(productSaleList);
             ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
             final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
             listView_SaleProduct.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
             productSaleDAO.close();
             txt_cost.setText("");
-        } else if(btn_Pay == v) {
+        } else if (btn_Pay == v) {
             Intent intent = new Intent(getActivity(), PayMainActivity.class);
-            intent.putExtra("total",txt_cost.getText());
+            intent.putExtra("total", txt_cost.getText());
             startActivity(intent);
 
         }
@@ -166,6 +209,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         Double total = 0.0;
         ProductDAO productDAO = new ProductDAO(getActivity());
+
         if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN) {
             productDAO.open();
             ProductSaleList productSaleList = new ProductSaleList();
@@ -178,22 +222,17 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
             final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
             listView_SaleProduct.setAdapter(adapter);
-            listView_SaleProduct.setSelection(listView_SaleProduct.getAdapter().getCount() - 1);
-            if (edit_Barcode.getText().toString().equals("")) {
-                Toast.makeText(getActivity(), "No Data", Toast.LENGTH_SHORT).show();
-                edit_Barcode.setText("");
-            } else {
-                DecimalFormat money_format = new DecimalFormat("###,###,###.00");
-                for (ProductSaleList bean : productSaleLists) {
-                    total +=  Double.valueOf(bean.getPrice());
 
-                }
-                txt_cost.setText(money_format.format((total)));
-                adapter.notifyDataSetChanged();
-                productSaleDAO.close();
-                edit_Barcode.setText("");
+            DecimalFormat money_format = new DecimalFormat("###,###,###.00");
+            for (ProductSaleList bean : productSaleLists) {
+                total += Double.valueOf(bean.getPrice());
 
             }
+
+            txt_cost.setText(money_format.format((total)));
+            adapter.notifyDataSetChanged();
+            productSaleDAO.close();
+            edit_Barcode.setText("");
 
 
             return true;
