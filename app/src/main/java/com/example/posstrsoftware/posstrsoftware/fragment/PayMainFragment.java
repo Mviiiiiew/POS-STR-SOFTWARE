@@ -40,10 +40,10 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     TextView txt_Change;
     TextView txt_NameTotal;
     EditText edit_txt_cash;
-    Double total =0.0;
-    Double change =0.0;
+    Double total = 0.0;
+    Double change = 0.0;
     Double cash = 0.0;
-    String x ;
+    String x;
 
 
     public PayMainFragment() {
@@ -60,6 +60,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+        edit_txt_cash.setText("");
     }
 
     @Override
@@ -82,10 +83,19 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+
+            }
+
+
+            @Override
+
+            public void afterTextChanged(Editable s) {
+
+
                 edit_txt_cash.removeTextChangedListener(this);
 
                 try {
-                    String originalString = s.toString();
+                    String originalString = String.valueOf(edit_txt_cash.getText());
 
                     Long longval;
                     if (originalString.contains(",")) {
@@ -94,7 +104,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     longval = Long.parseLong(originalString);
 
                     DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-                    formatter.applyPattern("#,###,###,###");
+                    formatter.applyPattern("#,###,###,###.##");
                     String formattedString = formatter.format(longval);
 
                     //setting text after format to EditText
@@ -107,15 +117,10 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
 
                 edit_txt_cash.addTextChangedListener(this);
-
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
 
 
-
-            }
         });
 
 
@@ -137,8 +142,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_025 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_025);
         btn_cost_050 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_050);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
-        txt_Change= (TextView)rootView.findViewById(R.id.txt_Change);
-        btn_Pay = (ButtonRectangle)rootView.findViewById(R.id.btn_Pay);
+        txt_Change = (TextView) rootView.findViewById(R.id.txt_Change);
+        btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
 
         btn_cost_050.setOnClickListener(this);
         btn_cost_025.setOnClickListener(this);
@@ -153,17 +158,17 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_1000.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
         btn_cost_1000.setRippleSpeed(50);
-        btn_cost_100.setRippleSpeed(40);
-        btn_cost_10.setRippleSpeed(40);
-        btn_cost_1.setRippleSpeed(40);
-        btn_cost_5.setRippleSpeed(40);
-        btn_cost_20.setRippleSpeed(40);
-        btn_cost_50.setRippleSpeed(40);
-        btn_cost_500.setRippleSpeed(40);
-        btn_back.setRippleSpeed(40);
-        btn_cost_050.setRippleSpeed(40);
-        btn_cost_025.setRippleSpeed(40);
-        btn_Pay.setRippleSpeed(40);
+        btn_cost_100.setRippleSpeed(50);
+        btn_cost_10.setRippleSpeed(50);
+        btn_cost_1.setRippleSpeed(50);
+        btn_cost_5.setRippleSpeed(50);
+        btn_cost_20.setRippleSpeed(50);
+        btn_cost_50.setRippleSpeed(50);
+        btn_cost_500.setRippleSpeed(50);
+        btn_back.setRippleSpeed(50);
+        btn_cost_050.setRippleSpeed(50);
+        btn_cost_025.setRippleSpeed(50);
+        btn_Pay.setRippleSpeed(60);
 
     }
 
@@ -206,51 +211,47 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 getActivity().finish();
                 break;
             case R.id.btn_cost_1:
-
-                cash += 1.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+1.0));
                 break;
             case R.id.btn_cost_5:
-
-                cash += 5.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
-
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+5.0));
                 break;
             case R.id.btn_cost_10:
-                cash += 10.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+10.0));
                 break;
             case R.id.btn_cost_20:
-                cash += 20.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0"
+                        :edit_txt_cash.getText().toString().replaceAll(",",""))+20.0));
                 break;
             case R.id.btn_cost_50:
-                cash += 50.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+50.0));
                 break;
             case R.id.btn_cost_100:
-                cash += 100.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+100.0));
                 break;
             case R.id.btn_cost_500:
-                cash += 500.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+500.0));
                 break;
             case R.id.btn_cost_1000:
-                cash += 1000.0;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+1000.0));
                 break;
             case R.id.btn_cost_050:
-                cash += 0.5;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+0.50));
 
                 break;
             case R.id.btn_cost_025:
-                cash += 0.25;
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(cash));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
+                        edit_txt_cash.getText().toString().replaceAll(",",""))+0.25));
                 break;
             case R.id.btn_Pay:
-
                 total = Double.valueOf((txt_NameTotal.getText().toString().replace(",", "")));
                 cash = Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""));
                 change = cash - total;
@@ -262,8 +263,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
         }
     }
-
-
 
 
 }

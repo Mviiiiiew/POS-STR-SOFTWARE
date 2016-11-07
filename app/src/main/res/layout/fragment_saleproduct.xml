@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/contentContainerfragment2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-android:id="@+id/contentContainerfragment2"
 
     >
 
@@ -54,7 +54,7 @@ android:id="@+id/contentContainerfragment2"
         android:layout_height="match_parent"
         android:layout_below="@+id/my_toolbar"
         android:orientation="horizontal"
-        android:weightSum="2">
+        >
 
 
         <LinearLayout
@@ -63,18 +63,62 @@ android:id="@+id/contentContainerfragment2"
             android:layout_weight="1.5"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="2">
 
-
-            <ListView
-                android:id="@+id/listView_SaleProduct"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+                <TextView
+                    android:id="@+id/txt_ProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ชื่อสินค้า"
+                    android:textSize="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/txt_ProductName"
+                    android:layout_marginLeft="350dp"
+                    android:layout_toRightOf="@+id/txt_ProductName"
+                    android:text="ราคา"
+                    android:textSize="40dp"
+                    android:textStyle="bold"/>
 
 
-                >
+            </LinearLayout>
 
-            </ListView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.8"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/view_black"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="5dp"
+                    android:background="@color/colorBlack"/>
+
+
+                <ListView
+                    android:id="@+id/listView_SaleProduct"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+                </ListView>
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -95,8 +139,8 @@ android:id="@+id/contentContainerfragment2"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:textSize="20sp"
                 android:text="Clear"
+                android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
 
@@ -106,8 +150,8 @@ android:id="@+id/contentContainerfragment2"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:textSize="20sp"
                 android:text="Pay"
+                android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
 
@@ -117,8 +161,8 @@ android:id="@+id/contentContainerfragment2"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:textSize="20sp"
                 android:text="Discount"
+                android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
 
