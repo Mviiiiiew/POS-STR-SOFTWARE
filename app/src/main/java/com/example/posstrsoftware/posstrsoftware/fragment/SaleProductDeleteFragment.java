@@ -46,6 +46,31 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_delete_saleproduct, container, false);
         initInstances(rootView);
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleDeleteList();
+        productSaleDAO.close();
+        final ProductSaleDeleteAdapter adapter = new ProductSaleDeleteAdapter(getActivity(), productSaleLists);
+        listView_SaleProductDelete.setAdapter(adapter);
+
+        listView_SaleProductDelete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                ProductSaleList productSaleLists1 = new ProductSaleList();
+                productSaleLists1.setId((int) adapter.getItemId(position));
+                productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
+                ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                productSaleDAO1.open();
+                productSaleDAO1.delete_product_id(productSaleLists1);
+                productSaleDAO1.close();
+                productSaleLists.remove(position);
+                adapter.notifyDataSetChanged();
+
+
+
+            }
+        });
         return rootView;
     }
 
@@ -57,21 +82,12 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         btn_ok = (ButtonRectangle)rootView.findViewById(R.id.btn_ok);
         btn_Back.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-
         btn_Back.setRippleSpeed(40);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-        productSaleDAO.open();
-        final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleDeleteList();
-        productSaleDAO.close();
-        final ProductSaleDeleteAdapter adapter = new ProductSaleDeleteAdapter(getActivity(), productSaleLists);
-        listView_SaleProductDelete.setAdapter(adapter);
-
-
 
 
 

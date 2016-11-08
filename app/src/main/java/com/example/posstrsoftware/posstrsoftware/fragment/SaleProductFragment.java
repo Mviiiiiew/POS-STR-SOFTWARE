@@ -122,14 +122,15 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
 
                         ProductSaleList productSaleLists1 = new ProductSaleList();
+                        productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
+
                         ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
                         productSaleDAO1.open();
                         productSaleDAO1.delete(productSaleLists1);
                         productSaleDAO1.close();
+
                         productSaleLists.remove(position);
                         adapter.notifyDataSetChanged();
-
-
 
                     }
 

@@ -24,8 +24,8 @@ public class ProductSaleDeleteAdapter extends BaseAdapter {
     private static Activity activity;
     private static LayoutInflater inflater;
     private ArrayList<ProductSaleList> mProductSaleLists;
-    private ViewHolder viewHolder;
-    private View v;
+
+
 
 
     public ProductSaleDeleteAdapter(Activity activity, ArrayList<ProductSaleList> mProductSaleLists) {
@@ -34,9 +34,6 @@ public class ProductSaleDeleteAdapter extends BaseAdapter {
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public ArrayList<ProductSaleList> getdata() {
-        return mProductSaleLists;
-    }
 
     @Override
     public int getCount() {
@@ -55,41 +52,19 @@ public class ProductSaleDeleteAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
-        ProductSaleList productSaleList = mProductSaleLists.get(pos);
-        v =convertView ;
+
+        View v = convertView;
         if (convertView == null) {
-            v = inflater.inflate(R.layout.list_item_productsaledelete, null);
-            viewHolder = new ViewHolder();
-            viewHolder.txt_name_productsale = (TextView) v.findViewById(R.id.txt_name_productsale);
-            viewHolder.txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
-            viewHolder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            v.setTag(viewHolder);
-
-        } else
-            viewHolder = (ViewHolder) v.getTag();
-        viewHolder.txt_name_productsale.setText(productSaleList.getProductSale());
-        viewHolder.txt_name_productprice.setText(formatAmount.formatAmountDouble(Double.valueOf(productSaleList.getPrice())));
-
-
-        if (productSaleList.isCheckbox()) {
-            viewHolder.checkbox.setChecked(true);
-
-
-        } else {
-            viewHolder.checkbox.setChecked(false);
-        }
+            v = inflater.inflate(R.layout.list_item_productsale, null); }
+        TextView txt_name_productsale = (TextView) v.findViewById(R.id.txt_name_productsale);
+        TextView txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
+        ProductSaleList productSaleList = mProductSaleLists.get(position);
+        txt_name_productsale.setText(productSaleList.getProductSale());
+        txt_name_productprice.setText(formatAmount.formatAmountDouble(Double.valueOf(productSaleList.getPrice())));
 
         return v;
+        }
 
-    }
-
-
-
-    public class ViewHolder {
-        TextView txt_name_productsale;
-        TextView txt_name_productprice;
-        CheckBox checkbox;
-
-    }
 }
+
+

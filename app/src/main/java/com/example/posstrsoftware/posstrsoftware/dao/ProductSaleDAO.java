@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 
@@ -87,9 +88,17 @@ public class ProductSaleDAO {
 
     public void delete(ProductSaleList productSaleList) {
 
-        this.database.execSQL("UPDATE productsale_list set delete_flag = 'Y' where id_productsale = " + productSaleList.getId());
+        this.database.execSQL("Delete From productsale_list  where productsale_text = '" +productSaleList.getProductSale()+"'");
+
 
     }
+    public void delete_product_id(ProductSaleList productSaleList) {
+
+        this.database.execSQL("Delete From productsale_list  where id_productsale = "+productSaleList.getId());
+
+
+    }
+
 
 
 }
