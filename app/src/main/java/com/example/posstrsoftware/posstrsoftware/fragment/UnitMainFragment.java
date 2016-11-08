@@ -1,9 +1,11 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -64,7 +66,7 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
 
         btn_add_unit = (ImageButton) rootView.findViewById(R.id.btn_add_unit);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-        searchViewUnit = (SearchView)rootView.findViewById(R.id.searchViewUnit);
+        searchViewUnit = (SearchView) rootView.findViewById(R.id.searchViewUnit);
         searchViewUnit.setQueryHint("Search..");
         btn_back.setOnClickListener(this);
         btn_add_unit.setOnClickListener(this);
@@ -109,34 +111,33 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         UnitDAO unitDAO = new UnitDAO(getActivity());
         unitDAO.open();
-        ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();
+        final ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();
         final UnitAdapter adapter = new UnitAdapter(getActivity(), unitLists);
         listView_Unit.setAdapter(adapter);
         unitDAO.close();
 
+
         listView_Unit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-         @Override
-         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-             Intent editIntent = new Intent(getActivity(), FixUnitActivity.class);
-             editIntent.putExtra("editUnit", (Serializable) adapter.getItem(position));
-             startActivity(editIntent);
-         }
-     });
-
-
-
+                Intent editIntent = new Intent(getActivity(), FixUnitActivity.class);
+                editIntent.putExtra("editUnit", (Serializable) adapter.getItem(position));
+                startActivity(editIntent);
+            }
+        });
     }
+
 
     @Override
     public void onClick(View v) {
         if (btn_add_unit == v) {
 
-                Intent intent = new Intent(getActivity(), AddUnitActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(getActivity(), AddUnitActivity.class);
+            startActivity(intent);
 
-        }else if (btn_back == v){
-        getActivity().finish();
+        } else if (btn_back == v) {
+            getActivity().finish();
 
         }
 

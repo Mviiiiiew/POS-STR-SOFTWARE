@@ -5,21 +5,28 @@ import android.os.Parcelable;
 import android.widget.BaseAdapter;
 
 
-
 /**
  * Created by Wasabi on 10/31/2016.
  */
 
-public class ProductSaleList  {
+public class ProductSaleList {
 
-    private  int id;
+    private int id;
+    private String amount;
     private String ProductSale;
+    private String price;
 
-public ProductSaleList()
-{}
+    public ProductSaleList() {
+    }
 
 
+    public String getAmount() {
+        return amount;
+    }
 
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
 
     public String getPrice() {
         return price;
@@ -29,7 +36,6 @@ public ProductSaleList()
         this.price = price;
     }
 
-    private String price;
 
     public int getId() {
         return id;
@@ -43,7 +49,7 @@ public ProductSaleList()
         return ProductSale;
     }
 
-    public void setProductSale(String prodcutSale){
+    public void setProductSale(String prodcutSale) {
         ProductSale = prodcutSale;
     }
 }

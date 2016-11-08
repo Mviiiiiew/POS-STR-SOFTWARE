@@ -28,6 +28,9 @@ ArrayList<ProductSaleList> mProductSaleLists;
         this.activity = activity;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+    public  ArrayList<ProductSaleList> getdata(){
+        return  mProductSaleLists;
+    }
 
     @Override
     public int getCount() {
@@ -51,8 +54,11 @@ ArrayList<ProductSaleList> mProductSaleLists;
             v = inflater.inflate(R.layout.list_item_productsale, null); }
         TextView txt_name_productsale = (TextView) v.findViewById(R.id.txt_name_productsale);
         TextView txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
+        TextView txt_name_amount = (TextView) v.findViewById(R.id.txt_name_amount);
         ProductSaleList productSaleList = mProductSaleLists.get(position);
+
         txt_name_productsale.setText(productSaleList.getProductSale());
+        txt_name_amount.setText(productSaleList.getAmount());
         txt_name_productprice.setText(formatAmount.formatAmountDouble(Double.valueOf(productSaleList.getPrice())));
 
         return v;

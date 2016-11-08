@@ -30,21 +30,17 @@ public class ProductSaleDAO {
         dbHelperProductSale.close();
     }
 
-    public ArrayList<ProductSaleList> getAllProductSaleList() {
-
+        public ArrayList<ProductSaleList> getAllProductSaleList() {
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
-
-        Cursor cursor = database.rawQuery("SELECT * FROM productsale_list where delete_flag = 'N';", null);
+        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(productprice_text as decimal)) as product_price,count(productsale_text) from productsale_list where delete_flag = 'N' group by productsale_text ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ProductSaleList mProductSaleList = new ProductSaleList();
-            mProductSaleList.setId(cursor.getInt(0));
-            mProductSaleList.setProductSale(cursor.getString(1));
-            mProductSaleList.setPrice(cursor.getString(2));
+            mProductSaleList.setProductSale(cursor.getString(0));
+            mProductSaleList.setAmount(cursor.getString(2));
+            mProductSaleList.setPrice(cursor.getString(1));
             ProductSaleList.add(mProductSaleList);
             cursor.moveToNext();
-
-
         }
         cursor.close();
         return ProductSaleList;
@@ -52,6 +48,7 @@ public class ProductSaleDAO {
 
 
     public void add(ProductSaleList productSaleList) {
+
 
         ContentValues values = new ContentValues();
         values.put("productsale_text", productSaleList.getProductSale());

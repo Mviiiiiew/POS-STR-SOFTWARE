@@ -96,11 +96,12 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         listView_SaleProduct.setAdapter(adapter);
 
         listView_SaleProduct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 final AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle(" Delete Yes / No ?");
-                alertDialogder.setMessage("Do yo want Delete Item " + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+
                 alertDialogder.setCancelable(false);
                 alertDialogder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -114,15 +115,14 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ProductSaleList productSaleList1 = new ProductSaleList();
-                        productSaleList1.setId((int) adapter.getItemId(position));
+
+                        ProductSaleList productSaleLists1 = new ProductSaleList();
                         ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
                         productSaleDAO1.open();
-                        productSaleDAO1.delete(productSaleList1);
+                        productSaleDAO1.delete(productSaleLists1);
                         productSaleDAO1.close();
-
-
-
+                        productSaleLists.remove(position);
+                        adapter.notifyDataSetChanged();
 
 
 
