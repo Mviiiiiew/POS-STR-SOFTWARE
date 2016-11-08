@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.SaleProductDeleteActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
@@ -42,6 +43,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     EditText edit_Barcode;
     ButtonRectangle btn_clear;
     TextView txt_cost;
+    ButtonRectangle btn_delete;
 
 
 
@@ -71,6 +73,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         listView_SaleProduct = (ListView) rootView.findViewById(R.id.listView_SaleProduct);
         edit_Barcode = (EditText) rootView.findViewById(R.id.edit_Barcode);
+        btn_delete = (ButtonRectangle)rootView.findViewById(R.id.btn_delete);
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
@@ -79,6 +82,8 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_clear.setOnClickListener(this);
         btn_clear.setRippleSpeed(15);
         btn_back.setOnClickListener(this);
+        btn_delete.setOnClickListener(this);
+        btn_delete.setRippleSpeed(50);
 
 
 
@@ -201,6 +206,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             intent.putExtra("total", txt_cost.getText());
             startActivity(intent);
 
+        } else if (btn_delete == v){
+            Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+            startActivity(intent);
         }
     }
 

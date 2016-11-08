@@ -15,8 +15,11 @@ public class ProductSaleList {
     private String amount;
     private String ProductSale;
     private String price;
+    boolean checkbox;
+
 
     public ProductSaleList() {
+
     }
 
 
@@ -51,5 +54,13 @@ public class ProductSaleList {
 
     public void setProductSale(String prodcutSale) {
         ProductSale = prodcutSale;
+    }
+
+    public boolean isCheckbox() {
+        return checkbox;
+    }
+
+    public void setCheckbox(boolean checkbox) {
+        this.checkbox = checkbox;
     }
 }

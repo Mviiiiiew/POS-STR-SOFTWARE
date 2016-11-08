@@ -46,6 +46,27 @@ public class ProductSaleDAO {
         return ProductSaleList;
     }
 
+    public ArrayList<ProductSaleList> getAllProductSaleDeleteList() {
+
+        ArrayList<ProductSaleList> productSaleLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM productsale_list where delete_flag = 'N';", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ProductSaleList mproductSaleList = new ProductSaleList();
+            mproductSaleList.setId(cursor.getInt(0));
+            mproductSaleList.setProductSale(cursor.getString(1));
+            mproductSaleList.setPrice(cursor.getString(2));
+            productSaleLists.add(mproductSaleList);
+            cursor.moveToNext();
+
+
+        }
+        cursor.close();
+        return productSaleLists;
+    }
+
+
 
     public void add(ProductSaleList productSaleList) {
 

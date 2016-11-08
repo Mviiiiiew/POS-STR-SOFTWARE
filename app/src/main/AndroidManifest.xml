@@ -24,23 +24,29 @@
         </activity>
         <activity android:name=".activity.ProductMainActivity">
         </activity>
-        <activity android:name=".activity.AddUnitActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".activity.AddUnitActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".activity.AddProductActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".activity.AddProductActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".activity.AddGroupActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".activity.AddGroupActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".activity.FixUnitActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".activity.FixUnitActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".activity.FixGroupActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".activity.FixGroupActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".activity.FixProductActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".activity.FixProductActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name=".activity.SaleProductActivity"
@@ -54,8 +60,11 @@
         </activity>
         <activity android:name=".activity.CompanySetActivity">
         </activity>
-        <activity android:name=".activity.PayMainActivity"
-                  android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".activity.PayMainActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".activity.SaleProductDeleteActivity">
         </activity>
     </application>
 
