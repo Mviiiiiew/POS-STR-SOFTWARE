@@ -8,40 +8,18 @@
         android:id="@+id/my_toolbar"
         layout="@layout/toolbarproduct"/>
 
-    <ImageButton
+    <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="12dp"
-        android:background="@android:color/transparent"
-        android:paddingLeft="5dp"
-        android:src="@drawable/ic_arrow_back"
-        />
-
-    <ImageView
-        android:id="@+id/image_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btn_back"
-        android:layout_toRightOf="@+id/btn_back"
-        android:paddingLeft="25dp"
-        android:src="@drawable/ic_unit_add_black_48dp"
-        />
-
-    <TextView
-        android:id="@+id/txt_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/image_unit"
-        android:layout_toRightOf="@+id/image_unit"
-        android:paddingLeft="40dp"
-        android:text="Edit Product Name"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:text="ย้อนกลับ"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:background="#795548"
+        android:textSize="20sp"
         android:textStyle="bold"
-
         />
+
 
     <EditText
 
@@ -52,7 +30,7 @@
     android:layout_marginLeft="50dp"
     android:layout_marginTop="50dp"
     android:background="@color/thumbColor"
-    android:hint="Edit Product Name"
+    android:hint="ชื่อสินค้า"
     android:padding="20dp"
 
 
@@ -66,7 +44,7 @@
         android:layout_alignTop="@+id/editText_product"
         android:layout_marginLeft="40dp"
         android:layout_toRightOf="@+id/editText_product"
-        android:text="Edit Product Name "
+        android:text="@string/save"
 
         >
 
@@ -79,7 +57,7 @@
         android:layout_alignTop="@+id/btn_edit_product"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/btn_edit_product"
-        android:text=" Delete "
+        android:text="@string/delete"
 
         >
 

@@ -25,9 +25,7 @@ import java.util.ArrayList;
  */
 public class SaleProductDeleteFragment extends Fragment implements View.OnClickListener {
 
-    ImageButton btn_back;
-    ButtonRectangle btn_Back;
-    ButtonRectangle btn_ok;
+    ButtonRectangle btn_back;
     ListView listView_SaleProductDelete;
 
     public SaleProductDeleteFragment() {
@@ -77,12 +75,10 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         listView_SaleProductDelete = (ListView)rootView.findViewById(R.id.listView_SaleProductDelete);
-        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-        btn_Back = (ButtonRectangle)rootView.findViewById(R.id.btn_Back);
-        btn_ok = (ButtonRectangle)rootView.findViewById(R.id.btn_ok);
-        btn_Back.setOnClickListener(this);
+        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_back.setOnClickListener(this);
-        btn_Back.setRippleSpeed(40);
+        btn_back.setRippleSpeed(50);
+
     }
 
     @Override
@@ -126,7 +122,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(btn_Back == v||btn_back ==v){
+        if(btn_back == v){
             getActivity().finish();
         }
     }

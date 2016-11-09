@@ -127,6 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
+                    android:listSelector="@drawable/bg_transparent"
+                    android:cacheColorHint="@android:color/transparent"
 
 
                     >
@@ -140,9 +142,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.4"
             android:orientation="vertical"
-            android:weightSum="3"
+            android:weightSum="4"
 
             >
 
@@ -153,7 +155,8 @@
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="Clear"
+                android:text="เริ่มรายการใหม่"
+                android:gravity="center"
                 android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
@@ -164,21 +167,33 @@
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="Pay"
+                android:text="ชำระ"
+                android:textSize="20sp"
+
+                ></com.gc.materialdesign.views.ButtonRectangle>
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_discount"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="ส่วนลด"
                 android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
 
-            <com.gc.materialdesign.views.ButtonRectangle
+                <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_delete"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="Delete"
+                android:text="ลบสินค้า"
                 android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
+
+
 
 
         </LinearLayout>

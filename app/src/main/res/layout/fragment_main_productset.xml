@@ -49,15 +49,15 @@
 
         >
 
-
         <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/btn_Set_Unit"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Set Unit"
-            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="เพิ่มหน่วยสินค้า"
+            android:textSize="@dimen/textsize_productset"
             />
 
         <com.gc.materialdesign.views.ButtonRectangle
@@ -68,8 +68,9 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="Set Group"
-            android:textSize="16sp"
+            android:text="เพิ่มกลุ่มสินค้า"
+            android:textStyle="bold"
+            android:textSize="@dimen/textsize_productset"
 
             />
 
@@ -79,8 +80,9 @@
             android:layout_height="160dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Set Product"
-            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="เพิ่มรายการสินค้า"
+            android:textSize="@dimen/textsize_productset"
             />
     </LinearLayout>
 

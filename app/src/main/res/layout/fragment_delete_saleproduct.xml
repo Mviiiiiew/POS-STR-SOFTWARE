@@ -9,16 +9,18 @@
         layout="@layout/toolbarsaleproduct"/>
 
 
-    <ImageButton
+    <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="12dp"
-        android:background="@android:color/transparent"
-        android:paddingLeft="5dp"
-        android:src="@drawable/ic_arrow_back"
-        />
+        android:text="ย้อนกลับ"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        >
+
+    </com.gc.materialdesign.views.ButtonRectangle>
 
 
     <LinearLayout
@@ -60,9 +62,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/txt_ProductName"
-                    android:layout_marginLeft="270dp"
+                    android:layout_marginLeft="500dp"
                     android:layout_toRightOf="@+id/txt_ProductName"
-                    android:text="จำนวน"
+                    android:text="ราคา"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
 
@@ -73,7 +75,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_toRightOf="@+id/txt_ProductName"
                     android:gravity="end"
-                    android:text="ราคา"
+                    android:text="ลบสินค้า"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
 
@@ -106,38 +108,10 @@
                 </ListView>
             </LinearLayout>
 
-
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:orientation="vertical"
-
-
-            >
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_ok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="OK"
-                android:textSize="20sp"
-                ></com.gc.materialdesign.views.ButtonRectangle>
-
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Back"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="back"
-                android:textSize="20sp"
-                ></com.gc.materialdesign.views.ButtonRectangle>
-
-
-        </LinearLayout>
 
     </LinearLayout>
+
 
 </RelativeLayout>

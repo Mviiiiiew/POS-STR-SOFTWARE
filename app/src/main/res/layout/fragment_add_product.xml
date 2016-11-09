@@ -8,27 +8,41 @@
         android:id="@+id/my_toolbar"
         layout="@layout/toolbarproduct"/>
 
-    <ImageButton
-        android:id="@+id/btn_back"
+
+    <TextView
+        android:id="@+id/txt_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="12dp"
-        android:background="@android:color/transparent"
-        android:paddingLeft="5dp"
-        android:src="@drawable/ic_arrow_back"
+        android:padding="20dp"
+        android:text="เพิ่มรายการสินค้า"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
         />
 
-    <ImageView
-        android:id="@+id/image_unit"
+    <EditText
+
+        android:id="@+id/editText_Product"
+        android:inputType="text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_alignBaseline="@+id/editText_Price"
+        android:layout_alignBottom="@+id/editText_Price"
+        android:background="@color/thumbColor"
+        android:hint="ชื่อสินค้า"
+        android:padding="20dp"/>
+    <TextView
+        android:id="@+id/txt_title_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btn_back"
-        android:layout_toRightOf="@+id/btn_back"
-        android:paddingLeft="25dp"
-        android:src="@drawable/ic_add_shopping_cart_black_48dp"
+        android:layout_alignLeft="@+id/spinner_unit"
+        android:layout_marginTop="80dp"
+        android:text="หน่วย"
+        android:textSize="20sp"
+        android:textStyle="bold"
         />
-
     <EditText
 
         android:id="@+id/editText_Price"
@@ -36,24 +50,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/editText_Product"
         android:background="@color/thumbColor"
-        android:hint="Price"
+        android:hint="ราคา"
         android:inputType="numberDecimal"
         android:padding="20dp"
         />
 
-    <TextView
-        android:id="@+id/txt_title_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinner_unit"
-        android:layout_marginTop="90dp"
-        android:text="Unit"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        />
+
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner_unit"
@@ -78,8 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spinner_group"
         android:layout_alignTop="@+id/txt_title_unit"
-        android:text="Group"
-        android:textSize="25sp"
+        android:text="กลุ่ม"
+        android:textSize="20sp"
         android:textStyle="bold"
         />
 
@@ -116,7 +121,7 @@
     </com.gc.materialdesign.views.ButtonRectangle>
 
     <com.gc.materialdesign.views.ButtonRectangle
-        android:id="@+id/btn_clear"
+        android:id="@+id/btn_back"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/btn_save"
@@ -126,18 +131,7 @@
 
         />
 
-    <EditText
 
-    android:id="@+id/editText_Product"
-    android:inputType="text"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_alignBaseline="@+id/editText_Price"
-    android:layout_alignBottom="@+id/editText_Price"
-    android:background="@color/thumbColor"
-    android:hint="Product Name"
-    android:padding="20dp"/>
 
     <EditText
         android:id="@+id/editText_Barcode"

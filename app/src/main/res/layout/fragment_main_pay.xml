@@ -24,9 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
-                android:text="Total"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:text="ราคาสุทธิ"
+                android:textSize="30sp"
                 />
 
             <TextView
@@ -41,6 +41,7 @@
                 android:gravity="center"
                 android:layout_toRightOf="@+id/txt_Total"
                 android:background="#000000"
+
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"/>
 
@@ -52,8 +53,8 @@
                 android:layout_alignLeft="@+id/txt_Total"
                 android:layout_below="@+id/txt_Total"
                 android:layout_marginTop="50dp"
-                android:text="Cash"
-                android:textSize="20sp"
+                android:text="รับชำระ"
+                android:textSize="30sp"
 
 
                 />
@@ -83,8 +84,8 @@
                 android:layout_below="@+id/txt_NameCash"
                 android:textStyle="bold"
                 android:layout_marginTop="50dp"
-                android:text="Change"
-                android:textSize="20sp"
+                android:text="เงินทอน"
+                android:textSize="30sp"
 
 
                 />
@@ -286,7 +287,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:text="Pay"
+                    android:text="จ่าย"
                     android:textSize="@dimen/textsize_button">
 
                 </com.gc.materialdesign.views.ButtonRectangle>
@@ -297,7 +298,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:text="Back"
+                    android:text="ย้อกลับ"
                     android:textSize="@dimen/textsize_button">
 
                 </com.gc.materialdesign.views.ButtonRectangle>

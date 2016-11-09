@@ -84,6 +84,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
         btn_delete.setRippleSpeed(50);
+        edit_Barcode.setOnEditorActionListener(this);
 
 
 
@@ -97,52 +98,8 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
         productSaleDAO.close();
         final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-
         listView_SaleProduct.setAdapter(adapter);
 
-        listView_SaleProduct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle(" Delete Yes / No ?");
-
-                alertDialogder.setCancelable(false);
-                alertDialogder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
-                    }
-                });
-                alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        ProductSaleList productSaleLists1 = new ProductSaleList();
-                        productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
-
-                        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-                        productSaleDAO1.open();
-                        productSaleDAO1.delete(productSaleLists1);
-                        productSaleDAO1.close();
-
-                        productSaleLists.remove(position);
-                        adapter.notifyDataSetChanged();
-
-                    }
-
-                });
-
-                alertDialogder.show();
-
-
-                return false;
-            }
-        });
-        edit_Barcode.setOnEditorActionListener(this);
         Double x = 0.0;
         DecimalFormat money_format = new DecimalFormat("###,###,###.00");
         for (ProductSaleList bean : productSaleLists) {

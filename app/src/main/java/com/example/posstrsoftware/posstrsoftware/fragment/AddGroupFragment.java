@@ -24,10 +24,10 @@ import com.gc.materialdesign.views.ButtonRectangle;
  * Created by nuuneoi on 11/16/2014.
  */
 public class AddGroupFragment extends Fragment implements View.OnClickListener {
-    ImageButton btn_back;
+    ButtonRectangle btn_back;
     EditText editText_Group;
     ButtonRectangle btn_save;
-    ButtonRectangle btn_clear;
+
 
 
     public AddGroupFragment() {
@@ -53,12 +53,10 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
         // Init 'View' instance(s) with rootView.findViewById here
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         editText_Group = (EditText) rootView.findViewById(R.id.editText_Group);
-        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-        btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
+        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-        btn_clear.setOnClickListener(this);
-        btn_clear.setRippleSpeed(15);
+        btn_back.setRippleSpeed(40);
     }
 
     @Override
@@ -121,10 +119,6 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
             }
         } else if (v == btn_back) {
             getActivity().finish();
-        }else if (btn_clear == v){
-            editText_Group.setText("");
-
-
         }
     }
 }

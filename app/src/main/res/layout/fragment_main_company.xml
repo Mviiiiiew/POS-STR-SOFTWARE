@@ -48,9 +48,9 @@
                 android:layout_width="250dp"
                 android:layout_height="150dp"
                 android:background="#FF5722"
-                android:textColor="#FFCCBC"
+                android:textColor="#FFFFFF"
                 android:layout_gravity="center"
-                android:text="Company"
+                android:text="ตั้งค่าบริษัท"
                 android:textSize="20sp"
 
                 />

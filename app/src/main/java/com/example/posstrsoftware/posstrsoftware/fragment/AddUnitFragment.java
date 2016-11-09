@@ -27,8 +27,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
 public class AddUnitFragment extends Fragment implements View.OnClickListener {
     EditText editText_Unit;
     ButtonRectangle btn_save;
-    ImageButton btn_back;
-    ButtonRectangle btn_clear;
+    ButtonRectangle btn_back;
+
 
     public AddUnitFragment() {
         super();
@@ -53,13 +53,13 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
         // Init 'View' instance(s) with rootView.findViewById here
         editText_Unit = (EditText) rootView.findViewById(R.id.editText_Unit);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
-        btn_back = (ImageButton ) rootView.findViewById(R.id.btn_back);
-        btn_clear = (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
-        btn_clear.setOnClickListener(this);
+        btn_back = (ButtonRectangle ) rootView.findViewById(R.id.btn_back);
+
         btn_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);
+        btn_back.setRippleSpeed(40);
         btn_save.setRippleSpeed(15);
-        btn_clear.setRippleSpeed(15);
+
     }
 
     @Override
@@ -123,8 +123,6 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
 
         }else if (v == btn_back){
            getActivity().finish();
-        }else if (btn_clear == v){
-            editText_Unit.setText("");
         }
 
 

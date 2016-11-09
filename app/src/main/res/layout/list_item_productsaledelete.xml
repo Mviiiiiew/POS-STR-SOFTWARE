@@ -15,7 +15,7 @@
             android:id="@+id/txt_name_productsale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+             android:padding="10dp"
             android:text="test"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -28,20 +28,38 @@
 
 
 
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="0.7">
+        android:layout_weight="0.9">
 
         <TextView
 
             android:id="@+id/txt_name_productprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:text="test"
+            android:padding="10dp"
             android:textSize="30sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="0.6">
+
+        <ImageView
+            android:id="@+id/icon_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_delete_forever_black_36dp"
             android:textStyle="bold"/>
 
     </LinearLayout>

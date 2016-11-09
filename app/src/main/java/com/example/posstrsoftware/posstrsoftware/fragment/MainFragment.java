@@ -78,13 +78,13 @@ public class MainFragment extends Fragment {
             public CharSequence getPageTitle(int position) {
                 switch (position){
                     case 0:
-                        return "           Sale Product         ";
+                        return "         ขายสินค้า           ";
                     case 1:
-                        return "         Product Setting       ";
+                        return "         ตั้งค้าสินค้า           ";
                     case 2:
-                        return "             Company             ";
+                        return "         ตั้งค่าบริษัท           ";
                     case 3:
-                        return "             Contact            ";
+                        return "          ติดต่อ            ";
                     default:
                         return "";
                 }

@@ -24,11 +24,10 @@ import com.gc.materialdesign.views.ButtonRectangle;
  * Created by nuuneoi on 11/16/2014.
  */
 public class FixProductFragment extends Fragment implements View.OnClickListener {
-    ImageButton btn_back;
+    ButtonRectangle btn_back;
     EditText editText_product;
     ButtonRectangle btn_edit_product;
     ButtonRectangle btn_delete;
-    EditText editText_price;
 
     public FixProductFragment() {
         super();
@@ -55,7 +54,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
+        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         editText_product = (EditText) rootView.findViewById(R.id.editText_product);
         btn_edit_product = (ButtonRectangle) rootView.findViewById(R.id.btn_edit_product);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
@@ -63,6 +62,9 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         btn_back.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
         btn_edit_product.setOnClickListener(this);
+        btn_delete.setRippleSpeed(15);
+        btn_edit_product.setRippleSpeed(15);
+        btn_back.setRippleSpeed(40);
 
 
     }

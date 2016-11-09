@@ -55,7 +55,8 @@ public class ProductSaleDeleteAdapter extends BaseAdapter {
 
         View v = convertView;
         if (convertView == null) {
-            v = inflater.inflate(R.layout.list_item_productsale, null); }
+            v = inflater.inflate(R.layout.list_item_productsaledelete, null);
+        }
         TextView txt_name_productsale = (TextView) v.findViewById(R.id.txt_name_productsale);
         TextView txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
         ProductSaleList productSaleList = mProductSaleLists.get(position);

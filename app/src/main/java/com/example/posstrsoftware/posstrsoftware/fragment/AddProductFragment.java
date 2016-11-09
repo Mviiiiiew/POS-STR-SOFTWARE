@@ -33,9 +33,9 @@ import java.util.ArrayList;
  */
 public class AddProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     EditText editText_Product;
-    ImageButton btn_back;
+    ButtonRectangle btn_back;
     ButtonRectangle btn_save;
-    ButtonRectangle btn_clear;
+
     EditText editText_Price;
     EditText editText_Barcode;
 
@@ -85,9 +85,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         editText_Product = (EditText) rootView.findViewById(R.id.editText_Product);
-        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
+        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
-        btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
         editText_Price = (EditText) rootView.findViewById(R.id.editText_Price);
         editText_Barcode = (EditText) rootView.findViewById(R.id.editText_Barcode);
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
@@ -106,9 +105,10 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         btn_save.setRippleSpeed(15);
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-        btn_clear.setOnClickListener(this);
+
         spinner_unit.setOnItemSelectedListener(this);
-        btn_clear.setRippleSpeed(15);
+
+        btn_back.setRippleSpeed(40);
 
 
     }
@@ -180,8 +180,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         } else if (btn_back == v) {
             getActivity().finish();
 
-        } else if (btn_clear == v) {
-            editText_Product.setText("");
         }
     }
 

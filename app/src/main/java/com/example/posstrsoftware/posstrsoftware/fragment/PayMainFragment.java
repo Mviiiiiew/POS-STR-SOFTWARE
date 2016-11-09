@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
@@ -252,10 +253,21 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         edit_txt_cash.getText().toString().replaceAll(",",""))+0.25));
                 break;
             case R.id.btn_Pay:
-                total = Double.valueOf((txt_NameTotal.getText().toString().replace(",", "")));
-                cash = Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""));
+                try {
+                    total = Double.valueOf((txt_NameTotal.getText().toString().replace(",", "")));
+
+                } catch (NumberFormatException e){
+
+                }
+                try {
+                    cash = Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""));
+
+                } catch (NumberFormatException e){
+
+                }
                 change = cash - total;
                 txt_Change.setText(formatAmount.formatAmountDouble(Double.valueOf(change.toString())));
+
 
                 break;
             default:
