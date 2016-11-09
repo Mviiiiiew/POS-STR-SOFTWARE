@@ -1,7 +1,10 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,23 +53,36 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         productSaleDAO.close();
         final ProductSaleDeleteAdapter adapter = new ProductSaleDeleteAdapter(getActivity(), productSaleLists);
         listView_SaleProductDelete.setAdapter(adapter);
-
         listView_SaleProductDelete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
 
-                ProductSaleList productSaleLists1 = new ProductSaleList();
-                productSaleLists1.setId((int) adapter.getItemId(position));
-                productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
-                ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-                productSaleDAO1.open();
-                productSaleDAO1.delete_product_id(productSaleLists1);
-                productSaleDAO1.close();
-                productSaleLists.remove(position);
-                adapter.notifyDataSetChanged();
+               AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้า :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
+                alertDialogder.setTitle("ลบสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductSaleList productSaleLists1 = new ProductSaleList();
+                        productSaleLists1.setId((int) adapter.getItemId(position));
+                        productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
+                        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                        productSaleDAO1.open();
+                        productSaleDAO1.delete_product_id(productSaleLists1);
+                        productSaleDAO1.close();
+                        productSaleLists.remove(position);
+                        adapter.notifyDataSetChanged();
 
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-
+                alertDialogder.show();
             }
         });
         return rootView;

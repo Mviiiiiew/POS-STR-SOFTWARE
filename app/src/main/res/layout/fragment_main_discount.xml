@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="2"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+        <include
+            android:id="@+id/my_toolbar"
+            layout="@layout/toolbarsaleproduct"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="30dp"
+            android:text="ส่วนลดรายการสินค้า"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.7"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.3"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editText_DiscountCost"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/thumbColor"
+                    android:hint="ราคาส่วนลด"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textSize="20sp"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_DiscountPercent"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_DiscountCost"
+                    android:layout_margin="10dp"
+                    android:background="@color/thumbColor"
+                    android:hint="เปอร์เซ็นต์ส่วนลด"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:checkedButton="@+id/radiobutton_cost"
+                    android:layout_toRightOf="@+id/editText_DiscountCost">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="คิดส่วนลดแบบจำนวนเงิน"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="คิดส่วนลดแบบเปอร์เซ็นต์"
+                        android:textSize="20sp"/>
+                </RadioGroup>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:orientation="vertical">
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_save"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:text="@string/save"
+                >
+
+            </com.gc.materialdesign.views.ButtonRectangle>
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_back"
+
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/cancel"
+
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

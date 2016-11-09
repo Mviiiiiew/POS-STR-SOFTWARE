@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.activity.DiscountMainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductDeleteActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
@@ -44,7 +45,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     ButtonRectangle btn_clear;
     TextView txt_cost;
     ButtonRectangle btn_delete;
-
+    ButtonRectangle btn_discount;
 
 
     public SaleProductFragment() {
@@ -73,19 +74,21 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         listView_SaleProduct = (ListView) rootView.findViewById(R.id.listView_SaleProduct);
         edit_Barcode = (EditText) rootView.findViewById(R.id.edit_Barcode);
-        btn_delete = (ButtonRectangle)rootView.findViewById(R.id.btn_delete);
+        btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
+        btn_discount = (ButtonRectangle) rootView.findViewById(R.id.btn_discount);
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
-        btn_Pay.setRippleSpeed(15);
+        btn_discount.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
-        btn_clear.setRippleSpeed(15);
         btn_back.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
-        btn_delete.setRippleSpeed(50);
         edit_Barcode.setOnEditorActionListener(this);
-
+        btn_Pay.setRippleSpeed(15);
+        btn_clear.setRippleSpeed(15);
+        btn_delete.setRippleSpeed(50);
+        btn_discount.setRippleSpeed(15);
 
 
     }
@@ -106,7 +109,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             x += Double.valueOf(bean.getPrice());
         }
         txt_cost.setText(money_format.format((x)));
-
 
 
     }
@@ -164,9 +166,13 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             intent.putExtra("total", txt_cost.getText());
             startActivity(intent);
 
-        } else if (btn_delete == v){
+        } else if (btn_delete == v) {
             Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
             startActivity(intent);
+        } else if (btn_discount == v){
+            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
+            startActivity(intent);
+
         }
     }
 

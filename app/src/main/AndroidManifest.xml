@@ -24,18 +24,13 @@
         </activity>
         <activity android:name=".activity.ProductMainActivity">
         </activity>
-        <activity
-            android:name=".activity.AddUnitActivity"
-           >
+        <activity android:name=".activity.AddUnitActivity">
         </activity>
         <activity
             android:name=".activity.AddProductActivity"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity
-            android:name=".activity.AddGroupActivity"
-          >
+        <activity android:name=".activity.AddGroupActivity">
         </activity>
         <activity
             android:name=".activity.FixUnitActivity"
@@ -66,6 +61,8 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".activity.SaleProductDeleteActivity">
+        </activity>
+        <activity android:name=".activity.DiscountMainActivity">
         </activity>
     </application>
 
