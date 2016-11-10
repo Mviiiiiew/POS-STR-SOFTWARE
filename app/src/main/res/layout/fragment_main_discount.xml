@@ -54,16 +54,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <CheckBox
+                    android:id="@+id/checkbox_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:freezesText="true"
+                    android:layout_marginTop="10dp"
+                    android:text="ตั้งค่าส่วนลด"
+                    android:textSize="25sp"/>
+
                 <EditText
                     android:id="@+id/editText_DiscountCost"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_below="@+id/checkbox_discount"
+                    android:layout_margin="15dp"
                     android:background="@color/thumbColor"
-                    android:hint="ราคาส่วนลด"
-                    android:padding="10dp"
                     android:gravity="center"
+                    android:hint="ราคาส่วนลด"
                     android:inputType="numberDecimal"
+                    android:padding="10dp"
                     android:textSize="20sp"
                     />
 
@@ -72,10 +83,10 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editText_DiscountCost"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:background="@color/thumbColor"
-                    android:hint="เปอร์เซ็นต์ส่วนลด"
                     android:gravity="center"
+                    android:hint="เปอร์เซ็นต์ส่วนลด"
                     android:inputType="number"
                     android:padding="10dp"
                     android:textSize="20sp"
@@ -85,10 +96,11 @@
                     android:id="@+id/radiogroup_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkbox_discount"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:checkedButton="@+id/radiobutton_cost"
-                    android:layout_toRightOf="@+id/editText_DiscountCost">
+                    android:layout_toRightOf="@+id/editText_DiscountCost"
+                    android:checkedButton="@+id/radiobutton_cost">
 
                     <RadioButton
                         android:id="@+id/radiobutton_cost"
@@ -124,6 +136,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="25dp"
 
                 android:text="@string/save"
                 >

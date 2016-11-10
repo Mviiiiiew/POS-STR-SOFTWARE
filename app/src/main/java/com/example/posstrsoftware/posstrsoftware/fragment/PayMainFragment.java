@@ -13,11 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -214,6 +216,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_cost_1:
                 edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
                         edit_txt_cash.getText().toString().replaceAll(",",""))+1.0));
+
                 break;
             case R.id.btn_cost_5:
                 edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
