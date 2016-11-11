@@ -103,10 +103,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         loadradio();
-        PojoDisCount pojoDisCount = new PojoDisCount();
-        ArrayList<PojoDisCount> pojoDisCountArrayList = new ArrayList<>();
-        editText_DiscountPercent.setText(pojoDisCountArrayList.get(1).getDiscountpercent());
-        editText_DiscountCost.setText(pojoDisCountArrayList.get(1).getDiscountpercent());
+
         rgRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -123,42 +120,31 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
             }
         });
         checkbox_discount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkbox_discount.isChecked() == true) {
-                    if (radiobutton_percent.isChecked() == true) {
-                        editText_DiscountPercent.setEnabled(true);
-                        editText_DiscountPercent.setText("");
-                    } else if (radiobutton_cost.isChecked() == true) {
-                        editText_DiscountCost.setEnabled(true);
-                        editText_DiscountPercent.setText("");
+
+                    for (int i = 0; i < rgRadiogroup.getChildCount(); i++) {
+                        (rgRadiogroup.getChildAt(i)).setEnabled(isChecked);
+                        switch (rgRadiogroup.getCheckedRadioButtonId()) {
+                            case R.id.radiobutton_cost:
+                                editText_DiscountCost.setEnabled(true);
+                                editText_DiscountPercent.setEnabled(false);
+                                break;
+                            case R.id.radiobutton_percent:
+
+                                editText_DiscountCost.setEnabled(false);
+                                editText_DiscountPercent.setEnabled(true);
+                                break;
+                        }
+
                     }
-
-                } else {
-
+                }else  if (checkbox_discount.isChecked() == false) {
+                   radiobutton_cost.setEnabled(false);
+                    radiobutton_percent.setEnabled(false);
                     editText_DiscountCost.setEnabled(false);
                     editText_DiscountPercent.setEnabled(false);
-                }
-                for (int i = 0; i < rgRadiogroup.getChildCount(); i++) {
-                    (rgRadiogroup.getChildAt(i)).setEnabled(isChecked);
-                    rgRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                            switch (rgRadiogroup.getCheckedRadioButtonId()) {
-                                case R.id.radiobutton_cost:
-                                    editText_DiscountCost.setEnabled(true);
-                                    editText_DiscountPercent.setEnabled(false);
-                                    break;
-                                case R.id.radiobutton_percent:
-
-                                    editText_DiscountCost.setEnabled(false);
-                                    editText_DiscountPercent.setEnabled(true);
-                                    break;
-                            }
-                        }
-                    });
-
                 }
 
             }
@@ -254,17 +240,17 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         if (btn_back == v) {
             getActivity().finish();
 
-        }else if(btn_save == v){
+        } else if (btn_save == v) {
             ArrayList<PojoDisCount> pojoDisCountArrayList = new ArrayList<>();
             PojoDisCount pojoDisCount = new PojoDisCount();
             pojoDisCount.setDiscountcost(editText_DiscountCost.getText().toString());
             pojoDisCount.setDiscountpercent(editText_DiscountPercent.getText().toString());
             pojoDisCountArrayList.clear();
             pojoDisCountArrayList.add(pojoDisCount);
-            Log.d("Cost",editText_DiscountCost.getText().toString());
-            Log.d("percent",editText_DiscountPercent.getText().toString());
+            Log.d("Cost", editText_DiscountCost.getText().toString());
+            Log.d("percent", editText_DiscountPercent.getText().toString());
 
-           Toast.makeText(getActivity(),pojoDisCountArrayList.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), pojoDisCountArrayList.toString(), Toast.LENGTH_SHORT).show();
         }
 
 

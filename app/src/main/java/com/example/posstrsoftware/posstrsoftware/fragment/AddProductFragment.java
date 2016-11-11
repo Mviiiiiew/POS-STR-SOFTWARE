@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +27,16 @@ import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.gc.materialdesign.views.ButtonRectangle;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class AddProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AddProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher {
     EditText editText_Product;
     ButtonRectangle btn_back;
     ButtonRectangle btn_save;
@@ -91,6 +96,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         editText_Barcode = (EditText) rootView.findViewById(R.id.editText_Barcode);
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
+        editText_Price.addTextChangedListener(this);
         spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -105,9 +111,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         btn_save.setRippleSpeed(15);
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-
         spinner_unit.setOnItemSelectedListener(this);
-
         btn_back.setRippleSpeed(40);
 
 
@@ -157,7 +161,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 productList.setBarcode(editText_Barcode.getText().toString());
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
-                productList.setProductprice(Double.valueOf(editText_Price.getText().toString()));
+                productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replace(",","")));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.add(productList);
@@ -192,6 +196,46 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        editText_Price.removeTextChangedListener(this);
+
+        try {
+            String originalString = String.valueOf(editText_Price.getText());
+
+            Long longval;
+            if (originalString.contains(",")) {
+                originalString = originalString.replaceAll(",", "");
+            }
+            longval = Long.parseLong(originalString);
+
+            DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+            formatter.applyPattern("#,###,###,###.##");
+            String formattedString = formatter.format(longval);
+
+            //setting text after format to EditText
+            editText_Price.setText(formattedString);
+            editText_Price.setSelection(editText_Price.getText().length());
+
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }
+
+
+        editText_Price.addTextChangedListener(this);
 
     }
 }

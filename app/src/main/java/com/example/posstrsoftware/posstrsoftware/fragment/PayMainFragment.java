@@ -40,7 +40,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_cost_050;
     ButtonRectangle btn_cost_025;
     ButtonRectangle btn_Pay;
-    TextView txt_Change;
+
     TextView txt_NameTotal;
     EditText edit_txt_cash;
     Double total = 0.0;
@@ -145,9 +145,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_025 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_025);
         btn_cost_050 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_050);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
-        txt_Change = (TextView) rootView.findViewById(R.id.txt_Change);
-        btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
 
+        btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_cost_050.setOnClickListener(this);
         btn_cost_025.setOnClickListener(this);
         btn_back.setOnClickListener(this);
@@ -269,7 +268,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
                 }
                 change = cash - total;
-                txt_Change.setText(formatAmount.formatAmountDouble(Double.valueOf(change.toString())));
+
 
 
                 break;

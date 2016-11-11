@@ -100,12 +100,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/editText_DiscountCost"
-                    android:checkedButton="@+id/radiobutton_cost">
+                    >
 
                     <RadioButton
                         android:id="@+id/radiobutton_cost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:text="คิดส่วนลดแบบจำนวนเงิน"
                         android:textSize="20sp"/>
 

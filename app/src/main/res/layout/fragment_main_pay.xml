@@ -10,13 +10,16 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorGray"
-        android:orientation="vertical">
+        android:layout_weight="1.2"
+        android:background="@color/colorBlue"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/txt_Total"
@@ -24,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
+                android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:text="ราคาสุทธิ"
                 android:textSize="30sp"
@@ -48,6 +52,7 @@
             <TextView
                 android:id="@+id/txt_NameCash"
                 android:textStyle="bold"
+                android:textColor="@color/colorWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Total"
@@ -76,35 +81,97 @@
 
                 />
 
-            <TextView
-                android:id="@+id/txt_NameChange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_Total"
-                android:layout_below="@+id/txt_NameCash"
-                android:textStyle="bold"
-                android:layout_marginTop="50dp"
-                android:text="เงินทอน"
-                android:textSize="30sp"
 
 
-                />
 
-            <TextView
-                android:id="@+id/txt_Change"
-                android:layout_width="match_parent"
-                android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_NameTotal"
-                android:gravity="center"
-                android:layout_alignRight="@+id/txt_NameTotal"
-                android:layout_alignTop="@+id/txt_NameChange"
-                android:layout_toRightOf="@+id/txt_NameChange"
-                android:background="#000000"
-
-                android:textSize="30sp"/>
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+
+           >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+            >
+
+                <CheckBox
+                    android:id="@+id/checkbox_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:freezesText="true"
+                    android:layout_marginTop="10dp"
+                    android:text="ตั้งค่าส่วนลด"
+                    android:textSize="25sp"/>
+
+                <EditText
+                    android:id="@+id/editText_DiscountCost"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkbox_discount"
+                    android:layout_margin="15dp"
+                    android:background="@color/thumbColor"
+                    android:gravity="center"
+                    android:hint="ราคาส่วนลด"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_DiscountPercent"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_DiscountCost"
+                    android:layout_margin="15dp"
+                    android:background="@color/thumbColor"
+                    android:gravity="center"
+                    android:hint="เปอร์เซ็นต์ส่วนลด"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkbox_discount"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/editText_DiscountCost"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="คิดส่วนลดแบบจำนวนเงิน"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="คิดส่วนลดแบบเปอร์เซ็นต์"
+                        android:textSize="20sp"/>
+                </RadioGroup>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -112,7 +179,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:orientation="vertical">
 
         <LinearLayout
