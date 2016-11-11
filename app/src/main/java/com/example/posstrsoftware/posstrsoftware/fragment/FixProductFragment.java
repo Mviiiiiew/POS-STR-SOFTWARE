@@ -110,7 +110,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 ProductList eProductList = new ProductList();
                 eProductList.setId(editproductList.getId());
                 eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.update(eProductList);

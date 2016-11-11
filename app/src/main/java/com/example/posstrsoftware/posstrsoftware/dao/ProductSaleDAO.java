@@ -71,11 +71,11 @@ public class ProductSaleDAO {
 
     public void add(ProductSaleList productSaleList) {
 
+            ContentValues values = new ContentValues();
+            values.put("productsale_text", productSaleList.getProductSale());
+            values.put("productprice_text", productSaleList.getPrice());
+            this.database.insert("productsale_list", null, values);
 
-        ContentValues values = new ContentValues();
-        values.put("productsale_text", productSaleList.getProductSale());
-        values.put("productprice_text", productSaleList.getPrice());
-        this.database.insert("productsale_list", null, values);
 
 
     }

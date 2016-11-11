@@ -18,9 +18,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductActivity;
 import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
 import com.example.posstrsoftware.posstrsoftware.util.InputFilterMinMax;
@@ -43,6 +45,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     EditText editText_DiscountPercent;
     CheckBox checkbox_discount;
     RadioButton radiobutton_cost;
+    String x;
+    TextView txt_NameTotal;
+
 
 
     public DiscountMainFragment() {
@@ -61,6 +66,10 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_discount, container, false);
         initInstances(rootView);
+        Intent intent = getActivity().getIntent();
+        x = intent.getStringExtra("total");
+        txt_NameTotal.setText(x.toString());
+
 
         return rootView;
     }
@@ -155,9 +164,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-
+        txt_NameTotal = (TextView)rootView.findViewById(R.id.txt_NameTotal);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
-        radiobutton_cost = (RadioButton) rootView.findViewById(R.id.radiobutton_cost);
+                radiobutton_cost = (RadioButton) rootView.findViewById(R.id.radiobutton_cost);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         checkbox_discount = (CheckBox) rootView.findViewById(R.id.checkbox_discount);
         radiobutton_percent = (RadioButton) rootView.findViewById(R.id.radiobutton_percent);
@@ -241,16 +250,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
             getActivity().finish();
 
         } else if (btn_save == v) {
-            ArrayList<PojoDisCount> pojoDisCountArrayList = new ArrayList<>();
-            PojoDisCount pojoDisCount = new PojoDisCount();
-            pojoDisCount.setDiscountcost(editText_DiscountCost.getText().toString());
-            pojoDisCount.setDiscountpercent(editText_DiscountPercent.getText().toString());
-            pojoDisCountArrayList.clear();
-            pojoDisCountArrayList.add(pojoDisCount);
-            Log.d("Cost", editText_DiscountCost.getText().toString());
-            Log.d("percent", editText_DiscountPercent.getText().toString());
-
-            Toast.makeText(getActivity(), pojoDisCountArrayList.toString(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), PayMainActivity.class);
+            intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",",""));
+            startActivity(intent);
         }
 
 

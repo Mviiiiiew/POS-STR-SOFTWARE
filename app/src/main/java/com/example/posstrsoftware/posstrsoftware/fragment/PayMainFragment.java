@@ -72,7 +72,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_main_pay, container, false);
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
-        x = intent.getStringExtra("total");
+        x = intent.getStringExtra("totalx");
         txt_NameTotal.setText(x.toString());
 
         edit_txt_cash.addTextChangedListener(new TextWatcher() {

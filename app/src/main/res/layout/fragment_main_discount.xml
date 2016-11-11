@@ -6,6 +6,8 @@
               android:weightSum="2"
     >
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -47,12 +49,51 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.3"
-            android:orientation="vertical">
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:weightSum="2">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:id="@+id/txt_Total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="50dp"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:text="ราคาสุทธิ"
+                    android:textSize="30sp"
+                    />
+
+                <TextView
+
+                    android:id="@+id/txt_NameTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/txt_Total"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="70dp"
+                    android:inputType="text"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/txt_Total"
+                    android:background="#000000"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"/>
+
+
+
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
 
                 <CheckBox
                     android:id="@+id/checkbox_discount"
@@ -129,16 +170,26 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+                android:orientation="vertical"
+                android:weightSum="2"
+              >
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_save"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-
                 android:text="@string/save"
                 >
 
@@ -146,13 +197,22 @@
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_back"
-
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="@string/cancel"
+                android:text="ย้อนกลับ"
 
                 />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.3"
+
+                >
+            </LinearLayout>
 
         </LinearLayout>
 

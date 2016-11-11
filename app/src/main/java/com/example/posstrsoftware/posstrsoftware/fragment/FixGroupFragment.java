@@ -15,9 +15,14 @@ import android.widget.Toast;
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.GroupMainActivity;
 import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.GroupList;
+import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.gc.materialdesign.views.ButtonRectangle;
+
+import java.util.ArrayList;
 
 
 /**
@@ -132,6 +137,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         } else if (btn_back == v) {
             getActivity().finish();
         }else if (btn_delete == v ){
+
             GroupDAO groupDAO = new GroupDAO(getActivity());
             groupDAO.open();
             groupDAO.delete(editGroupList);

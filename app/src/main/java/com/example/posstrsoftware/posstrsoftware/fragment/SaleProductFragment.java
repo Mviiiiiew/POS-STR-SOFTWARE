@@ -162,7 +162,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             productSaleDAO.close();
             txt_cost.setText("");
         } else if (btn_Pay == v) {
-            Intent intent = new Intent(getActivity(), PayMainActivity.class);
+            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
             startActivity(intent);
 
