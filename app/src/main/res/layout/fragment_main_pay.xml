@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
-         android:background="@color/colorBlue"
+        android:background="@color/colorBlue"
         android:orientation="vertical"
         android:weightSum="2"
         >
@@ -19,8 +19,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-          >
+            android:layout_weight="2"
+            >
 
             <TextView
                 android:id="@+id/txt_Total"
@@ -28,10 +28,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
                 android:text="ราคาสุทธิ"
+                android:textColor="@color/colorBlack"
                 android:textSize="30sp"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -42,25 +42,80 @@
                 android:layout_alignTop="@+id/txt_Total"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="70dp"
-                android:inputType="text"
-                android:gravity="center"
                 android:layout_toRightOf="@+id/txt_Total"
                 android:background="#000000"
+                android:gravity="center"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"/>
 
+            <TextView
+                android:id="@+id/txt_NameDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_Total"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:text="ส่วนลด"
+                android:textColor="@color/colorBlack"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+
+                android:id="@+id/txt_Discount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignRight="@+id/txt_NameTotal"
+                android:layout_alignTop="@+id/txt_NameDiscount"
+                android:layout_toRightOf="@+id/txt_NameDiscount"
+                android:background="#000000"
+                android:gravity="center"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/txt_NameTotalall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_NameDiscount"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:text="ราคารวม"
+                android:textColor="@color/colorBlack"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+
+                android:id="@+id/txt_Totalall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignRight="@+id/txt_NameTotal"
+                android:layout_alignTop="@+id/txt_NameTotalall"
+                android:layout_toRightOf="@+id/txt_NameTotalall"
+                android:background="#000000"
+                android:gravity="center"
+                android:inputType="text"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"/>
 
             <TextView
                 android:id="@+id/txt_NameCash"
-                android:textStyle="bold"
-                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Total"
-                android:layout_below="@+id/txt_Total"
+                android:layout_below="@+id/txt_NameTotalall"
                 android:layout_marginTop="50dp"
                 android:text="รับชำระ"
+                android:textColor="@color/colorBlack"
                 android:textSize="30sp"
+                android:textStyle="bold"
 
 
                 />
@@ -69,25 +124,22 @@
                 android:id="@+id/edit_txt_cash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorBlack"
                 android:layout_alignBottom="@+id/txt_NameCash"
                 android:layout_alignLeft="@+id/txt_NameTotal"
                 android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_toRightOf="@+id/txt_NameCash"
-                android:textSize="30sp"
-                android:textColor="@color/colorWhite"
+                android:background="@color/colorBlack"
                 android:ems="10"
-                android:textStyle="bold"
                 android:gravity="center"
                 android:inputType="numberDecimal"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold"
 
                 />
 
 
-
-
         </RelativeLayout>
-
 
 
     </LinearLayout>
@@ -155,6 +207,7 @@
                     android:text="500"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/textsize_button_pay"/>
+
                 <com.gc.materialdesign.views.ButtonRectangle
                     android:id="@+id/btn_cost_025"
                     android:layout_width="match_parent"
@@ -251,7 +304,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-               android:layout_marginTop="10dp"
+                android:layout_marginTop="10dp"
                 android:checked="true"
                 android:scaleX="1.2"
                 android:scaleY="1.2"

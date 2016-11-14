@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
+import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
@@ -40,13 +41,17 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_cost_050;
     ButtonRectangle btn_cost_025;
     ButtonRectangle btn_Pay;
-
     TextView txt_NameTotal;
+    TextView txt_Discount;
+    TextView txt_Totalall;
+    String totalall;
     EditText edit_txt_cash;
     Double total = 0.0;
     Double change = 0.0;
     Double cash = 0.0;
     String x;
+    String discount;
+    String discountpercent;
 
 
     public PayMainFragment() {
@@ -73,7 +78,21 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
         x = intent.getStringExtra("totalx");
-        txt_NameTotal.setText(x.toString());
+        totalall = intent.getStringExtra("totalall");
+        txt_Totalall.setText(formatAmount.formatAmountDouble(Double.valueOf(totalall.toString())));
+        discount = intent.getStringExtra("discountcost");
+        discountpercent = intent.getStringExtra("discountpercent");
+        txt_NameTotal.setText(formatAmount.formatAmountDouble(Double.valueOf(x.toString())));
+        try {
+
+            txt_Discount.setText(formatAmount.formatAmountDouble(Double.valueOf(discount.toString())));
+
+
+        } catch (Exception e) {
+            txt_Discount.setText(discountpercent.toString());
+
+        }
+
 
         edit_txt_cash.addTextChangedListener(new TextWatcher() {
 
@@ -123,7 +142,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
             }
 
 
-
         });
 
 
@@ -133,6 +151,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
+        txt_Discount = (TextView) rootView.findViewById(R.id.txt_Discount);
+        txt_Totalall = (TextView)rootView.findViewById(R.id.txt_Totalall);
         edit_txt_cash = (EditText) rootView.findViewById(R.id.edit_txt_cash);
         btn_cost_1000 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_1000);
         btn_cost_100 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_100);
@@ -145,7 +165,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_025 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_025);
         btn_cost_050 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_050);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
-
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_cost_050.setOnClickListener(this);
         btn_cost_025.setOnClickListener(this);
@@ -213,62 +232,63 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 getActivity().finish();
                 break;
             case R.id.btn_cost_1:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+1.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 1.0));
 
                 break;
             case R.id.btn_cost_5:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+5.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 5.0));
                 break;
             case R.id.btn_cost_10:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+10.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 10.0));
                 break;
             case R.id.btn_cost_20:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0"
-                        :edit_txt_cash.getText().toString().replaceAll(",",""))+20.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0"
+                        : edit_txt_cash.getText().toString().replaceAll(",", "")) + 20.0));
                 break;
             case R.id.btn_cost_50:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+50.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 50.0));
                 break;
             case R.id.btn_cost_100:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+100.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 100.0));
                 break;
             case R.id.btn_cost_500:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+500.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 500.0));
                 break;
             case R.id.btn_cost_1000:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+1000.0));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 1000.0));
                 break;
             case R.id.btn_cost_050:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+0.50));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 0.50));
 
                 break;
             case R.id.btn_cost_025:
-                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("")?"0.0":
-                        edit_txt_cash.getText().toString().replaceAll(",",""))+0.25));
+                edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
+                        edit_txt_cash.getText().toString().replaceAll(",", "")) + 0.25));
                 break;
             case R.id.btn_Pay:
                 try {
                     total = Double.valueOf((txt_NameTotal.getText().toString().replace(",", "")));
 
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
 
                 }
                 try {
                     cash = Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""));
 
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
 
                 }
+                total = Double.valueOf(txt_Totalall.getText().toString().replace(",",""));
                 change = cash - total;
-
+                Toast.makeText(getActivity(),formatAmount.formatAmountDouble(Double.valueOf(change.toString())),Toast.LENGTH_SHORT).show();
 
 
                 break;

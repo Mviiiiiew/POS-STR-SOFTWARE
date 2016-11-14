@@ -29,7 +29,10 @@ import com.example.posstrsoftware.posstrsoftware.util.InputFilterMinMax;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.gc.materialdesign.views.ButtonRectangle;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 /**
@@ -46,8 +49,13 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     CheckBox checkbox_discount;
     RadioButton radiobutton_cost;
     String x;
+    String discountcost;
+    String discountpercent;
     TextView txt_NameTotal;
-
+    Double C = 0.0;
+    Double totalall =0.0;
+     Double A =0.0;
+    Double B= 0.0;
 
 
     public DiscountMainFragment() {
@@ -91,12 +99,15 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         editor.putBoolean("5", checkbox_discount.isChecked());
         editor.putBoolean("6", editText_DiscountCost.isEnabled());
         editor.putBoolean("7", editText_DiscountPercent.isEnabled());
-
+        editor.putString("discountpercent", (editText_DiscountPercent.getText().toString()));
+        editor.putString("discountcost", (editText_DiscountCost.getText().toString()));
         editor.commit();
     }
 
     private void loadradio() {
+
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
         radiobutton_cost.setChecked(sharedPreferences.getBoolean("1", false));
         radiobutton_cost.setEnabled(sharedPreferences.getBoolean("2", false));
         radiobutton_percent.setChecked(sharedPreferences.getBoolean("3", false));
@@ -104,6 +115,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         checkbox_discount.setChecked(sharedPreferences.getBoolean("5", false));
         editText_DiscountCost.setEnabled(sharedPreferences.getBoolean("6", false));
         editText_DiscountPercent.setEnabled(sharedPreferences.getBoolean("7", false));
+        editText_DiscountPercent.setText(sharedPreferences.getString("discountpercent", editText_DiscountPercent.getText().toString()));
+        editText_DiscountCost.setText(sharedPreferences.getString("discountcost", editText_DiscountCost.getText().toString()));
+
 
     }
 
@@ -111,6 +125,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
+
         loadradio();
 
         rgRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -149,8 +164,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                         }
 
                     }
-                }else  if (checkbox_discount.isChecked() == false) {
-                   radiobutton_cost.setEnabled(false);
+                } else if (checkbox_discount.isChecked() == false) {
+                    radiobutton_cost.setEnabled(false);
                     radiobutton_percent.setEnabled(false);
                     editText_DiscountCost.setEnabled(false);
                     editText_DiscountPercent.setEnabled(false);
@@ -164,9 +179,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        txt_NameTotal = (TextView)rootView.findViewById(R.id.txt_NameTotal);
+        txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
-                radiobutton_cost = (RadioButton) rootView.findViewById(R.id.radiobutton_cost);
+        radiobutton_cost = (RadioButton) rootView.findViewById(R.id.radiobutton_cost);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         checkbox_discount = (CheckBox) rootView.findViewById(R.id.checkbox_discount);
         radiobutton_percent = (RadioButton) rootView.findViewById(R.id.radiobutton_percent);
@@ -176,8 +191,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         btn_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);
         btn_back.setRippleSpeed(40);
-
-
+        btn_save.setRippleSpeed(40);
         //// DisCount % ////
         editText_DiscountPercent.setInputType(InputType.TYPE_CLASS_NUMBER);
         InputFilter[] FilterArray = new InputFilter[1];
@@ -207,6 +221,48 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
                 }
 
+            }
+        });
+
+        editText_DiscountCost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                editText_DiscountCost.removeTextChangedListener(this);
+
+                try {
+                    String originalString = String.valueOf(editText_DiscountCost.getText());
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###.##");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    editText_DiscountCost.setText(formattedString);
+                    editText_DiscountCost.setSelection(editText_DiscountCost.getText().length());
+
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+
+                editText_DiscountCost.addTextChangedListener(this);
             }
         });
 
@@ -250,9 +306,61 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
             getActivity().finish();
 
         } else if (btn_save == v) {
-            Intent intent = new Intent(getActivity(), PayMainActivity.class);
-            intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",",""));
-            startActivity(intent);
+
+            if (checkbox_discount.isChecked() == true) {
+                if (checkbox_discount.isChecked() == true) {
+                    if (radiobutton_cost.isChecked() == true) {
+                        if((editText_DiscountCost.getText().toString().replaceAll("","").replaceAll("\\.","").matches(""))){
+                            Toast.makeText(getActivity(),"กรุณาใส่จำนวน",Toast.LENGTH_SHORT).show();
+                        }else {
+
+                            A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+                            B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
+                            totalall = A - B;
+                            discountcost = String.valueOf(editText_DiscountCost.getText());
+                            Intent intent = new Intent(getActivity(), PayMainActivity.class);
+                            intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
+                            intent.putExtra("discountcost", editText_DiscountCost.getText().toString().replace(",", ""));
+                            intent.putExtra("totalall", totalall.toString());
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    } else if (radiobutton_percent.isChecked() == true) {
+                        if(editText_DiscountPercent.getText().toString().replaceAll("","").matches("")){
+                            Toast.makeText(getActivity(),"กรุณาใส่จำนวน",Toast.LENGTH_SHORT).show();
+                        }else {
+                            A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+                            B = Double.valueOf(editText_DiscountPercent.getText().toString());
+                            C = (A * B) / 100;
+                            totalall = A - C;
+                            discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
+                            Intent intent = new Intent(getActivity(), PayMainActivity.class);
+                            intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
+                            intent.putExtra("totalall", totalall.toString());
+                            intent.putExtra("discountpercent", discountpercent);
+                            startActivity(intent);
+                            Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+
+            }else if(checkbox_discount.isChecked() == false){
+                totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",",""));
+                String u ="0";
+                discountpercent = String.valueOf(editText_DiscountPercent.getText()+" %");
+                Intent intent = new Intent(getActivity(), PayMainActivity.class);
+                intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
+                intent.putExtra("discountcost", u);
+                intent.putExtra("totalall",totalall.toString());
+                intent.putExtra("discountpercent", u);
+                startActivity(intent);
+                Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
         }
 
 

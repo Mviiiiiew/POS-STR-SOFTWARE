@@ -96,6 +96,7 @@ public class UnitDAO {
 
         this.database.execSQL("UPDATE unit_list set delete_flag = 'Y' where id_unit = "+ unitList.getId());
 
+
     }
 
 

@@ -45,7 +45,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     ButtonRectangle btn_clear;
     TextView txt_cost;
     ButtonRectangle btn_delete;
-    ButtonRectangle btn_discount;
+
 
 
     public SaleProductFragment() {
@@ -75,11 +75,11 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         listView_SaleProduct = (ListView) rootView.findViewById(R.id.listView_SaleProduct);
         edit_Barcode = (EditText) rootView.findViewById(R.id.edit_Barcode);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
-        btn_discount = (ButtonRectangle) rootView.findViewById(R.id.btn_discount);
+
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
-        btn_discount.setOnClickListener(this);
+
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_back.setOnClickListener(this);
@@ -88,7 +88,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_Pay.setRippleSpeed(15);
         btn_clear.setRippleSpeed(15);
         btn_delete.setRippleSpeed(50);
-        btn_discount.setRippleSpeed(15);
+
 
 
     }
@@ -130,7 +130,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save Instance State here
-        outState.putString("x", (String.valueOf(txt_cost.getText())));
 
     }
 
@@ -140,7 +139,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             // Restore Instance State here
-            total = Double.valueOf(savedInstanceState.getString("x"));
+
 
         }
 
@@ -169,11 +168,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         } else if (btn_delete == v) {
             Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
             startActivity(intent);
-        } else if (btn_discount == v){
-            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
-            startActivity(intent);
-
         }
+
+
     }
 
 
