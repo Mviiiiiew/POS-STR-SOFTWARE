@@ -62,8 +62,11 @@
         </activity>
         <activity android:name=".activity.SaleProductDeleteActivity">
         </activity>
-        <activity android:name=".activity.DiscountMainActivity"
-                  android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".activity.DiscountMainActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".activity.SaleProductManualActivity">
         </activity>
     </application>
 

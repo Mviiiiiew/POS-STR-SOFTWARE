@@ -18,12 +18,12 @@ import java.util.ArrayList;
  * Created by Wasabi on 10/31/2016.
  */
 
-public class ProductSaleAdapter extends BaseAdapter {
+public class ProductSaleManualAdapter extends BaseAdapter {
     private static Activity activity;
     private static LayoutInflater inflater;
     ArrayList<ProductSaleList> mProductSaleLists;
 
-    public ProductSaleAdapter(Activity activity,ArrayList<ProductSaleList> mProductSaleLists) {
+    public ProductSaleManualAdapter(Activity activity, ArrayList<ProductSaleList> mProductSaleLists) {
         this.mProductSaleLists = mProductSaleLists;
         this.activity = activity;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,7 +52,7 @@ public class ProductSaleAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (convertView == null) {
-            v = inflater.inflate(R.layout.list_item_productsale, null); }
+            v = inflater.inflate(R.layout.list_item_productsalemanual, null); }
         TextView txt_name_productsale = (TextView) v.findViewById(R.id.txt_name_productsale);
         TextView txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
         TextView txt_name_amount = (TextView) v.findViewById(R.id.txt_name_amount);

@@ -50,6 +50,7 @@ public class UnitDAO {
     }
 
 
+
     public int add(UnitList unitList) {
         String query = "Select count(*) from unit_list where unit_text = ? AND delete_flag = ?";
         SQLiteStatement stmt = database.compileStatement(query);

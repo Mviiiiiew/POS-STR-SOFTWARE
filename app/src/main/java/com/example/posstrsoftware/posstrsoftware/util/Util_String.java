@@ -6,6 +6,6 @@ package com.example.posstrsoftware.posstrsoftware.util;
 
 public class Util_String {
     public static String getGennerlateString(String input_value){
-        return  input_value.trim().replaceAll("","").replaceAll("'|\"-%,","").replaceAll(".","");
+        return  input_value.trim().replaceAll("","").replaceAll("'|\"-%","");
     }
 }

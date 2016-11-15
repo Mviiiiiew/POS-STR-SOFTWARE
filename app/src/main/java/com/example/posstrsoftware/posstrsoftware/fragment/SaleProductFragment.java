@@ -45,6 +45,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     ButtonRectangle btn_clear;
     TextView txt_cost;
     ButtonRectangle btn_delete;
+    ButtonRectangle btn_backz;
 
 
 
@@ -75,11 +76,11 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         listView_SaleProduct = (ListView) rootView.findViewById(R.id.listView_SaleProduct);
         edit_Barcode = (EditText) rootView.findViewById(R.id.edit_Barcode);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
-
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
-
+        btn_backz = (ButtonRectangle)rootView.findViewById(R.id.btn_backz);
+        btn_backz.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_back.setOnClickListener(this);
@@ -88,6 +89,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_Pay.setRippleSpeed(15);
         btn_clear.setRippleSpeed(15);
         btn_delete.setRippleSpeed(50);
+        btn_backz.setRippleSpeed(40);
 
 
 
@@ -102,6 +104,8 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         productSaleDAO.close();
         final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
         listView_SaleProduct.setAdapter(adapter);
+
+
 
         Double x = 0.0;
         DecimalFormat money_format = new DecimalFormat("###,###,###.00");
@@ -147,7 +151,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (btn_back == v) {
+        if (btn_back == v||btn_backz==v) {
             getActivity().finish();
 
         } else if (btn_clear == v) {
@@ -169,7 +173,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
             startActivity(intent);
         }
-
 
     }
 

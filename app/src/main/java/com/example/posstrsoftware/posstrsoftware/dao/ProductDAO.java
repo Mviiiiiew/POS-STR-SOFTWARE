@@ -43,7 +43,7 @@ public class ProductDAO {
         Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.price_text,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from product_list pl " +
                 "inner join  unit_list ul on pl.id_unit = ul.id_unit and  ul.delete_flag = 'N' " +
                 "inner join  group_list gl on pl.id_group = gl.id_group and  gl.delete_flag = 'N' " +
-                        "where pl.delete_flag = 'N';",null);
+                "where pl.delete_flag = 'N' ORDER BY  gl.id_group ;",null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -59,11 +59,12 @@ public class ProductDAO {
         }
         cursor.close();
         return productList;
-    }
+}
+
 
 
     public int add(ProductList productList) {
-        String query = "Select count(*) from product_list where product_text = ?  AND delete_flag = ? ";
+        String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ? ";
         SQLiteStatement stmt = database.compileStatement(query);
         stmt.bindString(1, productList.getProductText());
         stmt.bindString(2, "N");

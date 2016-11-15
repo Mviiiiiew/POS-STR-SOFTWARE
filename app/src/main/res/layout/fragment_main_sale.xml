@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:background="#263238"
-              android:layout_height="match_parent">
+              android:orientation="vertical"
+              android:weightSum="3">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="1"
         android:paddingTop="30dp"
 
         >
-
 
 
         <ImageView
@@ -20,11 +20,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:src="@drawable/ic_store_white_48dp"/>
-
-
 
 
     </LinearLayout>
@@ -34,12 +32,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="horizontal"
 
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
             >
 
@@ -48,14 +48,32 @@
                 android:layout_width="300dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:text="ขายสินค้า"
+
+                android:text="ขายสินค้า (Barcode)"
+                android:textSize="20sp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_Salebarcode"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:text="ขายสินค้า (Manual)"
                 android:textSize="20sp"
 
                 />
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>
