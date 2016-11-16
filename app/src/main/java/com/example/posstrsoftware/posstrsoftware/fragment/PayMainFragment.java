@@ -152,7 +152,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         // Init 'View' instance(s) with rootView.findViewById here
         txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
         txt_Discount = (TextView) rootView.findViewById(R.id.txt_Discount);
-        txt_Totalall = (TextView)rootView.findViewById(R.id.txt_Totalall);
+        txt_Totalall = (TextView) rootView.findViewById(R.id.txt_Totalall);
         edit_txt_cash = (EditText) rootView.findViewById(R.id.edit_txt_cash);
         btn_cost_1000 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_1000);
         btn_cost_100 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_100);
@@ -286,10 +286,15 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 } catch (NumberFormatException e) {
 
                 }
-                total = Double.valueOf(txt_Totalall.getText().toString().replace(",",""));
+                total = Double.valueOf(txt_Totalall.getText().toString().replace(",", ""));
                 change = cash - total;
-                Toast.makeText(getActivity(),formatAmount.formatAmountDouble(Double.valueOf(change.toString())),Toast.LENGTH_SHORT).show();
 
+
+                if (edit_txt_cash.getText().toString().trim().replaceAll(",%\\.", "").matches("")) {
+                    Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), formatAmount.formatAmountDouble(Double.valueOf(change.toString())), Toast.LENGTH_SHORT).show();
+                }
 
                 break;
             default:

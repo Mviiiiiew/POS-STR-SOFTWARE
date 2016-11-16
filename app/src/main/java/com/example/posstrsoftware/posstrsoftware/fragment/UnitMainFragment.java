@@ -115,8 +115,6 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         final UnitAdapter adapter = new UnitAdapter(getActivity(), unitLists);
         listView_Unit.setAdapter(adapter);
         unitDAO.close();
-
-
         listView_Unit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -126,6 +124,20 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
                 startActivity(editIntent);
             }
         });
+        searchViewUnit.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+        });
+
     }
 
 

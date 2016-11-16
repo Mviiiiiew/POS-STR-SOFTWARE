@@ -96,6 +96,20 @@ public class GroupMainFragment extends Fragment implements View.OnClickListener 
             }
         });
 
+        searchViewGroup.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+        });
+
     }
 
     @Override

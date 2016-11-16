@@ -23,15 +23,11 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
-import com.example.posstrsoftware.posstrsoftware.activity.SaleProductActivity;
-import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
-import com.example.posstrsoftware.posstrsoftware.util.InputFilterMinMax;
-import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
+
 import java.util.Locale;
 
 
@@ -53,9 +49,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     String discountpercent;
     TextView txt_NameTotal;
     Double C = 0.0;
-    Double totalall =0.0;
-     Double A =0.0;
-    Double B= 0.0;
+    Double totalall = 0.0;
+    Double A = 0.0;
+    Double B = 0.0;
 
 
     public DiscountMainFragment() {
@@ -218,7 +214,6 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                         Toast.makeText(getActivity(), "กำหนดอยู่ในช่วง 0 - 100 (%)", Toast.LENGTH_SHORT).show();
                         editText_DiscountPercent.setText("");
                     }
-
                 }
 
             }
@@ -310,9 +305,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
             if (checkbox_discount.isChecked() == true) {
                 if (checkbox_discount.isChecked() == true) {
                     if (radiobutton_cost.isChecked() == true) {
-                        if((editText_DiscountCost.getText().toString().replaceAll("","").replaceAll("\\.","").matches(""))){
-                            Toast.makeText(getActivity(),"กรุณาใส่จำนวน",Toast.LENGTH_SHORT).show();
-                        }else {
+                        if ((editText_DiscountCost.getText().toString().replaceAll("", "").replaceAll("\\.", "").matches(""))) {
+                            Toast.makeText(getActivity(), "กรุณาใส่จำนวน", Toast.LENGTH_SHORT).show();
+                        } else {
 
                             A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
                             B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
@@ -328,9 +323,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
 
                     } else if (radiobutton_percent.isChecked() == true) {
-                        if(editText_DiscountPercent.getText().toString().replaceAll("","").matches("")){
-                            Toast.makeText(getActivity(),"กรุณาใส่จำนวน",Toast.LENGTH_SHORT).show();
-                        }else {
+                        if (editText_DiscountPercent.getText().toString().replaceAll("", "").matches("")) {
+                            Toast.makeText(getActivity(), "กรุณาใส่จำนวน", Toast.LENGTH_SHORT).show();
+                        } else {
                             A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
                             B = Double.valueOf(editText_DiscountPercent.getText().toString());
                             C = (A * B) / 100;
@@ -347,14 +342,14 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                     }
                 }
 
-            }else if(checkbox_discount.isChecked() == false){
-                totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",",""));
-                String u ="0";
-                discountpercent = String.valueOf(editText_DiscountPercent.getText()+" %");
+            } else if (checkbox_discount.isChecked() == false) {
+                totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+                String u = "0";
+                discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
                 Intent intent = new Intent(getActivity(), PayMainActivity.class);
                 intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
                 intent.putExtra("discountcost", u);
-                intent.putExtra("totalall",totalall.toString());
+                intent.putExtra("totalall", totalall.toString());
                 intent.putExtra("discountpercent", u);
                 startActivity(intent);
                 Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();

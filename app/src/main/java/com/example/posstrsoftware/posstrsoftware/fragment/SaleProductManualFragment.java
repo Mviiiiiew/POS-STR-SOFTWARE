@@ -24,6 +24,7 @@ import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
@@ -141,8 +142,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                     total += Double.valueOf(bean.getPrice());
 
                 }
-                DecimalFormat money_format = new DecimalFormat("###,###,###.00");
-                txt_cost.setText(money_format.format((total)));
+
+                txt_cost.setText(formatAmount.formatAmountDouble(total));
                 productSaleDAO.close();
                 Toast.makeText(getActivity(),"Click Short Successfully"+"   "+((ProductList)objAdapter.getItem(position)).getProductText(), Toast.LENGTH_SHORT).show();
 

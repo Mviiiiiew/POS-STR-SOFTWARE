@@ -15,6 +15,23 @@ public class ProductList implements Serializable {
     private UnitList unitList;
     private String barcode;
 
+
+
+
+
+    public ProductList(int id, String productText, Double productprice, GroupList groupList, UnitList unitList, String barcode) {
+        this.id = id;
+        this.productText = productText;
+        this.productprice = productprice;
+        this.groupList = groupList;
+        this.unitList = unitList;
+        this.barcode = barcode;
+    }
+
+    public ProductList() {
+
+    }
+
     public String getBarcode() {
         return barcode;
     }

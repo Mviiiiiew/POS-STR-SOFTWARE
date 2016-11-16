@@ -93,6 +93,19 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
         productDAO.close();
         final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
+        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                objAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
         listView_Product.setAdapter(objAdapter);
 
     }

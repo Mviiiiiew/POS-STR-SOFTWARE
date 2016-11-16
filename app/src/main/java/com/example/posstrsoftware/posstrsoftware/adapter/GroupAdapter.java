@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
@@ -17,16 +19,20 @@ import java.util.ArrayList;
  * Created by Wasabi on 10/17/2016.
  */
 
-public class GroupAdapter extends BaseAdapter {
+public class GroupAdapter extends BaseAdapter implements Filterable{
     private static Activity activity;
     private static LayoutInflater inflater;
 
     ArrayList<GroupList> mGruopList;
+    ArrayList<GroupList> filterList;
+    CustomFilter filter;
 
 
     public GroupAdapter(Activity activity,ArrayList<GroupList> mGruopList) {
         this.mGruopList = mGruopList;
         this.activity = activity;
+        this.filterList = mGruopList;
+
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -60,5 +66,45 @@ public class GroupAdapter extends BaseAdapter {
 
         return v;
 
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filter == null){
+            filter = new CustomFilter();
+        }
+
+
+        return filter;
+    }
+
+    private class CustomFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                constraint = constraint.toString().toUpperCase();
+
+                ArrayList<GroupList> filters = new ArrayList<>();
+                for (int i = 0; i < filterList.size(); i++) {
+                    if (filterList.get(i).getGroupText().toUpperCase().contains(constraint)) {
+                        GroupList u = new GroupList(filterList.get(i).getId(), filterList.get(i).getGroupText());
+                        filters.add(u);
+                    }
+                }
+                results.count = filters.size();
+                results.values = filters;
+            } else {
+                results.count = filterList.size();
+                results.values = filterList;
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mGruopList = (ArrayList<GroupList>) results.values;
+            notifyDataSetChanged();
+        }
     }
 }

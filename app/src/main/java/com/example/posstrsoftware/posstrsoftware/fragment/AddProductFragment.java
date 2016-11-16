@@ -151,7 +151,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         int ex = 0;
         if (v == btn_save) {
-            if (editText_Product.getText().toString().trim().replaceAll("", "").matches("")) {
+            if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.","").matches("")) {
                 Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
             } else if (editText_Price.getText().toString().matches("")) {
                 Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();

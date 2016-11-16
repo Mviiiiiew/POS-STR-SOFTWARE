@@ -18,6 +18,7 @@ public class ProductSaleList {
     boolean checkbox;
 
 
+
     public ProductSaleList() {
 
     }
