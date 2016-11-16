@@ -13,14 +13,29 @@
         android:id="@+id/btn_back"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="ย้อนกลับ"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
+        android:text="ย้อนกลับ"
         android:textSize="20sp"
         android:textStyle="bold"
         >
 
     </com.gc.materialdesign.views.ButtonRectangle>
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_back"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:layout_toRightOf="@+id/btn_back"
+        android:background="@color/colorWhite"
+
+
+        />
 
 
     <LinearLayout

@@ -180,6 +180,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 } else {
                     getActivity().finish();
                 }
+
             }
         } else if (btn_back == v) {
             getActivity().finish();

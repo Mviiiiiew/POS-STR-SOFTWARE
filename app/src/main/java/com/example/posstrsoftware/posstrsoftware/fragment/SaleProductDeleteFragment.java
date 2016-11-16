@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
 
     ButtonRectangle btn_back;
     ListView listView_SaleProductDelete;
+    SearchView searchViewProduct;
 
     public SaleProductDeleteFragment() {
         super();
@@ -53,6 +55,18 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         productSaleDAO.close();
         final ProductSaleDeleteAdapter adapter = new ProductSaleDeleteAdapter(getActivity(), productSaleLists);
         listView_SaleProductDelete.setAdapter(adapter);
+        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+        });
         listView_SaleProductDelete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
@@ -85,6 +99,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                 alertDialogder.show();
             }
         });
+
         return rootView;
     }
 
@@ -92,7 +107,10 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         listView_SaleProductDelete = (ListView)rootView.findViewById(R.id.listView_SaleProductDelete);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
+        searchViewProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
+        searchViewProduct.setQueryHint("Search..");
         btn_back.setOnClickListener(this);
+
         btn_back.setRippleSpeed(50);
 
     }
@@ -100,8 +118,6 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
-
-
 
     }
 

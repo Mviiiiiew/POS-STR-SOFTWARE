@@ -65,10 +65,12 @@
         android:id="@+id/searchViewProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_toLeftOf="@+id/btn_add_product"
         android:layout_alignTop="@+id/btn_back"
         android:layout_toRightOf="@+id/txt_list"
-        android:paddingLeft="60dp"
-        android:paddingRight="100dp"
+     android:layout_marginLeft="50dp"
+        android:layout_marginRight="60dp"
 
         >
 

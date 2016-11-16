@@ -17,7 +17,11 @@ public class ProductSaleList {
     private String price;
     boolean checkbox;
 
-
+    public ProductSaleList(int id, String productSale, String price) {
+        this.id = id;
+        ProductSale = productSale;
+        this.price = price;
+    }
 
     public ProductSaleList() {
 

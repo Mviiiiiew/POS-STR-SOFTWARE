@@ -1,10 +1,13 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +34,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
-
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -40,11 +42,11 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     ListView listView_SaleProductmanual;
     ButtonRectangle btn_clear;
     ButtonRectangle btn_backz;
+    SearchView searchViewProduct;
     TextView txt_cost;
     ButtonRectangle btn_delete;
     ImageButton btn_back;
     ButtonRectangle btn_Pay;
-
 
 
     public SaleProductManualFragment() {
@@ -70,12 +72,14 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         listView_SaleProductmanual = (ListView) rootView.findViewById(R.id.listView_SaleProductmanual);
         listview_salemanual = (ListView) rootView.findViewById(R.id.listview_salemanual);
-        btn_backz = (ButtonRectangle)rootView.findViewById(R.id.btn_backz);
-        btn_clear= (ButtonRectangle)rootView.findViewById(R.id.btn_clear);
+        searchViewProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
+        searchViewProduct.setQueryHint("Search..");
+        btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
+        btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-        txt_cost = (TextView)rootView.findViewById(R.id.txt_cost);
+        txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_backz.setOnClickListener(this);
@@ -85,7 +89,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         btn_delete.setRippleSpeed(40);
         btn_clear.setRippleSpeed(40);
         btn_backz.setRippleSpeed(40);
-
 
 
     }
@@ -114,11 +117,11 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     public void onResume() {
         super.onResume();
         loadradio();
-       final ProductDAO productDAO = new ProductDAO(getActivity());
+        final ProductDAO productDAO = new ProductDAO(getActivity());
         productDAO.open();
         final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
         productDAO.close();
-        final ProductListManualAdapter objAdapter = new ProductListManualAdapter(getActivity(),myProductList);
+        final ProductListManualAdapter objAdapter = new ProductListManualAdapter(getActivity(), myProductList);
         listview_salemanual.setAdapter(objAdapter);
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
@@ -130,8 +133,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Double total = 0.0;
                 ProductSaleList productSaleList = new ProductSaleList();
-                productSaleList.setPrice(String.valueOf(((ProductList)objAdapter.getItem(position)).getProductprice()));
-                productSaleList.setProductSale(((ProductList)objAdapter.getItem(position)).getProductText());
+                productSaleList.setPrice(String.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
+                productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
                 productSaleDAO.add(productSaleList);
@@ -145,9 +148,21 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
                 txt_cost.setText(formatAmount.formatAmountDouble(total));
                 productSaleDAO.close();
-                Toast.makeText(getActivity(),"Click Short Successfully"+"   "+((ProductList)objAdapter.getItem(position)).getProductText(), Toast.LENGTH_SHORT).show();
 
 
+
+            }
+        });
+        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                objAdapter.getFilter().filter(query);
+                return false;
             }
         });
 
@@ -185,24 +200,39 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(btn_clear == v){
-            ProductSaleList productSaleList = new ProductSaleList();
-            ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-            productSaleDAO.open();
-            productSaleDAO.clear(productSaleList);
-            ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-            final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-            listView_SaleProductmanual.setAdapter(adapter);
-            productSaleDAO.close();
-            txt_cost.setText("");
+        if (btn_clear == v) {
+            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+            alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
+            alertDialogder.setTitle("เริ่มรายการใหม่ ?");
+            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ProductSaleList productSaleList = new ProductSaleList();
+                    ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                    productSaleDAO.open();
+                    productSaleDAO.clear(productSaleList);
+                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                    final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                    listView_SaleProductmanual.setAdapter(adapter);
+                    productSaleDAO.close();
+                    txt_cost.setText("");
+                }
+            });
+            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
 
+            alertDialogder.show();
 
-        }else if(btn_backz == v||btn_back ==v){
+        } else if (btn_backz == v || btn_back == v) {
             getActivity().finish();
-        }else if (btn_delete == v) {
+        } else if (btn_delete == v) {
             Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
             startActivity(intent);
-        }else if (btn_Pay == v) {
+        } else if (btn_Pay == v) {
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
             startActivity(intent);

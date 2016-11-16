@@ -151,29 +151,49 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (btn_back == v||btn_backz==v) {
+        if (btn_back == v || btn_backz == v) {
             getActivity().finish();
 
         } else if (btn_clear == v) {
-            ProductSaleList productSaleList = new ProductSaleList();
-            ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-            productSaleDAO.open();
-            productSaleDAO.clear(productSaleList);
-            ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-            final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-            listView_SaleProduct.setAdapter(adapter);
-            productSaleDAO.close();
-            txt_cost.setText("");
-        } else if (btn_Pay == v) {
-            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
-            intent.putExtra("total", txt_cost.getText());
-            startActivity(intent);
 
-        } else if (btn_delete == v) {
-            Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
-            startActivity(intent);
+            if (btn_clear == v) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
+                alertDialogder.setTitle("เริ่มรายการใหม่ ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductSaleList productSaleList = new ProductSaleList();
+                        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                        productSaleDAO.open();
+                        productSaleDAO.clear(productSaleList);
+                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                        listView_SaleProduct.setAdapter(adapter);
+                        productSaleDAO.close();
+                        txt_cost.setText("");
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (btn_Pay == v) {
+                Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
+                intent.putExtra("total", txt_cost.getText());
+                startActivity(intent);
+
+            } else if (btn_delete == v) {
+                Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+                startActivity(intent);
+            }
+
         }
-
     }
 
 

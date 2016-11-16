@@ -16,8 +16,11 @@ public class ProductList implements Serializable {
     private String barcode;
 
 
-
-
+    public ProductList(int id, String productText, GroupList groupList) {
+        this.id = id;
+        this.productText = productText;
+        this.groupList = groupList;
+    }
 
     public ProductList(int id, String productText, Double productprice, GroupList groupList, UnitList unitList, String barcode) {
         this.id = id;

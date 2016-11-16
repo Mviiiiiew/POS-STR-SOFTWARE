@@ -76,12 +76,14 @@
         android:id="@+id/searchViewUnit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/txt_list"
         android:layout_alignTop="@+id/image_unit"
-        android:paddingLeft="60dp"
-        android:paddingRight="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="60dp"
+        android:layout_toLeftOf="@+id/btn_add_unit"
+        android:layout_toRightOf="@+id/txt_list"
+        android:background="@color/colorWhite"
 
-      >
+        >
 
     </android.support.v7.widget.SearchView>
 

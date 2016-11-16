@@ -14,12 +14,13 @@
             android:id="@+id/txt_Group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/txt_id_product"
             android:padding="2dp"
             android:text="Gruop"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
 
             />
@@ -35,12 +36,13 @@
             android:id="@+id/txt_name_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/txt_Group"
             android:padding="2dp"
             android:text="Product"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold"/>
 
 

@@ -334,7 +334,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:text="ย้อกลับ"
+                    android:text="ย้อนกลับ"
                     android:textSize="@dimen/textsize_button">
 
                 </com.gc.materialdesign.views.ButtonRectangle>
