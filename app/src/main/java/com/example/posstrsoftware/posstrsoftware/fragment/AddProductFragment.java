@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -18,13 +19,16 @@ import android.widget.Toast;
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerGroupAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
+import com.example.posstrsoftware.posstrsoftware.util.VAT;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
@@ -40,10 +44,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     EditText editText_Product;
     ButtonRectangle btn_back;
     ButtonRectangle btn_save;
-
     EditText editText_Price;
     EditText editText_Barcode;
-
+    CheckBox checkbox_vat;
     Spinner spinner_unit;
     Spinner spinner_group;
     private spinnerGroupAdapter mSpinnerGroupAdapter;
@@ -89,7 +92,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+
         editText_Product = (EditText) rootView.findViewById(R.id.editText_Product);
+        checkbox_vat = (CheckBox) rootView.findViewById(R.id.checkbox_vat);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
         editText_Price = (EditText) rootView.findViewById(R.id.editText_Price);
@@ -150,18 +155,33 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int ex = 0;
+        double price=0.0;
         if (v == btn_save) {
-            if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.","").matches("")) {
+            if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                 Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
             } else if (editText_Price.getText().toString().matches("")) {
                 Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();
             } else {
+                if(checkbox_vat.isChecked() == true){
+                    double var = Double.parseDouble(editText_Price.getText().toString().replaceAll(",", ""));
+                    CompanyDAO companyDAO = new CompanyDAO(getActivity());
+                    companyDAO.open();
+                    double t = Double.valueOf((companyDAO.getVat().toString()));
+                    double vat = VAT.VATRATE(var, t);
+                    price = vat + var;
+                    Toast.makeText(getActivity(), price + "", Toast.LENGTH_SHORT).show();
+                    companyDAO.close();
+                }else if (checkbox_vat.isChecked() == false){
+                    price = Double.parseDouble(editText_Price.getText().toString());
+                    Toast.makeText(getActivity(), price + "", Toast.LENGTH_SHORT).show();
+                }
+
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
                 productList.setBarcode(editText_Barcode.getText().toString());
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
-                productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replace(",","")));
+                productList.setProductprice(price);
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.add(productList);
@@ -180,6 +200,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 } else {
                     getActivity().finish();
                 }
+
 
             }
         } else if (btn_back == v) {

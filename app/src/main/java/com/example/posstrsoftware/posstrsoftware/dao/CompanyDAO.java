@@ -47,7 +47,7 @@ public class CompanyDAO {
             mCompanyList.setPOSMachineID(cursor.getString(6));
             mCompanyList.setRegisterID(cursor.getString(7));
             mCompanyList.setENDbillText(cursor.getString(8));
-            mCompanyList.setVATRate(cursor.getString(9));
+            mCompanyList.setVATRate(cursor.getDouble(9));
             companyLists.add(mCompanyList);
             cursor.moveToNext();
 
@@ -56,6 +56,22 @@ public class CompanyDAO {
         cursor.close();
         return companyLists;
     }
+
+    public CompanyList getVat(){
+       CompanyList companyListsvat = new CompanyList();
+        Cursor cursor = database.rawQuery("SELECT * FROM company_list ;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            companyListsvat.setVATRate(cursor.getDouble(9));
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        return companyListsvat;
+
+
+    }
+
 
 
     public void add(CompanyList companyList) {

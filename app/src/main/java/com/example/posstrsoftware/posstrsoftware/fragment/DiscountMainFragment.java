@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
+import com.example.posstrsoftware.posstrsoftware.util.CostPercent;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
@@ -328,7 +329,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                         } else {
                             A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
                             B = Double.valueOf(editText_DiscountPercent.getText().toString());
-                            C = (A * B) / 100;
+                            C = CostPercent.costpercent(A,B);
                             totalall = A - C;
                             discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
                             Intent intent = new Intent(getActivity(), PayMainActivity.class);

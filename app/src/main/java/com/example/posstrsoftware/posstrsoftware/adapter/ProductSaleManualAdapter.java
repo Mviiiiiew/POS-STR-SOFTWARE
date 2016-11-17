@@ -57,7 +57,6 @@ public class ProductSaleManualAdapter extends BaseAdapter {
         TextView txt_name_productprice = (TextView) v.findViewById(R.id.txt_name_productprice);
         TextView txt_name_amount = (TextView) v.findViewById(R.id.txt_name_amount);
         ProductSaleList productSaleList = mProductSaleLists.get(position);
-
         txt_name_productsale.setText(productSaleList.getProductSale());
         txt_name_amount.setText(productSaleList.getAmount());
         txt_name_productprice.setText(formatAmount.formatAmountDouble(Double.valueOf(productSaleList.getPrice())));

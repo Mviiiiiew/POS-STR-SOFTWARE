@@ -72,7 +72,7 @@ public class CompanyAdapter extends BaseAdapter {
         txt_Name_POSMachineID.setText(companyList.getPOSMachineID());
         txt_Name_RegisterID.setText(companyList.getRegisterID());
         txt_Name_ENDbillText.setText(companyList.getENDbillText());
-        txt_Name_VATRate.setText(companyList.getVATRate());
+        txt_Name_VATRate.setText(companyList.getVATRate().toString());
 
         return v;
     }

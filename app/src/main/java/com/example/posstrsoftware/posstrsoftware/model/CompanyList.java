@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 
 public class CompanyList  implements Serializable{
+
+
+
     int id;
     String CompanyName;
     String CompanyAddress;
@@ -16,7 +19,12 @@ public class CompanyList  implements Serializable{
     String POSMachineID;
     String RegisterID;
     String ENDbillText;
-    String VATRate;
+    Double VATRate;
+
+    @Override
+    public String toString() {
+        return VATRate+""    ;
+    }
 
     public int getId() {
         return id;
@@ -90,11 +98,11 @@ public class CompanyList  implements Serializable{
         this.ENDbillText = ENDbillText;
     }
 
-    public String getVATRate() {
+    public Double getVATRate() {
         return VATRate;
     }
 
-    public void setVATRate(String VATRate) {
+    public void setVATRate(Double VATRate) {
         this.VATRate = VATRate;
     }
 }

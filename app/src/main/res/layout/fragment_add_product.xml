@@ -24,15 +24,16 @@
     <EditText
 
         android:id="@+id/editText_Product"
-        android:inputType="text"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_alignBaseline="@+id/editText_Price"
         android:layout_alignBottom="@+id/editText_Price"
+        android:layout_marginLeft="20dp"
         android:background="@color/thumbColor"
         android:hint="ชื่อสินค้า"
+        android:inputType="text"
         android:padding="20dp"/>
+
     <TextView
         android:id="@+id/txt_title_unit"
         android:layout_width="wrap_content"
@@ -43,6 +44,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         />
+
     <EditText
 
         android:id="@+id/editText_Price"
@@ -57,7 +59,6 @@
         android:inputType="numberDecimal"
         android:padding="20dp"
         />
-
 
 
     <android.support.v7.widget.AppCompatSpinner
@@ -132,17 +133,28 @@
         />
 
 
-
     <EditText
         android:id="@+id/editText_Barcode"
-        android:inputType="number"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_below="@+id/editText_Product"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:background="@color/thumbColor"
         android:hint="BARCODE"
+        android:inputType="number"
         android:padding="20dp"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_vat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:layout_alignBottom="@+id/editText_Barcode"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/editText_Barcode"
+        android:text="  กำหนดภาษี"
+        android:textSize="20sp"/>
 
 </RelativeLayout>

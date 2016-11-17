@@ -25,6 +25,7 @@ import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.util.VAT;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.io.Serializable;
@@ -46,7 +47,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     TextView txt_cost;
     ButtonRectangle btn_delete;
     ButtonRectangle btn_backz;
-
 
 
     public SaleProductFragment() {
@@ -79,7 +79,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
-        btn_backz = (ButtonRectangle)rootView.findViewById(R.id.btn_backz);
+        btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
         btn_backz.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
@@ -90,7 +90,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_clear.setRippleSpeed(15);
         btn_delete.setRippleSpeed(50);
         btn_backz.setRippleSpeed(40);
-
 
 
     }
@@ -104,7 +103,6 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         productSaleDAO.close();
         final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
         listView_SaleProduct.setAdapter(adapter);
-
 
 
         Double x = 0.0;
@@ -182,19 +180,21 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                 });
 
                 alertDialogder.show();
-
-            } else if (btn_Pay == v) {
-                Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
-                intent.putExtra("total", txt_cost.getText());
-                startActivity(intent);
-
-            } else if (btn_delete == v) {
-                Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
-                startActivity(intent);
             }
 
+        } else if (btn_Pay == v) {
+            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
+            intent.putExtra("total", txt_cost.getText());
+
+            startActivity(intent);
+
+        } else if (btn_delete == v) {
+            Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+            startActivity(intent);
         }
     }
+
+
 
 
     @Override

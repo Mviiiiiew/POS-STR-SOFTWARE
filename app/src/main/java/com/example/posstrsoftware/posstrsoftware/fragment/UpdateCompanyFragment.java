@@ -60,7 +60,7 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
         editText_Name_Division.setText(editCompanyList.getDivisionName());
         editText_Name_RegisterID.setText(editCompanyList.getRegisterID());
         editText_Name_ENDbillText.setText(editCompanyList.getENDbillText());
-        editText_Name_VATRate.setText(editCompanyList.getVATRate());
+        editText_Name_VATRate.setText(editCompanyList.getVATRate().toString());
 
         return rootView;
     }
@@ -127,7 +127,7 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
             companyList.setDivisionName(String.valueOf(editText_Name_Division.getText()));
             companyList.setRegisterID(String.valueOf(editText_Name_RegisterID.getText()));
             companyList.setENDbillText(String.valueOf(editText_Name_ENDbillText.getText()));
-            companyList.setVATRate(String.valueOf(editText_Name_VATRate.getText()));
+            companyList.setVATRate(Double.valueOf(editText_Name_VATRate.getText().toString()));
             companyList.setPOSMachineID(mngr.getDeviceId());
             CompanyDAO companyDAO = new CompanyDAO(getActivity());
             companyDAO.open();

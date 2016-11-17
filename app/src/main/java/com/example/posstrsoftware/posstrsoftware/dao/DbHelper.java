@@ -74,7 +74,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableGroupCreateSQL);
         db.execSQL(tableCompanyCreateSQL);
         db.execSQL(tableProductSaleCreateSQL);
-        String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','VATRate');";
+        String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','7');";
         db.execSQL(insertData);
 
 
