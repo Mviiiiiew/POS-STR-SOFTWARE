@@ -172,7 +172,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                     Toast.makeText(getActivity(), price + "", Toast.LENGTH_SHORT).show();
                     companyDAO.close();
                 }else if (checkbox_vat.isChecked() == false){
-                    price = Double.parseDouble(editText_Price.getText().toString());
+                    price = Double.parseDouble(editText_Price.getText().toString().trim().replaceAll(",",""));
                     Toast.makeText(getActivity(), price + "", Toast.LENGTH_SHORT).show();
                 }
 

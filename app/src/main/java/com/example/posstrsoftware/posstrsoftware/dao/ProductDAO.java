@@ -43,7 +43,7 @@ public class ProductDAO {
         Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.price_text,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from product_list pl " +
                 "inner join  unit_list ul on pl.id_unit = ul.id_unit and  ul.delete_flag = 'N' " +
                 "inner join  group_list gl on pl.id_group = gl.id_group and  gl.delete_flag = 'N' " +
-                "where pl.delete_flag = 'N' ORDER BY  gl.id_group ;",null);
+                "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
