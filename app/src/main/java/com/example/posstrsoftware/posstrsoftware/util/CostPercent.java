@@ -1,5 +1,9 @@
 package com.example.posstrsoftware.posstrsoftware.util;
 
+import android.util.Log;
+
+import java.text.DecimalFormat;
+
 /**
  * Created by Wasabi on 11/17/2016.
  */
@@ -7,48 +11,16 @@ package com.example.posstrsoftware.posstrsoftware.util;
 public class CostPercent {
 
     public static double costpercent(Double x, Double y) {
-        double u = 0.0;
-        double z = (x * y) / 100.0;
-        int i = (int) (z * 1000);
-        ////Decimal////
-        int d = i % 1000;
+        return y== 100.0?x: Double.parseDouble(new DecimalFormat("##.00").format((x * (y / 100))));
 
-
-        if (d >= 0 && d < 250) {
-            double p = 0.0;
-            double r = p / 1000.0;
-            int o = (int) z;
-            u = o + r;
-
-
-        } else if (d >= 250 && d < 500) {
-            double p = 250.0;
-            double r = p / 1000.0;
-            int o = (int) z;
-            u = o + r;
-
-
-        } else if (d >= 500 && d < 750) {
-            double p = 500.0;
-            double r = p / 1000.0;
-            int o = (int) z;
-            u = o + r;
-
-
-
-        } else if (d >= 750 && d<1000) {
-            double p = 750.0;
-            double r = p / 1000.0;
-            int o = (int) z;
-            u = o + r;
-
-        }   else if(d<=1000) {
-            double p = 1000.0;
-            double r = p / 1000.0;
-            int o = (int) z;
-            u = o + r;
-        }
-
-        return u;
+    }
+    public static double parserFormat(Double input){
+        String[] cal = new DecimalFormat("##.00").format(input).split("\\.");
+        Log.d("input=",cal[1]+"");
+        int decimal1 = Integer.parseInt(cal[1]);
+        return Double.parseDouble(cal[0] += isCheck(1,25,decimal1)?".25":isCheck(26,50,decimal1)?".50":isCheck(51,75,decimal1)?".75":".00");
+    }
+    private static boolean isCheck(int input_from,int input_to,int input_value){
+        return input_value >= input_from && input_value <= input_to;
     }
 }

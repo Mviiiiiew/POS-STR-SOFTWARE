@@ -31,6 +31,8 @@ import java.text.NumberFormat;
 
 import java.util.Locale;
 
+import static com.example.posstrsoftware.posstrsoftware.util.VAT.VATRATE;
+
 
 /**
  * Created by nuuneoi on 11/16/2014.
@@ -209,9 +211,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
             public void afterTextChanged(Editable s) {
                 String added_number = editText_DiscountPercent.getText().toString();
                 if (added_number.length() != 0) {
-                    int number = Integer.parseInt(added_number);
+                    double number = Double.valueOf(added_number);
 
-                    if (number > 100) {
+                    if (number > 100.0) {
                         Toast.makeText(getActivity(), "กำหนดอยู่ในช่วง 0 - 100 (%)", Toast.LENGTH_SHORT).show();
                         editText_DiscountPercent.setText("");
                     }
@@ -330,7 +332,11 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                             A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
                             B = Double.valueOf(editText_DiscountPercent.getText().toString());
                             C = CostPercent.costpercent(A,B);
-                            totalall = A - C;
+                            Log.d("valA=",A+"");
+                            Log.d("valC=",C+"");
+                            totalall = CostPercent.parserFormat(A-C);
+                            Log.d("totalall",totalall.toString());
+
                             discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
                             Intent intent = new Intent(getActivity(), PayMainActivity.class);
                             intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));

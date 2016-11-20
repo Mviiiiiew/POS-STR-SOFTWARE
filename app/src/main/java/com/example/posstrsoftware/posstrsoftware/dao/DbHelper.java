@@ -34,7 +34,8 @@ public class DbHelper extends SQLiteOpenHelper {
             +"price_text TEXT NOT NULL,"
             +"id_unit INTEGER,"
             +"id_group INTEGER,"
-            +"delete_flag TEXT DEFAULT 'N'"
+            +"delete_flag TEXT DEFAULT 'N',"
+            +"vat_flag TEXT "
             +");";
     private static final String tableCompanyCreateSQL = "CREATE TABLE company_list("
             +"id_company INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -57,6 +58,8 @@ public class DbHelper extends SQLiteOpenHelper {
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
 
+    private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax from product_list order by 1";
+
 
 
 
@@ -74,6 +77,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableGroupCreateSQL);
         db.execSQL(tableCompanyCreateSQL);
         db.execSQL(tableProductSaleCreateSQL);
+        db.execSQL(viewProductList);
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','7');";
         db.execSQL(insertData);
 

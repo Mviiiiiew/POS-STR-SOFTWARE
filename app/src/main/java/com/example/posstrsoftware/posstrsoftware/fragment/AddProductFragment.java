@@ -52,7 +52,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     private spinnerGroupAdapter mSpinnerGroupAdapter;
     private GroupList mSelectedGroup;
     private spinnerUnitAdapter mSpinnerUnitAdapter;
-
     private UnitList mSelectedUnit;
 
     public AddProductFragment() {
@@ -79,7 +78,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
         mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(), unitList);
         spinner_unit.setAdapter(mSpinnerUnitAdapter);
-
         final GroupDAO mGroupDAO = new GroupDAO(getActivity());
         mGroupDAO.open();
         final ArrayList<GroupList> groupList = mGroupDAO.getAllGroupList();
@@ -162,26 +160,21 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             } else if (editText_Price.getText().toString().matches("")) {
                 Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();
             } else {
-                if(checkbox_vat.isChecked() == true){
-                    double var = Double.parseDouble(editText_Price.getText().toString().replaceAll(",", ""));
-                    CompanyDAO companyDAO = new CompanyDAO(getActivity());
-                    companyDAO.open();
-                    double t = Double.valueOf((companyDAO.getVat().toString()));
-                    double vat = VAT.VATRATE(var, t);
-                    price = vat + var;
-                    Toast.makeText(getActivity(), price + "", Toast.LENGTH_SHORT).show();
-                    companyDAO.close();
-                }else if (checkbox_vat.isChecked() == false){
-                    price = Double.parseDouble(editText_Price.getText().toString().trim().replaceAll(",",""));
-                    Toast.makeText(getActivity(), price + "", Toast.LENGTH_SHORT).show();
-                }
 
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
                 productList.setBarcode(editText_Barcode.getText().toString());
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
-                productList.setProductprice(price);
+                productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replaceAll(",","")));
+
+                if(checkbox_vat.isChecked() == true){
+                    productList.setCheckvat("Y");
+                    Toast.makeText(getActivity(),"Y",Toast.LENGTH_LONG).show();
+                }else{
+                    productList.setCheckvat("N");
+                    Toast.makeText(getActivity(),"N",Toast.LENGTH_LONG).show();
+                }
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.add(productList);

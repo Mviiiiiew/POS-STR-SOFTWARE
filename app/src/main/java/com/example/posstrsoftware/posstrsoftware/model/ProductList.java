@@ -14,7 +14,15 @@ public class ProductList implements Serializable {
     private GroupList groupList;
     private UnitList unitList;
     private String barcode;
+    private  String checkvat;
 
+    public String getCheckvat() {
+        return checkvat;
+    }
+
+    public void setCheckvat(String checkvat) {
+        this.checkvat = checkvat;
+    }
 
     public ProductList(int id, String productText, GroupList groupList) {
         this.id = id;

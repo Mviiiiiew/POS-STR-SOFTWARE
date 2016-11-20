@@ -40,7 +40,7 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.price_text,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from product_list pl " +
+        Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
                 "inner join  unit_list ul on pl.id_unit = ul.id_unit and  ul.delete_flag = 'N' " +
                 "inner join  group_list gl on pl.id_group = gl.id_group and  gl.delete_flag = 'N' " +
                 "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
@@ -52,8 +52,9 @@ public class ProductDAO {
             productList1.setBarcode(cursor.getString(1));
             productList1.setProductText(cursor.getString(2));
             productList1.setProductprice(cursor.getDouble(3));
-            productList1.setUnitList(new UnitList(cursor.getInt(4),cursor.getString(5)));
-            productList1.setGroupList(new GroupList(cursor.getInt(6),cursor.getString(7)));
+            productList1.setCheckvat(cursor.getString(4));
+            productList1.setUnitList(new UnitList(cursor.getInt(5),cursor.getString(6)));
+            productList1.setGroupList(new GroupList(cursor.getInt(7),cursor.getString(8)));
             productList.add(productList1);
             cursor.moveToNext();
         }
@@ -77,11 +78,14 @@ public class ProductDAO {
             values.put("product_text", productList.getProductText());
             values.put("id_barcode",productList.getBarcode());
             values.put("price_text",productList.getProductprice());
+            values.put("vat_flag",productList.getCheckvat());
             values.put("id_unit",productList.getUnitList().getId());
             values.put("id_group",productList.getGroupList().getId());
+
             this.database.insert("product_list", null, values);
             return 1;
         }
+
 
 
 
