@@ -21,6 +21,7 @@ import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
@@ -316,7 +317,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     //   Toast.makeText(getActivity(),companyDAO.InvoiceMaster().getCompanyName().toString(), Toast.LENGTH_SHORT).show();
 
                 } else if (checkbox_print.isChecked() == false) {
-                    printerController.PrinterController_Close();
+
+
                     Toast.makeText(getActivity(), change.toString(), Toast.LENGTH_SHORT).show();
 
 
@@ -336,20 +338,20 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void ProductAll() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-
-
+        String[] feed = new String[]{"  ","     "};
         for (ProductSaleList bean : productSaleLists) {
-            String price = bean.getPrice();
-            String product = bean.getProductSale();
+            String price = PrintFix.generatePrice(bean.getPrice(),10);
+            String product = PrintFix.generateName(bean.getProductSale(),12)+feed[1];
+            String Amount = PrintFix.generateName(bean.getAmount(),3)+feed[0];
 
 
             printerController.PrinterController_Font_Normal_mode();
             printerController.PrinterController_Set_Left();
-            printerController.PrinterController_Print("01234567890123456789012345678901234567890".getBytes());
+            printerController.PrinterController_Print(Amount.getBytes());
+            printerController.PrinterController_Print(product.getBytes());
+            printerController.PrinterController_Print(price.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
-
 
 
         }
