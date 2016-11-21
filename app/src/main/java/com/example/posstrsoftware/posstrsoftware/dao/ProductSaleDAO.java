@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class ProductSaleDAO {
     private SQLiteDatabase database;
     private DbHelper dbHelperProductSale;
-
     public ProductSaleDAO(Context context) {
         dbHelperProductSale = new DbHelper(context);
     }

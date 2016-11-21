@@ -350,7 +350,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                 }
 
             } else if (checkbox_discount.isChecked() == false) {
-                totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+                totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
                 String u = "0";
                 discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
                 Intent intent = new Intent(getActivity(), PayMainActivity.class);
