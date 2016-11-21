@@ -305,7 +305,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
         } else if (btn_save == v) {
 
-            if (checkbox_discount.isChecked() == true) {
+
                 if (checkbox_discount.isChecked() == true) {
                     if (radiobutton_cost.isChecked() == true) {
                         if ((editText_DiscountCost.getText().toString().replaceAll("", "").replaceAll("\\.", "").matches(""))) {
@@ -349,7 +349,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                     }
                 }
 
-            } else if (checkbox_discount.isChecked() == false) {
+            else if (checkbox_discount.isChecked() == false) {
                 totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
                 String u = "0";
                 discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");

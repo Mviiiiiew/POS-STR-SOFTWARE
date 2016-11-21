@@ -57,21 +57,26 @@ public class CompanyDAO {
         return companyLists;
     }
 
-    public CompanyList getVat(){
-       CompanyList companyListsvat = new CompanyList();
+    public CompanyList InvoiceMaster() {
+        CompanyList companyListsInvoiceMaster = new CompanyList();
         Cursor cursor = database.rawQuery("SELECT * FROM company_list ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            companyListsvat.setVATRate(cursor.getDouble(9));
+            companyListsInvoiceMaster.setCompanyName(cursor.getString(1));
+            companyListsInvoiceMaster.setPOSMachineID(cursor.getString(6));
+            companyListsInvoiceMaster.setTelephone(cursor.getString(3));
+            companyListsInvoiceMaster.setDivisionName(cursor.getString(5));
+            companyListsInvoiceMaster.setTAXID(cursor.getString(4));
+            companyListsInvoiceMaster.setENDbillText(cursor.getString(8));
+
             cursor.moveToNext();
 
         }
         cursor.close();
-        return companyListsvat;
+        return companyListsInvoiceMaster;
 
 
     }
-
 
 
     public void add(CompanyList companyList) {

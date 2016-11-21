@@ -25,7 +25,6 @@ public class ProductSaleDAO {
     public void open() {
         database = dbHelperProductSale.getWritableDatabase();
     }
-
     public void close() {
         dbHelperProductSale.close();
     }

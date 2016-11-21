@@ -29,5 +29,10 @@ dependencies {
     compile project(':TheCheeseLibrary')
     compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
     compile 'com.bigmercu.cBox:cbox:1.08'
+    compile files('libs/IdCard.jar')
+    compile files('libs/pos(d)_jar_v3.9.jar')
+    compile files('libs/ZCSComboV2.5.1.jar')
+    compile files('libs/zxing.jar')
+
 
 }
