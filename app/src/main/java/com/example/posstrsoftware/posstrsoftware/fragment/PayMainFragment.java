@@ -403,7 +403,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void ProductAll() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
 
         String feed[]=new String[]{""," "};
