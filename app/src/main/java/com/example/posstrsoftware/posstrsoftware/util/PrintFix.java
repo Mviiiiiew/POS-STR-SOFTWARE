@@ -1,7 +1,11 @@
 package com.example.posstrsoftware.posstrsoftware.util;
 
 /**
+<<<<<<< HEAD
  * Created by Wasabi on 11/22/2016.
+=======
+ * Created by MAN on 11/21/2016.
+>>>>>>> origin/master
  */
 
 public class PrintFix {
