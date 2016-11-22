@@ -316,10 +316,13 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                             B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
                             totalall = A - B;
                             discountcost = String.valueOf(editText_DiscountCost.getText());
+                            String totalcost = String.valueOf(CostPercent.parserFormat(totalall));
                             Intent intent = new Intent(getActivity(), PayMainActivity.class);
                             intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
                             intent.putExtra("discountcost", editText_DiscountCost.getText().toString().replace(",", ""));
-                            intent.putExtra("totalall", totalall.toString());
+                            intent.putExtra("totalall", totalcost);
+                            intent.putExtra("discount",B.toString());
+
                             startActivity(intent);
                             Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
                         }
@@ -332,6 +335,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                             A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
                             B = Double.valueOf(editText_DiscountPercent.getText().toString());
                             C = CostPercent.costpercent(A,B);
+
                             Log.d("valA=",A+"");
                             Log.d("valC=",C+"");
                             totalall = CostPercent.parserFormat(A-C);
@@ -342,6 +346,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                             intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
                             intent.putExtra("totalall", totalall.toString());
                             intent.putExtra("discountpercent", discountpercent);
+                            intent.putExtra("discount",C.toString());
                             startActivity(intent);
                             Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
                         }
@@ -358,6 +363,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                 intent.putExtra("discountcost", u);
                 intent.putExtra("totalall", totalall.toString());
                 intent.putExtra("discountpercent", u);
+                    intent.putExtra("discount",u);
                 startActivity(intent);
                 Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
 

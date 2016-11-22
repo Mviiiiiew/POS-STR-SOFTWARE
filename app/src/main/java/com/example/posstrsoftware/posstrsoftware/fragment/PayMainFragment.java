@@ -21,6 +21,7 @@ import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
@@ -65,6 +66,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String x;
     String discount;
     String discountpercent;
+    String txtdiscount;
 
 
     public PayMainFragment() {
@@ -91,10 +93,12 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
         x = intent.getStringExtra("totalx");
+        txtdiscount = intent.getStringExtra("discount");
         totalall = intent.getStringExtra("totalall");
         txt_Totalall.setText(formatAmount.formatAmountDouble(Double.valueOf(totalall.toString())));
         discount = intent.getStringExtra("discountcost");
         discountpercent = intent.getStringExtra("discountpercent");
+
         txt_NameTotal.setText(formatAmount.formatAmountDouble(Double.valueOf(x.toString())));
         try {
 
@@ -307,17 +311,19 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 if (checkbox_print.isChecked() == true) {
                     HeadMaster();
                     ProductAll();
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
+                    Underline();
+                    TotalAll();
+                    EndText();
+                    Linefeed();
+
+
 
 
                     //   Toast.makeText(getActivity(),companyDAO.InvoiceMaster().getCompanyName().toString(), Toast.LENGTH_SHORT).show();
 
                 } else if (checkbox_print.isChecked() == false) {
-                    printerController.PrinterController_Close();
-                    Toast.makeText(getActivity(), change.toString(), Toast.LENGTH_SHORT).show();
+                    String discount = txtdiscount;
+                    Toast.makeText(getActivity(), discount.toString(), Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -333,23 +339,85 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void EndText() {
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        String endtext = companyDAO.InvoiceMaster().getENDbillText();
+        printerController.PrinterController_Font_Normal_mode();
+        printerController.PrinterController_Set_Center();
+        printerController.PrinterController_Print(endtext.getBytes());
+        companyDAO.close();
+
+
+    }
+
+    private void Linefeed() {
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+    }
+
+    private void Underline() {
+        String x = "-------------------------------";
+
+        printerController.PrinterController_Print(x.getBytes());
+    }
+
+    private void TotalAll() {
+        String x = "-------------------------------";
+        String Totaltxt = "Total";
+        String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(),27);
+        String TotalAlltxt = "TotalAll";
+        String totalall = PrintFix.generatePrice(txt_Totalall.getText().toString(),24);
+        String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",",""))),28);
+        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(change),26);
+        String Cashtxt= "Cash";
+        String Changetxt ="Change";
+        String Discounttxt ="Discount"+"->"+(PrintFix.generateName(txt_Discount.getText().toString(),10));
+        String discount = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount)),12);
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Print(Totaltxt.getBytes());
+        printerController.PrinterController_Print(total.getBytes());
+        printerController.PrinterController_Print(x.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Print(Discounttxt.getBytes());
+        printerController.PrinterController_Print(discount.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(TotalAlltxt.getBytes());
+        printerController.PrinterController_Print(totalall.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(Cashtxt.getBytes());
+        printerController.PrinterController_Print(cash.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Font_Bold();
+        printerController.PrinterController_Print(Changetxt.getBytes());
+        printerController.PrinterController_Print(changz.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+
+    }
+
     private void ProductAll() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
 
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
 
-
+        String feed[]=new String[]{""," "};
         for (ProductSaleList bean : productSaleLists) {
-            String price = bean.getPrice();
-            String product = bean.getProductSale();
-
+            String price = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getPrice())),10);
+            String product = PrintFix.generateName(bean.getProductSale(),18)+feed[1];
+            String amount = PrintFix.generateName(bean.getAmount(),3)+feed[0];
 
             printerController.PrinterController_Font_Normal_mode();
             printerController.PrinterController_Set_Left();
-            printerController.PrinterController_Print("01234567890123456789012345678901234567890".getBytes());
+            printerController.PrinterController_Print(amount.getBytes());
+            printerController.PrinterController_Print(product.getBytes());
+            printerController.PrinterController_Print(price.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
-
 
 
         }
@@ -362,11 +430,10 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController = PrinterController.getInstance(getActivity());
         printerController.PrinterController_Open();
         printerController.PrinterController_Font_Normal_mode();
-
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
         String text1 = "welcome to "+companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division "+companyDAO.InvoiceMaster().getDivisionName() +" "+"Tel. "+companyDAO.InvoiceMaster().getTelephone();
+        String text2 = "Division "+companyDAO.InvoiceMaster().getDivisionName() +" "+"Tel."+companyDAO.InvoiceMaster().getTelephone();
         String text3 = "TAX ID# "+companyDAO.InvoiceMaster().getTAXID();
         String text4 = "POS# "+companyDAO.InvoiceMaster().getPOSMachineID();
         printerController.PrinterController_Set_Center();
@@ -384,7 +451,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Font_Bold();
-        printerController.PrinterController_Print("---------------------------".getBytes());
+        printerController.PrinterController_Print("-----------------------------".getBytes());
         printerController.PrinterController_Linefeed();
 
         companyDAO.close();
