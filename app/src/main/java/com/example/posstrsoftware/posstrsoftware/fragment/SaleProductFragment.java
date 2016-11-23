@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.DiscountMainActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductDeleteActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
@@ -106,7 +107,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
 
         Double x = 0.0;
-        DecimalFormat money_format = new DecimalFormat("###,###,###.00");
+        DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
         for (ProductSaleList bean : productSaleLists) {
             x += Double.valueOf(bean.getPrice());
         }
@@ -150,7 +151,10 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (btn_back == v || btn_backz == v) {
-            getActivity().finish();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            this.getActivity().finish();
+
 
         } else if (btn_clear == v) {
 
@@ -169,7 +173,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                         final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
                         listView_SaleProduct.setAdapter(adapter);
                         productSaleDAO.close();
-                        txt_cost.setText("");
+                        txt_cost.setText("0.00");
                     }
                 });
                 alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
@@ -215,7 +219,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
             listView_SaleProduct.setAdapter(adapter);
 
-            DecimalFormat money_format = new DecimalFormat("###,###,###.00");
+            DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
             for (ProductSaleList bean : productSaleLists) {
                 total += Double.valueOf(bean.getPrice());
 

@@ -11,14 +11,15 @@ import java.text.DecimalFormat;
 public class CostPercent {
 
     public static double costpercent(Double x, Double y) {
-        return y == 100.0?x: Double.parseDouble(new DecimalFormat("##.00").format((x * (y / 100))));
+        return y == 100.0?x: Double.parseDouble(new DecimalFormat("#0.00").format((x * (y / 100))));
 
     }
     public static double parserFormat(Double input){
-        String[] cal = new DecimalFormat("##.00").format(input).split("\\.");
+        String[] cal = new DecimalFormat("#0.00").format(input).split("\\.");
         Log.d("input=",cal[0]+"");
+
         int decimal1 = Integer.parseInt(cal[1]);
-        int x = Integer.parseInt(cal[0]);
+         int x = Integer.parseInt(cal[0]);
         int y = 1;
         String calx = String.valueOf(x+y);
         Log.d("inputx=",x+"");

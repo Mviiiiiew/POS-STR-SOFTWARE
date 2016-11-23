@@ -37,7 +37,7 @@ public class ProductSaleDAO {
             ProductSaleList mProductSaleList = new ProductSaleList();
             mProductSaleList.setProductSale(cursor.getString(0));
             mProductSaleList.setAmount(cursor.getString(2));
-            mProductSaleList.setPrice(cursor.getString(1));
+            mProductSaleList.setPrice(cursor.getDouble(1));
             ProductSaleList.add(mProductSaleList);
             cursor.moveToNext();
         }
@@ -55,7 +55,7 @@ public class ProductSaleDAO {
             ProductSaleList mproductSaleList = new ProductSaleList();
             mproductSaleList.setId(cursor.getInt(0));
             mproductSaleList.setProductSale(cursor.getString(1));
-            mproductSaleList.setPrice(cursor.getString(2));
+            mproductSaleList.setPrice(cursor.getDouble(2));
             productSaleLists.add(mproductSaleList);
             cursor.moveToNext();
 

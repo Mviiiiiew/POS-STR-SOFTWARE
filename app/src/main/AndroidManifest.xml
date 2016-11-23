@@ -90,6 +90,8 @@
         </activity>
         <activity android:name=".activity.SaleProductManualActivity">
         </activity>
+        <activity android:name=".activity.ConcludeActivity">
+        </activity>
     </application>
 
 </manifest>

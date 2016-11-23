@@ -14,17 +14,20 @@ public class ProductSaleList {
     private int id;
     private String amount;
     private String ProductSale;
-    private String price;
+    private Double price;
     boolean checkbox;
 
-    public ProductSaleList(int id, String productSale, String price) {
-        this.id = id;
-        ProductSale = productSale;
-        this.price = price;
-    }
+
+
 
     public ProductSaleList() {
 
+    }
+
+    public ProductSaleList(int id, String productSale, Double price) {
+        this.id = id;
+        this.price = price;
+        ProductSale = productSale;
     }
 
 
@@ -36,14 +39,13 @@ public class ProductSaleList {
         this.amount = amount;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
-
 
     public int getId() {
         return id;

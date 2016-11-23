@@ -13,12 +13,11 @@ public class SaleProductManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_product_manual);
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.contentContainerdiscount);
-        if (fragment instanceof SaleProductManualFragment == false) {
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainerSaleProductManual, SaleProductManualFragment.newInstance())
+                    .add(R.id.contentContainerSaleProductManual, SaleProductManualFragment.newInstance())
                     .commit();
-        }
+
+
     }
 }

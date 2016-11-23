@@ -83,11 +83,15 @@ public class SaleMainFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(btn_Sale == v) {
 
+
             Intent intent = new Intent(getActivity(), SaleProductActivity.class);
             startActivity(intent);
+
         }else if(btn_Salebarcode == v){
-            Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
+
+           Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
             startActivity(intent);
+
         }
     }
 }

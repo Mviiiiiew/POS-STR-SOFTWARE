@@ -40,7 +40,7 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
+            Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
                 "inner join  unit_list ul on pl.id_unit = ul.id_unit and  ul.delete_flag = 'N' " +
                 "inner join  group_list gl on pl.id_group = gl.id_group and  gl.delete_flag = 'N' " +
                 "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
@@ -95,11 +95,11 @@ public class ProductDAO {
 
         ProductSaleList bee = new ProductSaleList();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM product_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM vproduct_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             bee.setProductSale(cursor.getString(2));
-            bee.setPrice(cursor.getString(3));
+            bee.setPrice(cursor.getDouble(8));
             cursor.moveToNext();
         }
         cursor.close();

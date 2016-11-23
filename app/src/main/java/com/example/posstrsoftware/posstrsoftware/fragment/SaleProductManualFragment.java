@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.DiscountMainActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductDeleteActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductListManualAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
@@ -96,44 +97,46 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     @Override
     public void onPause() {
         super.onPause();
-        saveradio();
-    }
-
-    private void saveradio() {
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("cost", (txt_cost.getText().toString()));
-        editor.commit();
-    }
-
-    private void loadradio() {
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        txt_cost.setText(sharedPreferences.getString("cost", txt_cost.getText().toString()));
-
 
     }
+
+
+
+
+
 
     @Override
     public void onResume() {
         super.onResume();
-        loadradio();
+
+
+
         final ProductDAO productDAO = new ProductDAO(getActivity());
         productDAO.open();
         final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
         productDAO.close();
         final ProductListManualAdapter objAdapter = new ProductListManualAdapter(getActivity(), myProductList);
         listview_salemanual.setAdapter(objAdapter);
+
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+        Double x = 0.0;
+        DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
+        for (ProductSaleList bean : productSaleLists) {
+            x += Double.valueOf(bean.getPrice());
+        }
+        txt_cost.setText(money_format.format((x)));
+
         final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
         listView_SaleProductmanual.setAdapter(adapter);
+
         listview_salemanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Double total = 0.0;
                 ProductSaleList productSaleList = new ProductSaleList();
-                productSaleList.setPrice(String.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
+                productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
                 productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
@@ -215,7 +218,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                     final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
                     listView_SaleProductmanual.setAdapter(adapter);
                     productSaleDAO.close();
-                    txt_cost.setText("");
+                    txt_cost.setText("0.00");
                 }
             });
             alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
@@ -228,7 +231,11 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             alertDialogder.show();
 
         } else if (btn_backz == v || btn_back == v) {
-            getActivity().finish();
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            this.getActivity().finish();
+
         } else if (btn_delete == v) {
             Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
             startActivity(intent);
@@ -236,6 +243,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
             startActivity(intent);
+
 
         }
     }

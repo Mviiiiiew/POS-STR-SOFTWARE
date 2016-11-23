@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.POSD.controllers.PrinterController;
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.activity.ConcludeActivity;
 import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
@@ -309,12 +310,15 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 total = Double.valueOf(txt_Totalall.getText().toString().replace(",", ""));
                 change = cash - total;
                 if (checkbox_print.isChecked() == true) {
-                    HeadMaster();
+                   /* HeadMaster();
                     ProductAll();
                     Underline();
                     TotalAll();
                     EndText();
-                    Linefeed();
+                    Linefeed();*/
+                    Intent intent = new Intent(getActivity(), ConcludeActivity.class);
+                    startActivity(intent);
+
 
 
 
