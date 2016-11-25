@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     android:text="ราคาสุทธิ"
@@ -96,14 +96,25 @@
             </RelativeLayout>
 
             <RelativeLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.7">
+                <CheckBox
+                    android:id="@+id/checkbox_AutoPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:freezesText="true"
+                    android:layout_marginTop="10dp"
+                    android:text="ตั้งค่า Auto ราคา"
+                    android:textSize="25sp"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkbox_AutoPay"
                     android:layout_marginLeft="5dp"
                     android:freezesText="true"
                     android:layout_marginTop="10dp"

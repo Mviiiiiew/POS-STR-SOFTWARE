@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.inthecheesefactory.thecheeselibrary.view.SlidingTabLayout;
@@ -25,6 +26,7 @@ import com.inthecheesefactory.thecheeselibrary.view.SlidingTabLayout;
 public class MainFragment extends Fragment {
     ViewPager viewPager;
     SlidingTabLayout slidingTabLayout;
+    TextView Company;
 
     public MainFragment() {
         super();
@@ -45,10 +47,20 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        Company.setText(companyDAO.InvoiceMaster().getCompanyName().toString());
+        companyDAO.close();
+    }
+
     private void initInstances(View rootView) {
         CompanyList companyList = new CompanyList();
 
         // Init 'View' instance(s) with rootView.findViewById here
+        Company  =  (TextView)rootView.findViewById(R.id.Company);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
 
 

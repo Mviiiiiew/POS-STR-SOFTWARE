@@ -118,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
 
+
                     android:layout_weight="1">
 
 
@@ -142,12 +143,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.25"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
@@ -191,15 +192,24 @@
                 android:background="@color/colorGray"
 
                 />
-
-
-            <ListView
-                android:id="@+id/listView_SaleProductmanual"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_weight="2.7">
+                <ListView
+                    android:id="@+id/listView_SaleProductmanual"
+                    android:layout_width="match_parent"
+                    android:clickable="false"
+                    android:layout_height="match_parent">
 
 
-            </ListView>
+                </ListView>
+
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
 

@@ -95,6 +95,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
     }
 
+
     @Override
     public void onResume() {
         super.onResume();

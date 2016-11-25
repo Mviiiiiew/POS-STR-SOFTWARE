@@ -1,5 +1,6 @@
 package com.example.posstrsoftware.posstrsoftware.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,18 +12,26 @@ import com.example.posstrsoftware.posstrsoftware.fragment.SaleProductFragment;
 public class SaleProductActivity extends AppCompatActivity {
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_product);
-
         Fragment fragment = getSupportFragmentManager()
                 .findFragmentById(R.id.contentContainerSaleProduct);
         if(fragment instanceof SaleProductFragment == false ) {
             getSupportFragmentManager().beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.contentContainerSaleProduct, SaleProductFragment.newInstance())
-
                     .commit();
+
         }
+
+
     }
 }

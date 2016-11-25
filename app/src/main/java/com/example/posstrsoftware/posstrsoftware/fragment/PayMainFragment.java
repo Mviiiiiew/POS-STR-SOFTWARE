@@ -41,7 +41,7 @@ import java.util.Locale;
  */
 public class PayMainFragment extends Fragment implements View.OnClickListener {
 
-    private static final byte[] Set_Right = new byte[]{(byte)27, (byte)97, (byte)2};
+    private static final byte[] Set_Right = new byte[]{(byte) 27, (byte) 97, (byte) 2};
     private PrinterController printerController = null;
     ButtonRectangle btn_back;
     ButtonRectangle btn_cost_1000;
@@ -68,6 +68,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String discount;
     String discountpercent;
     String txtdiscount;
+    String symbol;
 
 
     public PayMainFragment() {
@@ -93,8 +94,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_main_pay, container, false);
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
+        symbol = intent.getStringExtra("symbol");
+        Log.d("symbol", symbol);
         x = intent.getStringExtra("totalx");
         txtdiscount = intent.getStringExtra("discount");
+        Log.d("discount", txtdiscount);
         totalall = intent.getStringExtra("totalall");
         txt_Totalall.setText(formatAmount.formatAmountDouble(Double.valueOf(totalall.toString())));
         discount = intent.getStringExtra("discountcost");
@@ -310,32 +314,51 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 total = Double.valueOf(txt_Totalall.getText().toString().replace(",", ""));
                 change = cash - total;
                 if (checkbox_print.isChecked() == true) {
-                   /* HeadMaster();
-                    ProductAll();
-                    Underline();
-                    TotalAll();
-                    EndText();
-                    Linefeed();*/
-                    Intent intent = new Intent(getActivity(), ConcludeActivity.class);
-                    startActivity(intent);
+                    if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
+                        Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
+                    } else {
+                      /*  HeadMaster();
+                        ProductAll();
+                        Underline();
+                        TotalAll();
+                        EndText();
+                        Linefeed();*/
+                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getActivity(), ConcludeActivity.class);
+                        intent.putExtra("mTotal", txt_NameTotal.getText().toString());
+                        intent.putExtra("mDiscount", txt_Discount.getText().toString());
+                        intent.putExtra("mTotalAll", txt_Totalall.getText().toString());
+                        intent.putExtra("mCash", edit_txt_cash.getText().toString());
+                        intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
+                        intent.putExtra("symbol", symbol);
+                        intent.putExtra("discount", txtdiscount);
+                        startActivity(intent);
 
-
-
+                    }
 
 
                     //   Toast.makeText(getActivity(),companyDAO.InvoiceMaster().getCompanyName().toString(), Toast.LENGTH_SHORT).show();
 
                 } else if (checkbox_print.isChecked() == false) {
-                    String discount = txtdiscount;
-                    Toast.makeText(getActivity(), discount.toString(), Toast.LENGTH_SHORT).show();
+                    if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
+                        Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getActivity(), ConcludeActivity.class);
+                        intent.putExtra("mTotal", txt_NameTotal.getText().toString());
+                        intent.putExtra("mDiscount", txt_Discount.getText().toString());
+                        intent.putExtra("mTotalAll", txt_Totalall.getText().toString());
+                        intent.putExtra("mCash", edit_txt_cash.getText().toString());
+                        intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
+                        intent.putExtra("symbol", symbol);
+                        intent.putExtra("discount", txtdiscount);
+                        startActivity(intent);
+                    }
 
 
                 }
 
 
-                if (edit_txt_cash.getText().toString().trim().replaceAll(",%\\.", "").matches("")) {
-                    Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_SHORT).show();
-                }
                 break;
             default:
                 break;
@@ -372,15 +395,15 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void TotalAll() {
         String x = "-------------------------------";
         String Totaltxt = "Total";
-        String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(),27);
+        String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(), 27);
         String TotalAlltxt = "TotalAll";
-        String totalall = PrintFix.generatePrice(txt_Totalall.getText().toString(),24);
-        String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",",""))),28);
-        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(change),26);
-        String Cashtxt= "Cash";
-        String Changetxt ="Change";
-        String Discounttxt ="Discount"+"->"+(PrintFix.generateName(txt_Discount.getText().toString(),10));
-        String discount = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount)),12);
+        String totalall = PrintFix.generatePrice(txt_Totalall.getText().toString(), 24);
+        String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""))), 28);
+        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(change), 26);
+        String Cashtxt = "Cash";
+        String Changetxt = "Change";
+        String Discounttxt = "Discount" + "->" + (PrintFix.generateName(symbol, 5));
+        String discount = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount)), 17);
         printerController.PrinterController_Linefeed();
         printerController.PrinterController_Print(Totaltxt.getBytes());
         printerController.PrinterController_Print(total.getBytes());
@@ -409,11 +432,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         productSaleDAO.open();
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
 
-        String feed[]=new String[]{""," "};
+        String feed[] = new String[]{"", " "};
         for (ProductSaleList bean : productSaleLists) {
-            String price = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getPrice())),10);
-            String product = PrintFix.generateName(bean.getProductSale(),18)+feed[1];
-            String amount = PrintFix.generateName(bean.getAmount(),3)+feed[0];
+            String price = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getPrice())), 10);
+            String product = PrintFix.generateName(bean.getProductSale(), 18) + feed[1];
+            String amount = PrintFix.generateName(bean.getAmount(), 3) + feed[0];
 
             printerController.PrinterController_Font_Normal_mode();
             printerController.PrinterController_Set_Left();
@@ -435,10 +458,10 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Font_Normal_mode();
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
-        String text1 = "welcome to "+companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division "+companyDAO.InvoiceMaster().getDivisionName() +" "+"Tel."+companyDAO.InvoiceMaster().getTelephone();
-        String text3 = "TAX ID# "+companyDAO.InvoiceMaster().getTAXID();
-        String text4 = "POS# "+companyDAO.InvoiceMaster().getPOSMachineID();
+        String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() + " " + "Tel." + companyDAO.InvoiceMaster().getTelephone();
+        String text3 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
+        String text4 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Print(text1.getBytes());
         printerController.PrinterController_Print("\n".getBytes());

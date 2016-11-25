@@ -13,7 +13,10 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String databaseName = "STRPOS.Sqlite";
     private static final int databaseVerSion = 1;
     Context mContect;
-
+    public DbHelper(Context context) {
+        super(context,databaseName,null,databaseVerSion );
+        this.mContect = context;
+    }
 
     private static final String tableUnitCreateSQL = "CREATE TABLE unit_list("
             +"id_unit INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -60,13 +63,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax from product_list order by 1";
 
-
-
-
-    public DbHelper(Context context) {
-        super(context,databaseName,null,databaseVerSion );
-        this.mContect = context;
-    }
 
 
 
