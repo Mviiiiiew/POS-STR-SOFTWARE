@@ -75,6 +75,8 @@ public class MainFragment extends Fragment {
                     case 2:
                         return  CompanyMainFragment.newInstance();
                     case 3:
+                        return ReportMainFragment.newInstance();
+                    case 4:
                         return ContactMainFragment.newInstance();
                     default:
                         return null;
@@ -83,20 +85,22 @@ public class MainFragment extends Fragment {
 
             @Override
             public int getCount() {
-                return 4;
+                return 5;
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
                 switch (position){
                     case 0:
-                        return "         ขายสินค้า           ";
+                        return "     ขายสินค้า       ";
                     case 1:
-                        return "         ตั้งค้าสินค้า           ";
+                        return "     ตั้งค้าสินค้า       ";
                     case 2:
-                        return "         ตั้งค่าบริษัท           ";
+                        return "     ตั้งค่าบริษัท       ";
                     case 3:
-                        return "          ติดต่อ            ";
+                        return "      รายงาน        ";
+                    case 4:
+                        return "      ติดต่อ       ";
                     default:
                         return "";
                 }

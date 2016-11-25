@@ -54,19 +54,22 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         v = inflater.inflate(R.layout.list_item_product, null);
-        TextView textview = (TextView) v.findViewById(R.id.txt_name_product);
-        TextView textView1 = (TextView) v.findViewById(R.id.txt_id_product);
-        TextView textView2 = (TextView) v.findViewById(R.id.txt_name_price);
-        TextView textView3 = (TextView) v.findViewById(R.id.txt_name_unit);
-        TextView textView4 = (TextView) v.findViewById(R.id.txt_name_group);
-        TextView textView5 = (TextView) v.findViewById(R.id.txt_id_barcode);
+        TextView txt_name_product = (TextView) v.findViewById(R.id.txt_name_product);
+        TextView txt_id_product = (TextView) v.findViewById(R.id.txt_id_product);
+        TextView txt_name_price = (TextView) v.findViewById(R.id.txt_name_price);
+        TextView txt_name_unit = (TextView) v.findViewById(R.id.txt_name_unit);
+        TextView txt_name_group = (TextView) v.findViewById(R.id.txt_name_group);
+        TextView txt_id_barcode = (TextView) v.findViewById(R.id.txt_id_barcode);
+        TextView txt_mCost = (TextView)v.findViewById(R.id.txt_mCost);
+
         ProductList productList = mProductList.get(position);
-        textview.setText(productList.getProductText());
-        textView1.setText(productList.getId() + "");
-        textView2.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductprice() + "")));
-        textView3.setText(productList.getUnitList().getUnitText());
-        textView4.setText(productList.getGroupList().getGroupText());
-        textView5.setText(productList.getBarcode() + "");
+        txt_name_product.setText(productList.getProductText());
+        txt_id_product.setText(productList.getId() + "");
+        txt_name_price.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductprice() + "")));
+        txt_name_unit.setText(productList.getUnitList().getUnitText());
+        txt_name_group.setText(productList.getGroupList().getGroupText());
+        txt_id_barcode.setText(productList.getBarcode() + "");
+        txt_mCost.setText(productList.getCost()+"");
         return v;
     }
 

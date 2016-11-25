@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
-
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -91,6 +90,8 @@
         <activity android:name=".activity.SaleProductManualActivity">
         </activity>
         <activity android:name=".activity.ConcludeActivity">
+        </activity>
+        <activity android:name=".activity.ReportDayActivity">
         </activity>
     </application>
 

@@ -131,6 +131,17 @@
         android:text="@string/cancel"
 
         />
+    <EditText
+        android:id="@+id/editText_Cost"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_Product"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/thumbColor"
+        android:hint="ราคาต้นทุน"
+        android:inputType="numberDecimal"
+        android:padding="20dp"/>
 
 
     <EditText
@@ -140,6 +151,7 @@
         android:layout_below="@+id/editText_Product"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/editText_Cost"
         android:background="@color/thumbColor"
         android:hint="BARCODE"
         android:inputType="number"

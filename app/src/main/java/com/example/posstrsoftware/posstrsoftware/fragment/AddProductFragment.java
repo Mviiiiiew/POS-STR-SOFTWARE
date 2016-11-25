@@ -49,6 +49,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     CheckBox checkbox_vat;
     Spinner spinner_unit;
     Spinner spinner_group;
+    EditText editText_Cost;
     private spinnerGroupAdapter mSpinnerGroupAdapter;
     private GroupList mSelectedGroup;
     private spinnerUnitAdapter mSpinnerUnitAdapter;
@@ -92,6 +93,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         // Init 'View' instance(s) with rootView.findViewById here
 
         editText_Product = (EditText) rootView.findViewById(R.id.editText_Product);
+        editText_Cost = (EditText)rootView.findViewById(R.id.editText_Cost);
         checkbox_vat = (CheckBox) rootView.findViewById(R.id.checkbox_vat);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
@@ -167,6 +169,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
                 productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replaceAll(",","")));
+                productList.setCost(Double.valueOf(editText_Cost.getText().toString()));
 
                 if(checkbox_vat.isChecked() == true){
                     productList.setCheckvat("Y");

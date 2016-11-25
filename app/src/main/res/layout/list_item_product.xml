@@ -131,6 +131,30 @@
                 android:text="Name group"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/txt_Cost"
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_Group"
+                android:layout_below="@+id/txt_Group"
+                android:text="ราคาต้นทุน"
+                android:textSize="@dimen/textSize_Adapter"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/txt_mCost"
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_name_group"
+                android:layout_alignTop="@+id/txt_Cost"
+                android:layout_toRightOf="@+id/txt_Cost"
+                android:text="Cost"
+                android:textSize="@dimen/textSize_Adapter"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txt_Barcode"
@@ -138,7 +162,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Group"
-                android:layout_below="@+id/txt_Group"
+                android:layout_below="@+id/txt_Cost"
                 android:text="Barcode"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"

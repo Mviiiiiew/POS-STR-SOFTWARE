@@ -38,7 +38,9 @@ public class DbHelper extends SQLiteOpenHelper {
             +"id_unit INTEGER,"
             +"id_group INTEGER,"
             +"delete_flag TEXT DEFAULT 'N',"
-            +"vat_flag TEXT "
+            +"vat_flag TEXT, "
+            +"Cost TEXT "
+
             +");";
     private static final String tableCompanyCreateSQL = "CREATE TABLE company_list("
             +"id_company INTEGER PRIMARY KEY AUTOINCREMENT,"
