@@ -19,10 +19,14 @@ import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ConcludeActivity;
 import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
+import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
+import com.example.posstrsoftware.posstrsoftware.util.UniqueRandom;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
@@ -33,6 +37,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
 
 
@@ -71,6 +76,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String symbol;
 
 
+
     public PayMainFragment() {
         super();
     }
@@ -86,6 +92,15 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         edit_txt_cash.setText("");
+
+
+
+    }
+    private String Date() {
+        java.text.DateFormat df = new java.text.SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(java.util.Calendar.getInstance().getTime());
+
+        return date;
     }
 
     @Override
@@ -172,6 +187,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+
         checkbox_print = (CheckBox) rootView.findViewById(R.id.checkbox_print);
         txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
         txt_Discount = (TextView) rootView.findViewById(R.id.txt_Discount);
@@ -323,6 +339,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         TotalAll();
                         EndText();
                         Linefeed();*/
+
+
+
                         Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getActivity(), ConcludeActivity.class);
                         intent.putExtra("mTotal", txt_NameTotal.getText().toString());

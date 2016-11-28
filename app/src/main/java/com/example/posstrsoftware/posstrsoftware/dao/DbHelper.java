@@ -56,12 +56,21 @@ public class DbHelper extends SQLiteOpenHelper {
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
 
+    private static final String tableReportCreateSQL = "CREATE TABLE report_list("
+            +"id_BillNo INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"nameproduct_text TEXT NOT NULL,"
+            +"productprice_text TEXT NOT NULL"
+            +");";
+
     private static final String tableProductSaleCreateSQL = "CREATE TABLE productsale_list("
             +"id_productsale INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"productsale_text TEXT NOT NULL,"
             +"productprice_text TEXT NOT NULL,"
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
+
+
+
 
     private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax from product_list order by 1";
 
@@ -75,6 +84,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableGroupCreateSQL);
         db.execSQL(tableCompanyCreateSQL);
         db.execSQL(tableProductSaleCreateSQL);
+        db.execSQL(tableReportCreateSQL);
         db.execSQL(viewProductList);
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','7');";
         db.execSQL(insertData);

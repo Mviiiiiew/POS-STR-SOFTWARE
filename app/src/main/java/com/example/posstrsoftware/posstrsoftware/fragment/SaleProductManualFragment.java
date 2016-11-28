@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,16 @@ import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleManualAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -101,14 +105,20 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     }
 
 
-
-
+    private String Date() {
+        java.text.DateFormat df = new java.text.SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(java.util.Calendar.getInstance().getTime());
+        return date;
+    }
 
 
     @Override
     public void onResume() {
         super.onResume();
+        List<String> list = new ArrayList<>();
+        list.add(Date());
 
+        Log.d("date", String.valueOf(list));
 
 
         final ProductDAO productDAO = new ProductDAO(getActivity());
@@ -128,6 +138,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         }
         txt_cost.setText(money_format.format((x)));
 
+
         final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
         listView_SaleProductmanual.setAdapter(adapter);
 
@@ -138,6 +149,12 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 ProductSaleList productSaleList = new ProductSaleList();
                 productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
                 productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
+                ReportList reportList = new ReportList();
+                reportList.setNameProduct(((ProductList) objAdapter.getItem(position)).getProductText());
+                reportList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
+                ReportDAO reportDAO = new ReportDAO(getActivity());
+                reportDAO.open();
+                reportDAO.add(reportList);
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
                 productSaleDAO.add(productSaleList);
@@ -151,7 +168,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
                 txt_cost.setText(formatAmount.formatAmountDouble(total));
                 productSaleDAO.close();
-
 
 
             }

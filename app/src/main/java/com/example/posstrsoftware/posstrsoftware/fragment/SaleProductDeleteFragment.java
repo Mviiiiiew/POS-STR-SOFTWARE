@@ -18,7 +18,9 @@ import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleDeleteAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.util.ArrayList;
@@ -49,6 +51,10 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_delete_saleproduct, container, false);
         initInstances(rootView);
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        final ArrayList<ReportList> reportLists = reportDAO.getAllReportList();
+        reportDAO.close();
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
         final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleDeleteList();
@@ -77,6 +83,17 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                ///REPORTLIST///
+                        ReportList reportList = new ReportList();
+                        reportList.setId((int) adapter.getItemId(position));
+                        ReportDAO reportDAO1 = new ReportDAO(getActivity());
+                        reportDAO1.open();
+                        reportDAO1.delete_Report_id(reportList);
+                        reportDAO1.close();
+                        reportLists.remove(position);
+
+
+                  ///PRODUCTSALELIST///
                         ProductSaleList productSaleLists1 = new ProductSaleList();
                         productSaleLists1.setId((int) adapter.getItemId(position));
                         productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
@@ -84,6 +101,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                         productSaleDAO1.open();
                         productSaleDAO1.delete_product_id(productSaleLists1);
                         productSaleDAO1.close();
+
                         productSaleLists.remove(position);
                         adapter.notifyDataSetChanged();
 
