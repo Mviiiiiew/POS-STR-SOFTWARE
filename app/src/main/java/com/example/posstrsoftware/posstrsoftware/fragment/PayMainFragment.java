@@ -333,7 +333,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
-                      /*  HeadMaster();
+                     /*  HeadMaster();
                         ProductAll();
                         Underline();
                         TotalAll();

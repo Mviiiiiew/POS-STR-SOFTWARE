@@ -28,18 +28,19 @@ public class ReportDAO {
     }
 
     public ArrayList<ReportList> getAllReportList() {
-        ArrayList<ReportList> ProductSaleList = new ArrayList<>();
+        ArrayList<ReportList> reportLists = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM report_list ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
-            mReportList.setNameProduct(cursor.getString(0));
-            mReportList.setPrice(cursor.getDouble(1));
-            ProductSaleList.add(mReportList);
+            mReportList.setId(cursor.getInt(0));
+            mReportList.setNameProduct(cursor.getString(1));
+            mReportList.setPrice(cursor.getDouble(2));
+            reportLists.add(mReportList);
             cursor.moveToNext();
         }
         cursor.close();
-        return ProductSaleList;
+        return reportLists;
     }
 
 
