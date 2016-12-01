@@ -57,9 +57,11 @@ public class DbHelper extends SQLiteOpenHelper {
             +");";
 
     private static final String tableReportCreateSQL = "CREATE TABLE report_list("
-            +"id_BillNo INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"id_Report INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"id_BillNo TEXT,"
             +"nameproduct_text TEXT NOT NULL,"
-            +"productprice_text TEXT NOT NULL"
+            +"productprice_text TEXT NOT NULL,"
+            +"productcount_text TEXT NOT NULL"
             +");";
 
     private static final String tableProductSaleCreateSQL = "CREATE TABLE productsale_list("

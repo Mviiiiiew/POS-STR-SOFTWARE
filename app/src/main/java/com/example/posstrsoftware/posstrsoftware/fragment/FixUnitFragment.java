@@ -129,7 +129,6 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
                     getActivity().finish();
                 }
             }
-
         } else if (btn_back == v) {
             getActivity().finish();
         } else if (btn_delete == v) {

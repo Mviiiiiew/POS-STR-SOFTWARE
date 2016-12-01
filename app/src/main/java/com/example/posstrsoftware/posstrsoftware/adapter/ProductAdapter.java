@@ -53,6 +53,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
+
         v = inflater.inflate(R.layout.list_item_product, null);
         TextView txt_name_product = (TextView) v.findViewById(R.id.txt_name_product);
         TextView txt_id_product = (TextView) v.findViewById(R.id.txt_id_product);
@@ -94,7 +95,6 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
                 for (int i = 0; i < filterList.size(); i++) {
                     if (filterList.get(i).getProductText().toUpperCase().contains(constraint)) {
                         ProductList u = new ProductList(filterList.get(i).getId(), filterList.get(i).getProductText(), filterList.get(i).getProductprice(), filterList.get(i).getGroupList(), filterList.get(i).getUnitList(), filterList.get(i).getBarcode());
-
                         filters.add(u);
                     }
                 }

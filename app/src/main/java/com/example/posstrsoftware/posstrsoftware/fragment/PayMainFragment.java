@@ -19,15 +19,12 @@ import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ConcludeActivity;
 import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
+
 import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
-import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
-import com.example.posstrsoftware.posstrsoftware.model.PojoDisCount;
-import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
-import com.example.posstrsoftware.posstrsoftware.model.ReportList;
+
 import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
-import com.example.posstrsoftware.posstrsoftware.util.UniqueRandom;
-import com.example.posstrsoftware.posstrsoftware.util.Util_String;
+
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
@@ -37,7 +34,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+
 import java.util.Locale;
 
 
@@ -333,12 +330,17 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
-                       /* HeadMaster();
+                      /*  HeadMaster();
                         ProductAll();
                         Underline();
                         TotalAll();
                         EndText();
                         Linefeed();*/
+
+                        ReportDAO reportDAO = new ReportDAO(getActivity());
+                        reportDAO.open();
+                        reportDAO.addx();
+                        reportDAO.close();
 
 
 

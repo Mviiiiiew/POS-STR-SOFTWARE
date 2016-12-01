@@ -83,6 +83,7 @@
                     android:background="@color/colorBlue"
                     android:gravity="center"
                     android:padding="2dp"
+                    android:textColor="@color/colorBlack"
                     android:text="กลุ่ม"
                     android:textSize="25sp"
                     android:textStyle="bold"/>
@@ -158,6 +159,7 @@
                     android:layout_weight="1.5"
                     android:background="@color/colorBlue"
                     android:gravity="center"
+                    android:textColor="@color/colorBlack"
                     android:padding="2dp"
                     android:text="รายการสินค้า"
                     android:textSize="25sp"
@@ -179,6 +181,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textColor="@color/colorBlack"
                     android:background="#FFFF00"
                     android:text="ราคา"
                     android:textSize="25sp"

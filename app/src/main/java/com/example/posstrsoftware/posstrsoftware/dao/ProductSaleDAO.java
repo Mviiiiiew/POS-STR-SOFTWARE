@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 
 import java.util.ArrayList;
 
@@ -59,7 +60,6 @@ public class ProductSaleDAO {
             productSaleLists.add(mproductSaleList);
             cursor.moveToNext();
 
-
         }
         cursor.close();
         return productSaleLists;
@@ -67,9 +67,16 @@ public class ProductSaleDAO {
 
 
 
+
+
+
+
+
+
     public void add(ProductSaleList productSaleList) {
 
             ContentValues values = new ContentValues();
+
             values.put("productsale_text", productSaleList.getProductSale());
             values.put("productprice_text", productSaleList.getPrice());
             this.database.insert("productsale_list", null, values);

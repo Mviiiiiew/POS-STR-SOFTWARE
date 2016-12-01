@@ -44,6 +44,20 @@ public class ReportDAO {
     }
 
 
+    public ReportList addx(){
+
+        ReportList bee = new ReportList();
+        Cursor cursor = database.rawQuery("INSERT INTO report_list(nameproduct_text,productprice_text,productcount_text) select productsale_text,sum(CAST(productprice_text as decimal)) as product_price,count(productsale_text) from productsale_list where delete_flag = 'N' group by productsale_text ;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return bee ;
+    }
+
+
+
 
 
 
@@ -54,12 +68,6 @@ public class ReportDAO {
         values.put("productprice_text", reportList.getPrice());
         this.database.insert("report_list", null, values);
 
-
-
-    }
-    public void delete_Report_id(ReportList reportList) {
-
-        this.database.execSQL("Delete From report_list  where id_BillNo = "+reportList.getId());
 
 
     }

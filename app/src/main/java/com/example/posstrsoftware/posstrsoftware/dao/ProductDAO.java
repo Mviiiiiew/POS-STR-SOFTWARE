@@ -101,7 +101,7 @@ public class ProductDAO {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             bee.setProductSale(cursor.getString(2));
-            bee.setPrice(cursor.getDouble(8));
+            bee.setPrice(cursor.getDouble(9));
             cursor.moveToNext();
         }
         cursor.close();

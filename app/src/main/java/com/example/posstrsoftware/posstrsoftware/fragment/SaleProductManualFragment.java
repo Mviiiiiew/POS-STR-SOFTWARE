@@ -149,12 +149,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 ProductSaleList productSaleList = new ProductSaleList();
                 productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
                 productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
-                ReportList reportList = new ReportList();
-                reportList.setNameProduct(((ProductList) objAdapter.getItem(position)).getProductText());
-                reportList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
-                ReportDAO reportDAO = new ReportDAO(getActivity());
-                reportDAO.open();
-                reportDAO.add(reportList);
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
                 productSaleDAO.add(productSaleList);
