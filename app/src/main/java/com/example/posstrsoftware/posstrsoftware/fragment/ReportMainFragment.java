@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ReportDayActivity;
+import com.example.posstrsoftware.posstrsoftware.activity.ReportProductActivity;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 
@@ -17,6 +18,7 @@ import com.gc.materialdesign.views.ButtonRectangle;
  */
 public class ReportMainFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_Report_day;
+    ButtonRectangle btn_Report_Product;
 
     public ReportMainFragment() {
         super();
@@ -40,7 +42,10 @@ public class ReportMainFragment extends Fragment implements View.OnClickListener
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btn_Report_day = (ButtonRectangle)rootView.findViewById(R.id.btn_Report_day);
+        btn_Report_Product = (ButtonRectangle)rootView.findViewById(R.id.btn_Report_Product);
+        btn_Report_Product.setOnClickListener(this);
         btn_Report_day.setOnClickListener(this);
+        btn_Report_Product.setRippleSpeed(40);
         btn_Report_day.setRippleSpeed(40);
     }
 
@@ -76,7 +81,12 @@ public class ReportMainFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), ReportDayActivity.class);
-        startActivity(intent);
+        if(btn_Report_day == v) {
+            Intent intent = new Intent(getActivity(), ReportDayActivity.class);
+            startActivity(intent);
+        }else if(btn_Report_Product == v){
+            Intent intent = new Intent(getActivity(), ReportProductActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -91,10 +91,11 @@
         </activity>
         <activity android:name=".activity.ConcludeActivity">
         </activity>
-        <activity android:name=".activity.ReportDayActivity"
-                  android:windowSoftInputMode="stateAlwaysHidden">
-
-
+        <activity
+            android:name=".activity.ReportDayActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+        <activity android:name=".activity.ReportProductActivity">
         </activity>
     </application>
 

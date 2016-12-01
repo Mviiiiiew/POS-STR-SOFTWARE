@@ -1,4 +1,4 @@
-package com.example.posstrsoftware.posstrsoftware.model;
+package com.example.posstrsoftware.posstrsoftware.util;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -13,6 +13,7 @@ import java.util.Calendar;
  */
 
 public class SelectDateFragment extends DialogFragment {
+
     DatePickerDialog.OnDateSetListener ondateSet;
     public SelectDateFragment() {
     }
@@ -22,13 +23,7 @@ public class SelectDateFragment extends DialogFragment {
     private int year ;
     private int month ;
     private int day;
-    /*@Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        year = args.getInt("year");
-        month = args.getInt("month");
-        day = args.getInt("day");
-    }*/
+
 
     @NonNull
     @Override

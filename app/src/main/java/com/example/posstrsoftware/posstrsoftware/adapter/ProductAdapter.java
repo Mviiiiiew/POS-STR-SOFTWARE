@@ -69,7 +69,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
         txt_name_unit.setText(productList.getUnitList().getUnitText());
         txt_name_group.setText(productList.getGroupList().getGroupText());
         txt_id_barcode.setText(productList.getBarcode() + "");
-        txt_mCost.setText(productList.getCost()+"");
+        txt_mCost.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getCost()+"")));
         return v;
     }
 

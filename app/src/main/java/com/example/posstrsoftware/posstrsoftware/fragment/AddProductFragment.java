@@ -102,6 +102,49 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
         editText_Price.addTextChangedListener(this);
+        editText_Cost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                editText_Cost.removeTextChangedListener(this);
+
+                try {
+                    String originalString = String.valueOf(editText_Cost.getText());
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###.##");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    editText_Cost.setText(formattedString);
+                    editText_Cost.setSelection(editText_Cost.getText().length());
+
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+
+                editText_Cost.addTextChangedListener(this);
+
+            }
+
+
+        });
         spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -169,7 +212,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
                 productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
                 productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replaceAll(",","")));
-                productList.setCost(Double.valueOf(editText_Cost.getText().toString()));
+                productList.setCost(Double.valueOf(editText_Cost.getText().toString().replaceAll(",","")));
 
                 if(checkbox_vat.isChecked() == true){
                     productList.setCheckvat("Y");
@@ -216,6 +259,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

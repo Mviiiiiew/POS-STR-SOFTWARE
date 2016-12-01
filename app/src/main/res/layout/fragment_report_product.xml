@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-
-              android:orientation="vertical">
+              android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -12,14 +10,14 @@
 
         <include
             android:id="@+id/my_toolbar"
-            layout="@layout/toolbarreport"/>
+            layout="@layout/toolbarproductreport"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="สรุปยอดขายประจำวัน"
+            android:text="สรุปสินค้าที่ขายไป"
             android:textSize="30sp"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
@@ -40,7 +38,7 @@
             android:id="@+id/radio_date_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  สรุปรายวัน"
+            android:text="  สรุปสินค้าแบบรายวัน"
             android:textSize="25sp"
             />
 
@@ -60,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="  สรุปรายวันแบบกำหนดวัน"
+            android:text="  สรุปสินค้าแบบกำหนดวัน"
             android:textSize="25sp"
             />
 
@@ -119,8 +117,8 @@
             android:layout_height="match_parent"
             android:layout_margin="35dp"
             android:layout_weight="1"
-            android:background="#004D40"
-            android:text="พิมพ์สรุปรายวัน"
+            android:background="#9E9D24"
+            android:text="พิมพ์สรุปสินค้า"
             android:textSize="30sp">
 
         </com.gc.materialdesign.views.ButtonRectangle>
@@ -131,13 +129,12 @@
             android:layout_height="match_parent"
             android:layout_margin="35dp"
             android:layout_weight="1"
-            android:background="#004D40"
+            android:background="#9E9D24"
             android:text="ย้อนกลับ"
             android:textSize="30sp">
 
         </com.gc.materialdesign.views.ButtonRectangle>
 
     </LinearLayout>
-
 
 </LinearLayout>
