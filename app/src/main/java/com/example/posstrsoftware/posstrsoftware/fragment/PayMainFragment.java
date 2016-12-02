@@ -71,6 +71,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String discountpercent;
     String txtdiscount;
     String symbol;
+    String process;
+    int processmanual;
+    int processbarcode;
 
 
 
@@ -108,6 +111,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         Intent intent = getActivity().getIntent();
         symbol = intent.getStringExtra("symbol");
         Log.d("symbol", symbol);
+        processmanual = (intent.getIntExtra("processmanual",0));
+        Log.d("processm",processmanual+"");
+        processbarcode = intent.getIntExtra("processbarcode",0);
+        Log.d("processb",processbarcode+"");
+
         x = intent.getStringExtra("totalx");
         txtdiscount = intent.getStringExtra("discount");
         Log.d("discount", txtdiscount);
@@ -330,31 +338,37 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
-                      /*  HeadMaster();
+                        double cash= Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
+                        double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
+                        if (cash >=totalall ) {
+                        /*  HeadMaster();
                         ProductAll();
                         Underline();
                         TotalAll();
                         EndText();
                         Linefeed();*/
+                            ReportDAO reportDAO = new ReportDAO(getActivity());
+                            reportDAO.open();
+                            reportDAO.addx();
+                            reportDAO.close();
 
-                        ReportDAO reportDAO = new ReportDAO(getActivity());
-                        reportDAO.open();
-                        reportDAO.addx();
-                        reportDAO.close();
+                            Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getActivity(), ConcludeActivity.class);
+                            intent.putExtra("mTotal", txt_NameTotal.getText().toString());
+                            intent.putExtra("mDiscount", txt_Discount.getText().toString());
+                            intent.putExtra("mTotalAll", txt_Totalall.getText().toString());
+                            intent.putExtra("mCash", edit_txt_cash.getText().toString());
+                            intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
+                            intent.putExtra("symbol", symbol);
+                            intent.putExtra("discount", txtdiscount);
+                            intent.putExtra("processmanual", processmanual);
+                            intent.putExtra("processbarcode", processbarcode);
+                            Toast.makeText(getActivity(),txt_Totalall.getText().toString(),Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
 
-
-
-                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getActivity(), ConcludeActivity.class);
-                        intent.putExtra("mTotal", txt_NameTotal.getText().toString());
-                        intent.putExtra("mDiscount", txt_Discount.getText().toString());
-                        intent.putExtra("mTotalAll", txt_Totalall.getText().toString());
-                        intent.putExtra("mCash", edit_txt_cash.getText().toString());
-                        intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
-                        intent.putExtra("symbol", symbol);
-                        intent.putExtra("discount", txtdiscount);
-                        startActivity(intent);
-
+                        }else if(cash < totalall){
+                            Toast.makeText(getActivity(),"รับชำระมีค่าน้อยกว่าราคารวม"+" -> "+formatAmount.formatAmountDouble(totalall),Toast.LENGTH_SHORT).show();
+                        }
                     }
 
 
@@ -364,16 +378,24 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getActivity(), ConcludeActivity.class);
-                        intent.putExtra("mTotal", txt_NameTotal.getText().toString());
-                        intent.putExtra("mDiscount", txt_Discount.getText().toString());
-                        intent.putExtra("mTotalAll", txt_Totalall.getText().toString());
-                        intent.putExtra("mCash", edit_txt_cash.getText().toString());
-                        intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
-                        intent.putExtra("symbol", symbol);
-                        intent.putExtra("discount", txtdiscount);
-                        startActivity(intent);
+                        double cash= Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
+                        double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
+                        if (cash >=totalall ) {
+                            Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getActivity(), ConcludeActivity.class);
+                            intent.putExtra("mTotal", txt_NameTotal.getText().toString());
+                            intent.putExtra("mDiscount", txt_Discount.getText().toString());
+                            intent.putExtra("mTotalAll", txt_Totalall.getText().toString());
+                            intent.putExtra("mCash", edit_txt_cash.getText().toString());
+                            intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
+                            intent.putExtra("symbol", symbol);
+                            intent.putExtra("discount", txtdiscount);
+                            startActivity(intent);
+
+
+                    }else if(cash < totalall){
+                        Toast.makeText(getActivity(),"รับชำระมีค่าน้อยกว่าราคารวม"+" -> "+formatAmount.formatAmountDouble(totalall),Toast.LENGTH_SHORT).show();
+                    }
                     }
 
 

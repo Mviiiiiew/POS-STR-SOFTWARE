@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,8 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     String mChange;
     String symbol;
     String discount;
+    int processmanual;
+    int processbarcode;
 
     public ConcludeFragment() {
         super();
@@ -63,10 +66,13 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_conclude, container, false);
-        initInstances(rootView);
-        Date();
-        Total();
+
         Intent intent = getActivity().getIntent();
+        processmanual = (intent.getIntExtra("processmanual",0));
+
+        Log.d("processm",processmanual+"");
+        processbarcode = intent.getIntExtra("processbarcode",1);
+        Log.d("processb",processbarcode+"");
         mTotal = intent.getStringExtra("mTotal");
         mDiscount = intent.getStringExtra("mDiscount");
         mTotalAll = intent.getStringExtra("mTotalAll");
@@ -74,6 +80,9 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         mChange = intent.getStringExtra("mChange");
         symbol = intent.getStringExtra("symbol");
         discount = intent.getStringExtra("discount");
+        initInstances(rootView);
+        Date();
+        Total();
 
         return rootView;
     }
@@ -93,6 +102,20 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         btn_manual.setRippleSpeed(40);
         btn_barcode.setOnClickListener(this);
         btn_manual.setOnClickListener(this);
+
+
+        if(  processmanual == 1){
+            btn_manual.setBackgroundColor(getResources().getColor(R.color.colorDeepOrange));
+            btn_barcode.setBackgroundColor(getResources().getColor(R.color.colorGrayz));
+
+
+        }else{
+            btn_barcode.setBackgroundColor(getResources().getColor(R.color.colorDeepOrange));
+            btn_manual.setBackgroundColor(getResources().getColor(R.color.colorGrayz));
+        }
+
+
+
     }
 
     @Override

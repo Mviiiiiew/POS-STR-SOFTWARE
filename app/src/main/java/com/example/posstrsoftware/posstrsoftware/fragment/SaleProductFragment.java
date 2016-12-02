@@ -153,6 +153,8 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (btn_back == v || btn_backz == v) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra("processmanual",0);
+            intent.putExtra("processbarcode",1);
             startActivity(intent);
             this.getActivity().finish();
 

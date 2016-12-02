@@ -252,6 +252,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         } else if (btn_Pay == v) {
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
+            intent.putExtra("processmanual",1);
+            intent.putExtra("processbarcode",0);
             startActivity(intent);
 
 

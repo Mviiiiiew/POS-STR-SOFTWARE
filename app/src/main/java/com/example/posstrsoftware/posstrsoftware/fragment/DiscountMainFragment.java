@@ -56,6 +56,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     Double totalall = 0.0;
     Double A = 0.0;
     Double B = 0.0;
+    int   processmanual;
+    int  processbarcode;
 
 
     public DiscountMainFragment() {
@@ -77,7 +79,10 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         Intent intent = getActivity().getIntent();
         x = intent.getStringExtra("total");
         txt_NameTotal.setText(x.toString());
-
+        processmanual = intent.getIntExtra("processmanual",0);
+        Log.d("processm",processmanual+"");
+        processbarcode = intent.getIntExtra("processbarcode",0);
+        Log.d("processb",processbarcode+"");
 
         return rootView;
     }
@@ -361,6 +366,10 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("discountpercent", u);
         intent.putExtra("discount", u);
         intent.putExtra("symbol", "0.00");
+        intent.putExtra("processmanual",processmanual);
+        intent.putExtra("processbarcode",processbarcode);
+
+
         startActivity(intent);
 
     }
@@ -376,6 +385,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("discountpercent", u);
         intent.putExtra("discount", u);
         intent.putExtra("symbol", "0.00");
+        intent.putExtra("processmanual",processmanual);
+        intent.putExtra("processbarcode",processbarcode);
         startActivity(intent);
     }
 
@@ -395,6 +406,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("discountpercent", discountpercent);
         intent.putExtra("discount", C.toString());
         intent.putExtra("symbol", discountpercent);
+       intent.putExtra("processmanual",processmanual);
+        intent.putExtra("processbarcode",processbarcode);
         startActivity(intent);
     }
 
@@ -413,6 +426,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("discountpercent", discountpercent);
         intent.putExtra("discount", C.toString());
         intent.putExtra("symbol", discountpercent);
+        intent.putExtra("processmanual",processmanual);
+        intent.putExtra("processbarcode",processbarcode);
         startActivity(intent);
     }
 
@@ -428,6 +443,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("totalall", totalcost);
         intent.putExtra("discount", B.toString());
         intent.putExtra("symbol", "Cost");
+       intent.putExtra("processmanual",processmanual);
+        intent.putExtra("processbarcode",processbarcode);
         startActivity(intent);
     }
 
@@ -443,6 +460,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("totalall", totalcost);
         intent.putExtra("discount", B.toString());
         intent.putExtra("symbol", "Cost");
+        intent.putExtra("processmanual",processmanual);
+        intent.putExtra("processbarcode",processbarcode);
         startActivity(intent);
     }
 

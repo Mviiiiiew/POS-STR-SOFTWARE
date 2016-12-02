@@ -94,7 +94,7 @@ public class MainFragment extends Fragment {
                     case 0:
                         return "     ขายสินค้า       ";
                     case 1:
-                        return "     ตั้งค้าสินค้า       ";
+                        return "     ตั้งค่าสินค้า       ";
                     case 2:
                         return "     ตั้งค่าบริษัท       ";
                     case 3:
