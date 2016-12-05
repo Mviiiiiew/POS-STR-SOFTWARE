@@ -347,10 +347,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         TotalAll();
                         EndText();
                         Linefeed();*/
-                            ReportDAO reportDAO = new ReportDAO(getActivity());
-                            reportDAO.open();
-                            reportDAO.addx();
-                            reportDAO.close();
+
+
 
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getActivity(), ConcludeActivity.class);

@@ -12,6 +12,109 @@ import android.widget.BaseAdapter;
 public class ProductSaleList {
 
     private int id;
+    private  int productid;
+    private  int unitid;
+    private  int groupid;
+    private  int saleMasterid;
+    private  String groupname;
+    private  Double product_price;
+    private  Double product_cost;
+    private  String vat_flag;
+    private  Double vatrate;
+
+    public Double getVatrate() {
+        return vatrate;
+    }
+
+    public void setVatrate(Double vatrate) {
+        this.vatrate = vatrate;
+    }
+
+    public String getVat_flag() {
+        return vat_flag;
+    }
+
+    public void setVat_flag(String vat_flag) {
+        this.vat_flag = vat_flag;
+    }
+
+    public Double getProduct_price() {
+
+        return product_price;
+    }
+
+    public void setProduct_price(Double product_price) {
+        this.product_price = product_price;
+    }
+
+    public Double getProduct_cost() {
+        return product_cost;
+    }
+
+    public void setProduct_cost(Double product_cost) {
+        this.product_cost = product_cost;
+    }
+
+    public int getSaleMasterid() {
+        return saleMasterid;
+    }
+
+    public void setSaleMasterid(int saleMasterid) {
+        this.saleMasterid = saleMasterid;
+    }
+
+    private  String discount;
+    private  String unitname;
+
+    public String getUnitname() {
+        return unitname;
+    }
+
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
+    }
+
+
+    public int getUnitid() {
+        return unitid;
+    }
+
+    public void setUnitid(int unitid) {
+        this.unitid = unitid;
+    }
+
+    public int getGroupid() {
+        return groupid;
+    }
+
+    public void setGroupid(int groupid) {
+        this.groupid = groupid;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public int getProductid() {
+        return productid;
+    }
+
+    public void setProductid(int productid) {
+        this.productid = productid;
+    }
+
     private String amount;
     private String ProductSale;
     private Double price;

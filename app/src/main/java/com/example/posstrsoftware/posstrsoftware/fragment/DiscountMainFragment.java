@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
+import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.util.CostPercent;
 import com.gc.materialdesign.views.ButtonRectangle;
 
@@ -347,6 +348,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                     payAuto();
                 } else if (checkbox_AutoPay.isChecked() == false) {
                     pay();
+
                 }
 
                 //Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
@@ -453,6 +455,17 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
         totalall = A - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        productSaleDAO.updatebill(discountcost.replaceAll(",",""));
+        productSaleDAO.close();
+
+
+        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+        productSaleDAO1.open();
+        productSaleDAO1.addx();
+        productSaleDAO1.close();
+
         String totalcost = String.valueOf(CostPercent.parserFormat(totalall));
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));

@@ -25,9 +25,11 @@ import com.example.posstrsoftware.posstrsoftware.activity.SaleProductDeleteActiv
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductListManualAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductSaleManualAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 import com.example.posstrsoftware.posstrsoftware.model.ReportList;
@@ -146,9 +148,20 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Double total = 0.0;
+
                 ProductSaleList productSaleList = new ProductSaleList();
                 productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
                 productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
+                productSaleList.setProductid(((ProductList) objAdapter.getItem(position)).getId());
+                productSaleList.setUnitid(((ProductList) objAdapter.getItem(position)).getUnitList().getId());
+                productSaleList.setUnitname(((ProductList) objAdapter.getItem(position)).getUnitList().getUnitText());
+                productSaleList.setGroupid(((ProductList) objAdapter.getItem(position)).getGroupList().getId());
+                productSaleList.setGroupname(((ProductList) objAdapter.getItem(position)).getGroupList().getGroupText());
+                productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
+                productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
+                productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
+
+
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
                 productSaleDAO.add(productSaleList);
@@ -250,6 +263,9 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
             startActivity(intent);
         } else if (btn_Pay == v) {
+
+
+
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
             intent.putExtra("processmanual",1);

@@ -214,6 +214,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             ProductSaleList productSaleList = new ProductSaleList();
             productSaleList.setProductSale(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getProductSale());
             productSaleList.setPrice(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getPrice());
+            productSaleList.setProductid(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getProductid());
             productDAO.close();
             ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
             productSaleDAO.open();

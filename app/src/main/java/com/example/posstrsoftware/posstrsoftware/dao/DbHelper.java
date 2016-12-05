@@ -66,10 +66,68 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String tableProductSaleCreateSQL = "CREATE TABLE productsale_list("
             +"id_productsale INTEGER PRIMARY KEY AUTOINCREMENT,"
-            +"productsale_text TEXT NOT NULL,"
-            +"productprice_text TEXT NOT NULL,"
+            +"id_product TEXT ,"
+            +"productsale_text TEXT,"
+            +"productprice_text TEXT,"
+            +"sale_master_id INTEGER,"
+            +"unit_id TEXT ,"
+            +"unit_name TEXT ,"
+            +"group_id TEXT ,"
+            +"group_name TEXT, "
+            +"discount TEXT ,"
+            +"doc_date TEXT ,"
+            +"product_price TEXT ,"
+            +"product_cost TEXT ,"
+            +"vat_flag TEXT ,"
+            +"vatrate TEXT ,"
             +"delete_flag TEXT DEFAULT 'N'"
             +");";
+    private static final String tablesale_masterCreateSQL = "CREATE TABLE sale_master("
+            +"sale_master_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"sale_doc_id TEXT,"
+            +"sale_doc_date TEXT ,"
+            +"discount TEXT ,"
+            +"id_company TEXT DEFAULT 1"
+            +");";
+    private static final String tablesale_detailCreateSQL = "CREATE TABLE sale_detail("
+            +"sale_detail_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"sale_master_id INTEGER,"
+            +"line_no TEXT ,"
+            +"product_id TEXT ,"
+            +"product_name TEXT ,"
+            +"unit_id TEXT ,"
+            +"group_id TEXT ,"
+            +"group_name TEXT, "
+            +"product_amount TEXT ,"
+            +"product_price TEXT ,"
+            +"product_price_total TEXT ,"
+            +"product_price_total_vat TEXT ,"
+            +"product_cost TEXT ,"
+            +"product_cost_total TEXT "
+            +");";
+
+    private static final String tabletransectionBillCreateSQL = "CREATE TABLE transectionBill("
+            +"id_productsale INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"id_product TEXT ,"
+            +"productsale_text TEXT,"
+            +"productprice_text TEXT,"
+            +"sale_master_id INTEGER,"
+            +"unit_id TEXT ,"
+            +"unit_name TEXT ,"
+            +"group_id TEXT ,"
+            +"group_name TEXT, "
+            +"discount TEXT ,"
+            +"doc_date TEXT ,"
+            +"product_price TEXT ,"
+            +"product_cost TEXT ,"
+            +"vat_flag TEXT ,"
+            +"vatrate TEXT ,"
+            +"delete_flag TEXT DEFAULT 'N'"
+            +");";
+
+
+
+
 
 
 
@@ -88,6 +146,10 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableProductSaleCreateSQL);
         db.execSQL(tableReportCreateSQL);
         db.execSQL(viewProductList);
+        db.execSQL(tablesale_masterCreateSQL);
+        db.execSQL(tablesale_detailCreateSQL);
+        db.execSQL(tabletransectionBillCreateSQL);
+
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','7');";
         db.execSQL(insertData);
 
