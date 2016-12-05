@@ -12,9 +12,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.POSD.controllers.PrinterController;
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
+import com.example.posstrsoftware.posstrsoftware.model.ReportList;
+import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
 import com.example.posstrsoftware.posstrsoftware.util.SelectDateFragment;
+import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
+
+import java.util.ArrayList;
 
 
 /**
@@ -34,6 +41,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
     String date;
     String dateone;
     String datetwo;
+    private PrinterController printerController = null;
 
 
     public ReportDayFragment() {
@@ -85,7 +93,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
     private void Date() {
 
-            java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd");
             String date = df.format(java.util.Calendar.getInstance().getTime());
             edit_date_day.setText(date);
 
@@ -103,7 +111,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         /*    Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            edit_date_day.setText(dayOfMonth + "/" + (month + 1) + "/" + year );
+            edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
         }
 
 
@@ -122,7 +130,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             /*Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            edit_date_one.setText(dayOfMonth + "/" + (month + 1) + "/" + year );
+            edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
         }
 
 
@@ -140,7 +148,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
           /*  Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            edit_date_two.setText(dayOfMonth + "/" + (month + 1) + "/" + year );
+            edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
         }
 
 
@@ -215,16 +223,47 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             showDatePickerTwo();
         } else if(btn_back == v){
             getActivity().finish();
-        }else if (btn_print == v){
-           switch (radiogroup_date.getCheckedRadioButtonId()){
-               case R.id.radio_date_day:
-                   date = edit_date_day.getText().toString();
-                   Toast.makeText(getActivity(),date,Toast.LENGTH_SHORT).show();
-                   break;
+        }else if (btn_print == v) {
+            switch (radiogroup_date.getCheckedRadioButtonId()) {
+                case R.id.radio_date_day:
+                    date = edit_date_day.getText().toString();
+                    ReportDAO reportDAO = new ReportDAO(getActivity());
+                    reportDAO.open();
+                    reportDAO.getAllReportList(date.replaceAll("/", ""));
+                    ArrayList<ReportList> reportLists = reportDAO.getAllReportList(date.replaceAll("/", ""));
+
+                    String feed[] = new String[]{"", " "};
+                    for (ReportList bean : reportLists) {
+                        String BillNo = PrintFix.generateName(bean.getSale_masterid()+"",10);
+                        String date = PrintFix.generateName(bean.getDate(), 18) + feed[1];
+                        String discount = PrintFix.generateName(String.valueOf(bean.getDiscount()), 3) + feed[0];
+                        printerController = PrinterController.getInstance(getActivity());
+                        printerController.PrinterController_Open();
+                        printerController.PrinterController_Font_Normal_mode();
+                        printerController.PrinterController_Set_Left();
+                        printerController.PrinterController_Print(BillNo.getBytes());
+                        printerController.PrinterController_Print(date.getBytes());
+                        printerController.PrinterController_Print(discount.getBytes());
+
+                        printerController.PrinterController_Print("\n".getBytes());
+
+
+                    }
+                    printerController.PrinterController_Linefeed();
+                    printerController.PrinterController_Linefeed();
+                    printerController.PrinterController_Linefeed();
+                    printerController.PrinterController_Linefeed();
+                    printerController.PrinterController_Linefeed();
+
+                    reportDAO.close();
+                    break;
+
+
+
                case R.id.radio_date_between:
                    dateone = edit_date_one.getText().toString();
                    datetwo = edit_date_two.getText().toString();
-                   Toast.makeText(getActivity(),dateone + " - " +datetwo,Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getActivity(),dateone.replaceAll("/","") + " - " +datetwo,Toast.LENGTH_SHORT).show();
                    break;
 
            }

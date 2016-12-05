@@ -76,7 +76,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     int processbarcode;
 
 
-
     public PayMainFragment() {
         super();
     }
@@ -94,8 +93,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         edit_txt_cash.setText("");
 
 
-
     }
+
     private String Date() {
         java.text.DateFormat df = new java.text.SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         String date = df.format(java.util.Calendar.getInstance().getTime());
@@ -111,10 +110,10 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         Intent intent = getActivity().getIntent();
         symbol = intent.getStringExtra("symbol");
         Log.d("symbol", symbol);
-        processmanual = (intent.getIntExtra("processmanual",0));
-        Log.d("processm",processmanual+"");
-        processbarcode = intent.getIntExtra("processbarcode",0);
-        Log.d("processb",processbarcode+"");
+        processmanual = (intent.getIntExtra("processmanual", 0));
+        Log.d("processm", processmanual + "");
+        processbarcode = intent.getIntExtra("processbarcode", 0);
+        Log.d("processb", processbarcode + "");
 
         x = intent.getStringExtra("totalx");
         txtdiscount = intent.getStringExtra("discount");
@@ -338,16 +337,23 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
-                        double cash= Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
+                        double cash = Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
                         double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
-                        if (cash >=totalall ) {
-                        /*  HeadMaster();
-                        ProductAll();
-                        Underline();
-                        TotalAll();
-                        EndText();
-                        Linefeed();*/
+                        if (cash >= totalall) {
+                            HeadMaster();
+                            ProductAll();
+                            Underline();
+                            TotalAll();
+                            EndText();
+                            Linefeed();
+                           // printerController.PrinterController_Close();
 
+
+                            ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                            productSaleDAO1.open();
+                            productSaleDAO1.addx();
+                            productSaleDAO1.updatebill(txt_Discount.getText().toString().replaceAll(",", ""));
+                            productSaleDAO1.close();
 
 
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
@@ -361,11 +367,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("discount", txtdiscount);
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
-                            Toast.makeText(getActivity(),txt_Totalall.getText().toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), txt_Totalall.getText().toString(), Toast.LENGTH_SHORT).show();
                             startActivity(intent);
 
-                        }else if(cash < totalall){
-                            Toast.makeText(getActivity(),"รับชำระมีค่าน้อยกว่าราคารวม"+" -> "+formatAmount.formatAmountDouble(totalall),Toast.LENGTH_SHORT).show();
+                        } else if (cash < totalall) {
+                            Toast.makeText(getActivity(), "รับชำระมีค่าน้อยกว่าราคารวม" + " -> " + formatAmount.formatAmountDouble(totalall), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -376,9 +382,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
-                        double cash= Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
+                        double cash = Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
                         double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
-                        if (cash >=totalall ) {
+                        if (cash >= totalall) {
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getActivity(), ConcludeActivity.class);
                             intent.putExtra("mTotal", txt_NameTotal.getText().toString());
@@ -391,9 +397,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             startActivity(intent);
 
 
-                    }else if(cash < totalall){
-                        Toast.makeText(getActivity(),"รับชำระมีค่าน้อยกว่าราคารวม"+" -> "+formatAmount.formatAmountDouble(totalall),Toast.LENGTH_SHORT).show();
-                    }
+                        } else if (cash < totalall) {
+                            Toast.makeText(getActivity(), "รับชำระมีค่าน้อยกว่าราคารวม" + " -> " + formatAmount.formatAmountDouble(totalall), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
 
@@ -471,7 +477,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void ProductAll() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllDetialProductSaleList();
 
         String feed[] = new String[]{"", " "};
         for (ProductSaleList bean : productSaleLists) {
@@ -492,7 +498,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     }
 
     private void HeadMaster() {
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+
+
         String date = df.format(Calendar.getInstance().getTime());
         printerController = PrinterController.getInstance(getActivity());
         printerController.PrinterController_Open();
@@ -503,6 +513,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() + " " + "Tel." + companyDAO.InvoiceMaster().getTelephone();
         String text3 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
         String text4 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
+        String text5 = "BillNo # " + productSaleDAO.InvoiceMaster().getSaleMasterid();
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Print(text1.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
@@ -514,6 +525,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(text4.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text5.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(date.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Set_Center();
@@ -521,6 +534,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print("-----------------------------".getBytes());
         printerController.PrinterController_Linefeed();
 
+
+        productSaleDAO.close();
         companyDAO.close();
     }
 

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
 import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 
@@ -31,6 +32,60 @@ public class ProductSaleDAO {
     public void close() {
         dbHelperProductSale.close();
     }
+
+    public ProductSaleList InvoiceMaster() {
+        ProductSaleList productSaleList = new ProductSaleList();
+        Cursor cursor = database.rawQuery("select * from viewmaster_list  order by sale_master_id desc limit 1 ;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            productSaleList.setSaleMasterid(cursor.getInt(0));
+            productSaleList.setDiscount(cursor.getString(2));
+            productSaleList.setVat(cursor.getDouble(6));
+
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        return productSaleList;
+
+
+    }
+
+    public ArrayList<ProductSaleList> getAllMasterProductSaleList() {
+        ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
+        Cursor cursor = database.rawQuery("select * from viewmaster_list  order by sale_master_id desc limit 1 ;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ProductSaleList mProductSaleList = new ProductSaleList();
+            mProductSaleList.setSaleMasterid(cursor.getInt(0));
+            mProductSaleList.setDiscount(cursor.getString(2));
+            mProductSaleList.setVat(cursor.getDouble(6));
+
+            ProductSaleList.add(mProductSaleList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return ProductSaleList;
+    }
+
+    public ArrayList<ProductSaleList> getAllDetialProductSaleList() {
+        ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
+        Cursor cursor = database.rawQuery("select * from viewdetail_list order by productsale_text ASC ;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ProductSaleList mProductSaleList = new ProductSaleList();
+            mProductSaleList.setProductSale(cursor.getString(0));
+            mProductSaleList.setAmount(cursor.getString(2));
+            mProductSaleList.setPrice(cursor.getDouble(1));
+
+            ProductSaleList.add(mProductSaleList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return ProductSaleList;
+    }
+
+
 
 
     public ArrayList<ProductSaleList> getAllProductSaleList() {
@@ -92,15 +147,15 @@ public class ProductSaleDAO {
     public void
     updatebill(String input_discount) {
 
-        this.database.execSQL("update productsale_list set sale_master_id =  (select(case when (select count(*) from productsale_list where sale_master_id is not null) = 0 then 1 else (select (CASE  WHEN sale_master_id  is null then 1 else sale_master_id +1  end) as id from productsale_list where  sale_master_id is not null order by id_productsale desc limit 1) end)),discount=" + input_discount + ",doc_date= date('now'),vatrate=(select vatrate from company_list ) where sale_master_id is null");
+        this.database.execSQL("update transectionBill set sale_master_id =  (select(case when (select count(*) from transectionBill where sale_master_id is not null) = 0 then 1 else (select (CASE  WHEN sale_master_id  is null then 1 else sale_master_id +1  end) as id from transectionBill where  sale_master_id is not null order by id_productsale desc limit 1) end)),discount=" + input_discount + ",doc_date= date('now'),vatrate=(select vatrate from company_list ) where sale_master_id is null");
 
     }
 
     public ReportList addx(){
 
         ReportList bee = new ReportList();
-        Cursor cursor = database.rawQuery("INSERT INTO transectionBill(id_product ,productsale_text ,productprice_text,sale_master_id,unit_id,unit_name ,group_id,group_name,discount ,doc_date,product_price,product_cost,vat_flag,vatrate ,delete_flag ) " +
-                "select id_product ,productsale_text ,productprice_text,sale_master_id,unit_id,unit_name ,group_id,group_name,discount ,doc_date,product_price,product_cost,vat_flag,vatrate ,delete_flag  from productsale_list   ;", null);
+        Cursor cursor = database.rawQuery("INSERT INTO transectionBill(id_product ,productsale_text ,productprice_text,unit_id,unit_name ,group_id,group_name ,product_price,product_cost,vat_flag ,delete_flag ) " +
+                "select id_product ,productsale_text ,productprice_text,unit_id,unit_name ,group_id,group_name ,product_price,product_cost,vat_flag ,delete_flag  from productsale_list   ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             cursor.moveToNext();

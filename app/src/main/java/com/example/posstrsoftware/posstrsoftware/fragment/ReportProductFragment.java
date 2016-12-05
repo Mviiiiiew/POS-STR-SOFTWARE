@@ -151,7 +151,7 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
     DatePickerDialog.OnDateSetListener ondatetwo = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            edit_date_two.setText(dayOfMonth + "/" + (month + 1) + "/" + year );
+            edit_date_two.setText( year+ "/" + (month + 1) + "/" + dayOfMonth  );
         }
     };
 
@@ -164,7 +164,7 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
     DatePickerDialog.OnDateSetListener ondateone = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            edit_date_one.setText(dayOfMonth + "/" + (month + 1) + "/" + year );
+            edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
     }
     };
 
@@ -177,7 +177,7 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            edit_date_day.setText(dayOfMonth + "/" + (month + 1) + "/" + year );
+            edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
         }
     };
 }

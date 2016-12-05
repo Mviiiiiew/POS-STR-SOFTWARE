@@ -455,16 +455,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
         totalall = A - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
-        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-        productSaleDAO.open();
-        productSaleDAO.updatebill(discountcost.replaceAll(",",""));
-        productSaleDAO.close();
 
-
-        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-        productSaleDAO1.open();
-        productSaleDAO1.addx();
-        productSaleDAO1.close();
 
         String totalcost = String.valueOf(CostPercent.parserFormat(totalall));
         Intent intent = new Intent(getActivity(), PayMainActivity.class);

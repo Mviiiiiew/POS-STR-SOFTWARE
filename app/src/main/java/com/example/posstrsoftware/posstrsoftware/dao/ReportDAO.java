@@ -27,20 +27,32 @@ public class ReportDAO {
         dbHelperReport.close();
     }
 
-    public ArrayList<ReportList> getAllReportList() {
+    public ArrayList<ReportList> getAllReportList(String input_date) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM report_list ;", null);
+        Cursor cursor = database.rawQuery("select *  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date+"' as decimal)  and cast('"+input_date+"' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
-            mReportList.setId(cursor.getInt(0));
-            mReportList.setNameProduct(cursor.getString(1));
-            mReportList.setPrice(cursor.getDouble(2));
+            mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setDate(cursor.getString(1));
+            mReportList.setDiscount(cursor.getDouble(2));
+            mReportList.setAmount(cursor.getInt(3));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
         cursor.close();
         return reportLists;
+    }
+
+
+    public void ReportDaily(String input_date){
+        String sql = "select *  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date+"' as decimal)  and cast('"+input_date+"' as decimal) ";
+    }
+
+
+    public void ReportDaily(String input_date_from,String input_date_to){
+        String sql = " select *  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_from+"' as decimal)  and cast('"+input_date_to+"' as decimal) ;";
+
     }
 
 
@@ -59,7 +71,7 @@ public class ReportDAO {
 
 
 
-
+/*
 
     public void add(ReportList reportList) {
 
@@ -71,5 +83,5 @@ public class ReportDAO {
 
 
     }
-
+*/
 }

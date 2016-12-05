@@ -6,31 +6,40 @@ package com.example.posstrsoftware.posstrsoftware.model;
 
 public class ReportList {
 
-    private int id;
-    private String NameProduct;
-    private Double price;
+private int sale_masterid ;
+    private  String date;
+    private  double discount;
+    private  int amount;
 
-    public int getId() {
-        return id;
+    public int getSale_masterid() {
+        return sale_masterid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSale_masterid(int sale_masterid) {
+        this.sale_masterid = sale_masterid;
     }
 
-    public String getNameProduct() {
-        return NameProduct;
+    public String getDate() {
+        return date;
     }
 
-    public void setNameProduct(String nameProduct) {
-        NameProduct = nameProduct;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public Double getPrice() {
-        return price;
+    public double getDiscount() {
+        return discount;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

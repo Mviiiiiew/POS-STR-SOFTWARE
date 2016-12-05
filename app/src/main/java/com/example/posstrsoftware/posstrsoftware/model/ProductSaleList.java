@@ -21,6 +21,15 @@ public class ProductSaleList {
     private  Double product_cost;
     private  String vat_flag;
     private  Double vatrate;
+    private  Double vat;
+
+    public Double getVat() {
+        return vat;
+    }
+
+    public void setVat(Double vat) {
+        this.vat = vat;
+    }
 
     public Double getVatrate() {
         return vatrate;

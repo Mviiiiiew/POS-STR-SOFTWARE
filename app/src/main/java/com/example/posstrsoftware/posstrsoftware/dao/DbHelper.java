@@ -134,6 +134,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax from product_list order by 1";
 
+    private static  final String viewmasterList = "CREATE VIEW viewmaster_list as select sale_master_id,doc_date,cast(discount as decimal) as bill_discount," +
+            "count(sale_master_id) as count_amount,\n" +
+            "sum(cast(product_price as decimal)) as sum_product_price,\n" +
+            "sum(cast(product_cost as decimal)) as sum_product_cost ,\n" +
+            "sum(case when vat_flag  = 'Y' then (cast(product_price as decimal) * (cast(vatrate as decimal)/(100.0 + cast(vatrate as decimal)))) else 0.00 end) as sum_vat\n" +
+            "from transectionBill \n" +
+            "group by sale_master_id,doc_date\n" +
+            "order by cast(sale_master_id as decimal)";
+
+    private static  final String viewdetailList = "CREATE VIEW viewdetail_list as  select productsale_text,sum(cast(product_price as decimal)) as sum_product_price,count(productsale_text) as product_amount from transectionBill where sale_master_id = (select sale_master_id from viewmaster_list   order by sale_master_id desc limit 1) group by productsale_text order by productsale_text";
 
 
 
@@ -149,6 +159,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tablesale_masterCreateSQL);
         db.execSQL(tablesale_detailCreateSQL);
         db.execSQL(tabletransectionBillCreateSQL);
+        db.execSQL(viewmasterList);
+        db.execSQL(viewdetailList);
 
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','7');";
         db.execSQL(insertData);
