@@ -56,6 +56,7 @@ public class ProductDAO {
             productList1.setCost(cursor.getDouble(4));
             productList1.setUnitList(new UnitList(cursor.getInt(6),cursor.getString(7)));
             productList1.setGroupList(new GroupList(cursor.getInt(8),cursor.getString(9)));
+
             productList.add(productList1);
             cursor.moveToNext();
         }
@@ -83,6 +84,8 @@ public class ProductDAO {
             values.put("id_unit",productList.getUnitList().getId());
             values.put("id_group",productList.getGroupList().getId());
             values.put("Cost",productList.getCost());
+            values.put("UnitName",productList.getUnitList().getUnitText());
+            values.put("GroupName",productList.getGroupList().getGroupText());
 
             this.database.insert("product_list", null, values);
             return 1;
@@ -101,8 +104,15 @@ public class ProductDAO {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             bee.setProductSale(cursor.getString(2));
-            bee.setPrice(cursor.getDouble(9));
+            bee.setPrice(cursor.getDouble(11));
             bee.setProductid(cursor.getInt(0));
+            bee.setUnitid(cursor.getInt(4));
+            bee.setGroupid(cursor.getInt(5));
+            bee.setVat_flag(cursor.getString(7));
+            bee.setProduct_cost(cursor.getDouble(8));
+            bee.setProduct_price(cursor.getDouble(3));
+            bee.setUnitname(cursor.getString(9));
+            bee.setGroupname(cursor.getString(10));
             cursor.moveToNext();
         }
         cursor.close();

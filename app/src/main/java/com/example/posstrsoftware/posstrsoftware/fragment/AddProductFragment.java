@@ -209,8 +209,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
                 productList.setBarcode(editText_Barcode.getText().toString());
-                productList.setUnitList(new UnitList(mSelectedUnit.getId(), ""));
-                productList.setGroupList(new GroupList(mSelectedGroup.getId(), ""));
+                productList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                productList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
                 productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replaceAll(",","")));
                 productList.setCost(Double.valueOf(editText_Cost.getText().toString().replaceAll(",","")));
 
