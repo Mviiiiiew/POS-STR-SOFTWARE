@@ -72,6 +72,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String txtdiscount;
     String symbol;
     String process;
+    int idBill;
     int processmanual;
     int processbarcode;
 
@@ -340,20 +341,20 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         double cash = Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
                         double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
                         if (cash >= totalall) {
-                            HeadMaster();
+                            ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                            productSaleDAO1.open();
+                            productSaleDAO1.addx();
+                            productSaleDAO1.updatebill(txtdiscount.toString().replaceAll(",",""));
+                            productSaleDAO1.close();
+
+                          /* HeadMaster();
                             ProductAll();
                             Underline();
                             TotalAll();
                             EndText();
-                            Linefeed();
-                           // printerController.PrinterController_Close();
+                            Linefeed();*/
 
 
-                            ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-                            productSaleDAO1.open();
-                            productSaleDAO1.addx();
-                            productSaleDAO1.updatebill(txt_Discount.getText().toString().replaceAll(",", ""));
-                            productSaleDAO1.close();
 
 
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
@@ -367,7 +368,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("discount", txtdiscount);
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
-                            Toast.makeText(getActivity(), txt_Totalall.getText().toString(), Toast.LENGTH_SHORT).show();
+
                             startActivity(intent);
 
                         } else if (cash < totalall) {
@@ -477,7 +478,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void ProductAll() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllDetialProductSaleList();
+        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
 
         String feed[] = new String[]{"", " "};
         for (ProductSaleList bean : productSaleLists) {
@@ -509,11 +510,14 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Font_Normal_mode();
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
+
         String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
         String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() + " " + "Tel." + companyDAO.InvoiceMaster().getTelephone();
         String text3 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
         String text4 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
-        String text5 = "BillNo # " + productSaleDAO.InvoiceMaster().getSaleMasterid();
+        String text5 = "BillNo # " + (productSaleDAO.InvoiceMaster().getSaleMasterid());
+
+
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Print(text1.getBytes());
         printerController.PrinterController_Print("\n".getBytes());

@@ -10,14 +10,12 @@
         android:layout_height="0dp"
         android:layout_weight="1.5"
         android:orientation="horizontal"
-
-
         android:weightSum="3">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.3">
 
         </LinearLayout>
 
@@ -183,7 +181,6 @@
                     android:layout_below="@+id/view_red"
                     android:layout_marginTop="25dp"
                     android:text="Change"
-
                     android:textSize="35sp"
                     android:textStyle="bold"/>
 
@@ -210,7 +207,18 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5">
+            android:orientation="vertical"
+
+            android:layout_weight="0.7">
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btt_RePrint"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:text="ปริ้นบิลอีกครั้ง"
+                android:textColor="#757575"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"></com.gc.materialdesign.views.ButtonRectangle>
 
         </LinearLayout>
 

@@ -15,17 +15,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.POSD.controllers.PrinterController;
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.PayMainActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductManualActivity;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductSaleList;
+import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
+
+import java.util.ArrayList;
 
 
 /**
@@ -34,6 +40,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
 public class ConcludeFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_manual;
     ButtonRectangle btn_barcode;
+    ButtonRectangle btt_RePrint;
+    private PrinterController printerController = null;
     TextView txt_mDate;
     TextView txt_mTotal;
     TextView txt_mDiscount;
@@ -89,6 +97,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        btt_RePrint = (ButtonRectangle)rootView.findViewById(R.id.btt_RePrint);
         btn_manual = (ButtonRectangle) rootView.findViewById(R.id.btn_manual);
         btn_barcode = (ButtonRectangle) rootView.findViewById(R.id.btn_barcode);
         txt_mTotal = (TextView) rootView.findViewById(R.id.txt_mTotal);
@@ -98,8 +107,10 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         txt_mCash = (TextView)rootView.findViewById(R.id.txt_mCash);
         txt_mChange = (TextView)rootView.findViewById(R.id.txt_mChange);
         txt_symbolDiscount = (TextView)rootView.findViewById(R.id.txt_symbolDiscount);
+        btt_RePrint.setRippleSpeed(40);
         btn_barcode.setRippleSpeed(40);
         btn_manual.setRippleSpeed(40);
+        btt_RePrint.setOnClickListener(this);
         btn_barcode.setOnClickListener(this);
         btn_manual.setOnClickListener(this);
 
@@ -189,7 +200,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
         if (btn_manual == v) {
@@ -200,7 +211,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
             productSaleDAO.close();
             Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
             // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            getActivity().finishAffinity();
+          // getActivity().finishAffinity();
             startActivity(intent);
         } else if (btn_barcode == v) {
             ProductSaleList productSaleList = new ProductSaleList();
@@ -209,13 +220,150 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
             productSaleDAO.clear(productSaleList);
             productSaleDAO.close();
             Intent intent = new Intent(getActivity(), SaleProductActivity.class);
-            getActivity().finishAffinity();
+          //  getActivity().finishAffinity();
 
           //  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
+        }else if (btt_RePrint == v){
+
+
+                          /* HeadMaster();
+                            ProductAll();
+                            Underline();
+                            TotalAllx();
+                            EndText();
+                            Linefeed();*/
+
         }
 
 
+    }
+    private void EndText() {
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        String endtext = companyDAO.InvoiceMaster().getENDbillText();
+        printerController.PrinterController_Font_Normal_mode();
+        printerController.PrinterController_Set_Center();
+        printerController.PrinterController_Print(endtext.getBytes());
+        companyDAO.close();
+
+
+    }
+
+    private void Linefeed() {
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+    }
+
+    private void Underline() {
+        String x = "-------------------------------";
+
+        printerController.PrinterController_Print(x.getBytes());
+    }
+
+    private void TotalAllx() {
+        String x = "-------------------------------";
+        String Totaltxt = "Total";
+        String total = PrintFix.generatePrice(mTotal, 27);
+        String TotalAlltxt = "TotalAll";
+        String totalall = PrintFix.generatePrice(mTotalAll, 24);
+        String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(mCash.toString().replaceAll(",", ""))), 28);
+        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(mChange)), 26);
+        String Cashtxt = "Cash";
+        String Changetxt = "Change";
+        String Discounttxt = "Discount" + "->" + (PrintFix.generateName(symbol, 5));
+        String discountx = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(discount)), 17);
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Print(Totaltxt.getBytes());
+        printerController.PrinterController_Print(total.getBytes());
+        printerController.PrinterController_Print(x.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Print(Discounttxt.getBytes());
+        printerController.PrinterController_Print(discountx.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(TotalAlltxt.getBytes());
+        printerController.PrinterController_Print(totalall.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(Cashtxt.getBytes());
+        printerController.PrinterController_Print(cash.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Font_Bold();
+        printerController.PrinterController_Print(Changetxt.getBytes());
+        printerController.PrinterController_Print(changz.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+
+    }
+
+    private void ProductAll() {
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllDetialProductSaleList();
+
+        String feed[] = new String[]{"", " "};
+        for (ProductSaleList bean : productSaleLists) {
+            String price = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getPrice())), 10);
+            String product = PrintFix.generateName(bean.getProductSale(), 18) + feed[1];
+            String amount = PrintFix.generateName(bean.getAmount(), 3) + feed[0];
+
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Set_Left();
+            printerController.PrinterController_Print(amount.getBytes());
+            printerController.PrinterController_Print(product.getBytes());
+            printerController.PrinterController_Print(price.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+
+
+        }
+        productSaleDAO.close();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void HeadMaster() {
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        java.text.DateFormat df = new java.text.SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+
+
+        String date = df.format(java.util.Calendar.getInstance().getTime());
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        printerController.PrinterController_Font_Normal_mode();
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() + " " + "Tel." + companyDAO.InvoiceMaster().getTelephone();
+        String text3 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
+        String text4 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
+        String text5 = "BillNo # " + productSaleDAO.InvoiceMaster().getSaleMasterid();
+
+        printerController.PrinterController_Set_Center();
+        printerController.PrinterController_Print(text1.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Set_Left();
+        printerController.PrinterController_Print(text2.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text3.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text4.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text5.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(date.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Set_Center();
+        printerController.PrinterController_Font_Bold();
+        printerController.PrinterController_Print("-----------------------------".getBytes());
+        printerController.PrinterController_Linefeed();
+
+
+        productSaleDAO.close();
+        companyDAO.close();
     }
 }
