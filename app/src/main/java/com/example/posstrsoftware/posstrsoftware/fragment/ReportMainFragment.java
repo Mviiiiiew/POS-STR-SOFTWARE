@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ReportDayActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.ReportProductActivity;
+import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 
@@ -85,8 +86,10 @@ public class ReportMainFragment extends Fragment implements View.OnClickListener
             Intent intent = new Intent(getActivity(), ReportDayActivity.class);
             startActivity(intent);
         }else if(btn_Report_Product == v){
-            Intent intent = new Intent(getActivity(), ReportProductActivity.class);
+           Intent intent = new Intent(getActivity(), ReportProductActivity.class);
             startActivity(intent);
+
+
         }
     }
 }

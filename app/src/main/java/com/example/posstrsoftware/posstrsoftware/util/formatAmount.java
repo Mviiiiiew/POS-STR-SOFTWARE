@@ -13,6 +13,11 @@ public class formatAmount {
         DecimalFormat df = new DecimalFormat("#,###,##0.00");
         return df.format(Double.valueOf(num));
     }
+    public static String formatAmountDouble(int num)
+    {
+        DecimalFormat df = new DecimalFormat("##");
+        return df.format(num);
+    }
 
 
 }

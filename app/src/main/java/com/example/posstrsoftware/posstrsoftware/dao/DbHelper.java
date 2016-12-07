@@ -140,7 +140,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "count(sale_master_id) as count_amount,\n" +
             "sum(cast(product_price as decimal)) as sum_product_price,\n" +
             "sum(cast(product_cost as decimal)) as sum_product_cost ,\n" +
-            "sum(case when vat_flag  = 'Y' then (cast(product_price as decimal) * (cast(vatrate as decimal)/(100.0 + cast(vatrate as decimal)))) else 0.00 end) as sum_vat\n" +
+            "sum(case when vat_flag  = 'Y' then ((cast(product_price as decimal) * (cast(vatrate as decimal))/(100.0 + cast(vatrate as decimal)))) else 0.00 end) as sum_vat\n" +
             "from transectionBill \n" +
             "group by sale_master_id,doc_date\n" +
             "order by cast(sale_master_id as decimal)";

@@ -3,6 +3,8 @@ package com.example.posstrsoftware.posstrsoftware.fragment;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatEditText;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,9 @@ import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
 import com.example.posstrsoftware.posstrsoftware.util.SelectDateFragment;
-import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.vicmikhailau.maskededittext.MaskedEditText;
+import com.vicmikhailau.maskededittext.MaskedWatcher;
 
 import java.util.ArrayList;
 
@@ -93,9 +96,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
     private void Date() {
 
-            java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd");
-            String date = df.format(java.util.Calendar.getInstance().getTime());
-            edit_date_day.setText(date);
+        java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd");
+        String date = df.format(java.util.Calendar.getInstance().getTime());
+        edit_date_day.setText(date);
+        edit_date_one.setText(date);
+        edit_date_two.setText(date);
 
     }
 
@@ -111,7 +116,12 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         /*    Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
+            if (dayOfMonth < 10) {
+                edit_date_day.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else {
+
+                edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+            }
         }
 
 
@@ -130,7 +140,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             /*Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
+            if (dayOfMonth < 10) {
+                edit_date_one.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else {
+                edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+            }
         }
 
 
@@ -148,7 +162,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
           /*  Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
+            if (dayOfMonth < 10) {
+                edit_date_two.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else {
+                edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+            }
         }
 
 
@@ -179,6 +197,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         btn_print.setOnClickListener(this);
         btn_print.setRippleSpeed(40);
         btn_back.setRippleSpeed(40);
+
 
     }
 
@@ -219,16 +238,23 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
         } else if (edit_date_one == v) {
             showDatePickerOne();
+
         } else if (edit_date_two == v) {
             showDatePickerTwo();
-        } else if(btn_back == v){
+        } else if (btn_back == v) {
             getActivity().finish();
-        }else if (btn_print == v) {
+        } else if (btn_print == v) {
+            ReportDAO reportDAO = new ReportDAO(getActivity());
+            reportDAO.open();
             switch (radiogroup_date.getCheckedRadioButtonId()) {
+
                 case R.id.radio_date_day:
                     date = edit_date_day.getText().toString();
-                    ReportDAO reportDAO = new ReportDAO(getActivity());
-                    reportDAO.open();
+                    String x = date.replaceAll("/", "");
+                    reportDAO.exportDataBaseDayDaily(x);
+                    reportDAO.close();
+                    Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+                    /*
                     reportDAO.getAllReportList(date.replaceAll("/", ""));
                     ArrayList<ReportList> reportLists = reportDAO.getAllReportList(date.replaceAll("/", ""));
 
@@ -244,29 +270,39 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                         printerController.PrinterController_Print(BillNo.getBytes());
                         printerController.PrinterController_Print(date.getBytes());
                         printerController.PrinterController_Print(discount.getBytes());
-
                         printerController.PrinterController_Print("\n".getBytes());
-
-
                     }
                     printerController.PrinterController_Linefeed();
                     printerController.PrinterController_Linefeed();
                     printerController.PrinterController_Linefeed();
                     printerController.PrinterController_Linefeed();
                     printerController.PrinterController_Linefeed();
-
                     reportDAO.close();
+                    */
                     break;
 
 
+                case R.id.radio_date_between:
+                    dateone = edit_date_one.getText().toString();
+                    datetwo = edit_date_two.getText().toString();
+                    date = edit_date_day.getText().toString();
+                    int oneday = Integer.parseInt(dateone.replaceAll("/", ""));
+                    Log.d(oneday + "", "one");
+                    int twoday = Integer.parseInt(datetwo.replaceAll("/", ""));
+                    Log.d(twoday + "", "two");
+                    if (oneday < twoday) {
+                        reportDAO.exportDataBaseBetweenDailyOneTwo(oneday + "", twoday + "");
+                        reportDAO.close();
+                    } else if (oneday > twoday) {
+                        reportDAO.exportDataBaseBetweenDailyTwoOne(oneday + "", twoday + "");
+                        reportDAO.close();
+                    }
 
-               case R.id.radio_date_between:
-                   dateone = edit_date_one.getText().toString();
-                   datetwo = edit_date_two.getText().toString();
-                   Toast.makeText(getActivity(),dateone.replaceAll("/","") + " - " +datetwo,Toast.LENGTH_SHORT).show();
-                   break;
+                    //   Toast.makeText(getActivity(),oneday + twoday,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),dateone.replaceAll("/","") + " - " +datetwo,Toast.LENGTH_SHORT).show();
+                    break;
 
-           }
+            }
         }
 
 
