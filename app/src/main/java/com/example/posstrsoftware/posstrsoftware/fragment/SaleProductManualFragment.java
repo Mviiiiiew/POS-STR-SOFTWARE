@@ -150,7 +150,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 Double total = 0.0;
 
                 ProductSaleList productSaleList = new ProductSaleList();
-                productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductprice()));
+                productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
                 productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
                 productSaleList.setProductid(((ProductList) objAdapter.getItem(position)).getId());
                 productSaleList.setUnitid(((ProductList) objAdapter.getItem(position)).getUnitList().getId());
@@ -160,6 +160,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
                 productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
                 productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
+
 
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();

@@ -9,6 +9,16 @@ import java.io.Serializable;
 public class ProductList implements Serializable {
 
     private int id;
+    private  Double productpricesumvat;
+
+    public Double getProductpricesumvat() {
+        return productpricesumvat;
+    }
+
+    public void setProductpricesumvat(Double productpricesumvat) {
+        this.productpricesumvat = productpricesumvat;
+    }
+
     private String productText;
     private Double productprice;
     private GroupList groupList;

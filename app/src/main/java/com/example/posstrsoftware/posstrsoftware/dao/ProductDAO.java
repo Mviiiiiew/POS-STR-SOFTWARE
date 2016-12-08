@@ -40,7 +40,7 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-            Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
+            Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
                 "inner join  unit_list ul on pl.id_unit = ul.id_unit and  ul.delete_flag = 'N' " +
                 "inner join  group_list gl on pl.id_group = gl.id_group and  gl.delete_flag = 'N' " +
                 "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
@@ -51,11 +51,12 @@ public class ProductDAO {
             productList1.setId(cursor.getInt(0));
             productList1.setBarcode(cursor.getString(1));
             productList1.setProductText(cursor.getString(2));
-            productList1.setProductprice(cursor.getDouble(3));
-            productList1.setCheckvat(cursor.getString(5));
-            productList1.setCost(cursor.getDouble(4));
-            productList1.setUnitList(new UnitList(cursor.getInt(6),cursor.getString(7)));
-            productList1.setGroupList(new GroupList(cursor.getInt(8),cursor.getString(9)));
+            productList1.setProductprice(cursor.getDouble(4));
+            productList1.setCheckvat(cursor.getString(6));
+            productList1.setCost(cursor.getDouble(5));
+            productList1.setUnitList(new UnitList(cursor.getInt(7),cursor.getString(8)));
+            productList1.setGroupList(new GroupList(cursor.getInt(9),cursor.getString(10)));
+            productList1.setProductpricesumvat(cursor.getDouble(3));
 
             productList.add(productList1);
             cursor.moveToNext();
