@@ -66,7 +66,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
         ProductList productList = mProductList.get(position);
         txt_name_product.setText(productList.getProductText());
         txt_id_product.setText(productList.getId() + "");
-        txt_name_price.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductprice() + "")));
+        txt_name_price.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductpricesumvat() + "")));
         txt_name_unit.setText(productList.getUnitList().getUnitText());
         txt_name_group.setText(productList.getGroupList().getGroupText());
         txt_id_barcode.setText(productList.getBarcode() + "");
