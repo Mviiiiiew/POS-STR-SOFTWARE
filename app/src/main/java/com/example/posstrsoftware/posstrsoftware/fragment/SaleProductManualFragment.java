@@ -161,7 +161,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
                 productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
 
-
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
                 productSaleDAO.add(productSaleList);

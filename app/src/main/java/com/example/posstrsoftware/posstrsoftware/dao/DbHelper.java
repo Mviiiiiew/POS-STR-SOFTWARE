@@ -138,14 +138,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static  final String viewmasterList = "CREATE VIEW viewmaster_list as select sale_master_id,doc_date,cast(discount as decimal) as bill_discount," +
             "count(sale_master_id) as count_amount,\n" +
-            "sum(cast(product_price as decimal)) as sum_product_price,\n" +
+            "sum(cast(productprice_text as decimal)) as sum_product_price,\n" +
             "sum(cast(product_cost as decimal)) as sum_product_cost ,\n" +
-            "sum(case when vat_flag  = 'Y' then ((cast(product_price as decimal) * (cast(vatrate as decimal))/(100.0 + cast(vatrate as decimal)))) else 0.00 end) as sum_vat\n" +
+            "sum(case when vat_flag  = 'Y' then ((cast(productprice_text as decimal) * (cast(vatrate as decimal))/(100.0 + cast(vatrate as decimal)))) else 0.00 end) as sum_vat\n" +
             "from transectionBill \n" +
             "group by sale_master_id,doc_date\n" +
             "order by cast(sale_master_id as decimal)";
 
     private static  final String viewdetailList = "CREATE VIEW viewdetail_list as  select productsale_text,sum(cast(product_price as decimal)) as sum_product_price,count(productsale_text) as product_amount from transectionBill where sale_master_id = (select sale_master_id from viewmaster_list   order by sale_master_id desc limit 1) group by productsale_text order by productsale_text";
+    private static  final String viewProductSaleReportList = "CREATE VIEW viewProductReport as  select id_product,productsale_text,unit_name,count(productsale_text) as product_amount,productprice_text as product_price,sum(productprice_text) as productAll_price from transectionBill  group by  productsale_text";
+
 
 
 
@@ -163,6 +165,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tabletransectionBillCreateSQL);
         db.execSQL(viewmasterList);
         db.execSQL(viewdetailList);
+        db.execSQL(viewProductSaleReportList);
 
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','ENDbillText','7');";
         db.execSQL(insertData);
