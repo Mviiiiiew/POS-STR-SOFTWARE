@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.POSD.controllers.PrinterController;
 import com.example.posstrsoftware.posstrsoftware.R;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.ProductSaleDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ReportDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ReportList;
 import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
@@ -24,7 +27,10 @@ import com.gc.materialdesign.views.ButtonRectangle;
 import com.vicmikhailau.maskededittext.MaskedEditText;
 import com.vicmikhailau.maskededittext.MaskedWatcher;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -249,36 +255,13 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             switch (radiogroup_date.getCheckedRadioButtonId()) {
 
                 case R.id.radio_date_day:
-                    date = edit_date_day.getText().toString();
-                    String x = date.replaceAll("/", "");
-                    reportDAO.exportDataBaseDayDaily(x);
-                    reportDAO.close();
-                    Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
-                    /*
-                    reportDAO.getAllReportList(date.replaceAll("/", ""));
-                    ArrayList<ReportList> reportLists = reportDAO.getAllReportList(date.replaceAll("/", ""));
 
-                    String feed[] = new String[]{"", " "};
-                    for (ReportList bean : reportLists) {
-                        String BillNo = PrintFix.generateName(bean.getSale_masterid()+"",10);
-                        String date = PrintFix.generateName(bean.getDate(), 18) + feed[1];
-                        String discount = PrintFix.generateName(String.valueOf(bean.getDiscount()), 3) + feed[0];
-                        printerController = PrinterController.getInstance(getActivity());
-                        printerController.PrinterController_Open();
-                        printerController.PrinterController_Font_Normal_mode();
-                        printerController.PrinterController_Set_Left();
-                        printerController.PrinterController_Print(BillNo.getBytes());
-                        printerController.PrinterController_Print(date.getBytes());
-                        printerController.PrinterController_Print(discount.getBytes());
-                        printerController.PrinterController_Print("\n".getBytes());
-                    }
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
-                    printerController.PrinterController_Linefeed();
-                    reportDAO.close();
-                    */
+                   /* HeadMaster();
+                    Underline();*/
+                    Description();
+                    Linefeed();
+
+
                     break;
 
 
@@ -290,12 +273,17 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                     Log.d(oneday + "", "one");
                     int twoday = Integer.parseInt(datetwo.replaceAll("/", ""));
                     Log.d(twoday + "", "two");
+
                     if (oneday < twoday) {
-                        reportDAO.exportDataBaseBetweenDailyOneTwo(oneday + "", twoday + "");
-                        reportDAO.close();
+                        /*HeadMasterbetween();*/
+                        DescriptionBetweenOneTwo();
+                        Linefeed();
                     } else if (oneday > twoday) {
-                        reportDAO.exportDataBaseBetweenDailyTwoOne(oneday + "", twoday + "");
-                        reportDAO.close();
+                        /*HeadMasterbetween();*/
+                        DescriptionBetweenTwoOne();
+                        Linefeed();
+                    } else{
+                        DescriptionBetweenOneTwo();
                     }
 
                     //   Toast.makeText(getActivity(),oneday + twoday,Toast.LENGTH_SHORT).show();
@@ -306,6 +294,250 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         }
 
 
+    }
+
+    private void DescriptionBetweenTwoOne() {
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        dateone = edit_date_one.getText().toString().replaceAll("/","");
+        Log.d(dateone,"Date1");
+        datetwo = edit_date_two.getText().toString().replaceAll("/","");
+        Log.d(datetwo,"Date2");
+        ArrayList<ReportList> reportLists = reportDAO.getAllReportListTwoOne(dateone+"",datetwo+"");
+
+        for (ReportList bean : reportLists) {
+
+            String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
+            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getSale_masterid()+"",25);
+            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
+            String SumPrice = "SumPrice#"+PrintFix.generatePrice(bean.getSumPrice()+"",23);
+            String SumCost = "SumCost#"+PrintFix.generatePrice(bean.getSumCost()+"",24);
+            String SumVAT = "SumVAT#"+PrintFix.generatePrice(bean.getSumVAT()+"",25);
+            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(bean.getDiscount()+"",20);
+            String Profit = "Profit#"+PrintFix.generatePrice(bean.getProfit()+"",25);
+
+
+            printerController = PrinterController.getInstance(getActivity());
+            printerController.PrinterController_Open();
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Print(Date.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(BillNo.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(Amount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumPrice.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumCost.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumVAT.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumDiscount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(Profit.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+        }
+        reportDAO.close();
+
+    }
+
+    private void DescriptionBetweenOneTwo() {
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        dateone = edit_date_one.getText().toString().replaceAll("/","");
+        Log.d(dateone+"","Date1");
+        datetwo = edit_date_two.getText().toString().replaceAll("/","");
+        Log.d(datetwo+"","Date2");
+        ArrayList<ReportList> reportLists = reportDAO.getAllReportListOneTwo(dateone+"",datetwo+"");
+
+        for (ReportList bean : reportLists) {
+
+            String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
+            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getSale_masterid()+"",25);
+            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
+            String SumPrice = "SumPrice#"+PrintFix.generatePrice(bean.getSumPrice()+"",23);
+            String SumCost = "SumCost#"+PrintFix.generatePrice(bean.getSumCost()+"",24);
+            String SumVAT = "SumVAT#"+PrintFix.generatePrice(bean.getSumVAT()+"",25);
+            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(bean.getDiscount()+"",20);
+            String Profit = "Profit#"+PrintFix.generatePrice(bean.getProfit()+"",25);
+
+
+            printerController = PrinterController.getInstance(getActivity());
+            printerController.PrinterController_Open();
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Print(Date.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(BillNo.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(Amount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumPrice.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumCost.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumVAT.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumDiscount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(Profit.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+        }
+        reportDAO.close();
+    }
+
+    private void HeadMasterbetween() {
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+
+        String date = df.format(Calendar.getInstance().getTime());
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        printerController.PrinterController_Font_Normal_mode();
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+
+        String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() ;
+        String text3 = "Tel. " + companyDAO.InvoiceMaster().getTelephone();
+        String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
+        String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
+        String text6 = "Re.Date# " +edit_date_one.getText().toString()+"-"+edit_date_two.getText().toString() ;
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        printerController.PrinterController_Set_Center();
+        printerController.PrinterController_Print(text1.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Set_Left();
+        printerController.PrinterController_Print(text2.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text3.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text4.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text5.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text6.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(date.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+
+
+        productSaleDAO.close();
+        companyDAO.close();
+    }
+
+    private void Linefeed() {
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+    }
+
+    private void Underline() {
+        String x = "-------------------------------";
+
+        printerController.PrinterController_Print(x.getBytes());
+    }
+
+    private void Description() {
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        date = edit_date_day.getText().toString();
+        String x = date.replaceAll("/", "");
+        Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+        ArrayList<ReportList> reportLists = reportDAO.getAllReportList(x);
+
+        for (ReportList bean : reportLists) {
+
+            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getSale_masterid()+"",25);
+            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
+            String SumPrice = "SumPrice#"+PrintFix.generatePrice(bean.getSumPrice()+"",23);
+            String SumCost = "SumCost#"+PrintFix.generatePrice(bean.getSumCost()+"",24);
+            String SumVAT = "SumVAT#"+PrintFix.generatePrice(bean.getSumVAT()+"",25);
+            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(bean.getDiscount()+"",20);
+            String Profit = "Profit#"+PrintFix.generatePrice(bean.getProfit()+"",25);
+
+
+            printerController = PrinterController.getInstance(getActivity());
+            printerController.PrinterController_Open();
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Print(BillNo.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(Amount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumPrice.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumCost.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumVAT.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(SumDiscount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(Profit.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+        }
+        reportDAO.close();
+
+
+    }
+
+    private void HeadMaster() {
+        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+        productSaleDAO.open();
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+
+        String date = df.format(Calendar.getInstance().getTime());
+        printerController = PrinterController.getInstance(getActivity());
+        printerController.PrinterController_Open();
+        printerController.PrinterController_Font_Normal_mode();
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+
+        String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() ;
+        String text3 = "Tel." + companyDAO.InvoiceMaster().getTelephone();
+        String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
+        String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
+        String text6 = "ReportDATE# " + edit_date_day.getText().toString();
+
+        printerController.PrinterController_Set_Center();
+        printerController.PrinterController_Print(text1.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Set_Left();
+        printerController.PrinterController_Print(text2.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text3.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text4.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text5.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text6.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(date.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+
+
+        productSaleDAO.close();
+        companyDAO.close();
     }
 
 

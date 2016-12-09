@@ -10,6 +10,42 @@ private int sale_masterid ;
     private  String date;
     private  double discount;
     private  int amount;
+    private  double sumCost;
+    private  double sumPrice;
+    private  double Profit;
+    private  double sumVAT;
+
+    public double getSumCost() {
+        return sumCost;
+    }
+
+    public void setSumCost(double sumCost) {
+        this.sumCost = sumCost;
+    }
+
+    public double getSumPrice() {
+        return sumPrice;
+    }
+
+    public void setSumPrice(double sumPrice) {
+        this.sumPrice = sumPrice;
+    }
+
+    public double getProfit() {
+        return Profit;
+    }
+
+    public void setProfit(double profit) {
+        Profit = profit;
+    }
+
+    public double getSumVAT() {
+        return sumVAT;
+    }
+
+    public void setSumVAT(double sumVAT) {
+        this.sumVAT = sumVAT;
+    }
 
     public int getSale_masterid() {
         return sale_masterid;

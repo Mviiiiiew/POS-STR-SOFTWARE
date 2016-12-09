@@ -44,7 +44,7 @@ public class ReportDAO {
     public ArrayList<ReportList> getAllReportList(String input_date) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('\"+input_date+\"' as decimal)  and cast('\"+input_date+\"' as decimal);", null);
+        Cursor cursor = database.rawQuery("select *,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date+"' as decimal)  and cast('"+input_date+"' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -52,12 +52,60 @@ public class ReportDAO {
             mReportList.setDate(cursor.getString(1));
             mReportList.setDiscount(cursor.getDouble(2));
             mReportList.setAmount(cursor.getInt(3));
+            mReportList.setSumPrice(cursor.getDouble(4));
+            mReportList.setSumCost(cursor.getDouble(5));
+            mReportList.setSumVAT(cursor.getDouble(6));
+            mReportList.setProfit(cursor.getDouble(7));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
         cursor.close();
         return reportLists;
     }
+
+    public ArrayList<ReportList> getAllReportListOneTwo(String input_date_from,String input_date_to) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select *,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_from+"' as decimal)  and cast('"+input_date_to+"' as decimal);", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setDate(cursor.getString(1));
+            mReportList.setDiscount(cursor.getDouble(2));
+            mReportList.setAmount(cursor.getInt(3));
+            mReportList.setSumPrice(cursor.getDouble(4));
+            mReportList.setSumCost(cursor.getDouble(5));
+            mReportList.setSumVAT(cursor.getDouble(6));
+            mReportList.setProfit(cursor.getDouble(7));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+    public ArrayList<ReportList> getAllReportListTwoOne(String input_date_from,String input_date_to) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select *,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_to+"' as decimal)  and cast('"+input_date_from +"' as decimal);", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setDate(cursor.getString(1));
+            mReportList.setDiscount(cursor.getDouble(2));
+            mReportList.setAmount(cursor.getInt(3));
+            mReportList.setSumPrice(cursor.getDouble(4));
+            mReportList.setSumCost(cursor.getDouble(5));
+            mReportList.setSumVAT(cursor.getDouble(6));
+            mReportList.setProfit(cursor.getDouble(7));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+
 
 
     public void exportDataBaseProduct(String input_date) {
@@ -262,43 +310,10 @@ public class ReportDAO {
     }
 
 
-    public void ReportDaily(String input_date) {
-        String sql = "select *  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal) ";
-    }
-
-
-    public void ReportDaily(String input_date_from, String input_date_to) {
-        String sql = " select *  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal) ;";
-
-    }
-
-
-    public ReportList addx() {
-
-        ReportList bee = new ReportList();
-        Cursor cursor = database.rawQuery("INSERT INTO report_list(nameproduct_text,productprice_text,productcount_text) select productsale_text,sum(CAST(productprice_text as decimal)) as product_price,count(productsale_text) from productsale_list where delete_flag = 'N' group by productsale_text ;", null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return bee;
-    }
 
 
 
 
-/*
-
-    public void add(ReportList reportList) {
-
-        ContentValues values = new ContentValues();
-        values.put("nameproduct_text", reportList.getNameProduct());
-        values.put("productprice_text", reportList.getPrice());
-        this.database.insert("report_list", null, values);
 
 
-
-    }
-*/
 }
