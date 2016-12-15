@@ -184,7 +184,7 @@ public class ProductSaleDAO {
     }
     public void updateRunIdBill(String input_RunIdBill) {
 
-        this.database.execSQL("update transectionBill set RunIdBill="+ input_RunIdBill +" where RunIdBill is null");
+        this.database.execSQL("update transectionBill set RunIdBill=(select count(*) from viewmaster_list  where  substr(doc_date,3,2) || substr(doc_date,6,2)  like ("+input_RunIdBill+"))  where  substr(doc_date,3,2) || substr(doc_date,6,2)  like ("+input_RunIdBill+") and RunIdBill is null");
 
     }
 

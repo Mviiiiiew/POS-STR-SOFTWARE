@@ -105,7 +105,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     }
 
     private String Date() {
-        java.text.DateFormat df = new java.text.SimpleDateFormat("MM");
+        java.text.DateFormat df = new java.text.SimpleDateFormat("yyMM");
+
         String date = df.format(java.util.Calendar.getInstance().getTime());
 
         return date;
@@ -351,42 +352,14 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
                         if (cash >= totalall) {
 
+
+
                                 ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
                                 productSaleDAO1.open();
                                 productSaleDAO1.addx();
-                                int afterdate = Integer.parseInt(date);
-                                Log.d("date4", afterdate + "");
-                                int nowdate = Integer.parseInt(Date());
-                                Log.d(nowdate + "", "date2");
-                                int sumdate = nowdate - afterdate;
-                                Log.d(sumdate + "", "date3");
-                                if (sumdate == 0) {
-                                    productSaleDAO1.updatebill(discount);
-                                    int id = productSaleDAO1.datebefore().getId();
-                                    if(id==1){
-                                        String Runid = "1";
-                                        productSaleDAO1.updateRunIdBill(Runid);
+                                productSaleDAO1.updatebill(discount);
+                                productSaleDAO1.updateRunIdBill(Date().toString());
 
-                                        Toast.makeText(getActivity(), "0001", Toast.LENGTH_LONG).show();
-                                    }else{
-                                        int Runid = Integer.parseInt(productSaleDAO1.dateafter().getRunIdBill());
-                                        int RunIdBill = Runid + 1;
-                                        productSaleDAO1.updateRunIdBill(String.valueOf(RunIdBill));
-                                        String BillNo =  productSaleDAO1.dateafter().getRunIdBill().toString()+"POS";
-                                       // Log.d(BillNo + "", "BillNo");
-                                        productSaleDAO1.updatedBillNo("sol0001");
-
-
-                                        Toast.makeText(getActivity(), "+1", Toast.LENGTH_LONG).show();
-                                    }
-
-                                } else {
-                                    String discount = txtdiscount.toString().replaceAll(",", "");
-                                    String RunIdBill = "1";
-                                    productSaleDAO1.updatebill(discount);
-                                    productSaleDAO1.updateRunIdBill(RunIdBill);
-                                    Toast.makeText(getActivity(), "0", Toast.LENGTH_LONG).show();
-                                }
 
                                 //   Toast.makeText(getActivity(), afterdate+"   "+Date().toString(), Toast.LENGTH_LONG).show();
                                 productSaleDAO1.close();
