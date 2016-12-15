@@ -1,6 +1,8 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -28,6 +30,7 @@ import com.example.posstrsoftware.posstrsoftware.util.PrintFix;
 import com.example.posstrsoftware.posstrsoftware.util.formatAmount;
 import com.gc.materialdesign.views.ButtonRectangle;
 
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -75,6 +78,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     int idBill;
     int processmanual;
     int processbarcode;
+    String  date;
 
 
     public PayMainFragment() {
@@ -91,13 +95,17 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        date = sharedPreferences.getString("date",(Date().toString()) );
+        Log.d("date5", date + "");
+
         edit_txt_cash.setText("");
 
 
     }
 
     private String Date() {
-        java.text.DateFormat df = new java.text.SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        java.text.DateFormat df = new java.text.SimpleDateFormat("MM");
         String date = df.format(java.util.Calendar.getInstance().getTime());
 
         return date;
@@ -335,17 +343,57 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 total = Double.valueOf(txt_Totalall.getText().toString().replace(",", ""));
                 change = cash - total;
                 if (checkbox_print.isChecked() == true) {
+                    saveradio();
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
                         double cash = Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
                         double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
                         if (cash >= totalall) {
-                            ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-                            productSaleDAO1.open();
-                            productSaleDAO1.addx();
-                            productSaleDAO1.updatebill(txtdiscount.toString().replaceAll(",",""));
-                            productSaleDAO1.close();
+
+                                ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                                productSaleDAO1.open();
+                                productSaleDAO1.addx();
+                                int afterdate = Integer.parseInt(date);
+                                Log.d("date4", afterdate + "");
+                                int nowdate = Integer.parseInt(Date());
+                                Log.d(nowdate + "", "date2");
+                                int sumdate = nowdate - afterdate;
+                                Log.d(sumdate + "", "date3");
+                                if (sumdate == 0) {
+                                    productSaleDAO1.updatebill(discount);
+                                    int id = productSaleDAO1.datebefore().getId();
+                                    if(id==1){
+                                        String Runid = "1";
+                                        productSaleDAO1.updateRunIdBill(Runid);
+
+                                        Toast.makeText(getActivity(), "0001", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        int Runid = Integer.parseInt(productSaleDAO1.dateafter().getRunIdBill());
+                                        int RunIdBill = Runid + 1;
+                                        productSaleDAO1.updateRunIdBill(String.valueOf(RunIdBill));
+                                        String BillNo =  productSaleDAO1.dateafter().getRunIdBill().toString()+"POS";
+                                       // Log.d(BillNo + "", "BillNo");
+                                        productSaleDAO1.updatedBillNo("sol0001");
+
+
+                                        Toast.makeText(getActivity(), "+1", Toast.LENGTH_LONG).show();
+                                    }
+
+                                } else {
+                                    String discount = txtdiscount.toString().replaceAll(",", "");
+                                    String RunIdBill = "1";
+                                    productSaleDAO1.updatebill(discount);
+                                    productSaleDAO1.updateRunIdBill(RunIdBill);
+                                    Toast.makeText(getActivity(), "0", Toast.LENGTH_LONG).show();
+                                }
+
+                                //   Toast.makeText(getActivity(), afterdate+"   "+Date().toString(), Toast.LENGTH_LONG).show();
+                                productSaleDAO1.close();
+
+
+
+
 
                           /* HeadMaster();
                             ProductAll();
@@ -542,6 +590,26 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         productSaleDAO.close();
         companyDAO.close();
     }
+    private void saveradio() {
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("date", (Date().toString()));
+
+        editor.commit();
+    }
+
+    private void loadradio() {
+
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String date;
+        date = sharedPreferences.getString("date",(Date().toString()) );
+
+
+
+
+    }
+
+
 
 
 }

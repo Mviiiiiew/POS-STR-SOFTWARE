@@ -257,33 +257,34 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                 case R.id.radio_date_day:
 
                    /* HeadMaster();
-                    Underline();*/
+                    Underline();
                     Description();
-                    Linefeed();
+                    Linefeed();*/
 
 
                     break;
 
 
                 case R.id.radio_date_between:
+
                     dateone = edit_date_one.getText().toString();
                     datetwo = edit_date_two.getText().toString();
                     date = edit_date_day.getText().toString();
                     int oneday = Integer.parseInt(dateone.replaceAll("/", ""));
-                    Log.d(oneday + "", "one");
+
                     int twoday = Integer.parseInt(datetwo.replaceAll("/", ""));
-                    Log.d(twoday + "", "two");
+
 
                     if (oneday < twoday) {
-                        /*HeadMasterbetween();*/
+                        /*HeadMasterbetween();
                         DescriptionBetweenOneTwo();
-                        Linefeed();
+                        Linefeed();*/
                     } else if (oneday > twoday) {
-                        /*HeadMasterbetween();*/
+                        /*HeadMasterbetween();
                         DescriptionBetweenTwoOne();
-                        Linefeed();
+                        Linefeed();*/
                     } else{
-                        DescriptionBetweenOneTwo();
+                      /*  DescriptionBetweenOneTwo();*/
                     }
 
                     //   Toast.makeText(getActivity(),oneday + twoday,Toast.LENGTH_SHORT).show();

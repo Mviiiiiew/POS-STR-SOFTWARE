@@ -124,7 +124,9 @@ public class DbHelper extends SQLiteOpenHelper {
             +"product_cost TEXT ,"
             +"vat_flag TEXT ,"
             +"vatrate TEXT ,"
-            +"delete_flag TEXT DEFAULT 'N'"
+            +"delete_flag TEXT DEFAULT 'N',"
+            +"RunIdBill INTEGER,"
+            +"BillNo TEXT "
             +");";
 
 

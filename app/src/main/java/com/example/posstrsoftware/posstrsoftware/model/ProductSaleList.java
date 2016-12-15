@@ -10,18 +10,44 @@ import android.widget.BaseAdapter;
  */
 
 public class ProductSaleList {
+    public String getDateId() {
+        return dateId;
+    }
 
+    public void setDateId(String dateId) {
+        this.dateId = dateId;
+    }
+
+    private String dateId;
     private int id;
-    private  int productid;
-    private  int unitid;
-    private  int groupid;
-    private  int saleMasterid;
-    private  String groupname;
-    private  Double product_price;
-    private  Double product_cost;
-    private  String vat_flag;
-    private  Double vatrate;
-    private  Double vat;
+    private int productid;
+    private int unitid;
+    private int groupid;
+    private int saleMasterid;
+    private String groupname;
+    private Double product_price;
+    private Double product_cost;
+    private String vat_flag;
+    private Double vatrate;
+    private Double vat;
+    private String afterdate;
+    private String RunIdBill;
+
+    public String getRunIdBill() {
+        return RunIdBill;
+    }
+
+    public void setRunIdBill(String runIdBill) {
+        RunIdBill = runIdBill;
+    }
+
+    public String getAfterdate() {
+        return afterdate;
+    }
+
+    public void setAfterdate(String afterdate) {
+        this.afterdate = afterdate;
+    }
 
     public Double getVat() {
         return vat;
@@ -72,8 +98,8 @@ public class ProductSaleList {
         this.saleMasterid = saleMasterid;
     }
 
-    private  String discount;
-    private  String unitname;
+    private String discount;
+    private String unitname;
 
     public String getUnitname() {
         return unitname;
@@ -128,8 +154,6 @@ public class ProductSaleList {
     private String ProductSale;
     private Double price;
     boolean checkbox;
-
-
 
 
     public ProductSaleList() {

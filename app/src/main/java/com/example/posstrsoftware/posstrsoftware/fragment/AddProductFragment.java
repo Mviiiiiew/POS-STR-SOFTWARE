@@ -204,7 +204,10 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
             } else if (editText_Price.getText().toString().matches("")) {
                 Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else if (editText_Cost.getText().toString().matches("")) {
+                Toast.makeText(getActivity(), "< Please input Cost or  0 >", Toast.LENGTH_SHORT).show();
+            }else {
 
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));

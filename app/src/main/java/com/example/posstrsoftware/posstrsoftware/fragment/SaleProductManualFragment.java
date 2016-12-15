@@ -117,6 +117,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
+
         List<String> list = new ArrayList<>();
         list.add(Date());
 
@@ -148,6 +149,11 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Double total = 0.0;
+                java.text.DateFormat df = new java.text.SimpleDateFormat("MM");
+                String date = df.format(java.util.Calendar.getInstance().getTime());
+
+
+
 
                 ProductSaleList productSaleList = new ProductSaleList();
                 productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
@@ -160,6 +166,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
                 productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
                 productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
+
 
 
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());

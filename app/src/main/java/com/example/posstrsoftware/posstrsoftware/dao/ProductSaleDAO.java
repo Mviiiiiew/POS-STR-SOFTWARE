@@ -51,6 +51,38 @@ public class ProductSaleDAO {
 
     }
 
+    public ProductSaleList datebefore() {
+        ProductSaleList productSaleList = new ProductSaleList();
+        Cursor cursor = database.rawQuery("select id_productsale from transectionBill   order by  sale_master_id desc limit 1;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            productSaleList.setId(cursor.getInt(0));
+
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        return productSaleList;
+
+
+    }
+
+    public ProductSaleList dateafter() {
+        ProductSaleList productSaleList = new ProductSaleList();
+        Cursor cursor = database.rawQuery("select id_productsale,RunIdBill from transectionBill  where RunIdBill  is not null  order by  sale_master_id desc limit 1;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            productSaleList.setId(cursor.getInt(0));
+            productSaleList.setRunIdBill(cursor.getString(1));
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        return productSaleList;
+
+
+    }
+
     public ArrayList<ProductSaleList> getAllMasterProductSaleList() {
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
         Cursor cursor = database.rawQuery("select * from viewmaster_list  order by sale_master_id desc limit 1 ;", null);
@@ -139,15 +171,26 @@ public class ProductSaleDAO {
         values.put("product_cost", productSaleList.getProduct_cost());
         values.put("vat_flag", productSaleList.getVat_flag());
 
+
         this.database.insert("productsale_list", null, values);
 
 
     }
 
-    public void
-    updatebill(String input_discount) {
+    public void updatebill(String input_discount) {
 
         this.database.execSQL("update transectionBill set sale_master_id =  (select(case when (select count(*) from transectionBill where sale_master_id is not null) = 0 then 1 else (select (CASE  WHEN sale_master_id  is null then 1 else sale_master_id +1  end) as id from transectionBill where  sale_master_id is not null order by id_productsale desc limit 1) end)),discount=" + input_discount + ",doc_date= date('now'),vatrate=(select vatrate from company_list ) where sale_master_id is null");
+
+    }
+    public void updateRunIdBill(String input_RunIdBill) {
+
+        this.database.execSQL("update transectionBill set RunIdBill="+ input_RunIdBill +" where RunIdBill is null");
+
+    }
+
+    public void updatedBillNo(String input_BillNo) {
+
+        this.database.execSQL("update transectionBill set BillNo="+input_BillNo+" where BillNo is null");
 
     }
 
