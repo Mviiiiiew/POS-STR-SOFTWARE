@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/fragment_manual"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:id="@+id/fragment_manual"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -24,21 +24,52 @@
             android:paddingLeft="5dp"
             android:src="@drawable/ic_arrow_back"
             />
+
         <android.support.v7.widget.SearchView
             android:id="@+id/searchViewProduct"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
             android:layout_alignTop="@+id/btn_back"
-            android:layout_toRightOf="@+id/btn_back"
-            android:layout_toLeftOf="@+id/txt_cost"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="200dp"
+            android:layout_toRightOf="@+id/btn_back"
+
+            android:background="@color/colorWhite"
 
 
             >
 
         </android.support.v7.widget.SearchView>
+        <TextView
+            android:id="@+id/txt_Amount"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/searchViewProduct"
+            android:layout_alignBottom="@+id/searchViewProduct"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#000000"
+            android:layout_marginLeft="23dp"
+            android:textStyle="bold"
+            android:text="จำนวนสินค้า >>"
+
+            />
+
+        <EditText
+            android:id="@+id/edit_Amount"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txt_Amount"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/txt_Amount"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:cursorVisible="false"
+            android:hint="จำนวน"
+            android:inputType="number"
+            android:padding="4dp"
+            android:textSize="28sp"
+            android:textStyle="bold"/>
+
+
         <TextView
             android:id="@+id/txt_cost"
             android:layout_width="200dp"
@@ -67,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.25"
             android:orientation="vertical"
-          >
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,8 +114,8 @@
                     android:background="@color/colorBlue"
                     android:gravity="center"
                     android:padding="2dp"
-                    android:textColor="@color/colorBlack"
                     android:text="กลุ่ม"
+                    android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     android:textStyle="bold"/>
 
@@ -99,6 +130,7 @@
                     android:textStyle="bold"/>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -126,7 +158,6 @@
                 </ListView>
 
             </LinearLayout>
-
 
 
         </LinearLayout>
@@ -159,9 +190,9 @@
                     android:layout_weight="1.5"
                     android:background="@color/colorBlue"
                     android:gravity="center"
-                    android:textColor="@color/colorBlack"
                     android:padding="2dp"
                     android:text="รายการสินค้า"
+                    android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     android:textStyle="bold"/>
 
@@ -180,10 +211,10 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:textColor="@color/colorBlack"
                     android:background="#FFFF00"
+                    android:gravity="center"
                     android:text="ราคา"
+                    android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     android:textStyle="bold"/>
 
@@ -195,23 +226,23 @@
                 android:background="@color/colorGray"
 
                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="vertical"
-                android:layout_weight="2.7">
+                android:layout_weight="2.7"
+                android:orientation="vertical">
+
                 <ListView
                     android:id="@+id/listView_SaleProductmanual"
                     android:layout_width="match_parent"
-                    android:clickable="false"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:clickable="false">
 
 
                 </ListView>
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

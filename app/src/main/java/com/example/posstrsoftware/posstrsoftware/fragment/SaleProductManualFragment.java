@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,7 +56,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     ButtonRectangle btn_delete;
     ImageButton btn_back;
     ButtonRectangle btn_Pay;
-
+    EditText edit_Amount;
+    int amount =1;
 
     public SaleProductManualFragment() {
         super();
@@ -87,6 +90,15 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
+        edit_Amount = (EditText) rootView.findViewById(R.id.edit_Amount);
+        edit_Amount.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        edit_Amount.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             edit_Amount.setText("");
+
+         }
+     });
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_backz.setOnClickListener(this);
@@ -117,6 +129,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
+        edit_Amount.setText("1");
+
 
         List<String> list = new ArrayList<>();
         list.add(Date());
@@ -148,138 +162,146 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         listview_salemanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Double total = 0.0;
-                java.text.DateFormat df = new java.text.SimpleDateFormat("MM");
-                String date = df.format(java.util.Calendar.getInstance().getTime());
-
-
-
-
-                ProductSaleList productSaleList = new ProductSaleList();
-                productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
-                productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
-                productSaleList.setProductid(((ProductList) objAdapter.getItem(position)).getId());
-                productSaleList.setUnitid(((ProductList) objAdapter.getItem(position)).getUnitList().getId());
-                productSaleList.setUnitname(((ProductList) objAdapter.getItem(position)).getUnitList().getUnitText());
-                productSaleList.setGroupid(((ProductList) objAdapter.getItem(position)).getGroupList().getId());
-                productSaleList.setGroupname(((ProductList) objAdapter.getItem(position)).getGroupList().getGroupText());
-                productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
-                productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
-                productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
-
-
-
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
-                productSaleDAO.add(productSaleList);
-                ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
-                listView_SaleProductmanual.setAdapter(adapter);
-                for (ProductSaleList bean : productSaleLists) {
-                    total += Double.valueOf(bean.getPrice());
+                Double total = 0.0;
+                if (edit_Amount.getText().toString().matches("")) {
+                    amount = 1;
+                } else {
+                  amount = Integer.parseInt(edit_Amount.getText().toString().trim());
+                    }
 
+
+                    for (int i = 0; i < amount; i++) {
+
+                        ProductSaleList productSaleList = new ProductSaleList();
+                        productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
+                        productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
+                        productSaleList.setProductid(((ProductList) objAdapter.getItem(position)).getId());
+                        productSaleList.setUnitid(((ProductList) objAdapter.getItem(position)).getUnitList().getId());
+                        productSaleList.setUnitname(((ProductList) objAdapter.getItem(position)).getUnitList().getUnitText());
+                        productSaleList.setGroupid(((ProductList) objAdapter.getItem(position)).getGroupList().getId());
+                        productSaleList.setGroupname(((ProductList) objAdapter.getItem(position)).getGroupList().getGroupText());
+                        productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
+                        productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
+                        productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
+                        productSaleDAO.add(productSaleList);
+                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
+                        listView_SaleProductmanual.setAdapter(adapter);
+
+                    }
+                    edit_Amount.setText("1");
+                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                    for (ProductSaleList bean : productSaleLists) {
+                        total += Double.valueOf(bean.getPrice());
+                        txt_cost.setText(formatAmount.formatAmountDouble(total));
+
+
+                    }
+
+                    productSaleDAO.close();
                 }
-
-                txt_cost.setText(formatAmount.formatAmountDouble(total));
-                productSaleDAO.close();
-
-
             }
-        });
-        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+
+            );
+            searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+
+            {
+                @Override
+                public boolean onQueryTextSubmit (String query){
                 return true;
             }
 
-            @Override
-            public boolean onQueryTextChange(String query) {
+                @Override
+                public boolean onQueryTextChange (String query){
                 objAdapter.getFilter().filter(query);
                 return false;
             }
-        });
+            }
 
-    }
+            );
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
+        }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
+        @Override
+        public void onStart () {
+            super.onStart();
+        }
+
+        @Override
+        public void onStop () {
+            super.onStop();
+        }
 
     /*
      * Save Instance State Here
      */
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // Save Instance State here
-    }
+        @Override
+        public void onSaveInstanceState (Bundle outState){
+            super.onSaveInstanceState(outState);
+            // Save Instance State here
+        }
 
     /*
      * Restore Instance State Here
      */
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            // Restore Instance State here
+        @Override
+        public void onActivityCreated (Bundle savedInstanceState){
+            super.onActivityCreated(savedInstanceState);
+            if (savedInstanceState != null) {
+                // Restore Instance State here
+            }
+        }
+
+        @Override
+        public void onClick (View v){
+            if (btn_clear == v) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
+                alertDialogder.setTitle("เริ่มรายการใหม่ ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductSaleList productSaleList = new ProductSaleList();
+                        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                        productSaleDAO.open();
+                        productSaleDAO.clear(productSaleList);
+                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                        listView_SaleProductmanual.setAdapter(adapter);
+                        productSaleDAO.close();
+                        txt_cost.setText("0.00");
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (btn_backz == v || btn_back == v) {
+
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                this.getActivity().finish();
+
+            } else if (btn_delete == v) {
+                Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+                startActivity(intent);
+            } else if (btn_Pay == v) {
+
+
+                Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
+                intent.putExtra("total", txt_cost.getText());
+                intent.putExtra("processmanual", 1);
+                intent.putExtra("processbarcode", 0);
+                startActivity(intent);
+
+
+            }
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        if (btn_clear == v) {
-            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-            alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
-            alertDialogder.setTitle("เริ่มรายการใหม่ ?");
-            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ProductSaleList productSaleList = new ProductSaleList();
-                    ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-                    productSaleDAO.open();
-                    productSaleDAO.clear(productSaleList);
-                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                    final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-                    listView_SaleProductmanual.setAdapter(adapter);
-                    productSaleDAO.close();
-                    txt_cost.setText("0.00");
-                }
-            });
-            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            alertDialogder.show();
-
-        } else if (btn_backz == v || btn_back == v) {
-
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            this.getActivity().finish();
-
-        } else if (btn_delete == v) {
-            Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
-            startActivity(intent);
-        } else if (btn_Pay == v) {
-
-
-
-            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
-            intent.putExtra("total", txt_cost.getText());
-            intent.putExtra("processmanual",1);
-            intent.putExtra("processbarcode",0);
-            startActivity(intent);
-
-
-        }
-    }
-}
