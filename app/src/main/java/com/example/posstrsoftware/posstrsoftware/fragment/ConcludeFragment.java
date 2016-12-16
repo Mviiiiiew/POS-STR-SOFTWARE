@@ -228,12 +228,12 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         }else if (btt_RePrint == v){
 
 
-                          /* HeadMaster();
+                            HeadMaster();
                             ProductAll();
                             Underline();
                             TotalAllx();
                             EndText();
-                            Linefeed();*/
+                            Linefeed();
 
         }
 
@@ -327,7 +327,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     private void HeadMaster() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        java.text.DateFormat df = new java.text.SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        java.text.DateFormat df = new java.text.SimpleDateFormat(" d /MM /yyyy, HH:mm");
 
 
         String date = df.format(java.util.Calendar.getInstance().getTime());
@@ -337,10 +337,11 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
         String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() + " " + "Tel." + companyDAO.InvoiceMaster().getTelephone();
-        String text3 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
-        String text4 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
-        String text5 = "BillNo # " + productSaleDAO.InvoiceMaster().getSaleMasterid();
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName();
+        String text3  ="Tel." + companyDAO.InvoiceMaster().getTelephone();
+        String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
+        String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
+        String text6 = "BillNo # " + productSaleDAO.InvoiceMaster().getBillId();
 
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Print(text1.getBytes());
@@ -354,6 +355,8 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print(text4.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(text5.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text6.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(date.getBytes());
         printerController.PrinterController_Print("\n".getBytes());

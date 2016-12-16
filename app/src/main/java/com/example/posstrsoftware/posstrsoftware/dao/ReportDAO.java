@@ -49,13 +49,14 @@ public class ReportDAO {
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
             mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setBillId(cursor.getString(9));
             mReportList.setDate(cursor.getString(1));
             mReportList.setDiscount(cursor.getDouble(2));
             mReportList.setAmount(cursor.getInt(3));
             mReportList.setSumPrice(cursor.getDouble(4));
             mReportList.setSumCost(cursor.getDouble(5));
             mReportList.setSumVAT(cursor.getDouble(6));
-            mReportList.setProfit(cursor.getDouble(7));
+            mReportList.setProfit(cursor.getDouble(10));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
@@ -71,13 +72,14 @@ public class ReportDAO {
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
             mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setBillId(cursor.getString(9));
             mReportList.setDate(cursor.getString(1));
             mReportList.setDiscount(cursor.getDouble(2));
             mReportList.setAmount(cursor.getInt(3));
             mReportList.setSumPrice(cursor.getDouble(4));
             mReportList.setSumCost(cursor.getDouble(5));
             mReportList.setSumVAT(cursor.getDouble(6));
-            mReportList.setProfit(cursor.getDouble(7));
+            mReportList.setProfit(cursor.getDouble(10));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
@@ -92,13 +94,14 @@ public class ReportDAO {
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
             mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setBillId(cursor.getString(9));
             mReportList.setDate(cursor.getString(1));
             mReportList.setDiscount(cursor.getDouble(2));
             mReportList.setAmount(cursor.getInt(3));
             mReportList.setSumPrice(cursor.getDouble(4));
             mReportList.setSumCost(cursor.getDouble(5));
             mReportList.setSumVAT(cursor.getDouble(6));
-            mReportList.setProfit(cursor.getDouble(7));
+            mReportList.setProfit(cursor.getDouble(10));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }

@@ -344,7 +344,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                 total = Double.valueOf(txt_Totalall.getText().toString().replace(",", ""));
                 change = cash - total;
                 if (checkbox_print.isChecked() == true) {
-                    saveradio();
+
                     if (edit_txt_cash.getText().toString().trim().replaceAll("\\.", "").matches("")) {
                         Toast.makeText(getActivity(), "กรุณาใส่จำนวนเงินรับชำระ", Toast.LENGTH_LONG).show();
                     } else {
@@ -357,7 +357,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                                 ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
                                 productSaleDAO1.open();
                                 productSaleDAO1.addx();
-                                productSaleDAO1.updatebill(discount);
+                                productSaleDAO1.updatebill(txtdiscount);
                                 productSaleDAO1.updateRunIdBill(Date().toString());
 
 
@@ -368,12 +368,12 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
 
 
-                          /* HeadMaster();
+                           HeadMaster();
                             ProductAll();
                             Underline();
                             TotalAll();
                             EndText();
-                            Linefeed();*/
+                            Linefeed();
 
 
 
@@ -407,6 +407,15 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         double cash = Double.parseDouble(edit_txt_cash.getText().toString().trim().replaceAll(",", ""));
                         double totalall = Double.parseDouble((txt_Totalall.getText().toString().trim().replaceAll(",", "")));
                         if (cash >= totalall) {
+                            ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                            productSaleDAO1.open();
+                            productSaleDAO1.addx();
+                            productSaleDAO1.updatebill(txtdiscount);
+                            productSaleDAO1.updateRunIdBill(Date().toString());
+
+
+                            //   Toast.makeText(getActivity(), afterdate+"   "+Date().toString(), Toast.LENGTH_LONG).show();
+                            productSaleDAO1.close();
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getActivity(), ConcludeActivity.class);
                             intent.putExtra("mTotal", txt_NameTotal.getText().toString());
@@ -416,6 +425,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("mChange", formatAmount.formatAmountDouble(change).toString());
                             intent.putExtra("symbol", symbol);
                             intent.putExtra("discount", txtdiscount);
+                            intent.putExtra("processmanual", processmanual);
+                            intent.putExtra("processbarcode", processbarcode);
                             startActivity(intent);
 
 
@@ -500,7 +511,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-
         String feed[] = new String[]{"", " "};
         for (ProductSaleList bean : productSaleLists) {
             String price = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getPrice())), 10);
@@ -522,7 +532,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     private void HeadMaster() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        DateFormat df = new SimpleDateFormat("d/ MM/ yyyy, HH:mm");
 
 
         String date = df.format(Calendar.getInstance().getTime());
@@ -533,10 +543,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         companyDAO.open();
 
         String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() + " " + "Tel." + companyDAO.InvoiceMaster().getTelephone();
-        String text3 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
-        String text4 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
-        String text5 = "BillNo # " + (productSaleDAO.InvoiceMaster().getSaleMasterid());
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() ;
+        String text3   ="Tel." + companyDAO.InvoiceMaster().getTelephone();
+        String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
+        String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
+        String text6 = "BillNo # " + (productSaleDAO.InvoiceMaster().getBillId());
 
 
         printerController.PrinterController_Set_Center();
@@ -552,6 +563,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(text5.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(text6.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(date.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Set_Center();
@@ -563,24 +576,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         productSaleDAO.close();
         companyDAO.close();
     }
-    private void saveradio() {
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("date", (Date().toString()));
-
-        editor.commit();
-    }
-
-    private void loadradio() {
-
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String date;
-        date = sharedPreferences.getString("date",(Date().toString()) );
 
 
 
-
-    }
 
 
 

@@ -10,10 +10,13 @@
       <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE19.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE19.iml" />
       <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE24.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE24.iml" />
       <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE3.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE4.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE4.iml" />
       <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE7.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE7.iml" />
       <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWAREBackup3.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWAREBackup3.iml" />
       <module fileurl="file://$PROJECT_DIR$/POSSTRSoftware.iml" filepath="$PROJECT_DIR$/POSSTRSoftware.iml" />
       <module fileurl="file://$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" filepath="$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" filepath="$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

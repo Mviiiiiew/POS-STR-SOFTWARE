@@ -94,7 +94,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
                 ArrayList<ProductList> filters = new ArrayList<>();
                 for (int i = 0; i < filterList.size(); i++) {
                     if (filterList.get(i).getProductText().toUpperCase().contains(constraint)) {
-                        ProductList u = new ProductList(filterList.get(i).getId(), filterList.get(i).getProductText(), filterList.get(i).getProductprice(), filterList.get(i).getGroupList(), filterList.get(i).getUnitList(), filterList.get(i).getBarcode());
+                        ProductList u = new ProductList(filterList.get(i).getId(), filterList.get(i).getProductText(), filterList.get(i).getProductpricesumvat(), filterList.get(i).getGroupList(), filterList.get(i).getUnitList(),filterList.get(i).getCost(), filterList.get(i).getBarcode());
                         filters.add(u);
                     }
                 }

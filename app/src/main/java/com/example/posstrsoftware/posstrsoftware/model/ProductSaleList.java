@@ -32,6 +32,15 @@ public class ProductSaleList {
     private Double vat;
     private String afterdate;
     private String RunIdBill;
+    private String BillId;
+
+    public String getBillId() {
+        return BillId;
+    }
+
+    public void setBillId(String billId) {
+        BillId = billId;
+    }
 
     public String getRunIdBill() {
         return RunIdBill;

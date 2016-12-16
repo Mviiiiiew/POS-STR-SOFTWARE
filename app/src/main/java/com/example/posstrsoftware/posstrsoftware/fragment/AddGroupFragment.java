@@ -57,6 +57,7 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
         btn_save.setOnClickListener(this);
         btn_back.setOnClickListener(this);
         btn_back.setRippleSpeed(40);
+        btn_save.setRippleSpeed(40);
     }
 
     @Override

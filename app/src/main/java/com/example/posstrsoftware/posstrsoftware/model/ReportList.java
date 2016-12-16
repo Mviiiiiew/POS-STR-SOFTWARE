@@ -14,6 +14,15 @@ private int sale_masterid ;
     private  double sumPrice;
     private  double Profit;
     private  double sumVAT;
+    private  String BillId;
+
+    public String getBillId() {
+        return BillId;
+    }
+
+    public void setBillId(String billId) {
+        BillId = billId;
+    }
 
     public double getSumCost() {
         return sumCost;
