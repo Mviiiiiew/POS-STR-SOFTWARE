@@ -165,7 +165,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                 productSaleDAO.open();
                 Double total = 0.0;
-                if (edit_Amount.getText().toString().matches("")) {
+                if (edit_Amount.getText().toString().matches("")||edit_Amount.getText().toString().matches("0")) {
                     amount = 1;
                 } else {
                   amount = Integer.parseInt(edit_Amount.getText().toString().trim());
