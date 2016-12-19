@@ -56,7 +56,7 @@
         android:background="@color/colorWhite"
         android:gravity="center"
 
-
+       android:focusableInTouchMode="true"
         android:hint="จำนวน"
         android:inputType="number"
         android:padding="4dp"

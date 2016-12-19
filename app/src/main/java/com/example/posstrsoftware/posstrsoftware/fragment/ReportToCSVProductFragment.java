@@ -192,9 +192,14 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
     DatePickerDialog.OnDateSetListener ondatetwo = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_two.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_two.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
+
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
         }
@@ -209,9 +214,14 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
     DatePickerDialog.OnDateSetListener ondateone = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_one.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_one.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
+
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
     }
@@ -226,8 +236,12 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_day.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_day.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
 
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth);

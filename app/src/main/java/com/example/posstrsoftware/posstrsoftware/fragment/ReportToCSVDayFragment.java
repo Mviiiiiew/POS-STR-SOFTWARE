@@ -39,7 +39,6 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
     String datetwo;
 
 
-
     public ReportToCSVDayFragment() {
         super();
     }
@@ -109,8 +108,12 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
         /*    Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_day.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_day.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
 
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
@@ -133,9 +136,14 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
             /*Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_one.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_one.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
+
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
         }
@@ -155,9 +163,14 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
           /*  Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_two.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_two.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
+
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
         }
@@ -227,10 +240,8 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         if (edit_date_day == v) {
             showDatePicker();
-
         } else if (edit_date_one == v) {
             showDatePickerOne();
-
         } else if (edit_date_two == v) {
             showDatePickerTwo();
         } else if (btn_back == v) {

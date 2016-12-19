@@ -53,6 +53,8 @@ public class MainFragment extends Fragment {
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
         Company.setText(companyDAO.InvoiceMaster().getCompanyName().toString());
+
+
         companyDAO.close();
     }
 

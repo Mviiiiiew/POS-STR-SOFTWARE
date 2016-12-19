@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
@@ -58,6 +60,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     ButtonRectangle btn_Pay;
     EditText edit_Amount;
     int amount =1;
+    int VarAmount = 0 ;
 
     public SaleProductManualFragment() {
         super();
@@ -158,22 +161,54 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
         final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
         listView_SaleProductmanual.setAdapter(adapter);
+        listView_SaleProductmanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้า :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
+                alertDialogder.setTitle("ลบสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(),"OK",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(),"CANCEL",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogder.show();
+            }
+        });
 
         listview_salemanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-                productSaleDAO.open();
-                Double total = 0.0;
-                if (edit_Amount.getText().toString().matches("")||edit_Amount.getText().toString().matches("0")) {
-                    amount = 1;
-                } else {
-                  amount = Integer.parseInt(edit_Amount.getText().toString().trim());
+                if (edit_Amount.getText().toString().matches("")){
+                    edit_Amount.setText("1");
+                }else{
+                    VarAmount = Integer.parseInt(edit_Amount.getText().toString());
+                }
+                if (VarAmount > 100) {
+                    Toast.makeText(getActivity(), "กรุณาใส่จำนวนสินค้า 1-100 ชิ้น", Toast.LENGTH_LONG).show();
+
+                    edit_Amount.setText("1");
+                }else {
+                    ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                    productSaleDAO.open();
+                    Double total = 0.0;
+                    if (edit_Amount.getText().toString().matches("") || edit_Amount.getText().toString().matches("0")) {
+                        amount = 1;
+                    } else {
+                        amount = Integer.parseInt(edit_Amount.getText().toString().trim());
                     }
 
 
                     for (int i = 0; i < amount; i++) {
-
                         ProductSaleList productSaleList = new ProductSaleList();
                         productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
                         productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
@@ -202,6 +237,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
                     productSaleDAO.close();
                 }
+            }
             }
 
             );
@@ -254,6 +290,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             }
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public void onClick (View v){
             if (btn_clear == v) {
@@ -286,8 +323,9 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             } else if (btn_backz == v || btn_back == v) {
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().finishAffinity();
                 startActivity(intent);
-                this.getActivity().finish();
+
 
             } else if (btn_delete == v) {
                 Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);

@@ -52,37 +52,9 @@ public class ProductSaleDAO {
 
     }
 
-    public ProductSaleList datebefore() {
-        ProductSaleList productSaleList = new ProductSaleList();
-        Cursor cursor = database.rawQuery("select id_productsale from transectionBill   order by  sale_master_id desc limit 1;", null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            productSaleList.setId(cursor.getInt(0));
-
-            cursor.moveToNext();
-
-        }
-        cursor.close();
-        return productSaleList;
 
 
-    }
 
-    public ProductSaleList dateafter() {
-        ProductSaleList productSaleList = new ProductSaleList();
-        Cursor cursor = database.rawQuery("select id_productsale,RunIdBill from transectionBill  where RunIdBill  is not null  order by  sale_master_id desc limit 1;", null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            productSaleList.setId(cursor.getInt(0));
-            productSaleList.setRunIdBill(cursor.getString(1));
-            cursor.moveToNext();
-
-        }
-        cursor.close();
-        return productSaleList;
-
-
-    }
 
     public ArrayList<ProductSaleList> getAllMasterProductSaleList() {
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();

@@ -10,13 +10,7 @@ import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.fragment.SaleProductManualFragment;
 
 public class SaleProductManualActivity extends AppCompatActivity {
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

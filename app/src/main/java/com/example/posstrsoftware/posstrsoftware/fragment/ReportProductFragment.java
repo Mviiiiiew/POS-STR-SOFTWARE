@@ -151,7 +151,16 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
     DatePickerDialog.OnDateSetListener ondatetwo = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            edit_date_two.setText( year+ "/" + (month + 1) + "/" + dayOfMonth  );
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_two.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
+                edit_date_two.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_two.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
+            } else {
+                edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+
+            }
         }
     };
 
@@ -164,7 +173,16 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
     DatePickerDialog.OnDateSetListener ondateone = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_one.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
+                edit_date_one.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_one.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
+            } else {
+
+                edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+            }
     }
     };
 
@@ -177,7 +195,16 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth );
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_day.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
+                edit_date_day.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_day.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
+            } else {
+
+                edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+            }
         }
     };
 }

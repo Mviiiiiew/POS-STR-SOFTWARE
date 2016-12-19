@@ -11,12 +11,7 @@ import com.example.posstrsoftware.posstrsoftware.fragment.SaleProductFragment;
 
 public class SaleProductActivity extends AppCompatActivity {
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

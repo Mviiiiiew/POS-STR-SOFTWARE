@@ -211,7 +211,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
             productSaleDAO.close();
             Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
             // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          // getActivity().finishAffinity();
+           getActivity().finishAffinity();
             startActivity(intent);
         } else if (btn_barcode == v) {
             ProductSaleList productSaleList = new ProductSaleList();
@@ -220,7 +220,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
             productSaleDAO.clear(productSaleList);
             productSaleDAO.close();
             Intent intent = new Intent(getActivity(), SaleProductActivity.class);
-          //  getActivity().finishAffinity();
+            getActivity().finishAffinity();
 
           //  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -303,7 +303,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     private void ProductAll() {
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllDetialProductSaleList();
+        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
 
         String feed[] = new String[]{"", " "};
         for (ProductSaleList bean : productSaleLists) {

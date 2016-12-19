@@ -51,6 +51,13 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
     String date;
     String dateone;
     String datetwo;
+    int SumAmount = 0;
+    Double SumPrice = 0.0;
+    Double SumCost = 0.0;
+    Double SumVAT = 0.0;
+    Double SumDisCount = 0.0;
+    Double SumProfit = 0.0;
+
     private PrinterController printerController = null;
 
 
@@ -123,8 +130,12 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         /*    Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_day.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_day.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
 
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
@@ -147,9 +158,14 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             /*Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_one.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_one.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
+
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
         }
@@ -169,9 +185,14 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
           /*  Toast.makeText(getActivity(), String.valueOf(year) + "-" + String.valueOf(month + 1)
                             + "-" + String.valueOf(dayOfMonth),
                     Toast.LENGTH_SHORT).show();*/
-            if (dayOfMonth < 10) {
+            if (dayOfMonth < 10 && month < 10) {
+                edit_date_two.setText(year + "/" + "0" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
+            } else if (dayOfMonth >= 10 && month < 10) {
+                edit_date_two.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
             } else {
+
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
         }
@@ -260,7 +281,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                     HeadMaster();
                     Underline();
                     Description();
+                    Underline();
+                    Conclude();
                     Linefeed();
+
+
 
 
                     break;
@@ -277,14 +302,26 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
                     if (oneday < twoday) {
                         HeadMasterbetween();
+                        Underline();
                         DescriptionBetweenOneTwo();
+                        Underline();
+                        Conclude();
                         Linefeed();
                     } else if (oneday > twoday) {
                         HeadMasterbetween();
+                        Underline();
                         DescriptionBetweenTwoOne();
+                        Underline();
+                        Conclude();
                         Linefeed();
                     } else{
+
+                        HeadMasterbetween();
+                        Underline();
                         DescriptionBetweenOneTwo();
+                        Underline();
+                        Conclude();
+                        Linefeed();
                     }
 
                     //   Toast.makeText(getActivity(),oneday + twoday,Toast.LENGTH_SHORT).show();
@@ -294,6 +331,33 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             }
         }
 
+
+    }
+
+    private void Conclude() {
+
+        String mSumAmount = "SumAmount#"+PrintFix.generatePrice(SumAmount+"",22);
+        String mSumPrice = "SumPrice#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumPrice+"")),23);
+        String mSumCost = "SumCost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumCost+"")),24);
+        String mSumVAT = "SumVAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumVAT+"")),25);
+        String mSumDisCount = "SumDisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumDisCount+"")),20);
+        String mSumprofit = "Sumprofit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumProfit+"")),22);
+
+        printerController.PrinterController_Font_Normal_mode();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Print(mSumAmount.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(mSumPrice.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(mSumCost.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(mSumVAT.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(mSumDisCount.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(mSumprofit.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
 
     }
 
@@ -312,21 +376,13 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
             String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
             String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SumPrice#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),23);
-            String SumCost = "SumCost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),24);
-            String SumVAT = "SumVAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),25);
-            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),20);
+            String SumPrice = "Price#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),26);
+            String SumCost = "Cost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
+            String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
+            String SumDiscount = "DisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),23);
             String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
 
 
-          /*  String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
-            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
-            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SumPrice#"+PrintFix.generatePrice(bean.getSumPrice()+"",23);
-            String SumCost = "SumCost#"+PrintFix.generatePrice(bean.getSumCost()+"",24);
-            String SumVAT = "SumVAT#"+PrintFix.generatePrice(bean.getSumVAT()+"",25);
-            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(bean.getDiscount()+"",20);
-            String Profit = "Profit#"+PrintFix.generatePrice(bean.getProfit()+"",25);*/
 
 
             printerController = PrinterController.getInstance(getActivity());
@@ -351,6 +407,15 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             printerController.PrinterController_Print(Profit.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
         }
+        for (ReportList bean : reportLists) {
+            SumAmount+=(bean.getAmount());
+            SumPrice += Double.valueOf(bean.getSumPrice());
+            SumCost += Double.valueOf(bean.getSumCost());
+            SumVAT += Double.valueOf(bean.getSumVAT());
+            SumDisCount +=Double.valueOf(bean.getDiscount());
+            SumProfit += Double.valueOf(bean.getProfit());
+        }
+
         reportDAO.close();
 
     }
@@ -371,10 +436,10 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
             String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
             String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SumPrice#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),23);
-            String SumCost = "SumCost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),24);
-            String SumVAT = "SumVAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),25);
-            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),20);
+            String SumPrice = "Price#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),26);
+            String SumCost = "Cost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
+            String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
+            String SumDiscount = "DisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),23);
             String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
 
 
@@ -400,6 +465,15 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             printerController.PrinterController_Print(Profit.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
         }
+        for (ReportList bean : reportLists) {
+            SumAmount+=(bean.getAmount());
+            SumPrice += Double.valueOf(bean.getSumPrice());
+            SumCost += Double.valueOf(bean.getSumCost());
+            SumVAT += Double.valueOf(bean.getSumVAT());
+            SumDisCount +=Double.valueOf(bean.getDiscount());
+            SumProfit += Double.valueOf(bean.getProfit());
+        }
+
         reportDAO.close();
     }
 
@@ -476,20 +550,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
             String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
             String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SumPrice#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),23);
-            String SumCost = "SumCost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),24);
-            String SumVAT = "SumVAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),25);
-            String SumDiscount = "SumDisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),20);
+            String SumPrice = "Price#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),26);
+            String SumCost = "Cost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
+            String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
+            String SumDiscount = "DisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),23);
             String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
-
-
-         /*   String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
-            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SumPrice#"+PrintFix.generatePrice(bean.getSumPrice()+"",23);
-            String SumCost = "SumCost#"+PrintFix.generatePrice(bean.getSumCost()+"",24);
-            String SumVAT = "SumVAT#"+PrintFix.generatePrice(bean.getSumVAT()+"",25);
-            String SumDiscount ="SumDisCount#"+PrintFix.generatePrice(bean.getDiscount()+"",20);
-            String Profit = "Profit#"+PrintFix.generatePrice(bean.getProfit()+"",25);*/
 
 
             printerController = PrinterController.getInstance(getActivity());
@@ -512,6 +577,15 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             printerController.PrinterController_Print(Profit.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
         }
+        for (ReportList bean : reportLists) {
+            SumAmount+=(bean.getAmount());
+            SumPrice += Double.valueOf(bean.getSumPrice());
+            SumCost += Double.valueOf(bean.getSumCost());
+            SumVAT += Double.valueOf(bean.getSumVAT());
+            SumDisCount +=Double.valueOf(bean.getDiscount());
+            SumProfit += Double.valueOf(bean.getProfit());
+        }
+
         reportDAO.close();
 
 

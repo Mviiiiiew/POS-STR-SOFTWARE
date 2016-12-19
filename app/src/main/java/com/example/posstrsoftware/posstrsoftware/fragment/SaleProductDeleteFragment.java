@@ -77,7 +77,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
 
-               AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้า :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
                 alertDialogder.setTitle("ลบสินค้า");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
