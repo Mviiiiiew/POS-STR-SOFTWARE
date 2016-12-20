@@ -104,7 +104,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         int ex = 0;
         if (v == btn_edit_unit) {
             if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "Not Name Unit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "กรุณาใส่หน่วย : ?", Toast.LENGTH_SHORT).show();
             } else {
                 UnitList eUnitList = new UnitList();
                 eUnitList.setId(editUnitList.getId());
@@ -115,8 +115,8 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
                 unitDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("Repeat Unit");
-                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    alertDialogder.setMessage("มีข้อมูล 'หน่วย' ซ้ำในระบบ");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

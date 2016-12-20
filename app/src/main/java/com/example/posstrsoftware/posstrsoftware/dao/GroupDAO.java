@@ -94,7 +94,7 @@ public class GroupDAO {
     }
     public void  delete(GroupList groupList){
 
-        this.database.execSQL("UPDATE group_list set delete_flag = 'Y' where id_group = "+ groupList.getId());
+        this.database.execSQL("UPDATE group_list set delete_flag = 'Y', group_text = 'null' where id_group = "+ groupList.getId());
 
     }
 

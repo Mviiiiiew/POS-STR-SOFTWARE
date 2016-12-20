@@ -17,9 +17,12 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ProductMainActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.spinnerGroupAdapter;
 import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
+import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
@@ -36,10 +39,14 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     EditText editText_product;
     ButtonRectangle btn_edit_product;
     ButtonRectangle btn_delete;
+    Spinner spinner_group;
+    private spinnerGroupAdapter mSpinnerGroupAdapter;
+    private GroupList mSelectedGroup;
     Spinner spinner_unit;
+
     private spinnerUnitAdapter mSpinnerUnitAdapter;
     private UnitList mSelectedUnit;
-    String UnitBefore;
+    String NameProductBefore;
 
     public FixProductFragment() {
         super();
@@ -58,10 +65,17 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         View rootView = inflater.inflate(R.layout.fragment_fix_product, container, false);
         initInstances(rootView);
         ProductList editProductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
-        UnitBefore = editProductList.getProductText();
-        Log.d(UnitBefore,"UnitBefore");
+        NameProductBefore = editProductList.getProductText();
+        Log.d(NameProductBefore,"UnitBefore");
         editText_product.setText(editProductList.getProductText());
-        spinner_unit.setPrompt(editProductList.getBarcode());
+        final GroupDAO mGroupDAO = new GroupDAO(getActivity());
+        mGroupDAO.open();
+        final ArrayList<GroupList> groupList = mGroupDAO.getAllGroupList();
+        mGroupDAO.close();
+
+        mSpinnerGroupAdapter = new spinnerGroupAdapter(getActivity(), groupList);
+        spinner_group.setAdapter(mSpinnerGroupAdapter);
+
         final UnitDAO mUnitDAO = new UnitDAO(getActivity());
         mUnitDAO.open();
         final ArrayList<UnitList> unitList = mUnitDAO.getAllUnitList();
@@ -77,6 +91,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        spinner_group = (Spinner)rootView.findViewById(R.id.spinner_group);
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         editText_product = (EditText) rootView.findViewById(R.id.editText_product);
@@ -90,6 +105,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         btn_edit_product.setRippleSpeed(15);
         btn_back.setRippleSpeed(40);
         spinner_unit.setOnItemSelectedListener(this);
+        spinner_group.setOnItemSelectedListener(this);
 
     }
 
@@ -130,10 +146,11 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         if (v == btn_edit_product) {
             if (editText_product.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "Not Name Product", Toast.LENGTH_SHORT).show();
-            } else if(UnitBefore.matches(editText_product.getText().toString())){
+            } else if(NameProductBefore.matches(editText_product.getText().toString())){
                 ProductList eProductList = new ProductList();
                 eProductList.setId(editproductList.getId());
                 eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
                 eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -144,6 +161,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 ProductList eProductList = new ProductList();
                 eProductList.setId(editproductList.getId());
                 eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
                 eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -159,6 +177,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                             ProductList eProductList = new ProductList();
                             eProductList.setId(editproductList.getId());
                             eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
                             eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                             ProductDAO productDAO = new ProductDAO(getActivity());
                             productDAO.open();
@@ -196,7 +215,10 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+    mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+
+    mSelectedGroup = (GroupList) mSpinnerGroupAdapter.getItem(position);
+
 
 
     }

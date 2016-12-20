@@ -1,14 +1,14 @@
 package com.example.posstrsoftware.posstrsoftware.dao;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
+        import android.content.ContentValues;
+        import android.content.Context;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteStatement;
 
-import com.example.posstrsoftware.posstrsoftware.model.UnitList;
+        import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 /**
  * Created by Wasabi on 10/14/2016.

@@ -135,6 +135,7 @@ public class ProductDAO {
             values.put("product_text", updateProductList.getProductText());
             values.put("id_product", updateProductList.getId());
             values.put("id_unit", updateProductList.getUnitList().getId());
+            values.put("id_group", updateProductList.getGroupList().getId());
             String where = "id_product=" + updateProductList.getId();
             this.database.update("product_list", values, where, null);
             return 1;
@@ -147,6 +148,7 @@ public class ProductDAO {
         values.put("product_text", updateProductList.getProductText());
         values.put("id_product", updateProductList.getId());
         values.put("id_unit", updateProductList.getUnitList().getId());
+        values.put("id_group", updateProductList.getGroupList().getId());
         String where = "id_product=" + updateProductList.getId();
         this.database.update("product_list", values, where, null);
     }
