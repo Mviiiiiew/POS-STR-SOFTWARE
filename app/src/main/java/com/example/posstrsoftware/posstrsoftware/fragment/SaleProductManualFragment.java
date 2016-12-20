@@ -161,29 +161,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
         final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
         listView_SaleProductmanual.setAdapter(adapter);
-        listView_SaleProductmanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้า :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
-                alertDialogder.setTitle("ลบสินค้า");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(),"OK",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(),"CANCEL",Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-                alertDialogder.show();
-            }
-        });
 
         listview_salemanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -95,10 +95,11 @@ public class UnitDAO {
 
     public void  delete(UnitList unitList){
 
-        this.database.execSQL("UPDATE unit_list set delete_flag = 'Y' where id_unit = "+ unitList.getId());
+        this.database.execSQL("UPDATE unit_list set delete_flag = 'Y' , unit_text = 'null' where id_unit = "+ unitList.getId());
 
 
     }
+
 
 
 

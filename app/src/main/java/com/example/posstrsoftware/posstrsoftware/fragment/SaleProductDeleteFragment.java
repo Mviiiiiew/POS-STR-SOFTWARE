@@ -73,6 +73,35 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                 return false;
             }
         });
+        listView_SaleProductDelete.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,final int position, long id) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้าทั้งหมด :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
+                alertDialogder.setTitle("ลบสินค้าทั้งหมด");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductSaleList productSaleLists1 = new ProductSaleList();
+                        productSaleLists1.setId((int) adapter.getItemId(position));
+                        productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
+                        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                        productSaleDAO1.open();
+                        productSaleDAO1.delete_product_name(productSaleLists1);
+                        productSaleDAO1.close();
+                        getActivity().finish();
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogder.show();
+                return false;
+            }
+        });
         listView_SaleProductDelete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {

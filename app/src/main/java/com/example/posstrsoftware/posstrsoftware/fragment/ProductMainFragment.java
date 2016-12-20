@@ -154,6 +154,7 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
         Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
         editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
+
         startActivity(editIntent);
     }
 }

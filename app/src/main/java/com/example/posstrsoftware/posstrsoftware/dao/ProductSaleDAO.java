@@ -202,6 +202,12 @@ public class ProductSaleDAO {
 
 
     }
+    public void delete_product_name(ProductSaleList productSaleList) {
+
+        this.database.execSQL("Delete From productsale_list  where productsale_text = '" + productSaleList.getProductSale() + "'");
+
+
+    }
 
 
 }

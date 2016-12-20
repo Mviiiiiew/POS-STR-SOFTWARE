@@ -41,8 +41,8 @@ public class ProductDAO {
         ArrayList<ProductList> productList = new ArrayList<>();
 
             Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
-                "inner join  unit_list ul on pl.id_unit = ul.id_unit and  ul.delete_flag = 'N' " +
-                "inner join  group_list gl on pl.id_group = gl.id_group and  gl.delete_flag = 'N' " +
+                "inner join  unit_list ul on pl.id_unit = ul.id_unit   " +
+                "inner join  group_list gl on pl.id_group = gl.id_group  " +
                 "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
 
         cursor.moveToFirst();
@@ -134,11 +134,24 @@ public class ProductDAO {
             ContentValues values = new ContentValues();
             values.put("product_text", updateProductList.getProductText());
             values.put("id_product", updateProductList.getId());
+            values.put("id_unit", updateProductList.getUnitList().getId());
             String where = "id_product=" + updateProductList.getId();
             this.database.update("product_list", values, where, null);
             return 1;
         }
     }
+    public void updatereplace(ProductList productList) {
+
+        ProductList updateProductList = productList;
+        ContentValues values = new ContentValues();
+        values.put("product_text", updateProductList.getProductText());
+        values.put("id_product", updateProductList.getId());
+        values.put("id_unit", updateProductList.getUnitList().getId());
+        String where = "id_product=" + updateProductList.getId();
+        this.database.update("product_list", values, where, null);
+    }
+
+
 
     public void delete(ProductList productList) {
 

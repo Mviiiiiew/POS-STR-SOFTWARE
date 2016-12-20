@@ -5,29 +5,41 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.ProductMainActivity;
+import com.example.posstrsoftware.posstrsoftware.adapter.spinnerUnitAdapter;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.UnitDAO;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.model.UnitList;
 import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 import com.gc.materialdesign.views.ButtonRectangle;
+
+import java.util.ArrayList;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class FixProductFragment extends Fragment implements View.OnClickListener {
+public class FixProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     ButtonRectangle btn_back;
     EditText editText_product;
     ButtonRectangle btn_edit_product;
     ButtonRectangle btn_delete;
+    Spinner spinner_unit;
+    private spinnerUnitAdapter mSpinnerUnitAdapter;
+    private UnitList mSelectedUnit;
+    String UnitBefore;
 
     public FixProductFragment() {
         super();
@@ -46,7 +58,18 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         View rootView = inflater.inflate(R.layout.fragment_fix_product, container, false);
         initInstances(rootView);
         ProductList editProductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+        UnitBefore = editProductList.getProductText();
+        Log.d(UnitBefore,"UnitBefore");
         editText_product.setText(editProductList.getProductText());
+        spinner_unit.setPrompt(editProductList.getBarcode());
+        final UnitDAO mUnitDAO = new UnitDAO(getActivity());
+        mUnitDAO.open();
+        final ArrayList<UnitList> unitList = mUnitDAO.getAllUnitList();
+        mUnitDAO.close();
+
+
+        mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(), unitList);
+        spinner_unit.setAdapter(mSpinnerUnitAdapter);
 
 
         return rootView;
@@ -54,6 +77,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         editText_product = (EditText) rootView.findViewById(R.id.editText_product);
         btn_edit_product = (ButtonRectangle) rootView.findViewById(R.id.btn_edit_product);
@@ -65,7 +89,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         btn_delete.setRippleSpeed(15);
         btn_edit_product.setRippleSpeed(15);
         btn_back.setRippleSpeed(40);
-
+        spinner_unit.setOnItemSelectedListener(this);
 
     }
 
@@ -106,9 +130,20 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         if (v == btn_edit_product) {
             if (editText_product.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "Not Name Product", Toast.LENGTH_SHORT).show();
-            } else {
+            } else if(UnitBefore.matches(editText_product.getText().toString())){
                 ProductList eProductList = new ProductList();
                 eProductList.setId(editproductList.getId());
+                eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                ProductDAO productDAO = new ProductDAO(getActivity());
+                productDAO.open();
+                productDAO.updatereplace(eProductList);
+                productDAO.close();
+                getActivity().finish();
+            }else{
+                ProductList eProductList = new ProductList();
+                eProductList.setId(editproductList.getId());
+                eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
                 eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -118,6 +153,21 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                     alertDialogder.setMessage("Repeat Product");
                     alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                            ProductList eProductList = new ProductList();
+                            eProductList.setId(editproductList.getId());
+                            eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                            ProductDAO productDAO = new ProductDAO(getActivity());
+                            productDAO.open();
+                            productDAO.updatereplace(eProductList);
+                            productDAO.close();
+                            getActivity().finish();
+                        }
+                    });
+                    alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -141,5 +191,18 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
             getActivity().finish();
 
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

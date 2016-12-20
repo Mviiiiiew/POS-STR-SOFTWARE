@@ -35,6 +35,15 @@
 
 
     />
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_unit"
+        android:layout_width="145dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/editText_product"
+       android:layout_alignLeft="@+id/editText_product"
+      >
+
+    </android.support.v7.widget.AppCompatSpinner>
 
 
     <com.gc.materialdesign.views.ButtonRectangle
