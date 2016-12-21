@@ -33,7 +33,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
     EditText editText_Group;
     ButtonRectangle btn_edit_group;
     ButtonRectangle btn_delete;
-
+    String mGroup;
     public FixGroupFragment() {
         super();
     }
@@ -109,7 +109,18 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         if (v == btn_edit_group) {
             if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "No Name Group", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else if(editText_Group.getText().toString().matches(mGroup)){
+                GroupList eGroupList = new GroupList();
+                eGroupList.setId(editGroupList.getId());
+                eGroupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
+                GroupDAO groupDAO = new GroupDAO(getActivity());
+                groupDAO.open();
+                groupDAO.updatenow(eGroupList);
+                groupDAO.close();
+                getActivity().finish();
+            }
+            else {
                 GroupList eGroupList = new GroupList();
                 eGroupList.setId(editGroupList.getId());
                 eGroupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
@@ -119,8 +130,8 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
                 groupDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("Repeat Group");
-                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    alertDialogder.setMessage("มีข้อมูล 'กลุ่ม' ซ้ำในระบบ");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

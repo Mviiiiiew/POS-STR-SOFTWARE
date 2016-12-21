@@ -92,6 +92,19 @@ public class GroupDAO {
             return 1;
         }
     }
+    public void updatenow(GroupList groupList) {
+
+            GroupList updateGroupList = groupList;
+            ContentValues values = new ContentValues();
+            values.put("group_text", updateGroupList.getGroupText());
+            values.put("id_group", updateGroupList.getId());
+            String where = "id_group=" + updateGroupList.getId();
+            this.database.update("group_list", values, where, null);
+
+
+    }
+
+
     public void  delete(GroupList groupList){
 
         this.database.execSQL("UPDATE group_list set delete_flag = 'Y', group_text = 'null' where id_group = "+ groupList.getId());

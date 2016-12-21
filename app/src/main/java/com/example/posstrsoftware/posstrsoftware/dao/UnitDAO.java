@@ -89,6 +89,17 @@ public class UnitDAO {
             return 1;
         }
     }
+    public void updatenow(UnitList unitList) {
+
+            UnitList updateUnitList = unitList;
+            ContentValues values = new ContentValues();
+            values.put("unit_text", updateUnitList.getUnitText());
+            values.put("id_unit", updateUnitList.getId());
+            String where = "id_unit=" + updateUnitList.getId();
+            this.database.update("unit_list", values, where, null);
+
+
+    }
 
 
 

@@ -59,8 +59,9 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     ImageButton btn_back;
     ButtonRectangle btn_Pay;
     EditText edit_Amount;
-    int amount =1;
-    int VarAmount = 0 ;
+    int amount = 1;
+    int VarAmount = 0;
+    String mProduct;
 
     public SaleProductManualFragment() {
         super();
@@ -96,12 +97,12 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         edit_Amount = (EditText) rootView.findViewById(R.id.edit_Amount);
         edit_Amount.setImeOptions(EditorInfo.IME_ACTION_DONE);
         edit_Amount.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             edit_Amount.setText("");
+            @Override
+            public void onClick(View v) {
+                edit_Amount.setText("");
 
-         }
-     });
+            }
+        });
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_backz.setOnClickListener(this);
@@ -147,7 +148,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         productDAO.close();
         final ProductListManualAdapter objAdapter = new ProductListManualAdapter(getActivity(), myProductList);
         listview_salemanual.setAdapter(objAdapter);
-
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
@@ -158,134 +158,29 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         }
         txt_cost.setText(money_format.format((x)));
 
-
-        final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
+        ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
         listView_SaleProductmanual.setAdapter(adapter);
 
-        listview_salemanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        listView_SaleProductmanual.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (edit_Amount.getText().toString().matches("")){
-                    edit_Amount.setText("1");
-                }else{
-                    VarAmount = Integer.parseInt(edit_Amount.getText().toString());
-                }
-                if (VarAmount > 100) {
-                    Toast.makeText(getActivity(), "กรุณาใส่จำนวนสินค้า 1-100 ชิ้น", Toast.LENGTH_LONG).show();
-
-                    edit_Amount.setText("1");
-                }else {
-                    ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-                    productSaleDAO.open();
-                    Double total = 0.0;
-                    if (edit_Amount.getText().toString().matches("") || edit_Amount.getText().toString().matches("0")) {
-                        amount = 1;
-                    } else {
-                        amount = Integer.parseInt(edit_Amount.getText().toString().trim());
-                    }
-
-
-                    for (int i = 0; i < amount; i++) {
-                        ProductSaleList productSaleList = new ProductSaleList();
-                        productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
-                        productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
-                        productSaleList.setProductid(((ProductList) objAdapter.getItem(position)).getId());
-                        productSaleList.setUnitid(((ProductList) objAdapter.getItem(position)).getUnitList().getId());
-                        productSaleList.setUnitname(((ProductList) objAdapter.getItem(position)).getUnitList().getUnitText());
-                        productSaleList.setGroupid(((ProductList) objAdapter.getItem(position)).getGroupList().getId());
-                        productSaleList.setGroupname(((ProductList) objAdapter.getItem(position)).getGroupList().getGroupText());
-                        productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
-                        productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
-                        productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
-                        productSaleDAO.add(productSaleList);
-                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                        final ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
-                        listView_SaleProductmanual.setAdapter(adapter);
-
-                    }
-                    edit_Amount.setText("1");
-                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                    for (ProductSaleList bean : productSaleLists) {
-                        total += Double.valueOf(bean.getPrice());
-                        txt_cost.setText(formatAmount.formatAmountDouble(total));
-
-
-                    }
-
-                    productSaleDAO.close();
-                }
-            }
-            }
-
-            );
-            searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-
-            {
-                @Override
-                public boolean onQueryTextSubmit (String query){
-                return true;
-            }
-
-                @Override
-                public boolean onQueryTextChange (String query){
-                objAdapter.getFilter().filter(query);
-                return false;
-            }
-            }
-
-            );
-
-        }
-
-        @Override
-        public void onStart () {
-            super.onStart();
-        }
-
-        @Override
-        public void onStop () {
-            super.onStop();
-        }
-
-    /*
-     * Save Instance State Here
-     */
-        @Override
-        public void onSaveInstanceState (Bundle outState){
-            super.onSaveInstanceState(outState);
-            // Save Instance State here
-        }
-
-    /*
-     * Restore Instance State Here
-     */
-        @Override
-        public void onActivityCreated (Bundle savedInstanceState){
-            super.onActivityCreated(savedInstanceState);
-            if (savedInstanceState != null) {
-                // Restore Instance State here
-            }
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-        @Override
-        public void onClick (View v){
-            if (btn_clear == v) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                productSaleDAO.open();
+                ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
-                alertDialogder.setTitle("เริ่มรายการใหม่ ?");
+                alertDialogder.setMessage("คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  " + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+                mProduct = ((ProductSaleList) adapter.getItem(position)).getProductSale();
+                Log.d("mProduct", mProduct);
+                alertDialogder.setTitle("ลบสินค้า");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ProductSaleList productSaleList = new ProductSaleList();
-                        ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
-                        productSaleDAO.open();
-                        productSaleDAO.clear(productSaleList);
-                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-                        listView_SaleProductmanual.setAdapter(adapter);
-                        productSaleDAO.close();
-                        txt_cost.setText("0.00");
+                        Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+                        intent.putExtra("mProduct", mProduct);
+
+                        startActivity(intent);
                     }
                 });
                 alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
@@ -294,29 +189,170 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                         dialog.dismiss();
                     }
                 });
-
                 alertDialogder.show();
-
-            } else if (btn_backz == v || btn_back == v) {
-
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                getActivity().finishAffinity();
-                startActivity(intent);
-
-
-            } else if (btn_delete == v) {
-                Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
-                startActivity(intent);
-            } else if (btn_Pay == v) {
-
-
-                Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
-                intent.putExtra("total", txt_cost.getText());
-                intent.putExtra("processmanual", 1);
-                intent.putExtra("processbarcode", 0);
-                startActivity(intent);
-
-
+                return false;
             }
+        });
+
+        listview_salemanual.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                       @Override
+                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                           if (edit_Amount.getText().toString().matches("")) {
+                                                               edit_Amount.setText("1");
+                                                           } else {
+                                                               VarAmount = Integer.parseInt(edit_Amount.getText().toString());
+                                                           }
+                                                           if (VarAmount > 100) {
+                                                               Toast.makeText(getActivity(), "กรุณาใส่จำนวนสินค้า 1-100 ชิ้น", Toast.LENGTH_LONG).show();
+
+                                                               edit_Amount.setText("1");
+                                                           } else {
+                                                               ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                                                               productSaleDAO.open();
+                                                               Double total = 0.0;
+                                                               if (edit_Amount.getText().toString().matches("") || edit_Amount.getText().toString().matches("0")) {
+                                                                   amount = 1;
+                                                               } else {
+                                                                   amount = Integer.parseInt(edit_Amount.getText().toString().trim());
+                                                               }
+
+
+                                                               for (int i = 0; i < amount; i++) {
+                                                                   ProductSaleList productSaleList = new ProductSaleList();
+                                                                   productSaleList.setPrice(Double.valueOf(((ProductList) objAdapter.getItem(position)).getProductpricesumvat()));
+                                                                   productSaleList.setProductSale(((ProductList) objAdapter.getItem(position)).getProductText());
+                                                                   productSaleList.setProductid(((ProductList) objAdapter.getItem(position)).getId());
+                                                                   productSaleList.setUnitid(((ProductList) objAdapter.getItem(position)).getUnitList().getId());
+                                                                   productSaleList.setUnitname(((ProductList) objAdapter.getItem(position)).getUnitList().getUnitText());
+                                                                   productSaleList.setGroupid(((ProductList) objAdapter.getItem(position)).getGroupList().getId());
+                                                                   productSaleList.setGroupname(((ProductList) objAdapter.getItem(position)).getGroupList().getGroupText());
+                                                                   productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
+                                                                   productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
+                                                                   productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
+                                                                   productSaleDAO.add(productSaleList);
+
+                                                                   ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                                                                   ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
+                                                                   adapter.notifyDataSetChanged();
+                                                                   listView_SaleProductmanual.setAdapter(adapter);
+
+                                                               }
+
+
+                                                               edit_Amount.setText("1");
+                                                               ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                                                               for (ProductSaleList bean : productSaleLists) {
+                                                                   total += Double.valueOf(bean.getPrice());
+                                                                   txt_cost.setText(formatAmount.formatAmountDouble(total));
+
+
+                                                               }
+
+                                                               productSaleDAO.close();
+                                                           }
+                                                       }
+                                                   }
+
+        );
+        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+
+                                                 {
+                                                     @Override
+                                                     public boolean onQueryTextSubmit(String query) {
+                                                         return true;
+                                                     }
+
+                                                     @Override
+                                                     public boolean onQueryTextChange(String query) {
+                                                         objAdapter.getFilter().filter(query);
+                                                         return false;
+                                                     }
+                                                 }
+
+        );
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    /*
+     * Save Instance State Here
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save Instance State here
+    }
+
+    /*
+     * Restore Instance State Here
+     */
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore Instance State here
         }
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onClick(View v) {
+        if (btn_clear == v) {
+            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+            alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
+            alertDialogder.setTitle("เริ่มรายการใหม่ ?");
+            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ProductSaleList productSaleList = new ProductSaleList();
+                    ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                    productSaleDAO.open();
+                    productSaleDAO.clear(productSaleList);
+                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                    final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                    listView_SaleProductmanual.setAdapter(adapter);
+                    productSaleDAO.close();
+                    txt_cost.setText("0.00");
+                }
+            });
+            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            alertDialogder.show();
+
+        } else if (btn_backz == v || btn_back == v) {
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            getActivity().finishAffinity();
+            startActivity(intent);
+
+
+        } else if (btn_delete == v) {
+            Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+            startActivity(intent);
+        } else if (btn_Pay == v) {
+
+
+            Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
+            intent.putExtra("total", txt_cost.getText());
+            intent.putExtra("processmanual", 1);
+            intent.putExtra("processbarcode", 0);
+            startActivity(intent);
+
+
+        }
+    }
+}

@@ -1,11 +1,13 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +35,8 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
 
     ButtonRectangle btn_back;
     ListView listView_SaleProductDelete;
-    SearchView searchViewProduct;
+
+    String mProduct;
 
     public SaleProductDeleteFragment() {
         super();
@@ -51,34 +54,29 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_delete_saleproduct, container, false);
         initInstances(rootView);
+        Intent intent = getActivity().getIntent();
+        mProduct = intent.getStringExtra("mProduct");
+        Log.d("mProductx",mProduct);
+
+
      /*   ReportDAO reportDAO = new ReportDAO(getActivity());
         reportDAO.open();
         final ArrayList<ReportList> reportLists = reportDAO.getAllReportList();
         reportDAO.close();*/
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleDeleteList();
+        final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleDelete(mProduct);
         productSaleDAO.close();
         final ProductSaleDeleteAdapter adapter = new ProductSaleDeleteAdapter(getActivity(), productSaleLists);
         listView_SaleProductDelete.setAdapter(adapter);
-        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String query) {
-                adapter.getFilter().filter(query);
-                return false;
-            }
-        });
+
         listView_SaleProductDelete.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,final int position, long id) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้าทั้งหมด :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
-                alertDialogder.setTitle("ลบสินค้าทั้งหมด");
+                alertDialogder.setTitle("ลบสินค้า 'ทั้งหมด' ");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -130,9 +128,9 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                         productSaleDAO1.open();
                         productSaleDAO1.delete_product_id(productSaleLists1);
                         productSaleDAO1.close();
-
                         productSaleLists.remove(position);
                         adapter.notifyDataSetChanged();
+
 
                     }
                 });
@@ -154,9 +152,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         // Init 'View' instance(s) with rootView.findViewById here
         listView_SaleProductDelete = (ListView)rootView.findViewById(R.id.listView_SaleProductDelete);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
-        searchViewProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
-        searchViewProduct.setQueryHint("Search..");
-        btn_back.setOnClickListener(this);
+             btn_back.setOnClickListener(this);
 
         btn_back.setRippleSpeed(50);
 
@@ -165,6 +161,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
+
 
     }
 

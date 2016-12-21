@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_back;
     ButtonRectangle btn_delete;
     ButtonRectangle btn_edit_unit;
+    String mUnit;
 
     public FixUnitFragment() {
         super();
@@ -48,6 +50,9 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
         UnitList editUnitList = (UnitList) getActivity().getIntent().getSerializableExtra("editUnit");
         editText_Unit.setText(editUnitList.getUnitText());
+        mUnit = editUnitList.getUnitText();
+        Log.d("mUnit",mUnit);
+
         return rootView;
     }
 
@@ -105,6 +110,17 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         if (v == btn_edit_unit) {
             if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "กรุณาใส่หน่วย : ?", Toast.LENGTH_SHORT).show();
+            }else if(editText_Unit.getText().toString().matches(mUnit)){
+
+                UnitList eUnitList = new UnitList();
+                eUnitList.setId(editUnitList.getId());
+                eUnitList.setUnitText(Util_String.getGennerlateString(editText_Unit.getText().toString()));
+                UnitDAO unitDAO = new UnitDAO(getActivity());
+                unitDAO.open();
+                unitDAO.updatenow(eUnitList);
+                unitDAO.close();
+                getActivity().finish();
+
             } else {
                 UnitList eUnitList = new UnitList();
                 eUnitList.setId(editUnitList.getId());

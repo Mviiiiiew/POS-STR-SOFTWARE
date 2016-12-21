@@ -131,11 +131,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-
-
-
-
-
     private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax from product_list order by 1";
 
     private static  final String viewmasterList = "CREATE VIEW viewmaster_list as select sale_master_id,doc_date,cast(discount as decimal)" +
@@ -161,6 +156,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableCompanyCreateSQL);
         db.execSQL(tableProductSaleCreateSQL);
         db.execSQL(tableReportCreateSQL);
+
         db.execSQL(viewProductList);
         db.execSQL(tablesale_masterCreateSQL);
         db.execSQL(tablesale_detailCreateSQL);

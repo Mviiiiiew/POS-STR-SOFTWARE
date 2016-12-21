@@ -95,7 +95,7 @@ public class ProductSaleDAO {
 
     public ArrayList<ProductSaleList> getAllProductSaleList() {
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(productprice_text as decimal)) as product_price,count(productsale_text),id_product from productsale_list where delete_flag = 'N' group by productsale_text ;", null);
+        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(productprice_text as decimal)) as product_price,count(productsale_text),id_product from productsale_list where delete_flag = 'N' group by productsale_text   ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ProductSaleList mProductSaleList = new ProductSaleList();
@@ -110,11 +110,51 @@ public class ProductSaleDAO {
         return ProductSaleList;
     }
 
+
+    public ArrayList<ProductSaleList> getAllSaleList() {
+        ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
+        Cursor cursor = database.rawQuery("select * from vsale_list ;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ProductSaleList mProductSaleList = new ProductSaleList();
+            mProductSaleList.setProductSale(cursor.getString(0));
+            mProductSaleList.setAmount(cursor.getString(2));
+            mProductSaleList.setPrice(cursor.getDouble(1));
+            mProductSaleList.setProductid(cursor.getInt(3));
+            ProductSaleList.add(mProductSaleList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return ProductSaleList;
+    }
+
+
+
+
     public ArrayList<ProductSaleList> getAllProductSaleDeleteList() {
 
         ArrayList<ProductSaleList> productSaleLists = new ArrayList<>();
 
         Cursor cursor = database.rawQuery("SELECT * FROM productsale_list where delete_flag = 'N';", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ProductSaleList mproductSaleList = new ProductSaleList();
+            mproductSaleList.setId(cursor.getInt(0));
+            mproductSaleList.setProductSale(cursor.getString(2));
+            mproductSaleList.setPrice(cursor.getDouble(3));
+            productSaleLists.add(mproductSaleList);
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        return productSaleLists;
+    }
+
+    public ArrayList<ProductSaleList> getAllProductSaleDelete(String mProduct) {
+
+        ArrayList<ProductSaleList> productSaleLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select * from  productsale_list  where productsale_text  = '"+mProduct+"' and delete_flag = 'N';", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ProductSaleList mproductSaleList = new ProductSaleList();
@@ -161,11 +201,7 @@ public class ProductSaleDAO {
 
     }
 
-    public void updatedBillNo(String input_BillNo) {
 
-        this.database.execSQL("update transectionBill set BillNo="+input_BillNo+" where BillNo is null");
-
-    }
 
     public ReportList addx(){
 

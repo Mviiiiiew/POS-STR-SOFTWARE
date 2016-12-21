@@ -48,6 +48,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     private UnitList mSelectedUnit;
     String NameProductBefore;
 
+
     public FixProductFragment() {
         super();
     }
@@ -66,7 +67,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         initInstances(rootView);
         ProductList editProductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         NameProductBefore = editProductList.getProductText();
-        Log.d(NameProductBefore,"UnitBefore");
+        Log.d(NameProductBefore, "UnitBefore");
         editText_product.setText(editProductList.getProductText());
         final GroupDAO mGroupDAO = new GroupDAO(getActivity());
         mGroupDAO.open();
@@ -91,7 +92,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        spinner_group = (Spinner)rootView.findViewById(R.id.spinner_group);
+        spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         editText_product = (EditText) rootView.findViewById(R.id.editText_product);
@@ -105,7 +106,17 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         btn_edit_product.setRippleSpeed(15);
         btn_back.setRippleSpeed(40);
         spinner_unit.setOnItemSelectedListener(this);
-        spinner_group.setOnItemSelectedListener(this);
+        spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mSelectedGroup = (GroupList) mSpinnerGroupAdapter.getItem(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
@@ -141,43 +152,88 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+
         ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         int ex = 0;
         if (v == btn_edit_product) {
             if (editText_product.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "Not Name Product", Toast.LENGTH_SHORT).show();
-            } else if(NameProductBefore.matches(editText_product.getText().toString())){
+                Toast.makeText(getActivity(), " กรุณาใส่ชื่อสินค้า ", Toast.LENGTH_LONG).show();
+            } else if (NameProductBefore.matches(editText_product.getText().toString())) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
+                alertDialogder.setMessage("ชื่อสินค้า : " + editText_product.getText().toString() + "\n" + "ชื่อหน่วย : " + mSelectedUnit.getUnitText().toString() + "\n" + "ชื่อกลุ่ม   : " + mSelectedGroup.getGroupText().toString() + "\n");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                        ProductList eProductList = new ProductList();
+                        eProductList.setId(editproductList.getId());
+                        eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                        eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                        eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                        ProductDAO productDAO = new ProductDAO(getActivity());
+                        productDAO.open();
+                        productDAO.updatereplace(eProductList);
+                        productDAO.close();
+                        getActivity().finish();
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogder.show();
+
+            } else {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
                 ProductList eProductList = new ProductList();
                 eProductList.setId(editproductList.getId());
                 eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
-                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
+                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
                 eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
-                productDAO.updatereplace(eProductList);
+                ex = productDAO.check(eProductList);
                 productDAO.close();
-                getActivity().finish();
-            }else{
-                ProductList eProductList = new ProductList();
-                eProductList.setId(editproductList.getId());
-                eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
-                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
-                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-                ProductDAO productDAO = new ProductDAO(getActivity());
-                productDAO.open();
-                ex = productDAO.update(eProductList);
-                productDAO.close();
-                if (ex == 0) {
-                    AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("Repeat Product");
-                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                if (ex == 1) {
+                    alertDialogder.setMessage("ชื่อสินค้า : " + editText_product.getText().toString() + "\n" + "ชื่อหน่วย : " + mSelectedUnit.getUnitText().toString() + "\n" + "ชื่อกลุ่ม   : " + mSelectedGroup.getGroupText().toString() + "\n");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
                             ProductList eProductList = new ProductList();
                             eProductList.setId(editproductList.getId());
                             eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
-                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
+                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                            ProductDAO productDAO = new ProductDAO(getActivity());
+                            productDAO.open();
+                            productDAO.updatereplace(eProductList);
+                            productDAO.close();
+                            getActivity().finish();
+                        }
+                    });
+                    alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogder.show();
+
+                } else {
+                    alertDialogder.setMessage("ซื่อสินค้าซ้ำในระบบต้องการบันทึกซ้ำหรือไม่ ?\n" + "ชื่อสินค้า : " + editText_product.getText().toString() + "\n" + "ชื่อหน่วย : " + mSelectedUnit.getUnitText().toString() + "\n" + "ชื่อกลุ่ม   : " + mSelectedGroup.getGroupText().toString() + "\n");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                            ProductList eProductList = new ProductList();
+                            eProductList.setId(editproductList.getId());
+                            eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
                             eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                             ProductDAO productDAO = new ProductDAO(getActivity());
                             productDAO.open();
@@ -194,10 +250,8 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     });
 
                     alertDialogder.show();
-
-                } else {
-                    getActivity().finish();
                 }
+
             }
 
         } else if (btn_back == v) {
@@ -215,9 +269,9 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-    mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+        mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
 
-    mSelectedGroup = (GroupList) mSpinnerGroupAdapter.getItem(position);
+
 
 
 

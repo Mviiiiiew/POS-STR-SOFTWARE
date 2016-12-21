@@ -120,6 +120,21 @@ public class ProductDAO {
         return bee ;
 
     }
+    public int check(ProductList productList) {
+        String query = "Select count(*) from product_list where product_text = ? AND delete_flag = ?";
+        SQLiteStatement stmt = database.compileStatement(query);
+        stmt.bindString(1, productList.getProductText());
+        stmt.bindString(2, "N");
+        int count_row = (int) stmt.simpleQueryForLong();
+        if (stmt != null) stmt.close();
+        if (count_row != 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+
     public int update(ProductList productList) {
         String query = "Select count(*) from product_list where product_text = ? AND delete_flag = ?";
         SQLiteStatement stmt = database.compileStatement(query);
