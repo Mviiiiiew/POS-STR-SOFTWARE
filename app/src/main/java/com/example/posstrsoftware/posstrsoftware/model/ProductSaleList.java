@@ -33,6 +33,24 @@ public class ProductSaleList {
     private String afterdate;
     private String RunIdBill;
     private String BillId;
+    private String SymbolVat;
+    private Double ValueVat;
+
+    public Double getValueVat() {
+        return ValueVat;
+    }
+
+    public void setValueVat(Double valueVat) {
+        ValueVat = valueVat;
+    }
+
+    public String getSymbolVat() {
+        return SymbolVat;
+    }
+
+    public void setSymbolVat(String symbolVat) {
+        SymbolVat = symbolVat;
+    }
 
     public String getBillId() {
         return BillId;

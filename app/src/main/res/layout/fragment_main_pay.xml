@@ -48,12 +48,40 @@
                 android:inputType="text"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/txt_NameValueVat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_Total"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:text="ภาษี"
+                android:textColor="@color/colorBlack"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+
+                android:id="@+id/txt_ValueVat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignRight="@+id/txt_NameTotal"
+                android:layout_alignTop="@+id/txt_NameValueVat"
+                android:layout_toRightOf="@+id/txt_NameValueVat"
+                android:background="#000000"
+                android:gravity="center"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"/>
+
 
             <TextView
                 android:id="@+id/txt_NameDiscount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_Total"
+                android:layout_below="@+id/txt_NameValueVat"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
                 android:text="ส่วนลด"
@@ -61,6 +89,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 />
+
 
             <TextView
 

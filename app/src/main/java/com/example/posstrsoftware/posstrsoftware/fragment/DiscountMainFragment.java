@@ -57,8 +57,10 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     Double totalall = 0.0;
     Double A = 0.0;
     Double B = 0.0;
-    int   processmanual;
-    int  processbarcode;
+    Double ValueVat;
+    Double TotalSumVat;
+    int processmanual;
+    int processbarcode;
 
 
     public DiscountMainFragment() {
@@ -78,12 +80,14 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         View rootView = inflater.inflate(R.layout.fragment_main_discount, container, false);
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
+        ValueVat = intent.getDoubleExtra("ValueVat", 0.0);
+        Log.d("ValueVat", ValueVat + "");
         x = intent.getStringExtra("total");
         txt_NameTotal.setText(x.toString());
-        processmanual = intent.getIntExtra("processmanual",0);
-        Log.d("processm",processmanual+"");
-        processbarcode = intent.getIntExtra("processbarcode",0);
-        Log.d("processb",processbarcode+"");
+        processmanual = intent.getIntExtra("processmanual", 0);
+        Log.d("processm", processmanual + "");
+        processbarcode = intent.getIntExtra("processbarcode", 0);
+        Log.d("processb", processbarcode + "");
 
         return rootView;
     }
@@ -359,17 +363,20 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
     private void payAuto() {
         totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
+        TotalSumVat = totalall+ValueVat;
+        Log.d("VAT",TotalSumVat+"");
         String u = "0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
         intent.putExtra("discountcost", u);
-        intent.putExtra("totalall", totalall.toString());
+        intent.putExtra("totalall", TotalSumVat.toString());
         intent.putExtra("discountpercent", u);
         intent.putExtra("discount", u);
         intent.putExtra("symbol", "0.00");
-        intent.putExtra("processmanual",processmanual);
-        intent.putExtra("processbarcode",processbarcode);
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat", ValueVat);
 
 
         startActivity(intent);
@@ -377,18 +384,21 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     }
 
     private void pay() {
-        totalall =Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+        totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+        TotalSumVat = totalall+ValueVat;
+        Log.d("VAT",TotalSumVat+"");
         String u = "0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
         intent.putExtra("discountcost", u);
-        intent.putExtra("totalall", totalall.toString());
+        intent.putExtra("totalall", TotalSumVat.toString());
         intent.putExtra("discountpercent", u);
         intent.putExtra("discount", u);
         intent.putExtra("symbol", "0.00");
-        intent.putExtra("processmanual",processmanual);
-        intent.putExtra("processbarcode",processbarcode);
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat", ValueVat);
         startActivity(intent);
     }
 
@@ -399,7 +409,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         C = CostPercent.costpercent(A, B);
         Log.d("valA=", A + "");
         Log.d("valC=", C + "");
-        totalall = (A - C);
+        totalall = ((A+ValueVat) - C);
         Log.d("totalall", totalall.toString());
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -408,8 +418,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("discountpercent", discountpercent);
         intent.putExtra("discount", C.toString());
         intent.putExtra("symbol", discountpercent);
-       intent.putExtra("processmanual",processmanual);
-        intent.putExtra("processbarcode",processbarcode);
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat", ValueVat);
         startActivity(intent);
     }
 
@@ -419,7 +430,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         C = CostPercent.costpercent(A, B);
         Log.d("valA=", A + "");
         Log.d("valC=", C + "");
-        totalall = CostPercent.parserFormat(A - C);
+        totalall = CostPercent.parserFormat((A+ValueVat) - C);
         Log.d("totalall", totalall.toString());
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -428,15 +439,16 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("discountpercent", discountpercent);
         intent.putExtra("discount", C.toString());
         intent.putExtra("symbol", discountpercent);
-        intent.putExtra("processmanual",processmanual);
-        intent.putExtra("processbarcode",processbarcode);
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat", ValueVat);
         startActivity(intent);
     }
 
     private void PayCost() {
         A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
-        totalall = A - B;
+        totalall = (A+ValueVat) - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
         String totalcost = String.valueOf(totalall);
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -445,15 +457,16 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("totalall", totalcost);
         intent.putExtra("discount", B.toString());
         intent.putExtra("symbol", "Cost");
-       intent.putExtra("processmanual",processmanual);
-        intent.putExtra("processbarcode",processbarcode);
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat", ValueVat);
         startActivity(intent);
     }
 
     private void PayAutoCost() {
         A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
-        totalall = A - B;
+        totalall = (A+ValueVat) - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
 
 
@@ -464,8 +477,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("totalall", totalcost);
         intent.putExtra("discount", B.toString());
         intent.putExtra("symbol", "Cost");
-        intent.putExtra("processmanual",processmanual);
-        intent.putExtra("processbarcode",processbarcode);
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat",ValueVat);
         startActivity(intent);
     }
 

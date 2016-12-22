@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class SaleProductFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener{
+public class SaleProductFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
     Double total;
     ButtonRectangle btn_Pay;
@@ -56,8 +57,10 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     ButtonRectangle btn_delete;
     ButtonRectangle btn_backz;
     EditText edit_Amount;
-    int amount=1;
-    int VarAmount=0;
+    int amount = 1;
+    int VarAmount = 0;
+    String mProduct;
+    Double ValueVat =0.0;
 
 
     public SaleProductFragment() {
@@ -91,7 +94,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
         btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
-        edit_Amount = (EditText)rootView.findViewById(R.id.edit_Amount);
+        edit_Amount = (EditText) rootView.findViewById(R.id.edit_Amount);
         edit_Amount.setImeOptions(EditorInfo.IME_ACTION_DONE);
         btn_backz.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
@@ -106,32 +109,29 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         edit_Barcode.setShowSoftInputOnFocus(false);
 
 
-
         edit_Amount.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-          @Override
-          public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-              if (actionId == EditorInfo.IME_ACTION_DONE) {
-                Toast.makeText(getActivity(),"OK",Toast.LENGTH_SHORT).show();
-               edit_Amount.clearFocus();
-                  edit_Barcode.requestFocus();
-                  edit_Barcode.setCursorVisible(true);
-                  InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                  imm.hideSoftInputFromWindow(edit_Barcode.getWindowToken(),0);
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+                    edit_Amount.clearFocus();
+                    edit_Barcode.requestFocus();
+                    edit_Barcode.setCursorVisible(true);
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edit_Barcode.getWindowToken(), 0);
 
-                  return false;
-              } else {
-                  return true;
-              }
-          }
-      });
-
-
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        });
 
 
-       edit_Amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        edit_Amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
+                if (hasFocus) {
                     edit_Amount.setText("");
                 }
             }
@@ -147,17 +147,54 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         edit_Amount.setText("1");
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
-        final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
         productSaleDAO.close();
-        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+        ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
         listView_SaleProduct.setAdapter(adapter);
+        listView_SaleProduct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
+                productSaleDAO.open();
+                ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                productSaleDAO.close();
+                ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage("คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  " + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+                mProduct = ((ProductSaleList) adapter.getItem(position)).getProductSale();
+                Log.d("mProduct", mProduct);
+                alertDialogder.setTitle("ลบสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
+                        intent.putExtra("mProduct", mProduct);
+
+                        startActivity(intent);
+                    }
+                });
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogder.show();
+                return false;
+            }
+        });
 
 
         Double x = 0.0;
+        Double y = 0.0;
         DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
         for (ProductSaleList bean : productSaleLists) {
             x += Double.valueOf(bean.getPrice());
-        }
+            y +=bean.getValueVat();
+
+    }
+        ValueVat = y;
         txt_cost.setText(money_format.format((x)));
 
 
@@ -200,11 +237,11 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (btn_back == v || btn_backz == v) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.putExtra("processmanual",0);
-            intent.putExtra("processbarcode",1);
+            intent.putExtra("processmanual", 0);
+            intent.putExtra("processbarcode", 1);
+
             getActivity().finishAffinity();
             startActivity(intent);
-
 
 
         } else if (btn_clear == v) {
@@ -240,7 +277,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         } else if (btn_Pay == v) {
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
-
+            intent.putExtra("ValueVat",ValueVat);
+            intent.putExtra("processmanual", 0);
+            intent.putExtra("processbarcode", 1);
             startActivity(intent);
 
         } else if (btn_delete == v) {
@@ -250,21 +289,20 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     }
 
 
-
-
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (edit_Amount.getText().toString().matches("")){
+        if (edit_Amount.getText().toString().matches("")) {
             edit_Amount.setText("1");
-        }else{
+        } else {
             VarAmount = Integer.parseInt(edit_Amount.getText().toString());
         }
         if (VarAmount > 100) {
             Toast.makeText(getActivity(), "กรุณาใส่จำนวนสินค้า 1-100 ชิ้น", Toast.LENGTH_LONG).show();
             edit_Barcode.setText("");
             edit_Amount.setText("1");
-        }else {
+        } else {
             Double total = 0.0;
+
             ProductDAO productDAO = new ProductDAO(getActivity());
             ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
 
@@ -289,23 +327,28 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                     productSaleList.setGroupname(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getGroupname());
                     productSaleList.setProduct_cost(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getProduct_cost());
                     productSaleList.setProduct_price(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getProduct_price());
+                    productSaleList.setSymbolVat(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getSymbolVat());
+                    productSaleList.setValueVat(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getValueVat());
                     productDAO.close();
 
 
-                    productSaleDAO.open();
-                    productSaleDAO.add(productSaleList);
-                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                    final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-                    listView_SaleProduct.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                        productSaleDAO.open();
+                        productSaleDAO.add(productSaleList);
+                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                        listView_SaleProduct.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
 
 
                 }
                 edit_Amount.setText("1");
                 ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
                 DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
+                ValueVat = 0.0;
                 for (ProductSaleList bean : productSaleLists) {
                     total += Double.valueOf(bean.getPrice());
+                    ValueVat += bean.getValueVat();
+                    Log.d("ValueVat",ValueVat+"");
 
                 }
 
@@ -319,10 +362,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             }
         }
 
-            return false;
+        return false;
 
     }
-
 
 
 }

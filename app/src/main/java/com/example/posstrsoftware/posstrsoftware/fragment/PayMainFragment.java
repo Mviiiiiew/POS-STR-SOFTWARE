@@ -46,7 +46,7 @@ import java.util.Locale;
  */
 public class PayMainFragment extends Fragment implements View.OnClickListener {
 
-    private static final byte[] Set_Right = new byte[]{(byte) 27, (byte) 97, (byte) 2};
+
     private PrinterController printerController = null;
     ButtonRectangle btn_back;
     ButtonRectangle btn_cost_1000;
@@ -64,6 +64,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     TextView txt_NameTotal;
     TextView txt_Discount;
     TextView txt_Totalall;
+    TextView txt_ValueVat;
     String totalall;
     EditText edit_txt_cash;
     Double total = 0.0;
@@ -74,11 +75,10 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String discountpercent;
     String txtdiscount;
     String symbol;
-    String process;
-    int idBill;
     int processmanual;
     int processbarcode;
     String  date;
+    Double  ValueVat;
 
 
     public PayMainFragment() {
@@ -99,6 +99,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         date = sharedPreferences.getString("date",(Date().toString()) );
         Log.d("date5", date + "");
 
+
         edit_txt_cash.setText("");
 
 
@@ -118,6 +119,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_main_pay, container, false);
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
+        ValueVat = intent.getDoubleExtra("ValueVat",0.0);
+        Log.d("ValueVat", ValueVat+"");
         symbol = intent.getStringExtra("symbol");
         Log.d("symbol", symbol);
         processmanual = (intent.getIntExtra("processmanual", 0));
@@ -130,6 +133,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         Log.d("discount", txtdiscount);
         totalall = intent.getStringExtra("totalall");
         txt_Totalall.setText(formatAmount.formatAmountDouble(Double.valueOf(totalall.toString())));
+        txt_ValueVat.setText(formatAmount.formatAmountDouble(ValueVat));
         discount = intent.getStringExtra("discountcost");
         discountpercent = intent.getStringExtra("discountpercent");
 
@@ -201,7 +205,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-
+        txt_ValueVat = (TextView)rootView.findViewById(R.id.txt_ValueVat);
         checkbox_print = (CheckBox) rootView.findViewById(R.id.checkbox_print);
         txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
         txt_Discount = (TextView) rootView.findViewById(R.id.txt_Discount);
@@ -389,6 +393,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("discount", txtdiscount);
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
+                            intent.putExtra("ValueVat", ValueVat);
 
                             startActivity(intent);
 
@@ -427,6 +432,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("discount", txtdiscount);
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
+                            intent.putExtra("ValueVat", ValueVat);
                             startActivity(intent);
 
 

@@ -49,6 +49,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     TextView txt_mCash;
     TextView txt_mChange;
     TextView txt_symbolDiscount;
+    TextView txt_mValueVat;
     String mTotal;
     String mDiscount;
     String mTotalAll;
@@ -58,6 +59,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     String discount;
     int processmanual;
     int processbarcode;
+    Double ValueVat;
 
     public ConcludeFragment() {
         super();
@@ -77,6 +79,8 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
 
         Intent intent = getActivity().getIntent();
         processmanual = (intent.getIntExtra("processmanual",0));
+        ValueVat = (intent.getDoubleExtra("ValueVat",0.0));
+
 
         Log.d("processm",processmanual+"");
         processbarcode = intent.getIntExtra("processbarcode",1);
@@ -106,6 +110,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         txt_mTotalAll = (TextView)rootView.findViewById(R.id.txt_mTotalAll);
         txt_mCash = (TextView)rootView.findViewById(R.id.txt_mCash);
         txt_mChange = (TextView)rootView.findViewById(R.id.txt_mChange);
+        txt_mValueVat = (TextView) rootView.findViewById(R.id.txt_mValueVat);
         txt_symbolDiscount = (TextView)rootView.findViewById(R.id.txt_symbolDiscount);
         btt_RePrint.setRippleSpeed(40);
         btn_barcode.setRippleSpeed(40);
@@ -149,11 +154,16 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         Date();
         Total();
+        VAT();
         Discount();
         TotalAll();
         Cash();
         Change();
 
+    }
+
+    private void VAT() {
+        txt_mValueVat.setText(ValueVat.toString());
     }
 
     private void Change() {

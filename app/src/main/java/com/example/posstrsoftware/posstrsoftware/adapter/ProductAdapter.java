@@ -62,15 +62,18 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
         TextView txt_name_group = (TextView) v.findViewById(R.id.txt_name_group);
         TextView txt_id_barcode = (TextView) v.findViewById(R.id.txt_id_barcode);
         TextView txt_mCost = (TextView)v.findViewById(R.id.txt_mCost);
+        TextView txt_mSymbolVat = (TextView)v.findViewById(R.id.txt_mSymbolVat);
+
 
         ProductList productList = mProductList.get(position);
         txt_name_product.setText(productList.getProductText());
         txt_id_product.setText(productList.getId() + "");
-        txt_name_price.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductpricesumvat() + "")));
+        txt_name_price.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductprice() + "")));
         txt_name_unit.setText(productList.getUnitList().getUnitText());
         txt_name_group.setText(productList.getGroupList().getGroupText());
         txt_id_barcode.setText(productList.getBarcode() + "");
         txt_mCost.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getCost()+"")));
+        txt_mSymbolVat.setText(productList.getSymbolVat().toString());
         return v;
     }
 
@@ -94,7 +97,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
                 ArrayList<ProductList> filters = new ArrayList<>();
                 for (int i = 0; i < filterList.size(); i++) {
                     if (filterList.get(i).getProductText().toUpperCase().contains(constraint)) {
-                        ProductList u = new ProductList(filterList.get(i).getId(), filterList.get(i).getProductText(), filterList.get(i).getProductpricesumvat(), filterList.get(i).getGroupList(), filterList.get(i).getUnitList(),filterList.get(i).getCost(), filterList.get(i).getBarcode());
+                        ProductList u = new ProductList(filterList.get(i).getId(), filterList.get(i).getProductText(), filterList.get(i).getProductprice(), filterList.get(i).getGroupList(), filterList.get(i).getUnitList(),filterList.get(i).getCost(), filterList.get(i).getBarcode(), filterList.get(i).getSymbolVat());
                         filters.add(u);
                     }
                 }

@@ -95,7 +95,7 @@ public class ProductSaleDAO {
 
     public ArrayList<ProductSaleList> getAllProductSaleList() {
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(productprice_text as decimal)) as product_price,count(productsale_text),id_product from productsale_list where delete_flag = 'N' group by productsale_text   ;", null);
+        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(product_price as decimal)) as product_price,count(productsale_text),id_product,sum(CAST(Value_Vat as decimal)) as ValueVat from productsale_list where delete_flag = 'N' group by productsale_text   ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ProductSaleList mProductSaleList = new ProductSaleList();
@@ -103,6 +103,7 @@ public class ProductSaleDAO {
             mProductSaleList.setAmount(cursor.getString(2));
             mProductSaleList.setPrice(cursor.getDouble(1));
             mProductSaleList.setProductid(cursor.getInt(3));
+            mProductSaleList.setValueVat(cursor.getDouble(4));
             ProductSaleList.add(mProductSaleList);
             cursor.moveToNext();
         }
@@ -160,7 +161,7 @@ public class ProductSaleDAO {
             ProductSaleList mproductSaleList = new ProductSaleList();
             mproductSaleList.setId(cursor.getInt(0));
             mproductSaleList.setProductSale(cursor.getString(2));
-            mproductSaleList.setPrice(cursor.getDouble(3));
+            mproductSaleList.setPrice(cursor.getDouble(11));
             productSaleLists.add(mproductSaleList);
             cursor.moveToNext();
 
@@ -183,6 +184,8 @@ public class ProductSaleDAO {
         values.put("product_price", productSaleList.getProduct_price());
         values.put("product_cost", productSaleList.getProduct_cost());
         values.put("vat_flag", productSaleList.getVat_flag());
+        values.put("Symbol_Vat",productSaleList.getSymbolVat());
+        values.put("Value_Vat",productSaleList.getValueVat());
 
 
         this.database.insert("productsale_list", null, values);
@@ -206,8 +209,8 @@ public class ProductSaleDAO {
     public ReportList addx(){
 
         ReportList bee = new ReportList();
-        Cursor cursor = database.rawQuery("INSERT INTO transectionBill(id_product ,productsale_text ,productprice_text,unit_id,unit_name ,group_id,group_name ,product_price,product_cost,vat_flag ,delete_flag ) " +
-                "select id_product ,productsale_text ,productprice_text,unit_id,unit_name ,group_id,group_name ,product_price,product_cost,vat_flag ,delete_flag  from productsale_list   ;", null);
+        Cursor cursor = database.rawQuery("INSERT INTO transectionBill(id_product ,productsale_text ,productprice_text,unit_id,unit_name ,group_id,group_name ,product_price,product_cost,vat_flag ,delete_flag,Symbol_Vat,Value_Vat ) " +
+                "select id_product ,productsale_text ,productprice_text,unit_id,unit_name ,group_id,group_name ,product_price,product_cost,vat_flag ,delete_flag,Symbol_Vat,Value_Vat  from productsale_list   ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             cursor.moveToNext();

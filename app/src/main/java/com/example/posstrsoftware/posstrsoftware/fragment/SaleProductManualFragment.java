@@ -62,6 +62,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     int amount = 1;
     int VarAmount = 0;
     String mProduct;
+    Double ValueVat =  0.0;
+
 
     public SaleProductManualFragment() {
         super();
@@ -152,10 +154,15 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         productSaleDAO.open();
         ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
         Double x = 0.0;
+        Double y = 0.0;
         DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
         for (ProductSaleList bean : productSaleLists) {
             x += Double.valueOf(bean.getPrice());
+            y += bean.getValueVat();
+
         }
+        ValueVat = y;
+
         txt_cost.setText(money_format.format((x)));
 
         ProductSaleManualAdapter adapter = new ProductSaleManualAdapter(getActivity(), productSaleLists);
@@ -210,6 +217,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                                                                ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                                                                productSaleDAO.open();
                                                                Double total = 0.0;
+                                                               ValueVat =  0.0;
+
                                                                if (edit_Amount.getText().toString().matches("") || edit_Amount.getText().toString().matches("0")) {
                                                                    amount = 1;
                                                                } else {
@@ -229,6 +238,9 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                                                                    productSaleList.setProduct_price(((ProductList) objAdapter.getItem(position)).getProductprice());
                                                                    productSaleList.setProduct_cost(((ProductList) objAdapter.getItem(position)).getCost());
                                                                    productSaleList.setVat_flag(((ProductList) objAdapter.getItem(position)).getCheckvat());
+                                                                   productSaleList.setSymbolVat(((ProductList) objAdapter.getItem(position)).getSymbolVat());
+                                                                   productSaleList.setValueVat(((ProductList) objAdapter.getItem(position)).getValueVat());
+
                                                                    productSaleDAO.add(productSaleList);
 
                                                                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
@@ -240,9 +252,12 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
 
                                                                edit_Amount.setText("1");
+
                                                                ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
                                                                for (ProductSaleList bean : productSaleLists) {
                                                                    total += Double.valueOf(bean.getPrice());
+                                                                   ValueVat +=Double.valueOf(bean.getValueVat());
+                                                                   Log.d("ValueVat",ValueVat+"");
                                                                    txt_cost.setText(formatAmount.formatAmountDouble(total));
 
 
@@ -348,6 +363,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
 
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
+            intent.putExtra("ValueVat",ValueVat);
             intent.putExtra("processmanual", 1);
             intent.putExtra("processbarcode", 0);
             startActivity(intent);

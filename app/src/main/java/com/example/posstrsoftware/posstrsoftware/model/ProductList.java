@@ -9,19 +9,48 @@ import java.io.Serializable;
 public class ProductList implements Serializable {
 
     private int id;
-    private  Double productpricesumvat;
+    private Double productpricesumvat;
+    private String productText;
+    private Double productprice;
+    private GroupList groupList;
+    private UnitList unitList;
+    private String barcode;
+    private String checkvat;
+    private Double Cost;
+    private String SymbolVat;
+    private Double ValueVat;
 
+    public Double getValueVat() {
+        return ValueVat;
+    }
 
+    public void setValueVat(Double valueVat) {
+        ValueVat = valueVat;
+    }
 
-    public ProductList(int id, String productText, Double productpricesumvat, GroupList groupList, UnitList unitList, Double cost, String barcode) {
+    public ProductList() {
+
+    }
+
+    public ProductList(int id, String productText, Double productprice, GroupList groupList, UnitList unitList, Double cost, String barcode, String symbolVat) {
         this.id = id;
         this.productpricesumvat = productpricesumvat;
         this.productText = productText;
+        this.productprice = productprice;
         this.groupList = groupList;
         this.unitList = unitList;
         this.barcode = barcode;
+        this.checkvat = checkvat;
         Cost = cost;
+        SymbolVat = symbolVat;
     }
+
+    public ProductList(int id, String productText, GroupList groupList) {
+        this.id = id;
+        this.productText = productText;
+        this.groupList = groupList;
+    }
+
 
     public Double getProductpricesumvat() {
         return productpricesumvat;
@@ -31,13 +60,13 @@ public class ProductList implements Serializable {
         this.productpricesumvat = productpricesumvat;
     }
 
-    private String productText;
-    private Double productprice;
-    private GroupList groupList;
-    private UnitList unitList;
-    private String barcode;
-    private String checkvat;
-    private Double Cost;
+    public String getSymbolVat() {
+        return SymbolVat;
+    }
+
+    public void setSymbolVat(String symbolVat) {
+        SymbolVat = symbolVat;
+    }
 
     public Double getCost() {
         return Cost;
@@ -53,38 +82,6 @@ public class ProductList implements Serializable {
 
     public void setCheckvat(String checkvat) {
         this.checkvat = checkvat;
-    }
-
-    public ProductList(int id, String productText, GroupList groupList) {
-        this.id = id;
-        this.productText = productText;
-        this.groupList = groupList;
-    }
-
-
-   public ProductList(int id, String productText, Double productprice, GroupList groupList, UnitList unitList, String barcode) {
-        this.id = id;
-        this.productText = productText;
-        this.productprice = productprice;
-        this.groupList = groupList;
-        this.unitList = unitList;
-        this.barcode = barcode;
-
-    }
-
-    public ProductList(int id, String productText, Double productprice, GroupList groupList, UnitList unitList, String barcode, String checkvat, Double cost) {
-        this.id = id;
-        this.productText = productText;
-        this.productprice = productprice;
-        this.groupList = groupList;
-        this.unitList = unitList;
-        this.barcode = barcode;
-        this.checkvat = checkvat;
-        this.Cost = cost;
-    }
-
-    public ProductList() {
-
     }
 
     public String getBarcode() {

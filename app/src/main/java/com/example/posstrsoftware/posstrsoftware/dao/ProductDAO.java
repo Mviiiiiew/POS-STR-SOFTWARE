@@ -40,10 +40,10 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-            Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text from vproduct_list pl " +
-                "inner join  unit_list ul on pl.id_unit = ul.id_unit   " +
-                "inner join  group_list gl on pl.id_group = gl.id_group  " +
-                "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
+            Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text,pl.Symbol_Vat,pl.ValueVat from vproduct_list pl \n" +
+                    "                inner join  unit_list ul on pl.id_unit = ul.id_unit   \n" +
+                    "                inner join  group_list gl on pl.id_group = gl.id_group  \n" +
+                    "                where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -57,6 +57,10 @@ public class ProductDAO {
             productList1.setUnitList(new UnitList(cursor.getInt(7),cursor.getString(8)));
             productList1.setGroupList(new GroupList(cursor.getInt(9),cursor.getString(10)));
             productList1.setProductpricesumvat(cursor.getDouble(3));
+            productList1.setSymbolVat(cursor.getString(11));
+            productList1.setValueVat(cursor.getDouble(12));
+
+
 
             productList.add(productList1);
             cursor.moveToNext();
@@ -87,6 +91,7 @@ public class ProductDAO {
             values.put("Cost",productList.getCost());
             values.put("UnitName",productList.getUnitList().getUnitText());
             values.put("GroupName",productList.getGroupList().getGroupText());
+            values.put("Symbol_Vat",productList.getSymbolVat());
 
             this.database.insert("product_list", null, values);
             return 1;
@@ -105,7 +110,7 @@ public class ProductDAO {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             bee.setProductSale(cursor.getString(2));
-            bee.setPrice(cursor.getDouble(11));
+            bee.setPrice(cursor.getDouble(12));
             bee.setProductid(cursor.getInt(0));
             bee.setUnitid(cursor.getInt(4));
             bee.setGroupid(cursor.getInt(5));
@@ -114,6 +119,8 @@ public class ProductDAO {
             bee.setProduct_price(cursor.getDouble(3));
             bee.setUnitname(cursor.getString(9));
             bee.setGroupname(cursor.getString(10));
+            bee.setSymbolVat(cursor.getString(11));
+            bee.setValueVat(cursor.getDouble(13));
             cursor.moveToNext();
         }
         cursor.close();

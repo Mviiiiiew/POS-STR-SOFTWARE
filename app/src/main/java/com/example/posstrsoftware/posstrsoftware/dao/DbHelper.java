@@ -41,8 +41,8 @@ public class DbHelper extends SQLiteOpenHelper {
             +"vat_flag TEXT, "
             +"Cost TEXT, "
             +"UnitName TEXT, "
-            +"GroupName TEXT "
-
+            +"GroupName TEXT, "
+            +"Symbol_Vat TEXT "
             +");";
     private static final String tableCompanyCreateSQL = "CREATE TABLE company_list("
             +"id_company INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -82,7 +82,9 @@ public class DbHelper extends SQLiteOpenHelper {
             +"product_cost TEXT ,"
             +"vat_flag TEXT ,"
             +"vatrate TEXT ,"
-            +"delete_flag TEXT DEFAULT 'N'"
+            +"delete_flag TEXT DEFAULT 'N',"
+            +" Symbol_Vat  TEXT, "
+            +" Value_Vat  TEXT "
             +");";
     private static final String tablesale_masterCreateSQL = "CREATE TABLE sale_master("
             +"sale_master_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -126,12 +128,14 @@ public class DbHelper extends SQLiteOpenHelper {
             +"vatrate TEXT ,"
             +"delete_flag TEXT DEFAULT 'N',"
             +"RunIdBill INTEGER,"
-            +"BillNo TEXT DEFAULT 'POS' "
+            +"BillNo TEXT DEFAULT 'POS', "
+            +" Symbol_Vat  TEXT, "
+            +" Value_Vat  TEXT "
             +");";
 
 
 
-    private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax from product_list order by 1";
+    private static  final String viewProductList = "CREATE VIEW vproduct_list as select *,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) +( cast(price_text as decimal)*(select vatrate /100.0 from company_list limit 1)) ELSE cast(price_text as decimal) END AS cal_tax,CASE WHEN vat_flag = 'Y' THEN cast(price_text as decimal) *(select vatrate /100.0 from company_list limit 1)ELSE cast(0.00 as decimal) END AS ValueVat  from product_list order by 1";
 
     private static  final String viewmasterList = "CREATE VIEW viewmaster_list as select sale_master_id,doc_date,cast(discount as decimal)" +
             " as bill_discount,count(sale_master_id) as count_amount, sum(cast(productprice_text as decimal)) as sum_product_price," +
@@ -156,7 +160,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableCompanyCreateSQL);
         db.execSQL(tableProductSaleCreateSQL);
         db.execSQL(tableReportCreateSQL);
-
         db.execSQL(viewProductList);
         db.execSQL(tablesale_masterCreateSQL);
         db.execSQL(tablesale_detailCreateSQL);
