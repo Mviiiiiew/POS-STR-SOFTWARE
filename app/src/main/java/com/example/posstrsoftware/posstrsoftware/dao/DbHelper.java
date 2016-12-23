@@ -147,7 +147,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "BillNO,RunIdBill order by cast(sale_master_id as decimal)";
 
     private static  final String viewdetailList = "CREATE VIEW viewdetail_list as  select productsale_text,sum(cast(product_price as decimal)) as sum_product_price,count(productsale_text) as product_amount from transectionBill where sale_master_id = (select sale_master_id from viewmaster_list   order by sale_master_id desc limit 1) group by productsale_text order by productsale_text";
-    private static  final String viewProductSaleReportList = "CREATE VIEW viewProductReport as select id_product,doc_date,productsale_text,unit_name,count(productsale_text) as product_amount,productprice_text as product_price,sum(productprice_text) as productAll_price from transectionBill  group by  productsale_text,doc_date order by doc_date";
+    private static  final String viewProductSaleReportList = "CREATE VIEW viewProductReport as select id_product,doc_date,productsale_text,unit_name,count(productsale_text) as product_amount,product_price as product_price,sum(product_price) as productAll_price   from transectionBill  group by  productsale_text,doc_date order by doc_date";
 
 
 

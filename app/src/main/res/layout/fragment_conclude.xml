@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.50"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="DATE"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -47,7 +47,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/txt_Date"
                     android:text="19.25.25"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_below="@+id/txt_Date"
                     android:layout_marginTop="10dp"
                     android:text="Total"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -70,8 +70,9 @@
                     android:layout_toRightOf="@+id/txt_Total"
                     android:gravity="end"
                     android:text="259,500.50"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
+
                 <TextView
                     android:id="@+id/txt_ValueVat"
                     android:layout_width="wrap_content"
@@ -79,7 +80,7 @@
                     android:layout_below="@+id/txt_Total"
                     android:layout_marginTop="10dp"
                     android:text="VAT"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -92,10 +93,8 @@
                     android:layout_toRightOf="@+id/txt_Total"
                     android:gravity="end"
                     android:text="259,500.50"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
-
-
 
                 <View
                     android:id="@+id/view_black"
@@ -112,8 +111,9 @@
                     android:layout_below="@+id/view_black"
                     android:layout_marginTop="10dp"
                     android:text="Discount"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
+
                 <TextView
                     android:id="@+id/txt_symbolDiscount"
                     android:layout_width="wrap_content"
@@ -123,8 +123,7 @@
                     android:text="Discount"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/txt_Discount"
-
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -137,7 +136,7 @@
                     android:layout_toRightOf="@+id/txt_symbolDiscount"
                     android:gravity="end"
                     android:text="5,500.50"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -147,7 +146,7 @@
                     android:layout_below="@+id/txt_Discount"
                     android:layout_marginTop="10dp"
                     android:text="TotalAll"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -160,7 +159,7 @@
                     android:layout_toRightOf="@+id/txt_Total"
                     android:gravity="end"
                     android:text="255,500.50"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
 
@@ -171,7 +170,7 @@
                     android:layout_below="@+id/txt_TotalAll"
                     android:layout_marginTop="10dp"
                     android:text="Cash"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -184,12 +183,11 @@
                     android:layout_toRightOf="@+id/txt_Total"
                     android:gravity="end"
                     android:text="255,500.50"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/sizetextconclude"
                     android:textStyle="bold"/>
 
                 <View
                     android:id="@+id/view_red"
-
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_below="@+id/txt_Cash"
@@ -218,7 +216,7 @@
                     android:textColor="#000000"
                     android:gravity="end"
                     android:text="29,500.50"
-                    android:textSize="40sp"
+                    android:textSize="45sp"
                     android:textStyle="bold"/>
 
 
@@ -251,7 +249,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.50"
         android:orientation="horizontal"
         android:weightSum="2"
         >

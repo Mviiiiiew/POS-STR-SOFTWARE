@@ -27,7 +27,7 @@ import com.gc.materialdesign.views.ButtonRectangle;
 public class FixUnitFragment extends Fragment implements View.OnClickListener {
 
     EditText editText_Unit;
-    ButtonRectangle btn_back;
+    ImageButton btn_back;
     ButtonRectangle btn_delete;
     ButtonRectangle btn_edit_unit;
     String mUnit;
@@ -59,7 +59,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
 
-        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
+        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         editText_Unit = (EditText) rootView.findViewById(R.id.editText_Unit);
         btn_edit_unit = (ButtonRectangle) rootView.findViewById(R.id.btn_edit_unit);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
@@ -68,7 +68,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         btn_back.setOnClickListener(this);
         btn_delete.setRippleSpeed(15);
         btn_edit_unit.setRippleSpeed(15);
-        btn_back.setRippleSpeed(40);
+
 
 
     }

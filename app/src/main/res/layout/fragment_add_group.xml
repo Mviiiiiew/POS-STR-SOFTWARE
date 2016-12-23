@@ -52,6 +52,8 @@
         android:id="@+id/editText_Group"
         android:layout_width="600dp"
         android:inputType="text"
+        android:textStyle="bold"
+        android:textSize="@dimen/txtsize"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="90dp"

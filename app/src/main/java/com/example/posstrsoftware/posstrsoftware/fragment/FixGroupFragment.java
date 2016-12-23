@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Created by nuuneoi on 11/16/2014.
  */
 public class FixGroupFragment extends Fragment implements View.OnClickListener {
-    ButtonRectangle btn_back;
+    ImageButton btn_back;
     EditText editText_Group;
     ButtonRectangle btn_edit_group;
     ButtonRectangle btn_delete;
@@ -52,13 +52,14 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
         GroupList editGroupList = (GroupList) getActivity().getIntent().getSerializableExtra("editGroup");
         editText_Group.setText(editGroupList.getGroupText());
+        mGroup=editGroupList.getGroupText();
 
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
+        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         editText_Group = (EditText) rootView.findViewById(R.id.editText_Group);
         btn_edit_group = (ButtonRectangle) rootView.findViewById(R.id.btn_edit_group);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
@@ -67,7 +68,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         btn_back.setOnClickListener(this);
         btn_delete.setRippleSpeed(15);
         btn_edit_group.setRippleSpeed(15);
-        btn_back.setRippleSpeed(40);
+
 
 
     }

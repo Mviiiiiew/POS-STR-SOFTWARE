@@ -31,6 +31,7 @@
         android:layout_marginLeft="20dp"
         android:background="@color/thumbColor"
         android:hint="ชื่อสินค้า"
+        android:textStyle="bold"
         android:inputType="text"
         android:padding="20dp"/>
 
@@ -51,6 +52,7 @@
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
+        android:textStyle="bold"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/editText_Product"
@@ -138,6 +140,7 @@
         android:layout_below="@+id/editText_Product"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:textStyle="bold"
         android:background="@color/thumbColor"
         android:hint="ราคาต้นทุน"
         android:inputType="numberDecimal"
@@ -154,6 +157,7 @@
         android:layout_toRightOf="@+id/editText_Cost"
         android:background="@color/thumbColor"
         android:hint="BARCODE"
+        android:textStyle="bold"
         android:inputType="number"
         android:padding="20dp"/>
 
@@ -166,7 +170,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="50dp"
         android:layout_toRightOf="@+id/editText_Barcode"
-        android:text="  กำหนดภาษี"
+        android:text="  ไม่มีภาษี"
         android:textSize="20sp"/>
 
 </RelativeLayout>

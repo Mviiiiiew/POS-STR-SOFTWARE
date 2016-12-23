@@ -33,12 +33,14 @@
         android:hint="  ชื่อหน่วย"
         android:layout_width="600dp"
         android:inputType="text"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="90dp"
         android:layout_marginTop="50dp"
         android:background="@color/thumbColor"
         android:padding="20dp"
+        android:textSize="@dimen/txtsize"
 
 
         />

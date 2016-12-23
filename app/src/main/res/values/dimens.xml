@@ -13,4 +13,6 @@
     <dimen name="textsize_productset">20sp</dimen>
     <dimen name="textSize_Adapter">25sp</dimen>
     <dimen name="padding_Adapter">5dp</dimen>
+    <dimen name="sizetextconclude">25sp</dimen>
+    <dimen name="txtsize">25sp</dimen>
 </resources>

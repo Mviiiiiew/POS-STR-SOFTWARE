@@ -482,6 +482,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         String x = "-------------------------------";
         String Totaltxt = "Total";
         String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(), 27);
+        String ValueVat = "VAT";
+        String vat = PrintFix.generatePrice(txt_ValueVat.getText().toString(), 29);
         String TotalAlltxt = "TotalAll";
         String totalall = PrintFix.generatePrice(txt_Totalall.getText().toString(), 24);
         String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""))), 28);
@@ -498,6 +500,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Linefeed();
         printerController.PrinterController_Print(Discounttxt.getBytes());
         printerController.PrinterController_Print(discount.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(ValueVat.getBytes());
+        printerController.PrinterController_Print(vat.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(TotalAlltxt.getBytes());
         printerController.PrinterController_Print(totalall.getBytes());

@@ -33,10 +33,11 @@ import java.util.ArrayList;
  */
 public class SaleProductDeleteFragment extends Fragment implements View.OnClickListener {
 
-    ButtonRectangle btn_back;
+    ImageButton btn_back;
     ListView listView_SaleProductDelete;
-
     String mProduct;
+
+
 
     public SaleProductDeleteFragment() {
         super();
@@ -59,10 +60,6 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         Log.d("mProductx",mProduct);
 
 
-     /*   ReportDAO reportDAO = new ReportDAO(getActivity());
-        reportDAO.open();
-        final ArrayList<ReportList> reportLists = reportDAO.getAllReportList();
-        reportDAO.close();*/
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
         productSaleDAO.open();
         final ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleDelete(mProduct);
@@ -110,14 +107,6 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-               /* ///REPORTLIST///
-                        ReportList reportList = new ReportList();
-                        reportList.setId((int) adapter.getItemId(position));
-                        ReportDAO reportDAO1 = new ReportDAO(getActivity());
-                        reportDAO1.open();
-                        reportDAO1.delete_Report_id(reportList);
-                        reportDAO1.close();
-                        reportLists.remove(position);*/
 
 
                   ///PRODUCTSALELIST///
@@ -151,10 +140,9 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         listView_SaleProductDelete = (ListView)rootView.findViewById(R.id.listView_SaleProductDelete);
-        btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
+        btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
              btn_back.setOnClickListener(this);
 
-        btn_back.setRippleSpeed(50);
 
     }
 

@@ -8,17 +8,31 @@
         android:id="@+id/my_toolbar"
         layout="@layout/toolbar"/>
 
-    <com.gc.materialdesign.views.ButtonRectangle
+    <ImageButton
         android:id="@+id/btn_back"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ย้อนกลับ"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
-        android:background="#795548"
-        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:background="@android:color/transparent"
+        android:paddingLeft="5dp"
+        android:src="@drawable/ic_arrow_back"
+        />
+
+    <TextView
+        android:id="@+id/txt_editUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_back"
+        android:layout_toRightOf="@+id/btn_back"
+        android:paddingLeft="40dp"
+        android:text="แก้ไขหน่วยนับ"
+        android:textColor="#000000"
+        android:textSize="30sp"
         android:textStyle="bold"
         />
+
+
 
 
     <EditText
@@ -31,6 +45,9 @@
         android:layout_marginTop="50dp"
         android:background="@color/thumbColor"
         android:hint="ชื่อหน่วย"
+        android:textSize="@dimen/txtsize"
+        android:textStyle="bold"
+        android:inputType="text"
         android:padding="20dp"
 
 
@@ -43,7 +60,7 @@
         android:layout_alignTop="@+id/editText_Unit"
         android:layout_marginLeft="40dp"
         android:layout_toRightOf="@+id/editText_Unit"
-        android:text="@string/save"
+        android:text="ยืนยัน"
 
         >
 

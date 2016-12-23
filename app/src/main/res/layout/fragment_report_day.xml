@@ -24,7 +24,7 @@
             android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
 
-    </RelativeLayout>
+</RelativeLayout>
 
 
     <RadioGroup

@@ -55,7 +55,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     ButtonRectangle btn_backz;
     SearchView searchViewProduct;
     TextView txt_cost;
-    ButtonRectangle btn_delete;
     ImageButton btn_back;
     ButtonRectangle btn_Pay;
     EditText edit_Amount;
@@ -92,7 +91,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         searchViewProduct.setQueryHint("Search..");
         btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
-        btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
+
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
@@ -108,10 +107,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_backz.setOnClickListener(this);
-        btn_delete.setOnClickListener(this);
         btn_back.setOnClickListener(this);
         btn_Pay.setRippleSpeed(40);
-        btn_delete.setRippleSpeed(40);
         btn_clear.setRippleSpeed(40);
         btn_backz.setRippleSpeed(40);
 
@@ -355,10 +352,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             startActivity(intent);
 
 
-        } else if (btn_delete == v) {
-            Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
-            startActivity(intent);
-        } else if (btn_Pay == v) {
+        }  else if (btn_Pay == v) {
 
 
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);

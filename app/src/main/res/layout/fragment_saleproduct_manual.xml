@@ -255,7 +255,6 @@
             android:layout_weight="0.5"
             android:orientation="vertical"
             android:weightSum="4"
-
             >
 
 
@@ -264,7 +263,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1.75"
                 android:text="ชำระ"
 
                 android:textSize="25sp"
@@ -276,7 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="1.1"
+                android:layout_weight="1.35"
                 android:gravity="center"
                 android:text="เริ่มรายการใหม่"
                 android:textSize="17sp"
@@ -284,23 +283,14 @@
                 ></com.gc.materialdesign.views.ButtonRectangle>
 
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_delete"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0.7"
-                android:text="ลบสินค้า"
-                android:textSize="20sp"
 
-                ></com.gc.materialdesign.views.ButtonRectangle>
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_backz"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:text="ย้อนกลับ"
                 android:textSize="20sp"
 
