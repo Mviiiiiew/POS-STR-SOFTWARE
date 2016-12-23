@@ -87,14 +87,23 @@ public class GroupMainFragment extends Fragment implements View.OnClickListener 
         groupDAO.close();
         final GroupAdapter adapter = new GroupAdapter(getActivity(),groupLists);
         listView_group.setAdapter(adapter);
-        listView_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView_group.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent editIntent = new Intent(getActivity(), FixGroupActivity.class);
+                editIntent.putExtra("editGroup", (Serializable) adapter.getItem(position));
+                startActivity(editIntent);
+                return false;
+            }
+        });
+      /*  listView_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent editIntent = new Intent(getActivity(), FixGroupActivity.class);
                 editIntent.putExtra("editGroup", (Serializable) adapter.getItem(position));
                 startActivity(editIntent);
             }
-        });
+        });*/
 
         searchViewGroup.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

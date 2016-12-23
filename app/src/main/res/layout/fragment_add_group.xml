@@ -23,7 +23,8 @@
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_save"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/editText_Group"
         android:layout_marginLeft="20dp"
@@ -36,10 +37,11 @@
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_back"
-        android:layout_width="120dp"
+        android:layout_width="140dp"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/btn_save"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:layout_toRightOf="@+id/btn_save"
         android:text="@string/cancel"
 
@@ -57,8 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="90dp"
+        android:background="@drawable/btn_default_normal"
         android:layout_marginTop="50dp"
-        android:background="@color/thumbColor"
         android:hint="ชื่อกลุ่ม"
         android:padding="20dp"
 

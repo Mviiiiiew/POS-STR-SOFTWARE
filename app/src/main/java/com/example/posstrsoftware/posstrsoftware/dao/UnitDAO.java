@@ -34,7 +34,7 @@ public class UnitDAO {
 
         ArrayList<UnitList> unitList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM unit_list where delete_flag = 'N';", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM unit_list where delete_flag = 'N' order by unit_text asc;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             UnitList mUnitList = new UnitList();

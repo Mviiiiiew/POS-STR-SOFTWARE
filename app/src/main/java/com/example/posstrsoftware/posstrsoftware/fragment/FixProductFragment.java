@@ -256,11 +256,28 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         } else if (btn_back == v) {
             getActivity().finish();
         } else if (btn_delete == v) {
-            ProductDAO productDAODel = new ProductDAO(getActivity());
-            productDAODel.open();
-            productDAODel.delete(editproductList);
-            productDAODel.close();
-            getActivity().finish();
+
+            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+            alertDialogder.setTitle("คุณต้องการที่จะลบสินค้า : " + NameProductBefore + "  หรือไม่ ?");
+            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                    ProductDAO productDAODel = new ProductDAO(getActivity());
+                    productDAODel.open();
+                    productDAODel.delete(editproductList);
+                    productDAODel.close();
+                    getActivity().finish();
+                }
+            });
+            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialogder.show();
+
 
         }
     }

@@ -34,6 +34,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_edit_group;
     ButtonRectangle btn_delete;
     String mGroup;
+
     public FixGroupFragment() {
         super();
     }
@@ -52,7 +53,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
         GroupList editGroupList = (GroupList) getActivity().getIntent().getSerializableExtra("editGroup");
         editText_Group.setText(editGroupList.getGroupText());
-        mGroup=editGroupList.getGroupText();
+        mGroup = editGroupList.getGroupText();
 
         return rootView;
     }
@@ -68,7 +69,6 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         btn_back.setOnClickListener(this);
         btn_delete.setRippleSpeed(15);
         btn_edit_group.setRippleSpeed(15);
-
 
 
     }
@@ -110,8 +110,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         if (v == btn_edit_group) {
             if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
                 Toast.makeText(getActivity(), "No Name Group", Toast.LENGTH_SHORT).show();
-            }
-            else if(editText_Group.getText().toString().matches(mGroup)){
+            } else if (editText_Group.getText().toString().matches(mGroup)) {
                 GroupList eGroupList = new GroupList();
                 eGroupList.setId(editGroupList.getId());
                 eGroupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
@@ -120,8 +119,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
                 groupDAO.updatenow(eGroupList);
                 groupDAO.close();
                 getActivity().finish();
-            }
-            else {
+            } else {
                 GroupList eGroupList = new GroupList();
                 eGroupList.setId(editGroupList.getId());
                 eGroupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
@@ -148,13 +146,29 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
 
         } else if (btn_back == v) {
             getActivity().finish();
-        }else if (btn_delete == v ){
+        }
+        else if (btn_delete == v) {
 
-            GroupDAO groupDAO = new GroupDAO(getActivity());
-            groupDAO.open();
-            groupDAO.delete(editGroupList);
-            groupDAO.close();
-            getActivity().finish();
+            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+            alertDialogder.setTitle("คุณต้องการที่จะลบกลุ่ม : " + mGroup + "  หรือไม่ ?");
+            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    GroupList editGroupList = (GroupList) getActivity().getIntent().getSerializableExtra("editGroup");
+                    GroupDAO groupDAO = new GroupDAO(getActivity());
+                    groupDAO.open();
+                    groupDAO.delete(editGroupList);
+                    groupDAO.close();
+                    getActivity().finish();
+                }
+            });
+            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialogder.show();
         }
     }
 

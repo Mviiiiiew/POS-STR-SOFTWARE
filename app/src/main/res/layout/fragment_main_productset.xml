@@ -77,7 +77,7 @@
         <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/btn_Set_Product"
             android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:textStyle="bold"

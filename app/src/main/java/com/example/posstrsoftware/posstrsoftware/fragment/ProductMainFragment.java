@@ -74,7 +74,7 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         btn_add_product.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-        listView_Product.setOnItemClickListener(this);
+      //  listView_Product.setOnItemClickListener(this);
 
 
     }
@@ -107,6 +107,20 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
             }
         });
         listView_Product.setAdapter(objAdapter);
+        listView_Product.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final ProductDAO productDAO = new ProductDAO(getActivity());
+                productDAO.open();
+                final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
+                productDAO.close();
+                final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
+                Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
+                editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
+                startActivity(editIntent);
+                return false;
+            }
+        });
 
     }
 

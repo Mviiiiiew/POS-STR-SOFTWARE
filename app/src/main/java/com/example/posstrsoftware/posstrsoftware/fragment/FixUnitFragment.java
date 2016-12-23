@@ -148,11 +148,27 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         } else if (btn_back == v) {
             getActivity().finish();
         } else if (btn_delete == v) {
-            UnitDAO unitDAODel = new UnitDAO(getActivity());
-            unitDAODel.open();
-            unitDAODel.delete(editUnitList);
-            unitDAODel.close();
-            getActivity().finish();
+            AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+            alertDialogder.setTitle("คุณต้องการที่จะลบหน่วย : "+ mUnit +"  หรือไม่ ?" );
+            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    UnitList editUnitList = (UnitList) getActivity().getIntent().getSerializableExtra("editUnit");
+                    UnitDAO unitDAODel = new UnitDAO(getActivity());
+                    unitDAODel.open();
+                    unitDAODel.delete(editUnitList);
+                    unitDAODel.close();
+                    getActivity().finish();
+                }
+            });
+            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+               dialog.dismiss();
+                }
+            });
+            alertDialogder.show();
+
 
         }
     }

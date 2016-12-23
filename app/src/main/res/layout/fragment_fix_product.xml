@@ -44,7 +44,7 @@
         android:layout_below="@+id/my_toolbar"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
-        android:background="@color/thumbColor"
+        android:background="@drawable/btn_default_normal"
         android:hint="ชื่อสินค้า"
         android:padding="20dp"
 
@@ -88,11 +88,7 @@
         android:layout_alignTop="@+id/txt_Unit"
         android:layout_below="@+id/editText_product"
         android:layout_marginLeft="20dp"
-        android:spinnerMode="dropdown"
-        android:popupBackground="@drawable/btn_default_normal"
         android:layout_toRightOf="@+id/txt_Unit"
-
-
 
         >
     </android.support.v7.widget.AppCompatSpinner>

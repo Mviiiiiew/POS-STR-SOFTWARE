@@ -58,7 +58,8 @@
             android:layout_alignParentTop="true"
             android:layout_margin="5dp"
             android:background="@color/colorWhite"
-            android:text="SAVE"
+            android:text="ยืนยัน"
+            android:textSize="20sp"
             android:textColor="#000000">
 
         </com.gc.materialdesign.views.ButtonRectangle>

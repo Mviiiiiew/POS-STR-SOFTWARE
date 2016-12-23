@@ -35,7 +35,7 @@ public class GroupDAO {
 
         ArrayList<GroupList> groupLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM group_list where delete_flag = 'N';",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM group_list where delete_flag = 'N' order by group_text asc;",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             GroupList mGroupList = new GroupList();
