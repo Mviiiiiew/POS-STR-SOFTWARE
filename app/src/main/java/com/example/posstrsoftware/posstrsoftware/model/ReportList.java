@@ -16,6 +16,62 @@ private int sale_masterid ;
     private  double sumVAT;
     private  String BillId;
 
+    private  String NameProduct;
+    private  String NameUnit;
+    private  Double SaleAmt;
+    private  Double SumSaleAmt;
+    private  String PrintProductDate;
+
+    public String getPrintProductDate() {
+        return PrintProductDate;
+    }
+
+    public void setPrintProductDate(String printProductDate) {
+        PrintProductDate = printProductDate;
+    }
+
+    private  int ProductprintAmount;
+
+    public int getProductprintAmount() {
+        return ProductprintAmount;
+    }
+
+    public void setProductprintAmount(int productprintAmount) {
+        ProductprintAmount = productprintAmount;
+    }
+
+    public String getNameProduct() {
+        return NameProduct;
+    }
+
+    public void setNameProduct(String nameProduct) {
+        NameProduct = nameProduct;
+    }
+
+    public String getNameUnit() {
+        return NameUnit;
+    }
+
+    public void setNameUnit(String nameUnit) {
+        NameUnit = nameUnit;
+    }
+
+    public Double getSaleAmt() {
+        return SaleAmt;
+    }
+
+    public void setSaleAmt(Double saleAmt) {
+        SaleAmt = saleAmt;
+    }
+
+    public Double getSumSaleAmt() {
+        return SumSaleAmt;
+    }
+
+    public void setSumSaleAmt(Double sumSaleAmt) {
+        SumSaleAmt = sumSaleAmt;
+    }
+
     public String getBillId() {
         return BillId;
     }

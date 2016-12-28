@@ -89,7 +89,6 @@
         android:background="@drawable/btn_default_normal"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/editText_Product"
-
         android:hint="ราคา"
         android:inputType="numberDecimal"
         android:padding="20dp"
@@ -162,7 +161,8 @@
 
     <EditText
         android:id="@+id/editText_Barcode"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText_Product"
         android:layout_marginLeft="20dp"

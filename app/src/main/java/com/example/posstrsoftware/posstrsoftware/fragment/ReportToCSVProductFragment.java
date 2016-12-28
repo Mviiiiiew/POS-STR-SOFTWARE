@@ -55,6 +55,27 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_report_to_csvproduct, container, false);
         initInstances(rootView);
+        edit_date_one.setFocusableInTouchMode(false);
+        edit_date_two.setFocusableInTouchMode(false);
+        edit_date_one.setEnabled(false);
+        edit_date_two.setEnabled(false);
+        radiogroup_date.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (radiogroup_date.getCheckedRadioButtonId()) {
+                    case R.id.radio_date_day:
+                        edit_date_day.setEnabled(true);
+                        edit_date_one.setEnabled(false);
+                        edit_date_two.setEnabled(false);
+                        break;
+                    case R.id.radio_date_between:
+                        edit_date_two.setEnabled(true);
+                        edit_date_one.setEnabled(true);
+                        edit_date_day.setEnabled(false);
+                        break;
+                }
+            }
+        });
         return rootView;
     }
 
@@ -167,6 +188,10 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
                         reportDAO.exportDataBaseProductTwoOne(oneday + "", twoday + "");
                         reportDAO.close();
                         Toast.makeText(getActivity(),"TwoOne",Toast.LENGTH_SHORT).show();
+                    }else{
+                        reportDAO.exportDataBaseProductOneTwo(oneday + "", twoday + "");
+                        reportDAO.close();
+                        Toast.makeText(getActivity(),"ONEONE",Toast.LENGTH_SHORT).show();
                     }
 
                     break;

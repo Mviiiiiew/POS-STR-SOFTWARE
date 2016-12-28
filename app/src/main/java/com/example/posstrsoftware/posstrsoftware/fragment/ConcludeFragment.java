@@ -59,7 +59,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     String discount;
     int processmanual;
     int processbarcode;
-    Double ValueVat;
+    String ValueVat;
 
     public ConcludeFragment() {
         super();
@@ -79,7 +79,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
 
         Intent intent = getActivity().getIntent();
         processmanual = (intent.getIntExtra("processmanual",0));
-        ValueVat = (intent.getDoubleExtra("ValueVat",0.0));
+        ValueVat = (intent.getStringExtra("ValueVat"));
 
 
         Log.d("processm",processmanual+"");
@@ -279,6 +279,8 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         String x = "-------------------------------";
         String Totaltxt = "Total";
         String total = PrintFix.generatePrice(mTotal, 27);
+        String ValueVat = "Include VAT";
+        String vat = PrintFix.generatePrice(txt_mValueVat.getText().toString(), 21);
         String TotalAlltxt = "TotalAll";
         String totalall = PrintFix.generatePrice(mTotalAll, 24);
         String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(mCash.toString().replaceAll(",", ""))), 28);
@@ -293,6 +295,9 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print(x.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Linefeed();
+        printerController.PrinterController_Print(ValueVat.getBytes());
+        printerController.PrinterController_Print(vat.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(Discounttxt.getBytes());
         printerController.PrinterController_Print(discountx.getBytes());
         printerController.PrinterController_Print("\n".getBytes());

@@ -363,7 +363,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
     private void payAuto() {
         totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
-        TotalSumVat = totalall+ValueVat;
+        TotalSumVat = totalall;
         Log.d("VAT",TotalSumVat+"");
         String u = "0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
@@ -385,7 +385,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
     private void pay() {
         totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
-        TotalSumVat = totalall+ValueVat;
+        TotalSumVat = totalall;
         Log.d("VAT",TotalSumVat+"");
         String u = "0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
@@ -409,7 +409,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         C = CostPercent.costpercent(A, B);
         Log.d("valA=", A + "");
         Log.d("valC=", C + "");
-        totalall = ((A+ValueVat) - C);
+        totalall = (A - C);
         Log.d("totalall", totalall.toString());
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -430,7 +430,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         C = CostPercent.costpercent(A, B);
         Log.d("valA=", A + "");
         Log.d("valC=", C + "");
-        totalall = CostPercent.parserFormat((A+ValueVat) - C);
+        totalall = CostPercent.parserFormat(A - C);
         Log.d("totalall", totalall.toString());
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -448,7 +448,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     private void PayCost() {
         A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
-        totalall = (A+ValueVat) - B;
+        totalall = A - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
         String totalcost = String.valueOf(totalall);
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -466,7 +466,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     private void PayAutoCost() {
         A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
-        totalall = (A+ValueVat) - B;
+        totalall = A - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
 
 

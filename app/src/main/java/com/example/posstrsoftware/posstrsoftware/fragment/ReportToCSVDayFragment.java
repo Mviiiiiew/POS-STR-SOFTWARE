@@ -55,6 +55,8 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_report_to_csvday, container, false);
         initInstances(rootView);
+        edit_date_one.setFocusableInTouchMode(false);
+        edit_date_two.setFocusableInTouchMode(false);
         edit_date_one.setEnabled(false);
         edit_date_two.setEnabled(false);
         radiogroup_date.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -274,6 +276,9 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
                         reportDAO.close();
                     } else if (oneday > twoday) {
                         reportDAO.exportDataBaseBetweenDailyTwoOne(oneday + "", twoday + "");
+                        reportDAO.close();
+                    }else{
+                        reportDAO.exportDataBaseBetweenDailyOneTwo(oneday + "", twoday + "");
                         reportDAO.close();
                     }
 

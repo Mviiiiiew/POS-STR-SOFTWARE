@@ -41,22 +41,22 @@ public class ReportDAO {
         dbHelperReport.close();
     }
 
-    public ArrayList<ReportList> getAllReportList(String input_date) {
+
+
+
+    public ArrayList<ReportList> getAllPrintReportProduct(String input_date) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date+"' as decimal)  and cast('"+input_date+"' as decimal);", null);
+        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('"+input_date+"' AS DECIMAL)  AND CAST('"+input_date+"' AS DECIMAL);;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
-            mReportList.setSale_masterid(cursor.getInt(0));
-            mReportList.setBillId(cursor.getString(9));
-            mReportList.setDate(cursor.getString(1));
-            mReportList.setDiscount(cursor.getDouble(2));
-            mReportList.setAmount(cursor.getInt(3));
-            mReportList.setSumPrice(cursor.getDouble(4));
-            mReportList.setSumCost(cursor.getDouble(5));
-            mReportList.setSumVAT(cursor.getDouble(6));
-            mReportList.setProfit(cursor.getDouble(10));
+            mReportList.setNameProduct(cursor.getString(2));
+            mReportList.setProductprintAmount(cursor.getInt(4));
+            mReportList.setSumSaleAmt(cursor.getDouble(7));
+            mReportList.setSaleAmt(cursor.getDouble(5));
+            mReportList.setNameUnit(cursor.getString(3));
+            mReportList.setPrintProductDate(cursor.getString(1));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
@@ -64,22 +64,91 @@ public class ReportDAO {
         return reportLists;
     }
 
-    public ArrayList<ReportList> getAllReportListOneTwo(String input_date_from,String input_date_to) {
+    public ArrayList<ReportList> getAllPrintReportProductOneTwo( String input_date_from,String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_from+"' as decimal)  and cast('"+input_date_to+"' as decimal);", null);
+        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('"+input_date_from+"' AS DECIMAL)  AND CAST('"+input_date_to+"' AS DECIMAL);;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setNameProduct(cursor.getString(2));
+            mReportList.setProductprintAmount(cursor.getInt(4));
+            mReportList.setSumSaleAmt(cursor.getDouble(7));
+            mReportList.setSaleAmt(cursor.getDouble(5));
+            mReportList.setNameUnit(cursor.getString(3));
+            mReportList.setPrintProductDate(cursor.getString(1));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+
+    public ArrayList<ReportList> getAllPrintReportProductTwoOne( String input_date_from,String input_date_to) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('"+input_date_to+"' AS DECIMAL)  AND CAST('"+input_date_from+"' AS DECIMAL);;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setNameProduct(cursor.getString(2));
+            mReportList.setProductprintAmount(cursor.getInt(4));
+            mReportList.setSumSaleAmt(cursor.getDouble(7));
+            mReportList.setSaleAmt(cursor.getDouble(5));
+            mReportList.setNameUnit(cursor.getString(3));
+            mReportList.setPrintProductDate(cursor.getString(1));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+
+
+
+
+
+    public ArrayList<ReportList> getAllReportList(String input_date) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date+"' as decimal)  and cast('"+input_date+"' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
             mReportList.setSale_masterid(cursor.getInt(0));
-            mReportList.setBillId(cursor.getString(9));
             mReportList.setDate(cursor.getString(1));
-            mReportList.setDiscount(cursor.getDouble(2));
-            mReportList.setAmount(cursor.getInt(3));
-            mReportList.setSumPrice(cursor.getDouble(4));
-            mReportList.setSumCost(cursor.getDouble(5));
-            mReportList.setSumVAT(cursor.getDouble(6));
-            mReportList.setProfit(cursor.getDouble(10));
+            mReportList.setDiscount(cursor.getDouble(3));
+            mReportList.setAmount(cursor.getInt(4));
+            mReportList.setSumPrice(cursor.getDouble(5));
+            mReportList.setSumCost(cursor.getDouble(6));
+            mReportList.setSumVAT(cursor.getDouble(7));
+            mReportList.setProfit(cursor.getDouble(11));
+            mReportList.setBillId(cursor.getString(10));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+
+
+
+    public ArrayList<ReportList> getAllReportListOneTwo(String input_date_from,String input_date_to) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_from+"' as decimal)  and cast('"+input_date_to+"' as decimal);", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setSale_masterid(cursor.getInt(0));
+            mReportList.setDate(cursor.getString(1));
+            mReportList.setDiscount(cursor.getDouble(3));
+            mReportList.setAmount(cursor.getInt(4));
+            mReportList.setSumPrice(cursor.getDouble(5));
+            mReportList.setSumCost(cursor.getDouble(6));
+            mReportList.setSumVAT(cursor.getDouble(7));
+            mReportList.setProfit(cursor.getDouble(11));
+            mReportList.setBillId(cursor.getString(10));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
@@ -89,19 +158,19 @@ public class ReportDAO {
     public ArrayList<ReportList> getAllReportListTwoOne(String input_date_from,String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_to+"' as decimal)  and cast('"+input_date_from +"' as decimal);", null);
+        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_to+"' as decimal)  and cast('"+input_date_from +"' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
             mReportList.setSale_masterid(cursor.getInt(0));
-            mReportList.setBillId(cursor.getString(9));
             mReportList.setDate(cursor.getString(1));
-            mReportList.setDiscount(cursor.getDouble(2));
-            mReportList.setAmount(cursor.getInt(3));
-            mReportList.setSumPrice(cursor.getDouble(4));
-            mReportList.setSumCost(cursor.getDouble(5));
-            mReportList.setSumVAT(cursor.getDouble(6));
-            mReportList.setProfit(cursor.getDouble(10));
+            mReportList.setDiscount(cursor.getDouble(3));
+            mReportList.setAmount(cursor.getInt(4));
+            mReportList.setSumPrice(cursor.getDouble(5));
+            mReportList.setSumCost(cursor.getDouble(6));
+            mReportList.setSumVAT(cursor.getDouble(7));
+            mReportList.setProfit(cursor.getDouble(11));
+            mReportList.setBillId(cursor.getString(10));
             reportLists.add(mReportList);
             cursor.moveToNext();
         }
@@ -133,7 +202,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6)
+                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -168,7 +237,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6)
+                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -202,7 +271,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6)
+                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -229,7 +298,7 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,sum_product_price ,count_amount,bill_discount,sum_product_cost,sum_vat,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,PriceSumVat ,count_amount,bill_discount,sum_product_cost,sum_vat,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
@@ -260,7 +329,7 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,sum_product_price ,count_amount,bill_discount,sum_product_cost,sum_vat,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,PriceSumVat ,count_amount,bill_discount,sum_product_cost,sum_vat,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
@@ -294,7 +363,7 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,sum_product_price ,count_amount,bill_discount,sum_product_cost,sum_vat,(sum_product_price - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,PriceSumVat ,count_amount,bill_discount,sum_product_cost,sum_vat,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...

@@ -105,6 +105,7 @@
                 android:id="@+id/editText_CompanyName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:layout_alignTop="@+id/txt_NameCompany"
                 android:layout_marginLeft="@dimen/layout_marginLeft_company_edittext"
                 android:layout_toRightOf="@+id/txt_NameCompany"
@@ -131,6 +132,7 @@
             <EditText
                 android:id="@+id/editText_CompanyAddress"
                 android:layout_width="match_parent"
+                android:inputType="text"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/editText_CompanyName"
                 android:layout_below="@+id/editText_CompanyName"
@@ -161,6 +163,7 @@
                 android:id="@+id/editText_Telephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
                 android:layout_below="@+id/editText_CompanyAddress"
                 android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
@@ -186,6 +189,7 @@
                 android:id="@+id/editText_Name_TAXID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
                 android:layout_below="@+id/editText_Telephone"
                 android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
@@ -211,6 +215,7 @@
             <EditText
                 android:id="@+id/editText_Name_Division"
                 android:layout_width="wrap_content"
+                android:inputType="text"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
                 android:layout_below="@+id/editText_Name_TAXID"
@@ -238,6 +243,7 @@
                 android:id="@+id/editText_Name_RegisterID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
                 android:layout_below="@+id/editText_Name_Division"
                 android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
@@ -267,6 +273,7 @@
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
                 android:layout_below="@+id/editText_Name_RegisterID"
                 android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:inputType="text"
                 android:background="@drawable/btn_default_normal"
                 android:hint="ENDbillText"
                 android:textColorHint="#FFFFFF"
@@ -295,6 +302,7 @@
                 android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
                 android:background="@drawable/btn_default_normal"
                 android:hint="VATRate"
+                android:inputType="numberDecimal"
                 android:textColorHint="#FFFFFF"
                 />
 

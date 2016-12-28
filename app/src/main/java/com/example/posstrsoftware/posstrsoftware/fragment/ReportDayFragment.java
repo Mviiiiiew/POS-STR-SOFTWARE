@@ -77,6 +77,8 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_report_day, container, false);
         initInstances(rootView);
+        edit_date_one.setFocusableInTouchMode(false);
+        edit_date_two.setFocusableInTouchMode(false);
         edit_date_one.setEnabled(false);
         edit_date_two.setEnabled(false);
         radiogroup_date.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -337,11 +339,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
     private void Conclude() {
 
         String mSumAmount = "SumAmount#"+PrintFix.generatePrice(SumAmount+"",22);
-        String mSumPrice = "SumPrice#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumPrice+"")),23);
-        String mSumCost = "SumCost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumCost+"")),24);
+        String mSumPrice = "SumSaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumPrice+"")),21);
+        String mSumCost = "SumCOST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumCost+"")),24);
         String mSumVAT = "SumVAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumVAT+"")),25);
-        String mSumDisCount = "SumDisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumDisCount+"")),20);
-        String mSumprofit = "Sumprofit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumProfit+"")),22);
+        String mSumDisCount = "SumDISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumDisCount+"")),24);
+        String mSumprofit = "SumProfit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumProfit+"")),22);
 
         printerController.PrinterController_Font_Normal_mode();
         printerController.PrinterController_Linefeed();
@@ -376,10 +378,10 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
             String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
             String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "Price#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),26);
-            String SumCost = "Cost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
+            String SumPrice = "SaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),24);
+            String SumCost = "COST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
             String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
-            String SumDiscount = "DisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),23);
+            String SumDiscount = "DISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),27);
             String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
 
 
@@ -436,10 +438,10 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
             String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
             String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "Price#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),26);
-            String SumCost = "Cost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
+            String SumPrice = "SaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),24);
+            String SumCost = "COST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
             String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
-            String SumDiscount = "DisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),23);
+            String SumDiscount = "DISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),27);
             String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
 
 
@@ -550,10 +552,10 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
             String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
             String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "Price#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),26);
-            String SumCost = "Cost#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
+            String SumPrice = "SaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),24);
+            String SumCost = "COST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
             String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
-            String SumDiscount = "DisCount#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),23);
+            String SumDiscount = "DISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),27);
             String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
 
 

@@ -132,6 +132,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         txtdiscount = intent.getStringExtra("discount");
         Log.d("discount", txtdiscount);
         totalall = intent.getStringExtra("totalall");
+
         txt_Totalall.setText(formatAmount.formatAmountDouble(Double.valueOf(totalall.toString())));
         txt_ValueVat.setText(formatAmount.formatAmountDouble(ValueVat));
         discount = intent.getStringExtra("discountcost");
@@ -393,7 +394,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("discount", txtdiscount);
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
-                            intent.putExtra("ValueVat", ValueVat);
+                            intent.putExtra("ValueVat", txt_ValueVat.getText().toString());
 
                             startActivity(intent);
 
@@ -432,7 +433,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("discount", txtdiscount);
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
-                            intent.putExtra("ValueVat", ValueVat);
+                            intent.putExtra("ValueVat", txt_ValueVat.getText().toString());
                             startActivity(intent);
 
 
@@ -482,8 +483,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         String x = "-------------------------------";
         String Totaltxt = "Total";
         String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(), 27);
-        String ValueVat = "VAT";
-        String vat = PrintFix.generatePrice(txt_ValueVat.getText().toString(), 29);
+        String ValueVat = "Include VAT";
+        String vat = PrintFix.generatePrice(txt_ValueVat.getText().toString(), 21);
         String TotalAlltxt = "TotalAll";
         String totalall = PrintFix.generatePrice(txt_Totalall.getText().toString(), 24);
         String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""))), 28);
@@ -498,11 +499,11 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print(x.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Linefeed();
-        printerController.PrinterController_Print(Discounttxt.getBytes());
-        printerController.PrinterController_Print(discount.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(ValueVat.getBytes());
         printerController.PrinterController_Print(vat.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(Discounttxt.getBytes());
+        printerController.PrinterController_Print(discount.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(TotalAlltxt.getBytes());
         printerController.PrinterController_Print(totalall.getBytes());
@@ -510,6 +511,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print(Cashtxt.getBytes());
         printerController.PrinterController_Print(cash.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
         printerController.PrinterController_Font_Bold();
         printerController.PrinterController_Print(Changetxt.getBytes());
         printerController.PrinterController_Print(changz.getBytes());

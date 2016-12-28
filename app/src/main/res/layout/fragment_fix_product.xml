@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/btn_back"
         android:layout_toRightOf="@+id/btn_back"
-        android:paddingLeft="40dp"
+        android:paddingLeft="20dp"
         android:text="แก้ไขข้อมูลสินค้า"
         android:textColor="#000000"
         android:textSize="30sp"
@@ -33,115 +33,17 @@
         />
 
 
-    <EditText
-
-        android:id="@+id/editText_product"
-        android:layout_width="600dp"
-        android:inputType="text"
-        android:textStyle="bold"
-        android:textSize="@dimen/txtsize"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/my_toolbar"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_default_normal"
-        android:hint="ชื่อสินค้า"
-        android:padding="20dp"
-
-
-        />
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <TextView
-        android:id="@+id/txt_Unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText_product"
-        android:layout_below="@+id/editText_product"
-        android:layout_marginTop="15dp"
-        android:text="หน่วยนับ"
-        android:textSize="25sp"
-        android:textStyle="bold"
-
-        />
-    <View
-        android:layout_width="275dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/editText_product"
-        android:layout_alignTop="@+id/txt_Unit"
-        android:layout_toRightOf="@+id/txt_Unit"
-        android:layout_marginLeft="20dp"
-        android:background="#BBDEFB"
-        />
-
-
-
-
-    <android.support.v7.widget.AppCompatSpinner
-
-        android:id="@+id/spinner_unit"
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/txt_Unit"
-        android:layout_below="@+id/editText_product"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/txt_Unit"
-
-        >
-    </android.support.v7.widget.AppCompatSpinner>
-
-
-
-    <TextView
-        android:id="@+id/txt_Group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txt_Unit"
-        android:layout_below="@+id/editText_product"
-        android:layout_marginLeft="50dp"
-        android:layout_toRightOf="@+id/spinner_unit"
-        android:text="กลุ่ม"
-        android:textSize="25sp"
-        android:textStyle="bold"
-
-        />
-    <View
-        android:layout_width="275dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/editText_product"
-        android:layout_alignTop="@+id/txt_Unit"
-        android:layout_toRightOf="@+id/txt_Group"
-        android:layout_marginLeft="30dp"
-        android:background="#BBDEFB"
-        />
-
-
-    <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/spinner_group"
-        android:layout_width="270dp"
-
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/txt_Unit"
-        android:layout_below="@+id/editText_product"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/txt_Group"
-
-
-        >
-
-    </android.support.v7.widget.AppCompatSpinner>
-
     <com.gc.materialdesign.views.ButtonRectangle
+
         android:id="@+id/btn_edit_product"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_product"
-        android:layout_marginLeft="40dp"
-        android:layout_toRightOf="@+id/editText_product"
+        android:layout_marginTop="2dp"
+        android:layout_toLeftOf="@+id/btn_delete"
+
+        android:background="#311B92"
         android:text="@string/save"
+        android:textSize="18sp"
 
         >
 
@@ -149,15 +51,198 @@
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btn_delete"
-        android:layout_width="120dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btn_edit_product"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/btn_edit_product"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btn_save"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#311B92"
         android:text="@string/delete"
+        android:textSize="18sp"
+
+        />
+
+
+    <EditText
+        android:id="@+id/editText_product"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_default_normal"
+        android:hint="ชื่อสินค้า"
+        android:inputType="text"
+        android:padding="20dp"
+        android:textSize="@dimen/txtsize"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+
+        android:id="@+id/txt_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edit_price"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginLeft="15dp"
+        android:text="ราคา"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:id="@+id/edit_price"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_price"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/editText_product"
+        android:background="@drawable/btn_default_normal"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:hint="ราคา"
+        android:textSize="25sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+
+        android:id="@+id/txt_priceCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/edit_price"
+        android:text="ราคาต้นทุน"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:id="@+id/edit_priceCost"
+        android:layout_width="200dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_price"
+        android:layout_marginLeft="10dp"
+        android:hint="ราคาต้นทุน"
+        android:layout_toRightOf="@+id/edit_price"
+        android:background="@drawable/btn_default_normal"
+        android:inputType="numberDecimal"
+        android:textSize="25sp"
+        android:textStyle="bold"
+
+        />
+
+
+    <CheckBox
+        android:id="@+id/checkbox_vat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_priceCost"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/edit_priceCost"
+        android:checked="false"
+        android:text="  ไม่มีภาษี"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/editText_Barcode"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText_product"
+        android:layout_below="@+id/editText_product"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:background="@drawable/btn_default_normal"
+        android:hint="Barcode"
+        android:inputType="text"
+        android:padding="20dp"
+        android:textSize="@dimen/txtsize"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:id="@+id/txt_Unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignLeft="@+id/spinner_unit"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/editText_Barcode"
+        android:text="หน่วยนับ"
+
+        />
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:layout_below="@+id/spinner_unit"
+        android:layout_alignLeft="@+id/spinner_unit"
+        />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+
+        android:id="@+id/spinner_unit"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/editText_Barcode"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/editText_Barcode"
 
         >
+    </android.support.v7.widget.AppCompatSpinner>
 
-    </com.gc.materialdesign.views.ButtonRectangle>
+
+    <TextView
+        android:id="@+id/txt_Group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="กลุ่ม"
+        android:layout_alignTop="@+id/editText_Barcode"
+        android:layout_alignLeft="@+id/spinner_group"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+
+        />
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:layout_below="@+id/spinner_group"
+        android:layout_alignLeft="@+id/spinner_group"
+        />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_group"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/editText_Barcode"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/spinner_unit"
+        >
+
+    </android.support.v7.widget.AppCompatSpinner>
 
 </RelativeLayout>

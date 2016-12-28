@@ -40,10 +40,10 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-            Cursor cursor = database.rawQuery("select pl.id_product,pl.id_barcode,pl.product_text,pl.cal_tax,pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text,pl.Symbol_Vat,pl.ValueVat from vproduct_list pl \n" +
-                    "                inner join  unit_list ul on pl.id_unit = ul.id_unit   \n" +
-                    "                inner join  group_list gl on pl.id_group = gl.id_group  \n" +
-                    "                where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
+            Cursor cursor = database.rawQuery("  select pl.id_product,pl.id_barcode,pl.product_text,round (pl.PriceNoVAT,2),pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text,pl.Symbol_Vat,round (pl.ValueVat,2) from vproduct_list pl      \n" +
+                    "inner join  unit_list ul on pl.id_unit = ul.id_unit       \n" +
+                    "inner join  group_list gl on pl.id_group = gl.id_group    \n" +
+                    "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -171,6 +171,9 @@ public class ProductDAO {
         values.put("id_product", updateProductList.getId());
         values.put("id_unit", updateProductList.getUnitList().getId());
         values.put("id_group", updateProductList.getGroupList().getId());
+        values.put("price_text", updateProductList.getProductprice());
+        values.put("Cost", updateProductList.getCost());
+        values.put("id_barcode", updateProductList.getBarcode());
         String where = "id_product=" + updateProductList.getId();
         this.database.update("product_list", values, where, null);
     }

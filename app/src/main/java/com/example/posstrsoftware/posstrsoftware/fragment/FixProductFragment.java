@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -40,6 +41,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     ButtonRectangle btn_edit_product;
     ButtonRectangle btn_delete;
     Spinner spinner_group;
+
     private spinnerGroupAdapter mSpinnerGroupAdapter;
     private GroupList mSelectedGroup;
     Spinner spinner_unit;
@@ -47,6 +49,15 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     private spinnerUnitAdapter mSpinnerUnitAdapter;
     private UnitList mSelectedUnit;
     String NameProductBefore;
+    String barcode;
+    String Vat;
+
+    EditText edit_price;
+    Double price;
+    Double priceCost;
+    EditText edit_priceCost;
+    EditText editText_Barcode;
+    CheckBox checkbox_vat;
 
 
     public FixProductFragment() {
@@ -67,8 +78,26 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         initInstances(rootView);
         ProductList editProductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         NameProductBefore = editProductList.getProductText();
+        barcode = editProductList.getBarcode();
+        price = editProductList.getProductprice();
+        priceCost = editProductList.getCost();
+        Vat = editProductList.getSymbolVat();
+        Log.d("VAT", Vat);
+
         Log.d(NameProductBefore, "UnitBefore");
+
         editText_product.setText(editProductList.getProductText());
+        edit_price.setText(price.toString());
+        Log.d(price+"", "price");
+        edit_priceCost.setText(priceCost.toString());
+        Log.d(priceCost+"", "cost");
+        editText_Barcode.setText(barcode);
+        if(Vat.matches("มีภาษี")){
+            checkbox_vat.setChecked(true);
+        }
+
+
+
         final GroupDAO mGroupDAO = new GroupDAO(getActivity());
         mGroupDAO.open();
         final ArrayList<GroupList> groupList = mGroupDAO.getAllGroupList();
@@ -98,13 +127,18 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         editText_product = (EditText) rootView.findViewById(R.id.editText_product);
         btn_edit_product = (ButtonRectangle) rootView.findViewById(R.id.btn_edit_product);
         btn_delete = (ButtonRectangle) rootView.findViewById(R.id.btn_delete);
+        edit_price = (EditText)rootView.findViewById(R.id.edit_price);
+        edit_priceCost = (EditText)rootView.findViewById(R.id.edit_priceCost);
+        editText_Barcode = (EditText)rootView.findViewById(R.id.editText_Barcode);
+        checkbox_vat = (CheckBox)rootView.findViewById(R.id.checkbox_vat);
 
         btn_back.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
         btn_edit_product.setOnClickListener(this);
+        spinner_unit.setOnItemSelectedListener(this);
         btn_delete.setRippleSpeed(15);
         btn_edit_product.setRippleSpeed(15);
-        spinner_unit.setOnItemSelectedListener(this);
+
         spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -170,6 +204,9 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                         eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
                         eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
                         eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                        eProductList.setProductprice(Double.valueOf(edit_price.getText().toString()));
+                        eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString()));
+                        eProductList.setBarcode(editText_Barcode.getText().toString());
                         ProductDAO productDAO = new ProductDAO(getActivity());
                         productDAO.open();
                         productDAO.updatereplace(eProductList);
