@@ -22,23 +22,14 @@
 
             >
 
-            <TextView
-                android:id="@+id/txt_id_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="test"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/textSize_Adapter"
-                android:textStyle="bold"/>
+
 
             <TextView
                 android:id="@+id/txt_name_group"
                 android:layout_width="wrap_content"
                 android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/txt_id_group"
-                android:paddingLeft="35dp"
+                android:paddingLeft="20dp"
                 android:text="Unit"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"/>

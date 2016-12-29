@@ -95,7 +95,16 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
         int ex = 0;
         if (v == btn_save) {
             if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), " < Please input Group >", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ชื่อกลุ่ม : ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
             } else {
                 GroupList groupList = new GroupList();
                 groupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));
@@ -105,8 +114,8 @@ public class AddGroupFragment extends Fragment implements View.OnClickListener {
                 groupDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("< Please change namegroup because repeat >");
-                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    alertDialogder.setTitle("มีข้อมูล 'กลุ่ม' ซ้ำในระบบ");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

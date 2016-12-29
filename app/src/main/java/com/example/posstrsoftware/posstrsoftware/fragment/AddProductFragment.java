@@ -127,7 +127,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                     longval = Long.parseLong(originalString);
 
                     DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-                    formatter.applyPattern("#,###,###,###.##");
+                    formatter.applyPattern("#,###.##");
                     String formattedString = formatter.format(longval);
 
                     //setting text after format to EditText
@@ -201,12 +201,42 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         double price=0.0;
         if (v == btn_save) {
             if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
-                Toast.makeText(getActivity(), "< Please input Product >", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ชื่อสินค้า ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
             } else if (editText_Price.getText().toString().matches("")) {
-                Toast.makeText(getActivity(), "< Please input Price >", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ราคาสินค้า ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
             }
             else if (editText_Cost.getText().toString().matches("")) {
-                Toast.makeText(getActivity(), "< Please input Cost or  0 >", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ราคาต้นทุน หรือ 0 ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
             }else {
 
                 ProductList productList = new ProductList();
@@ -232,8 +262,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 productDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("< Please change nameproduct because repeat >");
-                    alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -291,7 +321,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             longval = Long.parseLong(originalString);
 
             DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-            formatter.applyPattern("#,###,###,###.##");
+            formatter.applyPattern("#,###.##");
             String formattedString = formatter.format(longval);
 
             //setting text after format to EditText

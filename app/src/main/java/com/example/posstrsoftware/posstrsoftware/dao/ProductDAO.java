@@ -174,6 +174,8 @@ public class ProductDAO {
         values.put("price_text", updateProductList.getProductprice());
         values.put("Cost", updateProductList.getCost());
         values.put("id_barcode", updateProductList.getBarcode());
+        values.put("vat_flag", updateProductList.getCheckvat());
+        values.put("Symbol_Vat", updateProductList.getSymbolVat());
         String where = "id_product=" + updateProductList.getId();
         this.database.update("product_list", values, where, null);
     }

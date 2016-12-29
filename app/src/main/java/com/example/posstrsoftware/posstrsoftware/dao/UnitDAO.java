@@ -49,6 +49,25 @@ public class UnitDAO {
         return unitList;
     }
 
+    public ArrayList<UnitList> getAllFixUnitList(int idUnit ) {
+
+        ArrayList<UnitList> unitList = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select * from unit_list where id_unit = '"+idUnit+"' and delete_flag = 'N'   union all  select * from unit_list where id_unit <> '"+idUnit+"' and    delete_flag = 'N';", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            UnitList mUnitList = new UnitList();
+            mUnitList.setId(cursor.getInt(0));
+            mUnitList.setUnitText(cursor.getString(1));
+            unitList.add(mUnitList);
+            cursor.moveToNext();
+
+
+        }
+        cursor.close();
+        return unitList;
+    }
+
 
 
     public int add(UnitList unitList) {

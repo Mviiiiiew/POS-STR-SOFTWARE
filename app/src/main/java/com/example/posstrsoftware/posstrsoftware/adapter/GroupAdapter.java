@@ -59,10 +59,9 @@ public class GroupAdapter extends BaseAdapter implements Filterable{
             v = inflater.inflate(R.layout.list_item_group, null);
         }
         TextView txt_name_group = (TextView) v.findViewById(R.id.txt_name_group);
-        TextView txt_id_group = (TextView) v.findViewById(R.id.txt_id_group);
         GroupList groupList = mGruopList.get(position);
         txt_name_group.setText(groupList.getGroupText());
-        txt_id_group.setText(groupList.getId() + "");
+
 
         return v;
 
@@ -88,7 +87,7 @@ public class GroupAdapter extends BaseAdapter implements Filterable{
                 ArrayList<GroupList> filters = new ArrayList<>();
                 for (int i = 0; i < filterList.size(); i++) {
                     if (filterList.get(i).getGroupText().toUpperCase().contains(constraint)) {
-                        GroupList u = new GroupList(filterList.get(i).getId(), filterList.get(i).getGroupText());
+                        GroupList u = new GroupList( filterList.get(i).getGroupText());
                         filters.add(u);
                     }
                 }

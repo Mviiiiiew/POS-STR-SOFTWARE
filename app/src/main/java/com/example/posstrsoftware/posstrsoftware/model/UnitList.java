@@ -20,6 +20,10 @@ public class UnitList implements Serializable {
 
     }
 
+    public UnitList(String unitText) {
+        this.unitText = unitText;
+    }
+
     public int getId() {
         return id;
     }

@@ -442,6 +442,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("processmanual", processmanual);
         intent.putExtra("processbarcode", processbarcode);
         intent.putExtra("ValueVat", ValueVat);
+
         startActivity(intent);
     }
 

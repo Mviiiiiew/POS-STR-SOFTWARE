@@ -20,6 +20,18 @@ public class ProductList implements Serializable {
     private String SymbolVat;
     private Double ValueVat;
 
+    public ProductList(String productText, Double productprice, GroupList groupList, UnitList unitList, Double cost, String barcode, String symbolVat) {
+
+        this.productpricesumvat = productpricesumvat;
+        this.productText = productText;
+        this.productprice = productprice;
+        this.groupList = groupList;
+        this.unitList = unitList;
+        this.barcode = barcode;
+        this.checkvat = checkvat;
+        Cost = cost;
+        SymbolVat = symbolVat;}
+
     public Double getValueVat() {
         return ValueVat;
     }
@@ -32,19 +44,7 @@ public class ProductList implements Serializable {
 
     }
 
-    public ProductList(int id, String productText, Double productprice, GroupList groupList, UnitList unitList, Double cost, String barcode, String symbolVat) {
-        this.id = id;
-        this.productpricesumvat = productpricesumvat;
-        this.productText = productText;
-        this.productprice = productprice;
-        this.groupList = groupList;
-        this.unitList = unitList;
-        this.barcode = barcode;
-        this.checkvat = checkvat;
-        Cost = cost;
-        SymbolVat = symbolVat;
-    }
-
+  
     public ProductList(int id, String productText, GroupList groupList) {
         this.id = id;
         this.productText = productText;

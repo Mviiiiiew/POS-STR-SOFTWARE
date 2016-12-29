@@ -109,7 +109,17 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         int ex = 0;
         if (v == btn_edit_unit) {
             if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "กรุณาใส่หน่วย : ?", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่หน่วยนับ : ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
             }else if(editText_Unit.getText().toString().matches(mUnit)){
 
                 UnitList eUnitList = new UnitList();
@@ -131,7 +141,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
                 unitDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("มีข้อมูล 'หน่วย' ซ้ำในระบบ");
+                    alertDialogder.setTitle("มีข้อมูล 'หน่วยนับ' ซ้ำในระบบ");
                     alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

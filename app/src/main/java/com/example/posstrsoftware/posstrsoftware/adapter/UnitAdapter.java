@@ -59,10 +59,9 @@ public class UnitAdapter extends BaseAdapter implements Filterable {
             v = inflater.inflate(R.layout.list_item_unit, null);
         }
         TextView txt_name_unit = (TextView) v.findViewById(R.id.txt_name_unit);
-        TextView txt_id_unit = (TextView) v.findViewById(R.id.txt_id_unit);
         UnitList unitList = mUnitList.get(position);
         txt_name_unit.setText(unitList.getUnitText());
-        txt_id_unit.setText(unitList.getId() + "");
+
 
         return v;
 
@@ -91,7 +90,7 @@ public class UnitAdapter extends BaseAdapter implements Filterable {
                 for(int i=0;i<filterList.size();i++)
                 {
                     if(filterList.get(i).getUnitText().toUpperCase().contains(constraint)){
-                        UnitList u=new UnitList(filterList.get(i).getId(),filterList.get(i).getUnitText());
+                        UnitList u = new UnitList(filterList.get(i).getUnitText());
                         filters.add(u);
                     }
                 }

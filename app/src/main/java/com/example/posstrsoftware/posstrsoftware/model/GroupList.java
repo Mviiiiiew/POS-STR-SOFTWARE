@@ -18,6 +18,10 @@ public class GroupList implements Serializable{
 
     }
 
+    public GroupList(String groupText) {
+        this.groupText = groupText;
+    }
+
     public int getId() {
         return id;
     }

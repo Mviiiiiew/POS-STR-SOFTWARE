@@ -49,6 +49,24 @@ public class GroupDAO {
         cursor.close();
         return groupLists;
     }
+    public ArrayList<GroupList> getAllFixGroupList(int idGroup){
+
+        ArrayList<GroupList> groupLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select * from group_list where id_group = '"+idGroup+"' and delete_flag ='N' union all select * from group_list where id_group <> '"+idGroup+"'  and delete_flag='N';",null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            GroupList mGroupList = new GroupList();
+            mGroupList.setId(cursor.getInt(0));
+            mGroupList.setGroupText(cursor.getString(1));
+            groupLists.add(mGroupList);
+            cursor.moveToNext();
+
+
+        }
+        cursor.close();
+        return groupLists;
+    }
 
 
 

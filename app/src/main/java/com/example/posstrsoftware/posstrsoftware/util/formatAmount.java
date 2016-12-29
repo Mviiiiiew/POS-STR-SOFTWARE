@@ -19,5 +19,11 @@ public class formatAmount {
         return df.format(num);
     }
 
+    public static String DecimalFormatDouble(Double num)
+    {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return df.format(Double.valueOf(num));
+    }
+
 
 }

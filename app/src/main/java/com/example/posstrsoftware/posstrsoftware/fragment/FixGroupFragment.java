@@ -109,7 +109,17 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         int ex = 0;
         if (v == btn_edit_group) {
             if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
-                Toast.makeText(getActivity(), "No Name Group", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ชื่อกลุ่ม : ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
             } else if (editText_Group.getText().toString().matches(mGroup)) {
                 GroupList eGroupList = new GroupList();
                 eGroupList.setId(editGroupList.getId());
@@ -129,7 +139,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
                 groupDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setMessage("มีข้อมูล 'กลุ่ม' ซ้ำในระบบ");
+                    alertDialogder.setTitle("มีข้อมูล 'กลุ่ม' ซ้ำในระบบ");
                     alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

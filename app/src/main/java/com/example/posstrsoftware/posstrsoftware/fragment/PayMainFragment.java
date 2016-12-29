@@ -145,7 +145,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
 
         } catch (Exception e) {
-            txt_Discount.setText(discountpercent.toString());
+
+            txt_Discount.setText(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount))+" ("+discountpercent.toString()+")");
 
         }
 

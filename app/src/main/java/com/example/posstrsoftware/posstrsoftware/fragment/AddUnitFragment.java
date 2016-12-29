@@ -97,7 +97,17 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
         int ex = 0;
         if (v == btn_save) {
                     if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
-                        Toast.makeText(getActivity(), "< Please input Unit >", Toast.LENGTH_SHORT).show();
+
+                        AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                        alertDialogder.setTitle("กรุณาใส่ชื่อหน่วยนับ : ?");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        alertDialogder.show();
                     } else {
                         UnitList unitList = new UnitList();
                         unitList.setUnitText(Util_String.getGennerlateString(editText_Unit.getText().toString()));
@@ -107,8 +117,8 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
                         unitDAO.close();
                         if (ex == 0) {
                             AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                            alertDialogder.setMessage("< Please change nameunit because repeat >");
-                            alertDialogder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            alertDialogder.setTitle("มีข้อมูล 'หน่วยนับ' ซ้ำในระบบ");
+                            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
