@@ -93,7 +93,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         // Init 'View' instance(s) with rootView.findViewById here
 
         editText_Product = (EditText) rootView.findViewById(R.id.editText_Product);
-        editText_Cost = (EditText)rootView.findViewById(R.id.editText_Cost);
+        editText_Cost = (EditText) rootView.findViewById(R.id.editText_Cost);
         checkbox_vat = (CheckBox) rootView.findViewById(R.id.checkbox_vat);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_save = (ButtonRectangle) rootView.findViewById(R.id.btn_save);
@@ -102,6 +102,23 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
         editText_Price.addTextChangedListener(this);
+        editText_Price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    editText_Price.setText("");
+                }
+            }
+        });
+
+        editText_Cost.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    editText_Cost.setText("");
+                }
+            }
+        });
         editText_Cost.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -198,7 +215,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int ex = 0;
-        double price=0.0;
+        double price = 0.0;
         if (v == btn_save) {
             if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
@@ -212,6 +229,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
+
             } else if (editText_Price.getText().toString().matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาใส่ราคาสินค้า ?");
@@ -224,8 +242,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
-            }
-            else if (editText_Cost.getText().toString().matches("")) {
+            } else if (editText_Cost.getText().toString().matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาใส่ราคาต้นทุน หรือ 0 ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -237,24 +254,24 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
-            }else {
+            } else {
 
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
                 productList.setBarcode(editText_Barcode.getText().toString());
                 productList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
-                productList.setGroupList(new GroupList(mSelectedGroup.getId(),mSelectedGroup.getGroupText()));
-                productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replaceAll(",","")));
-                productList.setCost(Double.valueOf(editText_Cost.getText().toString().replaceAll(",","")));
+                productList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                productList.setProductprice(Double.valueOf(editText_Price.getText().toString().replaceAll(",", "")));
+                productList.setCost(Double.valueOf(editText_Cost.getText().toString().replaceAll(",", "")));
 
-                if(checkbox_vat.isChecked() == true){
+                if (checkbox_vat.isChecked() == true) {
                     productList.setCheckvat("N");
                     productList.setSymbolVat("ไม่มีภาษี");
-                    Toast.makeText(getActivity(),"N",Toast.LENGTH_LONG).show();
-                }else{
+                    Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                } else {
                     productList.setCheckvat("Y");
                     productList.setSymbolVat("มีภาษี");
-                    Toast.makeText(getActivity(),"Y",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
                 }
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
@@ -294,7 +311,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
 
 
     @Override

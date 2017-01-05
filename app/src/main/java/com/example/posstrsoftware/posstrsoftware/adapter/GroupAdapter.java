@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by Wasabi on 10/17/2016.
  */
 
-public class GroupAdapter extends BaseAdapter implements Filterable{
+public class GroupAdapter extends BaseAdapter implements Filterable {
     private static Activity activity;
     private static LayoutInflater inflater;
 
@@ -28,7 +28,7 @@ public class GroupAdapter extends BaseAdapter implements Filterable{
     CustomFilter filter;
 
 
-    public GroupAdapter(Activity activity,ArrayList<GroupList> mGruopList) {
+    public GroupAdapter(Activity activity, ArrayList<GroupList> mGruopList) {
         this.mGruopList = mGruopList;
         this.activity = activity;
         this.filterList = mGruopList;
@@ -57,7 +57,9 @@ public class GroupAdapter extends BaseAdapter implements Filterable{
         View v = convertView;
         if (convertView == null) {
             v = inflater.inflate(R.layout.list_item_group, null);
+
         }
+
         TextView txt_name_group = (TextView) v.findViewById(R.id.txt_name_group);
         GroupList groupList = mGruopList.get(position);
         txt_name_group.setText(groupList.getGroupText());
@@ -69,7 +71,7 @@ public class GroupAdapter extends BaseAdapter implements Filterable{
 
     @Override
     public Filter getFilter() {
-        if(filter == null){
+        if (filter == null) {
             filter = new CustomFilter();
         }
 
@@ -87,16 +89,18 @@ public class GroupAdapter extends BaseAdapter implements Filterable{
                 ArrayList<GroupList> filters = new ArrayList<>();
                 for (int i = 0; i < filterList.size(); i++) {
                     if (filterList.get(i).getGroupText().toUpperCase().contains(constraint)) {
-                        GroupList u = new GroupList( filterList.get(i).getGroupText());
+                        GroupList u = new GroupList(filterList.get(i).getGroupText());
                         filters.add(u);
                     }
                 }
+
                 results.count = filters.size();
                 results.values = filters;
             } else {
                 results.count = filterList.size();
                 results.values = filterList;
             }
+
             return results;
         }
 

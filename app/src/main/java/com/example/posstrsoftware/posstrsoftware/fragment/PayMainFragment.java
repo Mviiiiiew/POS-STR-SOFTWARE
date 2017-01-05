@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -77,8 +78,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     String symbol;
     int processmanual;
     int processbarcode;
-    String  date;
-    Double  ValueVat;
+    String date;
+    Double ValueVat;
 
 
     public PayMainFragment() {
@@ -96,7 +97,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        date = sharedPreferences.getString("date",(Date().toString()) );
+        date = sharedPreferences.getString("date", (Date().toString()));
         Log.d("date5", date + "");
 
 
@@ -119,8 +120,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_main_pay, container, false);
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
-        ValueVat = intent.getDoubleExtra("ValueVat",0.0);
-        Log.d("ValueVat", ValueVat+"");
+        ValueVat = intent.getDoubleExtra("ValueVat", 0.0);
+        Log.d("ValueVat", ValueVat + "");
         symbol = intent.getStringExtra("symbol");
         Log.d("symbol", symbol);
         processmanual = (intent.getIntExtra("processmanual", 0));
@@ -146,7 +147,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
         } catch (Exception e) {
 
-            txt_Discount.setText(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount))+" ("+discountpercent.toString()+")");
+            txt_Discount.setText(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount)) + " (" + discountpercent.toString() + ")");
 
         }
 
@@ -156,20 +157,15 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
             }
-
 
             @Override
 
             public void afterTextChanged(Editable s) {
-
 
                 edit_txt_cash.removeTextChangedListener(this);
 
@@ -207,7 +203,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        txt_ValueVat = (TextView)rootView.findViewById(R.id.txt_ValueVat);
+        txt_ValueVat = (TextView) rootView.findViewById(R.id.txt_ValueVat);
         checkbox_print = (CheckBox) rootView.findViewById(R.id.checkbox_print);
         txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
         txt_Discount = (TextView) rootView.findViewById(R.id.txt_Discount);
@@ -249,6 +245,12 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_050.setRippleSpeed(50);
         btn_cost_025.setRippleSpeed(50);
         btn_Pay.setRippleSpeed(60);
+       edit_txt_cash.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               edit_txt_cash.setText("");
+           }
+       });
 
     }
 
@@ -359,29 +361,23 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                         if (cash >= totalall) {
 
 
-
-                                ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-                                productSaleDAO1.open();
-                                productSaleDAO1.addx();
-                                productSaleDAO1.updatebill(txtdiscount);
-                                productSaleDAO1.updateRunIdBill(Date().toString());
-
-
-                                //   Toast.makeText(getActivity(), afterdate+"   "+Date().toString(), Toast.LENGTH_LONG).show();
-                                productSaleDAO1.close();
+                            ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                            productSaleDAO1.open();
+                            productSaleDAO1.addx();
+                            productSaleDAO1.updatebill(txtdiscount);
+                            productSaleDAO1.updateRunIdBill(Date().toString());
 
 
+                            //   Toast.makeText(getActivity(), afterdate+"   "+Date().toString(), Toast.LENGTH_LONG).show();
+                            productSaleDAO1.close();
 
 
-
-                           HeadMaster();
+                            HeadMaster();
                             ProductAll();
                             Underline();
                             TotalAll();
                             EndText();
                             Linefeed();
-
-
 
 
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
@@ -557,8 +553,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         companyDAO.open();
 
         String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() ;
-        String text3   ="Tel." + companyDAO.InvoiceMaster().getTelephone();
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName();
+        String text3 = "Tel." + companyDAO.InvoiceMaster().getTelephone();
         String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
         String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
         String text6 = "BillNo # " + (productSaleDAO.InvoiceMaster().getBillId());
@@ -590,11 +586,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         productSaleDAO.close();
         companyDAO.close();
     }
-
-
-
-
-
 
 
 }

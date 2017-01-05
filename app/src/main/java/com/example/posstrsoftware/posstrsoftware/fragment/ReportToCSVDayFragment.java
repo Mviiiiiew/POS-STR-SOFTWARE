@@ -258,7 +258,7 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
                     String x = date.replaceAll("/", "");
                     reportDAO.exportDataBaseDayDaily(x);
                     reportDAO.close();
-                    Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
 
                     break;
 
@@ -274,12 +274,15 @@ public class ReportToCSVDayFragment extends Fragment implements View.OnClickList
                     if (oneday < twoday) {
                         reportDAO.exportDataBaseBetweenDailyOneTwo(oneday + "", twoday + "");
                         reportDAO.close();
+                        Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
                     } else if (oneday > twoday) {
                         reportDAO.exportDataBaseBetweenDailyTwoOne(oneday + "", twoday + "");
                         reportDAO.close();
+                        Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
                     }else{
                         reportDAO.exportDataBaseBetweenDailyOneTwo(oneday + "", twoday + "");
                         reportDAO.close();
+                        Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
                     }
 
                     break;

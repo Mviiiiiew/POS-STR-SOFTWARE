@@ -15,7 +15,6 @@ private int sale_masterid ;
     private  double Profit;
     private  double sumVAT;
     private  String BillId;
-
     private  String NameProduct;
     private  String NameUnit;
     private  Double SaleAmt;

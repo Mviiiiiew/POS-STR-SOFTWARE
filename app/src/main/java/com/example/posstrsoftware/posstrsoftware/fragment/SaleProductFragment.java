@@ -59,7 +59,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     int amount = 1;
     int VarAmount = 0;
     String mProduct;
-    Double ValueVat =0.0;
+    Double ValueVat = 0.0;
 
 
     public SaleProductFragment() {
@@ -109,7 +109,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+
                     edit_Amount.clearFocus();
                     edit_Barcode.requestFocus();
                     edit_Barcode.setCursorVisible(true);
@@ -187,9 +187,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
         for (ProductSaleList bean : productSaleLists) {
             x += Double.valueOf(bean.getPrice());
-            y +=bean.getValueVat();
+            y += bean.getValueVat();
 
-    }
+        }
         ValueVat = y;
         txt_cost.setText(money_format.format((x)));
 
@@ -273,7 +273,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         } else if (btn_Pay == v) {
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
-            intent.putExtra("ValueVat",ValueVat);
+            intent.putExtra("ValueVat", ValueVat);
             intent.putExtra("processmanual", 0);
             intent.putExtra("processbarcode", 1);
             startActivity(intent);
@@ -325,12 +325,12 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                     productDAO.close();
 
 
-                        productSaleDAO.open();
-                        productSaleDAO.add(productSaleList);
-                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-                        listView_SaleProduct.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+                    productSaleDAO.open();
+                    productSaleDAO.add(productSaleList);
+                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                    final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                    listView_SaleProduct.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
 
                 }
@@ -341,7 +341,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                 for (ProductSaleList bean : productSaleLists) {
                     total += Double.valueOf(bean.getPrice());
                     ValueVat += bean.getValueVat();
-                    Log.d("ValueVat",ValueVat+"");
+                    Log.d("ValueVat", ValueVat + "");
 
                 }
 

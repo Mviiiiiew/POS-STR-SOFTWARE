@@ -23,7 +23,6 @@ public class CompanyAdapter extends BaseAdapter {
 
     ArrayList<CompanyList> mCompanyLists;
 
-
     public CompanyAdapter(Activity activity,ArrayList<CompanyList> mGruopList) {
         this.mCompanyLists = mGruopList;
         this.activity = activity;

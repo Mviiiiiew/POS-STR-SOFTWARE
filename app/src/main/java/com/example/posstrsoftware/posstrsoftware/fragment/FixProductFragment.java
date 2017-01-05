@@ -268,6 +268,24 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         btn_delete.setOnClickListener(this);
         btn_edit_product.setOnClickListener(this);
         spinner_unit.setOnItemSelectedListener(this);
+        edit_price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    edit_price.setText("");
+                }
+
+            }
+        });
+        edit_priceCost.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    edit_priceCost.setText("");
+                }
+            }
+        });
+
         btn_delete.setRippleSpeed(15);
         btn_edit_product.setRippleSpeed(15);
 
@@ -493,7 +511,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
             }
 
-        } else if (btn_back == v) {
+        }else if (btn_back == v) {
             getActivity().finish();
         } else if (btn_delete == v) {
 

@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by Wasabi on 11/15/2016.
  */
 
-public class ProductListManualAdapter extends BaseAdapter  implements Filterable{
+public class ProductListManualAdapter extends BaseAdapter implements Filterable {
     private static Activity activity;
     private static LayoutInflater inflater;
     ArrayList<ProductList> mProductList;
@@ -51,7 +51,7 @@ public class ProductListManualAdapter extends BaseAdapter  implements Filterable
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-        v = inflater.inflate(R.layout.list_item_productlistmanual,null);
+        v = inflater.inflate(R.layout.list_item_productlistmanual, null);
         TextView textview = (TextView) v.findViewById(R.id.txt_Group);
         TextView textview1 = (TextView) v.findViewById(R.id.txt_name_product);
         ProductList productList = mProductList.get(position);
@@ -65,7 +65,7 @@ public class ProductListManualAdapter extends BaseAdapter  implements Filterable
     @Override
     public Filter getFilter() {
 
-        if(filter == null){
+        if (filter == null) {
             filter = new CustomFilter();
         }
 
@@ -77,23 +77,22 @@ public class ProductListManualAdapter extends BaseAdapter  implements Filterable
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            if(constraint != null && constraint.length()>0)
-            {
+            if (constraint != null && constraint.length() > 0) {
                 constraint = constraint.toString().toUpperCase();
                 ArrayList<ProductList> filters = new ArrayList<>();
-                for(int i=0;i<filterList.size();i++)
-                {
-                    if(filterList.get(i).getProductText().toUpperCase().contains(constraint)){
-                        ProductList u=new ProductList(filterList.get(i).getId(),filterList.get(i).getProductText(),filterList.get(i).getGroupList());
+                for (int i = 0; i < filterList.size(); i++) {
+                    if (filterList.get(i).getProductText().toUpperCase().contains(constraint)) {
+                        ProductList u = new ProductList(filterList.get(i).getId(), filterList.get(i).getProductText(), filterList.get(i).getGroupList());
                         filters.add(u);
                     }
                 }
+
                 results.count = filters.size();
-                results.values=filters;
-            }else
-            {
+                results.values = filters;
+            } else {
                 results.count = filterList.size();
-                results.values=filterList;
+                results.values = filterList;
+
             }
             return results;
         }

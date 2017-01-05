@@ -55,8 +55,8 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
 
         View v = convertView;
         v = inflater.inflate(R.layout.list_item_product, null);
-        TextView txt_name_product = (TextView) v.findViewById(R.id.txt_name_product);
 
+        TextView txt_name_product = (TextView) v.findViewById(R.id.txt_name_product);
         TextView txt_name_price = (TextView) v.findViewById(R.id.txt_name_price);
         TextView txt_name_unit = (TextView) v.findViewById(R.id.txt_name_unit);
         TextView txt_name_group = (TextView) v.findViewById(R.id.txt_name_group);
@@ -67,7 +67,6 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
 
         ProductList productList = mProductList.get(position);
         txt_name_product.setText(productList.getProductText());
-
         txt_name_price.setText(formatAmount.formatAmountDouble(Double.valueOf(productList.getProductprice() + "")));
         txt_name_unit.setText(productList.getUnitList().getUnitText());
         txt_name_group.setText(productList.getGroupList().getGroupText());
@@ -88,6 +87,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
     }
 
     private class CustomFilter extends Filter {
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();

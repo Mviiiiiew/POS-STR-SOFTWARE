@@ -41,7 +41,7 @@ public class ProductSaleDAO {
             productSaleList.setSaleMasterid(cursor.getInt(0));
             productSaleList.setDiscount(cursor.getString(2));
             productSaleList.setVat(cursor.getDouble(6));
-            productSaleList.setBillId(cursor.getString(9));
+            productSaleList.setBillId(cursor.getString(10));
 
             cursor.moveToNext();
 

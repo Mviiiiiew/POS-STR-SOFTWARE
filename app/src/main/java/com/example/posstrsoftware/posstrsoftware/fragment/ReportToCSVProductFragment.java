@@ -167,7 +167,7 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
                     String x = date.replaceAll("/", "");
                     reportDAO.exportDataBaseProduct(x);
                     reportDAO.close();
-                    Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
 
                     break;
 
@@ -183,15 +183,15 @@ public class ReportToCSVProductFragment extends Fragment implements View.OnClick
                     if (oneday < twoday) {
                         reportDAO.exportDataBaseProductOneTwo(oneday + "", twoday + "");
                         reportDAO.close();
-                        Toast.makeText(getActivity(),"OneTwo",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
                     } else if (oneday > twoday) {
                         reportDAO.exportDataBaseProductTwoOne(oneday + "", twoday + "");
                         reportDAO.close();
-                        Toast.makeText(getActivity(),"TwoOne",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
                     }else{
                         reportDAO.exportDataBaseProductOneTwo(oneday + "", twoday + "");
                         reportDAO.close();
-                        Toast.makeText(getActivity(),"ONEONE",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "บันทึกเสร็จสิ้น", Toast.LENGTH_SHORT).show();
                     }
 
                     break;

@@ -10,13 +10,6 @@ import android.widget.BaseAdapter;
  */
 
 public class ProductSaleList {
-    public String getDateId() {
-        return dateId;
-    }
-
-    public void setDateId(String dateId) {
-        this.dateId = dateId;
-    }
 
     private String dateId;
     private int id;
@@ -35,6 +28,14 @@ public class ProductSaleList {
     private String BillId;
     private String SymbolVat;
     private Double ValueVat;
+
+    public String getDateId() {
+        return dateId;
+    }
+
+    public void setDateId(String dateId) {
+        this.dateId = dateId;
+    }
 
     public Double getValueVat() {
         return ValueVat;

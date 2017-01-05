@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 public class CompanyList  implements Serializable{
 
-
-
     int id;
     String CompanyName;
     String CompanyAddress;
