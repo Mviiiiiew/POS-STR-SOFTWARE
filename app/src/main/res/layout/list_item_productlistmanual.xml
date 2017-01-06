@@ -20,6 +20,7 @@
             android:layout_toRightOf="@+id/txt_id_product"
             android:padding="2dp"
             android:text="Gruop"
+            android:textColor="@color/colorBlack"
             android:textSize="23sp"
             android:textStyle="bold"
 
@@ -39,6 +40,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+            android:textColor="@color/colorBlack"
             android:layout_toRightOf="@+id/txt_Group"
             android:padding="2dp"
             android:text="Product"

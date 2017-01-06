@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_cost_500;
     ButtonRectangle btn_cost_050;
     ButtonRectangle btn_cost_025;
+    ButtonRectangle btn_clear;
     ButtonRectangle btn_Pay;
     CheckBox checkbox_print;
     TextView txt_NameTotal;
@@ -221,6 +223,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_050 = (ButtonRectangle) rootView.findViewById(R.id.btn_cost_050);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
+        btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
+        btn_clear.setOnClickListener(this);
         btn_cost_050.setOnClickListener(this);
         btn_cost_025.setOnClickListener(this);
         btn_back.setOnClickListener(this);
@@ -233,6 +237,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_500.setOnClickListener(this);
         btn_cost_1000.setOnClickListener(this);
         btn_Pay.setOnClickListener(this);
+        btn_clear.setRippleSpeed(100);
         btn_cost_1000.setRippleSpeed(50);
         btn_cost_100.setRippleSpeed(50);
         btn_cost_10.setRippleSpeed(50);
@@ -245,12 +250,13 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         btn_cost_050.setRippleSpeed(50);
         btn_cost_025.setRippleSpeed(50);
         btn_Pay.setRippleSpeed(60);
-       edit_txt_cash.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               edit_txt_cash.setText("");
-           }
-       });
+        edit_txt_cash.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        edit_txt_cash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edit_txt_cash.setText("");
+            }
+        });
 
     }
 
@@ -291,6 +297,9 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_back:
                 getActivity().finish();
+                break;
+            case R.id.btn_clear:
+                edit_txt_cash.setText("");
                 break;
             case R.id.btn_cost_1:
                 edit_txt_cash.setText(formatAmount.formatAmountDouble(Double.parseDouble(edit_txt_cash.getText().toString().equals("") ? "0.0" :
@@ -471,13 +480,13 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     }
 
     private void Underline() {
-        String x = "-------------------------------";
+        String x = "--------------------------------";
 
         printerController.PrinterController_Print(x.getBytes());
     }
 
     private void TotalAll() {
-        String x = "-------------------------------";
+        String x = "--------------------------------";
         String Totaltxt = "Total";
         String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(), 27);
         String ValueVat = "Include VAT";
@@ -579,7 +588,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Font_Bold();
-        printerController.PrinterController_Print("-----------------------------".getBytes());
+        printerController.PrinterController_Print("--------------------------------".getBytes());
         printerController.PrinterController_Linefeed();
 
 

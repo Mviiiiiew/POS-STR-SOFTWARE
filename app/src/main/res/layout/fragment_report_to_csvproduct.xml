@@ -10,7 +10,7 @@
 
         <include
             android:id="@+id/my_toolbar"
-            layout="@layout/toolbarproductreport"/>
+            layout="@layout/toolbartocsv_product"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
             android:layout_height="match_parent"
             android:layout_margin="35dp"
             android:layout_weight="1"
-            android:background="#004D40"
+            android:background="#0F444F"
             android:text="บันทึกสรุปสินค้า"
             android:textSize="30sp">
 
@@ -129,7 +129,7 @@
             android:layout_height="match_parent"
             android:layout_margin="35dp"
             android:layout_weight="1"
-            android:background="#004D40"
+            android:background="#0F444F"
             android:text="ย้อนกลับ"
             android:textSize="30sp">
 

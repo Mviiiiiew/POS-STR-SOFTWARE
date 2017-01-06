@@ -267,11 +267,11 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 if (checkbox_vat.isChecked() == true) {
                     productList.setCheckvat("N");
                     productList.setSymbolVat("ไม่มีภาษี");
-                    Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
                 } else {
                     productList.setCheckvat("Y");
                     productList.setSymbolVat("มีภาษี");
-                    Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
                 }
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();

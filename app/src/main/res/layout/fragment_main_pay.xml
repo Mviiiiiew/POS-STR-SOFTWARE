@@ -40,21 +40,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/txt_Total"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="70dp"
                 android:layout_toRightOf="@+id/txt_Total"
                 android:background="#000000"
                 android:gravity="center"
                 android:inputType="text"
+                android:padding="@dimen/padding_pay"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"/>
+
             <TextView
                 android:id="@+id/txt_NameValueVat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_Total"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/mg_top"
                 android:text="ภาษี"
                 android:textColor="@color/colorBlack"
                 android:textSize="30sp"
@@ -74,6 +76,7 @@
                 android:gravity="center"
                 android:inputType="text"
                 android:textColor="#FFFFFF"
+                android:padding="@dimen/padding_pay"
                 android:textSize="30sp"/>
 
 
@@ -83,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_NameValueVat"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/mg_top"
                 android:text="ส่วนลด"
                 android:textColor="@color/colorBlack"
                 android:textSize="30sp"
@@ -103,6 +106,7 @@
                 android:background="#000000"
                 android:gravity="center"
                 android:inputType="text"
+                android:padding="@dimen/padding_pay"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"/>
 
@@ -112,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_NameDiscount"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/mg_top"
                 android:text="ราคารวม"
                 android:textColor="@color/colorBlack"
                 android:textSize="30sp"
@@ -129,10 +133,11 @@
                 android:layout_alignTop="@+id/txt_NameTotalall"
                 android:layout_toRightOf="@+id/txt_NameTotalall"
                 android:background="#000000"
+                android:padding="@dimen/padding_pay"
                 android:gravity="center"
                 android:inputType="text"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="32sp"/>
 
             <TextView
                 android:id="@+id/txt_NameCash"
@@ -140,32 +145,49 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Total"
                 android:layout_below="@+id/txt_NameTotalall"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:text="รับชำระ"
                 android:textColor="@color/colorBlack"
                 android:textSize="30sp"
                 android:textStyle="bold"
 
 
+
                 />
 
             <EditText
                 android:id="@+id/edit_txt_cash"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
                 android:layout_alignBottom="@+id/txt_NameCash"
                 android:layout_alignLeft="@+id/txt_NameTotal"
-                android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_toRightOf="@+id/txt_NameCash"
                 android:background="@color/colorBlack"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="numberDecimal"
                 android:textColor="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="32sp"
                 android:textStyle="bold"
 
                 />
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_clear"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/edit_txt_cash"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/edit_txt_cash"
+                android:padding="10dp"
+                android:background="#FFEB3B"
+                android:textColor="#000000"
+                android:text="ลบ"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                >
+
+            </com.gc.materialdesign.views.ButtonRectangle>
 
 
         </RelativeLayout>

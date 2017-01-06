@@ -270,13 +270,13 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void Underline() {
-        String x = "-------------------------------";
+        String x = "--------------------------------";
 
         printerController.PrinterController_Print(x.getBytes());
     }
 
     private void TotalAllx() {
-        String x = "-------------------------------";
+        String x = "--------------------------------";
         String Totaltxt = "Total";
         String total = PrintFix.generatePrice(mTotal, 27);
         String ValueVat = "Include VAT";
@@ -284,7 +284,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         String TotalAlltxt = "TotalAll";
         String totalall = PrintFix.generatePrice(mTotalAll, 24);
         String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(mCash.toString().replaceAll(",", ""))), 28);
-        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(mChange)), 26);
+        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(mChange.toString().replaceAll(",",""))), 26);
         String Cashtxt = "Cash";
         String Changetxt = "Change";
         String Discounttxt = "Discount" + "->" + (PrintFix.generateName(symbol, 5));
@@ -307,6 +307,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print(Cashtxt.getBytes());
         printerController.PrinterController_Print(cash.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
         printerController.PrinterController_Font_Bold();
         printerController.PrinterController_Print(Changetxt.getBytes());
         printerController.PrinterController_Print(changz.getBytes());
@@ -377,7 +378,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Set_Center();
         printerController.PrinterController_Font_Bold();
-        printerController.PrinterController_Print("-----------------------------".getBytes());
+        printerController.PrinterController_Print("--------------------------------".getBytes());
         printerController.PrinterController_Linefeed();
 
 

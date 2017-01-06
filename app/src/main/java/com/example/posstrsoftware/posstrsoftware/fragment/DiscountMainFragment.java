@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -198,6 +199,11 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         rgRadiogroup = (RadioGroup) rootView.findViewById(R.id.radiogroup_discount);
         editText_DiscountCost = (EditText) rootView.findViewById(R.id.editText_DiscountCost);
         editText_DiscountPercent = (EditText) rootView.findViewById(R.id.editText_DiscountPercent);
+
+
+        editText_DiscountPercent.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editText_DiscountCost.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
         btn_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);
         btn_back.setRippleSpeed(40);

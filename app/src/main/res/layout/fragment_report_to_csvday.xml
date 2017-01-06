@@ -12,7 +12,7 @@
 
         <include
             android:id="@+id/my_toolbar"
-            layout="@layout/toolbartocsv"/>
+            layout="@layout/toolbartocsv_day"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
             android:layout_height="match_parent"
             android:layout_margin="35dp"
             android:layout_weight="1"
-            android:background="#004D40"
+            android:background="#7A1D14"
             android:text="บันทึกสรุปรายวัน"
             android:textSize="30sp">
 
@@ -132,7 +132,7 @@
             android:layout_height="match_parent"
             android:layout_margin="35dp"
             android:layout_weight="1"
-            android:background="#004D40"
+            android:background="#7A1D14"
             android:text="ย้อนกลับ"
             android:textSize="30sp">
 

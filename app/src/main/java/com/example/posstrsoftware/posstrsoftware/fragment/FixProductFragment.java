@@ -126,13 +126,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         editText_Barcode.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText_product.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
-        if(checkbox_vat.isChecked() == true){
-            CheckVAT = "ไม่มีภาษี";
 
-        }else if(checkbox_vat.isChecked() == false) {
-            CheckVAT = "มีภาษี";
-
-        }
 
         editText_product.setText(editProductList.getProductText());
         edit_price.setText(formatAmount.DecimalFormatDouble(price).toString());
@@ -335,7 +329,13 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        if(checkbox_vat.isChecked() == true){
+            CheckVAT = "ไม่มีภาษี";
 
+        }else if(checkbox_vat.isChecked() == false) {
+            CheckVAT = "มีภาษี";
+
+        }
         ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         int ex = 0;
         if (v == btn_edit_product) {
@@ -461,8 +461,8 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
                 } else {
 
-                    alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบต้องการบันทึกซ้ำหรือไม่ ?\n" + "ชื่อสินค้า : " + editText_product.getText().toString());
-                    alertDialogder.setMessage( "ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                    alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" +"->"+ "  ชื่อสินค้า : " + editText_product.getText().toString());
+                   /* alertDialogder.setMessage( "ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
                             + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                             + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                             + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -498,8 +498,8 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                             productDAO.close();
                             getActivity().finish();
                         }
-                    });
-                    alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    });*/
+                    alertDialogder.setNegativeButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
