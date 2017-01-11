@@ -28,7 +28,7 @@
         android:layout_alignTop="@+id/btn_back"
         android:layout_toRightOf="@+id/btn_back"
         android:paddingLeft="25dp"
-        android:src="@drawable/ic_home_black_48dp"
+        android:src="@drawable/ic_settings_black_48dp"
         />
 
     <TextView

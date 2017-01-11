@@ -2,9 +2,11 @@ package com.example.posstrsoftware.posstrsoftware.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,29 +119,47 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(btn_UpdateCompany == v) {
-            TelephonyManager mngr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+            if (editText_Name_VATRate.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
+               editText_Name_VATRate.setText("7.0");
+                TelephonyManager mngr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+                CompanyList companyList = new CompanyList();
+                companyList.setCompanyName(String.valueOf(editText_CompanyName.getText()));
+                companyList.setCompanyAddress(String.valueOf(editText_CompanyAddress.getText()));
+                companyList.setTelephone(String.valueOf(editText_Telephone.getText()));
+                companyList.setTAXID(String.valueOf(editText_Name_TAXID.getText()));
+                companyList.setDivisionName(String.valueOf(editText_Name_Division.getText()));
+                companyList.setRegisterID(String.valueOf(editText_Name_RegisterID.getText()));
+                companyList.setENDbillText(String.valueOf(editText_Name_ENDbillText.getText()));
+                companyList.setVATRate(Double.valueOf(editText_Name_VATRate.getText().toString()));
+                companyList.setPOSMachineID(mngr.getDeviceId());
+                CompanyDAO companyDAO = new CompanyDAO(getActivity());
+                companyDAO.open();
+                companyDAO.update(companyList);
+                companyDAO.close();
+                getActivity().finish();
+            }else {
 
-            CompanyList companyList = new CompanyList();
-            companyList.setCompanyName(String.valueOf(editText_CompanyName.getText()));
-            companyList.setCompanyAddress(String.valueOf(editText_CompanyAddress.getText()));
-            companyList.setTelephone(String.valueOf(editText_Telephone.getText()));
-            companyList.setTAXID(String.valueOf(editText_Name_TAXID.getText()));
-            companyList.setDivisionName(String.valueOf(editText_Name_Division.getText()));
-            companyList.setRegisterID(String.valueOf(editText_Name_RegisterID.getText()));
-            companyList.setENDbillText(String.valueOf(editText_Name_ENDbillText.getText()));
-            companyList.setVATRate(Double.valueOf(editText_Name_VATRate.getText().toString()));
-            companyList.setPOSMachineID(mngr.getDeviceId());
-            CompanyDAO companyDAO = new CompanyDAO(getActivity());
-            companyDAO.open();
-            companyDAO.update(companyList);
-            companyDAO.close();
-            getActivity().finish();
-        }else if(btn_back == v){
+                TelephonyManager mngr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+                CompanyList companyList = new CompanyList();
+                companyList.setCompanyName(String.valueOf(editText_CompanyName.getText()));
+                companyList.setCompanyAddress(String.valueOf(editText_CompanyAddress.getText()));
+                companyList.setTelephone(String.valueOf(editText_Telephone.getText()));
+                companyList.setTAXID(String.valueOf(editText_Name_TAXID.getText()));
+                companyList.setDivisionName(String.valueOf(editText_Name_Division.getText()));
+                companyList.setRegisterID(String.valueOf(editText_Name_RegisterID.getText()));
+                companyList.setENDbillText(String.valueOf(editText_Name_ENDbillText.getText()));
+                companyList.setVATRate(Double.valueOf(editText_Name_VATRate.getText().toString()));
+                companyList.setPOSMachineID(mngr.getDeviceId());
+                CompanyDAO companyDAO = new CompanyDAO(getActivity());
+                companyDAO.open();
+                companyDAO.update(companyList);
+                companyDAO.close();
+                getActivity().finish();
+            }
+            } else if (btn_back == v) {
 
-            getActivity().finish();
-        }
-
-
+                getActivity().finish();
+            }
 
 
 

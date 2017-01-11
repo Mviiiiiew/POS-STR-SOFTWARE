@@ -159,7 +159,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setMessage("คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  " + ((ProductSaleList) adapter.getItem(position)).getProductSale());
                 mProduct = ((ProductSaleList) adapter.getItem(position)).getProductSale();
-                Log.d("mProduct", mProduct);
+            //    Log.d("mProduct", mProduct);
                 alertDialogder.setTitle("ลบสินค้า");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
@@ -324,18 +324,55 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                     productSaleList.setValueVat(productDAO.SearchID(String.valueOf(edit_Barcode.getText())).getValueVat());
                     productDAO.close();
 
+                    int T = productSaleList.getProductid();
+                    if(T == 0){
+                        Log.d("ID",T+"");
+                        AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                        alertDialogder.setTitle("ไม่มีสินค้าภายในระบบ !!");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                    productSaleDAO.open();
-                    productSaleDAO.add(productSaleList);
-                    ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
-                    final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
-                    listView_SaleProduct.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                        alertDialogder.show();
+                    }else{
+
+                        productSaleDAO.open();
+                        productSaleDAO.add(productSaleList);
+                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                        listView_SaleProduct.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                      //  ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
+                        ValueVat = 0.0;
+                        for (ProductSaleList bean : productSaleLists) {
+                            total += Double.valueOf(bean.getPrice());
+                            ValueVat += bean.getValueVat();
+                            Log.d("ValueVat", ValueVat + "");
+
+                        }
+
+                        txt_cost.setText(money_format.format((total)));
+                        productSaleDAO.close();
+                    }
+
+
+                    /*    productSaleDAO.open();
+                        productSaleDAO.add(productSaleList);
+                        ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+                        final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
+                        listView_SaleProduct.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();*/
+
 
 
                 }
+
                 edit_Amount.setText("1");
-                ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
+             /*   ArrayList<ProductSaleList> productSaleLists = produc1tSaleDAO.getAllProductSaleList();
                 DecimalFormat money_format = new DecimalFormat("###,###,##0.00");
                 ValueVat = 0.0;
                 for (ProductSaleList bean : productSaleLists) {
@@ -346,7 +383,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                 }
 
                 txt_cost.setText(money_format.format((total)));
-                productSaleDAO.close();
+                productSaleDAO.close();*/
                 edit_Barcode.setText("");
 
 

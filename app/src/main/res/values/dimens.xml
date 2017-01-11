@@ -12,7 +12,7 @@
     <dimen name="textsize_button">20sp</dimen>
     <dimen name="textsize_productset">20sp</dimen>
     <dimen name="textSize_Adapter">25sp</dimen>
-    <dimen name="padding_Adapter">5dp</dimen>
+    <dimen name="padding_Adapter">2dp</dimen>
     <dimen name="sizetextconclude">25sp</dimen>
     <dimen name="txtsize">23sp</dimen>
     <dimen name="padding_pay">5dp</dimen>

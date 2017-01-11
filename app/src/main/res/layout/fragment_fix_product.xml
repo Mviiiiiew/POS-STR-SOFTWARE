@@ -57,7 +57,7 @@
         android:layout_alignTop="@+id/btn_save"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="20dp"
-        android:background="#311B92"
+        android:background="#FF4081"
         android:text="@string/delete"
         android:textSize="18sp"
 

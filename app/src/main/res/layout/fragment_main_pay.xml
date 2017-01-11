@@ -387,6 +387,8 @@
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:text="ย้อนกลับ"
+                    android:background="#FFD600"
+                    android:textColor="#000000"
                     android:textSize="@dimen/textsize_button">
 
                 </com.gc.materialdesign.views.ButtonRectangle>

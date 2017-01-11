@@ -3,6 +3,7 @@ package com.example.posstrsoftware.posstrsoftware.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -113,6 +115,8 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         editor.putBoolean("8", checkbox_AutoPay.isChecked());
         editor.putString("discountpercent", (editText_DiscountPercent.getText().toString()));
         editor.putString("discountcost", (editText_DiscountCost.getText().toString()));
+
+
         editor.commit();
     }
 
@@ -131,6 +135,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         editText_DiscountCost.setText(sharedPreferences.getString("discountcost", editText_DiscountCost.getText().toString()));
 
 
+
     }
 
 
@@ -138,6 +143,19 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         loadradio();
+        if(checkbox_discount.isChecked() == true){
+            if(radiobutton_cost.isChecked() == true){
+                editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
+                editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+            }else if(radiobutton_percent.isChecked() == true){
+                editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+                editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
+            }
+            else {
+                editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+                editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+            }
+        }
         rgRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -145,10 +163,15 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                     case R.id.radiobutton_cost:
                         editText_DiscountCost.setEnabled(true);
                         editText_DiscountPercent.setEnabled(false);
+                        editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
+                        editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
                         break;
                     case R.id.radiobutton_percent:
                         editText_DiscountCost.setEnabled(false);
                         editText_DiscountPercent.setEnabled(true);
+                        editText_DiscountPercent.setBackgroundColor(Color.GRAY);
+                        editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+                        editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
                         break;
                 }
             }
@@ -165,20 +188,27 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                             case R.id.radiobutton_cost:
                                 editText_DiscountCost.setEnabled(true);
                                 editText_DiscountPercent.setEnabled(false);
+                                editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
+                                editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
                                 break;
                             case R.id.radiobutton_percent:
 
                                 editText_DiscountCost.setEnabled(false);
                                 editText_DiscountPercent.setEnabled(true);
+                                editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+                                editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
                                 break;
                         }
 
                     }
                 } else if (checkbox_discount.isChecked() == false) {
+
                     radiobutton_cost.setEnabled(false);
                     radiobutton_percent.setEnabled(false);
                     editText_DiscountCost.setEnabled(false);
                     editText_DiscountPercent.setEnabled(false);
+                    editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
+                    editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
                 }
 
             }
@@ -199,10 +229,25 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         rgRadiogroup = (RadioGroup) rootView.findViewById(R.id.radiogroup_discount);
         editText_DiscountCost = (EditText) rootView.findViewById(R.id.editText_DiscountCost);
         editText_DiscountPercent = (EditText) rootView.findViewById(R.id.editText_DiscountPercent);
-
-
         editText_DiscountPercent.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText_DiscountCost.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editText_DiscountPercent.clearFocus();
+        editText_DiscountCost.clearFocus();
+        editText_DiscountCost.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editText_DiscountCost.setText("");
+                return false;
+            }
+        });
+        editText_DiscountPercent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editText_DiscountPercent.setText("");
+                return false;
+            }
+        });
+
 
         btn_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);
@@ -358,7 +403,6 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                     payAuto();
                 } else if (checkbox_AutoPay.isChecked() == false) {
                     pay();
-
                 }
 
                 //Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
@@ -371,7 +415,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
         TotalSumVat = totalall;
         Log.d("VAT",TotalSumVat+"");
-        String u = "0";
+        String u = "0.0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
@@ -393,7 +437,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         TotalSumVat = totalall;
         Log.d("VAT",TotalSumVat+"");
-        String u = "0";
+        String u = "0.0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));

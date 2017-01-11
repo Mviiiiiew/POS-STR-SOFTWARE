@@ -8,10 +8,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -61,7 +63,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     int amount = 1;
     int VarAmount = 0;
     String mProduct;
-    Double ValueVat =  0.0;
+    Double ValueVat = 0.0;
+
 
 
     public SaleProductManualFragment() {
@@ -91,19 +94,27 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         searchViewProduct.setQueryHint("Search..");
         btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
         btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
-
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
         edit_Amount = (EditText) rootView.findViewById(R.id.edit_Amount);
+
         edit_Amount.setImeOptions(EditorInfo.IME_ACTION_DONE);
+       /* edit_searchview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchViewProduct.setIconified(false);
+            }
+        });*/
         edit_Amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 edit_Amount.setText("");
 
+
             }
         });
+
         btn_Pay.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
         btn_backz.setOnClickListener(this);
@@ -132,7 +143,12 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
+
         edit_Amount.setText("1");
+        searchViewProduct.setIconifiedByDefault(false);
+        searchViewProduct.setIconified(false);
+        searchViewProduct.clearFocus();
+
 
 
         List<String> list = new ArrayList<>();
@@ -178,6 +194,13 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                 mProduct = ((ProductSaleList) adapter.getItem(position)).getProductSale();
                 Log.d("mProduct", mProduct);
                 alertDialogder.setTitle("ลบสินค้า");
+                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -187,13 +210,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                         startActivity(intent);
                     }
                 });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
                 alertDialogder.show();
+
                 return false;
             }
         });
@@ -214,7 +232,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                                                                ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
                                                                productSaleDAO.open();
                                                                Double total = 0.0;
-                                                               ValueVat =  0.0;
+                                                               ValueVat = 0.0;
 
                                                                if (edit_Amount.getText().toString().matches("") || edit_Amount.getText().toString().matches("0")) {
                                                                    amount = 1;
@@ -253,8 +271,8 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                                                                ArrayList<ProductSaleList> productSaleLists = productSaleDAO.getAllProductSaleList();
                                                                for (ProductSaleList bean : productSaleLists) {
                                                                    total += Double.valueOf(bean.getPrice());
-                                                                   ValueVat +=Double.valueOf(bean.getValueVat());
-                                                                   Log.d("ValueVat",ValueVat+"");
+                                                                   ValueVat += Double.valueOf(bean.getValueVat());
+                                                                   Log.d("ValueVat", ValueVat + "");
                                                                    txt_cost.setText(formatAmount.formatAmountDouble(total));
 
 
@@ -333,6 +351,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
                     final ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
                     listView_SaleProductmanual.setAdapter(adapter);
                     productSaleDAO.close();
+                    ValueVat = 0.0;
                     txt_cost.setText("0.00");
                 }
             });
@@ -352,12 +371,12 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
             startActivity(intent);
 
 
-        }  else if (btn_Pay == v) {
+        } else if (btn_Pay == v) {
 
 
             Intent intent = new Intent(getActivity(), DiscountMainActivity.class);
             intent.putExtra("total", txt_cost.getText());
-            intent.putExtra("ValueVat",ValueVat);
+            intent.putExtra("ValueVat", ValueVat);
             intent.putExtra("processmanual", 1);
             intent.putExtra("processbarcode", 0);
             startActivity(intent);

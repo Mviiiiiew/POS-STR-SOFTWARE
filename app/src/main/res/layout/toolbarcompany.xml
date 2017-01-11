@@ -5,7 +5,7 @@
                                    android:layout_height="75dp"
                                    android:orientation="vertical"
                                    android:animateLayoutChanges="true"
-                                   android:background="#FFE57F"
+                                   android:background="#FFC107"
                                    android:minHeight="?attr/actionBarSize"
                                    app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     >

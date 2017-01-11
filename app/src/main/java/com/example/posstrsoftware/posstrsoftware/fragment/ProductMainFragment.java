@@ -36,7 +36,7 @@ import java.util.Arrays;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class ProductMainFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ProductMainFragment extends Fragment implements View.OnClickListener {
     Toolbar my_toolbar;
     SearchView searchViewProduct;
     ListView listView_Product;
@@ -88,11 +88,25 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        final ProductDAO productDAO = new ProductDAO(getActivity());
+        searchViewProduct.setIconifiedByDefault(false);
+        searchViewProduct.setIconified(false);
+        searchViewProduct.clearFocus();
+        ProductDAO productDAO = new ProductDAO(getActivity());
         productDAO.open();
         final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
-        productDAO.close();
         final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
+        listView_Product.setAdapter(objAdapter);
+        productDAO.close();
+        listView_Product.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
+                editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
+                startActivity(editIntent);
+                return false;
+            }
+        });
         searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -102,25 +116,14 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
 
             @Override
             public boolean onQueryTextChange(String query) {
+
                 objAdapter.getFilter().filter(query);
+
                 return false;
             }
         });
-        listView_Product.setAdapter(objAdapter);
-        listView_Product.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final ProductDAO productDAO = new ProductDAO(getActivity());
-                productDAO.open();
-                final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
-                productDAO.close();
-                final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
-                Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
-                editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
-                startActivity(editIntent);
-                return false;
-            }
-        });
+
+
 
     }
 
@@ -159,16 +162,5 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final ProductDAO productDAO = new ProductDAO(getActivity());
-        productDAO.open();
-        final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
-        productDAO.close();
-        final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
-        Intent editIntent = new Intent(getActivity(), FixProductActivity.class);
-        editIntent.putExtra("editProduct", (Serializable) objAdapter.getItem(position));
 
-        startActivity(editIntent);
-    }
 }

@@ -72,7 +72,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     int Group;
 
 
-
     public FixProductFragment() {
         super();
     }
@@ -102,8 +101,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         spinner_group.setAdapter(mSpinnerGroupAdapter);
 
 
-
-
     }
 
     @Override
@@ -119,13 +116,12 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         Vat = editProductList.getCheckvat();
         Unit = editProductList.getUnitList().getId();
         Group = editProductList.getGroupList().getId();
-        Log.d("VAT", Vat);
+        Log.d("VAT", Vat + "");
         Log.d(NameProductBefore, "UnitBefore");
         edit_price.setImeOptions(EditorInfo.IME_ACTION_DONE);
         edit_priceCost.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText_Barcode.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText_product.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
 
 
         editText_product.setText(editProductList.getProductText());
@@ -257,7 +253,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         edit_priceCost = (EditText) rootView.findViewById(R.id.edit_priceCost);
         editText_Barcode = (EditText) rootView.findViewById(R.id.editText_Barcode);
         checkbox_vat = (CheckBox) rootView.findViewById(R.id.checkbox_vat);
-
         btn_back.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
         btn_edit_product.setOnClickListener(this);
@@ -329,17 +324,18 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        if(checkbox_vat.isChecked() == true){
+        if (checkbox_vat.isChecked() == true) {
             CheckVAT = "ไม่มีภาษี";
 
-        }else if(checkbox_vat.isChecked() == false) {
+        } else if (checkbox_vat.isChecked() == false) {
             CheckVAT = "มีภาษี";
 
         }
         ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         int ex = 0;
         if (v == btn_edit_product) {
-            if (editText_product.getText().toString().trim().replaceAll("", "").matches("")) {
+
+            if (editText_product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle(" กรุณาใส่ชื่อสินค้า : ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -351,11 +347,36 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
-            } else if (NameProductBefore.matches(editText_product.getText().toString())) {
+            } else if (edit_price.getText().toString().matches("") || edit_price.getText().toString().matches("\\.")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ราคาสินค้า ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
+                alertDialogder.show();
+
+            } else if (edit_priceCost.getText().toString().matches("") || edit_priceCost.getText().toString().matches("\\.")) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาใส่ราคาต้นทุน หรือ 0 ?");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (NameProductBefore.matches(editText_product.getText().toString())) {
+
+
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
-                alertDialogder.setMessage( "ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
                         + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                         + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                         + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -372,8 +393,8 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                         eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
                         eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
                         eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-                        eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",","")));
-                        eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",","")));
+                        eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                        eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
                         eProductList.setBarcode(editText_Barcode.getText().toString());
 
                         if (checkbox_vat.isChecked() == true) {
@@ -401,7 +422,11 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 });
                 alertDialogder.show();
 
-            } else {
+            }
+
+
+
+            else {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
                 ProductList eProductList = new ProductList();
@@ -409,12 +434,13 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
                 eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
                 eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                eProductList.setBarcode(editText_Barcode.getText().toString());
                 ProductDAO productDAO = new ProductDAO(getActivity());
                 productDAO.open();
                 ex = productDAO.check(eProductList);
                 productDAO.close();
                 if (ex == 1) {
-                    alertDialogder.setMessage( "ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
                             + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                             + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                             + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -432,8 +458,8 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                             eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
                             eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
                             eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-                            eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",","")));
-                            eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",","")));
+                            eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                            eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
                             eProductList.setBarcode(editText_Barcode.getText().toString());
                             if (checkbox_vat.isChecked() == true) {
                                 eProductList.setCheckvat("N");
@@ -459,46 +485,21 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     });
                     alertDialogder.show();
 
-                } else {
+                } else if (ex == 2) {
 
-                    alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" +"->"+ "  ชื่อสินค้า : " + editText_product.getText().toString());
-                   /* alertDialogder.setMessage( "ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
-                            + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
-                            + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
-                            + "ราคา          :  " + edit_price.getText().toString() + "\n"
-                            + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
-                            + "ภาษี           :  " + CheckVAT.toString() + "\n"
-                            + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
-                    );
+                    alertDialogder.setTitle("มีข้อมูล 'Barcode' และ 'ชื่อสินค้า' ซ้ำในระบบ");
                     alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
-                            ProductList eProductList = new ProductList();
-                            eProductList.setId(editproductList.getId());
-                            eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
-                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
-                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-                            eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",","")));
-                            eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",","")));
-                            eProductList.setBarcode(editText_Barcode.getText().toString());
-                            if (checkbox_vat.isChecked() == true) {
-                                eProductList.setCheckvat("N");
-                                eProductList.setSymbolVat("ไม่มีภาษี");
-                                Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
-                            } else {
-                                eProductList.setCheckvat("Y");
-                                eProductList.setSymbolVat("มีภาษี");
-                                Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
-                            }
-                            ProductDAO productDAO = new ProductDAO(getActivity());
-                            productDAO.open();
-                            productDAO.updatereplace(eProductList);
-                            productDAO.close();
-                            getActivity().finish();
+                            dialog.dismiss();
                         }
-                    });*/
+                    });
+                    alertDialogder.show();
+
+
+                } else if (ex == 0) {
+
+                    alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + editText_product.getText().toString());
                     alertDialogder.setNegativeButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -507,11 +508,23 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     });
 
                     alertDialogder.show();
+
+                } else if (ex == 3) {
+                    alertDialogder.setTitle("มีข้อมูล 'Barcode' ซ้ำในระบบ");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alertDialogder.show();
+
                 }
 
             }
 
-        }else if (btn_back == v) {
+        } else if (btn_back == v) {
             getActivity().finish();
         } else if (btn_delete == v) {
 
@@ -545,7 +558,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
-
 
 
     }

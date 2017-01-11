@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#D7CCC8"
+              android:background="#FFF59D"
               android:orientation="horizontal"
               android:weightSum="2"
     >
@@ -28,11 +28,23 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_Company"
             android:layout_marginTop="@dimen/layout_marginTop_company"
-            android:text="Company Name :"
+            android:text="Company Name"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameCompany"
+            android:layout_alignTop="@+id/txt_NameCompany"
+            android:textStyle="bold"/>
+
 
         <TextView
             android:id="@+id/txt_Name_Company"
@@ -41,7 +53,7 @@
             android:layout_marginLeft="80dp"
             android:layout_toRightOf="@+id/txt_NameCompany"
             android:background="@drawable/btn_default_normal"
-            android:text="CompanyName;"
+            android:text="CompanyName"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"/>
@@ -50,14 +62,24 @@
             android:id="@+id/txt_AddressCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/txt_NameCompany"
             android:layout_alignBottom="@+id/txt_Address_Company"
             android:layout_alignLeft="@+id/txt_NameCompany"
-
-            android:text="Address :"
+            android:text="Address"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_AddressCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_AddressCompany"
+            android:layout_alignTop="@+id/txt_AddressCompany"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Address_Company"
@@ -78,12 +100,21 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Telephone"
             android:layout_alignLeft="@+id/txt_NameCompany"
-
-            android:text="Telephone :"
+            android:text="Telephone"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameTelephone"
+            android:layout_alignTop="@+id/txt_NameTelephone"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Telephone"
@@ -104,12 +135,21 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_TAXID"
             android:layout_alignLeft="@+id/txt_NameCompany"
-
-            android:text="TAXID :"
+            android:text="TAXID"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameTAXID"
+            android:layout_alignTop="@+id/txt_NameTAXID"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Name_TAXID"
@@ -130,12 +170,21 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_DivisionName"
             android:layout_alignLeft="@+id/txt_NameCompany"
-
-            android:text="Division :"
+            android:text="Division"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameDivision"
+            android:layout_alignTop="@+id/txt_NameDivision"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Name_DivisionName"
@@ -144,7 +193,6 @@
             android:layout_alignLeft="@+id/txt_Name_TAXID"
             android:layout_below="@+id/txt_Name_TAXID"
             android:layout_marginTop="@dimen/layout_marginTop_company"
-
             android:background="@drawable/btn_default_normal"
             android:text="Division"
             android:textColor="@color/colorBlack"
@@ -157,12 +205,22 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_RegisterID"
             android:layout_alignLeft="@+id/txt_NameCompany"
-
-            android:text="RegisterID :"
+            android:text="RegisterID"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameRegisterID"
+            android:layout_alignTop="@+id/txt_NameRegisterID"
+            android:textStyle="bold"/>
+
 
         <TextView
             android:id="@+id/txt_Name_RegisterID"
@@ -183,12 +241,21 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_ENDbillText"
             android:layout_alignLeft="@+id/txt_NameCompany"
-
-            android:text="ENDbillText :"
+            android:text="ENDbillText"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameENDbillText"
+            android:layout_alignTop="@+id/txt_NameENDbillText"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Name_ENDbillText"
@@ -209,11 +276,21 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_VATRate"
             android:layout_alignLeft="@+id/txt_NameCompany"
-            android:text="VATRate :"
+            android:text="VATRate"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NameVATRate"
+            android:layout_alignTop="@+id/txt_NameVATRate"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Name_VATRate"
@@ -234,11 +311,21 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_POSMachineID"
             android:layout_alignLeft="@+id/txt_NameCompany"
-            android:text="POSMachineID :"
+            android:text="POSMachineID"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
             />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  :"
+            android:layout_toRightOf="@+id/txt_NameCompany"
+            android:textSize="@dimen/textsize_company"
+            android:layout_alignBottom="@+id/txt_NamePOSMachineID"
+            android:layout_alignTop="@+id/txt_NamePOSMachineID"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_Name_POSMachineID"
@@ -247,7 +334,7 @@
             android:layout_alignLeft="@+id/txt_Name_VATRate"
             android:layout_below="@+id/txt_Name_VATRate"
             android:layout_marginTop="@dimen/layout_marginTop_company"
-            android:text="POSMachineID;"
+            android:text="POSMachineID"
             android:background="@drawable/btn_default_normal"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"

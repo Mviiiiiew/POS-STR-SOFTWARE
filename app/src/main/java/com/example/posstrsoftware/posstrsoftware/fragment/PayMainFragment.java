@@ -82,7 +82,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     int processbarcode;
     String date;
     Double ValueVat;
-
+    String CashChangeAll;
 
     public PayMainFragment() {
         super();
@@ -101,8 +101,8 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         date = sharedPreferences.getString("date", (Date().toString()));
         Log.d("date5", date + "");
-
-
+        CashChangeAll =cash.toString()+"/"+change.toString();
+        Log.d("CashChangeAll", CashChangeAll + "");
         edit_txt_cash.setText("");
 
 
@@ -183,6 +183,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                     DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
                     formatter.applyPattern("#,###,###,###.##");
                     String formattedString = formatter.format(longval);
+
 
                     //setting text after format to EditText
                     edit_txt_cash.setText(formattedString);
@@ -380,13 +381,29 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             //   Toast.makeText(getActivity(), afterdate+"   "+Date().toString(), Toast.LENGTH_LONG).show();
                             productSaleDAO1.close();
 
+                            if(txtdiscount.matches("0.0")){
 
-                            HeadMaster();
-                            ProductAll();
-                            Underline();
-                            TotalAll();
-                            EndText();
-                            Linefeed();
+                                //No discount
+
+                                HeadMaster();
+                                ProductAll();
+                                Underline();
+                                TotalAllNoDiscount();
+                                EndText();
+                                Linefeed();
+                                Toast.makeText(getActivity(),"0.0",Toast.LENGTH_SHORT).show();
+                            }else{
+                                //discount
+
+                                HeadMaster();
+                                ProductAll();
+                                Underline();
+                                TotalAll();
+                                EndText();
+                                Linefeed();
+                                Toast.makeText(getActivity(),"WOW",Toast.LENGTH_SHORT).show();
+                            }
+
 
 
                             Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
@@ -401,7 +418,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             intent.putExtra("processmanual", processmanual);
                             intent.putExtra("processbarcode", processbarcode);
                             intent.putExtra("ValueVat", txt_ValueVat.getText().toString());
-
                             startActivity(intent);
 
                         } else if (cash < totalall) {
@@ -459,6 +475,34 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void TotalAllNoDiscount() {
+
+
+        String CashChangex = formatAmount.formatAmountDouble(cash)+"/"+formatAmount.formatAmountDouble(change);
+        String x = "--------------------------------";
+        String Totaltxt = "Total";
+        String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(), 27);
+        String ValueVat = "VAT";
+        String vat = PrintFix.generatePrice(txt_ValueVat.getText().toString(), 29);
+        String changz = PrintFix.generatePrice(CashChangex, 21);
+        String CashChange = "Cash/Change";
+
+
+        printerController.PrinterController_Print(Totaltxt.getBytes());
+        printerController.PrinterController_Print(total.getBytes());
+        printerController.PrinterController_Print(x.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Print(ValueVat.getBytes());
+        printerController.PrinterController_Print(vat.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Font_Bold();
+        printerController.PrinterController_Print(CashChange.getBytes());
+        printerController.PrinterController_Print(changz.getBytes());
+        printerController.PrinterController_Print("\n".getBytes());
+        printerController.PrinterController_Linefeed();
+
+    }
+
     private void EndText() {
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
@@ -486,40 +530,30 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
     }
 
     private void TotalAll() {
+        String CashChangex = formatAmount.formatAmountDouble(cash)+"/"+formatAmount.formatAmountDouble(change);
         String x = "--------------------------------";
         String Totaltxt = "Total";
         String total = PrintFix.generatePrice(txt_NameTotal.getText().toString(), 27);
-        String ValueVat = "Include VAT";
-        String vat = PrintFix.generatePrice(txt_ValueVat.getText().toString(), 21);
-        String TotalAlltxt = "TotalAll";
-        String totalall = PrintFix.generatePrice(txt_Totalall.getText().toString(), 24);
-        String cash = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(edit_txt_cash.getText().toString().replaceAll(",", ""))), 28);
-        String changz = PrintFix.generatePrice(formatAmount.formatAmountDouble(change), 26);
-        String Cashtxt = "Cash";
-        String Changetxt = "Change";
-        String Discounttxt = "Discount" + "->" + (PrintFix.generateName(symbol, 5));
-        String discount = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount)), 17);
-        printerController.PrinterController_Linefeed();
+        String ValueVat = "VAT";
+        String vat = PrintFix.generatePrice(txt_ValueVat.getText().toString(), 29);
+        String changz = PrintFix.generatePrice(CashChangex, 21);
+        String CashChange = "Cash/Change";
+        String Discounttxt = "DISC." + "->" + (PrintFix.generateName(symbol, 5));
+        String discount = PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(txtdiscount)), 20);
+
+
         printerController.PrinterController_Print(Totaltxt.getBytes());
         printerController.PrinterController_Print(total.getBytes());
         printerController.PrinterController_Print(x.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Linefeed();
         printerController.PrinterController_Print(ValueVat.getBytes());
         printerController.PrinterController_Print(vat.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Print(Discounttxt.getBytes());
         printerController.PrinterController_Print(discount.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(TotalAlltxt.getBytes());
-        printerController.PrinterController_Print(totalall.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(Cashtxt.getBytes());
-        printerController.PrinterController_Print(cash.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Linefeed();
         printerController.PrinterController_Font_Bold();
-        printerController.PrinterController_Print(Changetxt.getBytes());
+        printerController.PrinterController_Print(CashChange.getBytes());
         printerController.PrinterController_Print(changz.getBytes());
         printerController.PrinterController_Print("\n".getBytes());
         printerController.PrinterController_Linefeed();

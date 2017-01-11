@@ -109,6 +109,10 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+        searchViewUnit.setIconifiedByDefault(false);
+        searchViewUnit.setIconified(false);
+        searchViewUnit.clearFocus();
+
         UnitDAO unitDAO = new UnitDAO(getActivity());
         unitDAO.open();
         final ArrayList<UnitList> unitLists = unitDAO.getAllUnitList();

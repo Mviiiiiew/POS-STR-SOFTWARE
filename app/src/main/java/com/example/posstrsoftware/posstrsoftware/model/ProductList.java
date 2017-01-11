@@ -20,8 +20,9 @@ public class ProductList implements Serializable {
     private String SymbolVat;
     private Double ValueVat;
 
-    public ProductList(String productText, Double productprice, GroupList groupList, UnitList unitList, Double cost, String barcode, String symbolVat) {
 
+    public ProductList(int id, Double productpricesumvat, String productText, Double productprice, GroupList groupList, UnitList unitList, String barcode, String checkvat, Double cost, String symbolVat, Double valueVat) {
+        this.id = id;
         this.productpricesumvat = productpricesumvat;
         this.productText = productText;
         this.productprice = productprice;
@@ -30,7 +31,37 @@ public class ProductList implements Serializable {
         this.barcode = barcode;
         this.checkvat = checkvat;
         Cost = cost;
-        SymbolVat = symbolVat;}
+        SymbolVat = symbolVat;
+        ValueVat = valueVat;
+    }
+
+    public ProductList(String productText, Double productprice, GroupList groupList, UnitList unitList, Double cost, String barcode, String symbolVat, String checkvat, int id) {
+        this.id = id;
+        this.productpricesumvat = productpricesumvat;
+        this.productText = productText;
+        this.productprice = productprice;
+        this.groupList = groupList;
+        this.unitList = unitList;
+        this.barcode = barcode;
+        this.checkvat = checkvat;
+        Cost = cost;
+        SymbolVat = symbolVat;
+
+    }
+
+    public ProductList(String productText, Double productprice, GroupList groupList, UnitList unitList, Double cost, String barcode, String symbolVat, String checkvat, int id, Double productpricesumvat) {
+        this.id = id;
+        this.productpricesumvat = productpricesumvat;
+        this.productText = productText;
+        this.productprice = productprice;
+        this.groupList = groupList;
+        this.unitList = unitList;
+        this.barcode = barcode;
+        this.checkvat = checkvat;
+        Cost = cost;
+        SymbolVat = symbolVat;
+    }
+
 
     public Double getValueVat() {
         return ValueVat;

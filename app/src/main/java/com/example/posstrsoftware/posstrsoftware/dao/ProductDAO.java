@@ -69,16 +69,55 @@ public class ProductDAO {
         return productList;
 }
 
-
-
-    public int add(ProductList productList) {
-        String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ? ";
+    public int addNobarcode(ProductList productList) {
+        String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ?  ";
         SQLiteStatement stmt = database.compileStatement(query);
+
         stmt.bindString(1, productList.getProductText());
         stmt.bindString(2, "N");
         int count_row = (int) stmt.simpleQueryForLong();
         if (stmt != null) stmt.close();
         if (count_row != 0) {
+            return 0;
+        } else {
+            ContentValues values = new ContentValues();
+            values.put("product_text", productList.getProductText());
+            values.put("id_barcode", productList.getBarcode());
+            values.put("price_text", productList.getProductprice());
+            values.put("vat_flag", productList.getCheckvat());
+            values.put("id_unit", productList.getUnitList().getId());
+            values.put("id_group", productList.getGroupList().getId());
+            values.put("Cost", productList.getCost());
+            values.put("UnitName", productList.getUnitList().getUnitText());
+            values.put("GroupName", productList.getGroupList().getGroupText());
+            values.put("Symbol_Vat", productList.getSymbolVat());
+
+            this.database.insert("product_list", null, values);
+            return 1;
+        }
+    }
+
+
+
+    public int add(ProductList productList) {
+        String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ?  ";
+        SQLiteStatement stmt = database.compileStatement(query);
+        String QueryBarcode = "Select count(*) from product_list  where  id_barcode = ? AND delete_flag = ? ";
+        SQLiteStatement stmtbarcodr = database.compileStatement(QueryBarcode);
+        stmt.bindString(1, productList.getProductText());
+        stmt.bindString(2, "N");
+        stmtbarcodr.bindString(1,productList.getBarcode());
+        stmtbarcodr.bindString(2, "N");
+        int count_row = (int) stmt.simpleQueryForLong();
+        int count_row_barcode = (int) stmtbarcodr.simpleQueryForLong();
+        if (stmt != null) stmt.close();
+        if (stmtbarcodr != null) stmtbarcodr.close();
+
+        if(count_row != 0 && count_row_barcode != 0){
+            return 2;
+        }else if(count_row_barcode != 0){
+            return  3;
+        }else  if (count_row != 0) {
             return 0;
         } else {
             ContentValues values = new ContentValues();
@@ -128,13 +167,24 @@ public class ProductDAO {
 
     }
     public int check(ProductList productList) {
-        String query = "Select count(*) from product_list where product_text = ? AND delete_flag = ?";
+        String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ?  ";
         SQLiteStatement stmt = database.compileStatement(query);
+        String QueryBarcode = "Select count(*) from product_list  where  id_barcode = ? AND delete_flag = ? ";
+        SQLiteStatement stmtbarcodr = database.compileStatement(QueryBarcode);
         stmt.bindString(1, productList.getProductText());
         stmt.bindString(2, "N");
+        stmtbarcodr.bindString(1,productList.getBarcode());
+        stmtbarcodr.bindString(2, "N");
         int count_row = (int) stmt.simpleQueryForLong();
+        int count_row_barcode = (int) stmtbarcodr.simpleQueryForLong();
         if (stmt != null) stmt.close();
-        if (count_row != 0) {
+        if (stmtbarcodr != null) stmtbarcodr.close();
+
+        if(count_row != 0 && count_row_barcode != 0){
+            return 2;
+        }else if(count_row_barcode != 0){
+            return  3;
+        }else  if (count_row != 0) {
             return 0;
         } else {
             return 1;

@@ -75,7 +75,7 @@ public class MainFragment extends Fragment {
                     case 1:
                         return ProductSetMainFragment.newInstance();
                     case 2:
-                        return  CompanyMainFragment.newInstance();
+                        return CompanyMainFragment.newInstance();
                     case 3:
                         return ReportMainFragment.newInstance();
                     case 4:

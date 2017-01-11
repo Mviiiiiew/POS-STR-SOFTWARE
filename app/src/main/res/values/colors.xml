@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorOrange">#FF3D00</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="test">#585959</color>
     <color name="colorGray">#B0BEC5</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBlue">#40C4FF</color>
@@ -12,6 +13,7 @@
     <color name="colorLightBlue">#03A9F4</color>
     <color name="colorGrayz">#F5F5F5</color>
     <color name="colorPink">#F06292</color>
-
+    <color name="colorDiscOK">#F8BBD0</color>
+    <color name="colorDiscNO">#E0E0E0</color>
 
 </resources>

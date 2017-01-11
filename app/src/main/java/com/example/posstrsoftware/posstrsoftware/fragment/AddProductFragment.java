@@ -64,6 +64,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
@@ -230,7 +231,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 alertDialogder.show();
 
 
-            } else if (editText_Price.getText().toString().matches("")) {
+            } else if (editText_Price.getText().toString().matches("") || editText_Price.getText().toString().matches("\\.")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาใส่ราคาสินค้า ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -242,7 +243,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
-            } else if (editText_Cost.getText().toString().matches("")) {
+            } else if (editText_Cost.getText().toString().matches("") || editText_Cost.getText().toString().matches("\\.")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาใส่ราคาต้นทุน หรือ 0 ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -267,32 +268,78 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 if (checkbox_vat.isChecked() == true) {
                     productList.setCheckvat("N");
                     productList.setSymbolVat("ไม่มีภาษี");
-                   // Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
                 } else {
                     productList.setCheckvat("Y");
                     productList.setSymbolVat("มีภาษี");
                     //Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
                 }
                 ProductDAO productDAO = new ProductDAO(getActivity());
-                productDAO.open();
-                ex = productDAO.add(productList);
-                productDAO.close();
-                if (ex == 0) {
-                    AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
-                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                if (editText_Barcode.getText().toString().matches("")) {
+                    productDAO.open();
+                    ex = productDAO.addNobarcode(productList);
+                    productDAO.close();
 
-                    alertDialogder.show();
+
+                     if (ex == 0) {
+                        AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                        alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        alertDialogder.show();
+                    }else {
+                         getActivity().finish();
+                     }
+
                 } else {
-                    getActivity().finish();
+                    productDAO.open();
+                    ex = productDAO.add(productList);
+                    productDAO.close();
+                    if (ex == 2) {
+                        AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                        alertDialogder.setTitle("มีข้อมูล 'Barcode' และ 'ชื่อสินค้า' ซ้ำในระบบ");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        alertDialogder.show();
+
+                    } else if (ex == 3) {
+                        AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                        alertDialogder.setTitle("มีข้อมูล 'Barcode' ซ้ำในระบบ");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        alertDialogder.show();
+                    } else if (ex == 0) {
+                        AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                        alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        alertDialogder.show();
+                    } else {
+                        getActivity().finish();
+                    }
+
+
                 }
-
-
             }
         } else if (btn_back == v) {
             getActivity().finish();
