@@ -40,10 +40,10 @@ public class ProductDAO {
 
         ArrayList<ProductList> productList = new ArrayList<>();
 
-            Cursor cursor = database.rawQuery("  select pl.id_product,pl.id_barcode,pl.product_text,round (pl.PriceNoVAT,2),pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text,pl.Symbol_Vat,round (pl.ValueVat,2) from vproduct_list pl      \n" +
-                    "inner join  unit_list ul on pl.id_unit = ul.id_unit       \n" +
-                    "inner join  group_list gl on pl.id_group = gl.id_group    \n" +
-                    "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;",null);
+        Cursor cursor = database.rawQuery("  select pl.id_product,pl.id_barcode,pl.product_text,round (pl.PriceNoVAT,2),pl.price_text,pl.Cost,pl.vat_flag,pl.id_unit,ul.unit_text,pl.id_group,gl.group_text,pl.Symbol_Vat,round (pl.ValueVat,2) from vproduct_list pl      \n" +
+                "inner join  unit_list ul on pl.id_unit = ul.id_unit       \n" +
+                "inner join  group_list gl on pl.id_group = gl.id_group    \n" +
+                "where pl.delete_flag = 'N' ORDER BY  gl.group_text  ASC;", null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -54,12 +54,11 @@ public class ProductDAO {
             productList1.setProductprice(cursor.getDouble(4));
             productList1.setCheckvat(cursor.getString(6));
             productList1.setCost(cursor.getDouble(5));
-            productList1.setUnitList(new UnitList(cursor.getInt(7),cursor.getString(8)));
-            productList1.setGroupList(new GroupList(cursor.getInt(9),cursor.getString(10)));
+            productList1.setUnitList(new UnitList(cursor.getInt(7), cursor.getString(8)));
+            productList1.setGroupList(new GroupList(cursor.getInt(9), cursor.getString(10)));
             productList1.setProductpricesumvat(cursor.getDouble(3));
             productList1.setSymbolVat(cursor.getString(11));
             productList1.setValueVat(cursor.getDouble(12));
-
 
 
             productList.add(productList1);
@@ -67,7 +66,7 @@ public class ProductDAO {
         }
         cursor.close();
         return productList;
-}
+    }
 
     public int addNobarcode(ProductList productList) {
         String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ?  ";
@@ -98,7 +97,6 @@ public class ProductDAO {
     }
 
 
-
     public int add(ProductList productList) {
         String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ?  ";
         SQLiteStatement stmt = database.compileStatement(query);
@@ -106,48 +104,46 @@ public class ProductDAO {
         SQLiteStatement stmtbarcodr = database.compileStatement(QueryBarcode);
         stmt.bindString(1, productList.getProductText());
         stmt.bindString(2, "N");
-        stmtbarcodr.bindString(1,productList.getBarcode());
+        stmtbarcodr.bindString(1, productList.getBarcode());
         stmtbarcodr.bindString(2, "N");
         int count_row = (int) stmt.simpleQueryForLong();
         int count_row_barcode = (int) stmtbarcodr.simpleQueryForLong();
         if (stmt != null) stmt.close();
         if (stmtbarcodr != null) stmtbarcodr.close();
 
-        if(count_row != 0 && count_row_barcode != 0){
+        if (count_row != 0 && count_row_barcode != 0) {
             return 2;
-        }else if(count_row_barcode != 0){
-            return  3;
-        }else  if (count_row != 0) {
+        } else if (count_row_barcode != 0) {
+            return 3;
+        } else if (count_row != 0) {
             return 0;
         } else {
             ContentValues values = new ContentValues();
             values.put("product_text", productList.getProductText());
-            values.put("id_barcode",productList.getBarcode());
-            values.put("price_text",productList.getProductprice());
-            values.put("vat_flag",productList.getCheckvat());
-            values.put("id_unit",productList.getUnitList().getId());
-            values.put("id_group",productList.getGroupList().getId());
-            values.put("Cost",productList.getCost());
-            values.put("UnitName",productList.getUnitList().getUnitText());
-            values.put("GroupName",productList.getGroupList().getGroupText());
-            values.put("Symbol_Vat",productList.getSymbolVat());
+            values.put("id_barcode", productList.getBarcode());
+            values.put("price_text", productList.getProductprice());
+            values.put("vat_flag", productList.getCheckvat());
+            values.put("id_unit", productList.getUnitList().getId());
+            values.put("id_group", productList.getGroupList().getId());
+            values.put("Cost", productList.getCost());
+            values.put("UnitName", productList.getUnitList().getUnitText());
+            values.put("GroupName", productList.getGroupList().getGroupText());
+            values.put("Symbol_Vat", productList.getSymbolVat());
 
             this.database.insert("product_list", null, values);
             return 1;
         }
 
 
-
-
     }
 
-    public ProductSaleList SearchID(String ID){
+    public ProductSaleList SearchID(String ID) {
 
         ProductSaleList bee = new ProductSaleList();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM vproduct_list where delete_flag = 'N' and id_barcode ='"+ID+"';",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM vproduct_list where delete_flag = 'N' and id_barcode ='" + ID + "';", null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             bee.setProductSale(cursor.getString(2));
             bee.setPrice(cursor.getDouble(12));
             bee.setProductid(cursor.getInt(0));
@@ -163,9 +159,29 @@ public class ProductDAO {
             cursor.moveToNext();
         }
         cursor.close();
-        return bee ;
+        return bee;
 
     }
+
+    public int checkNoName(ProductList productList) {
+
+        String QueryBarcode = "Select count(*) from product_list  where  id_barcode = ? AND delete_flag = ? ";
+        SQLiteStatement stmtbarcodr = database.compileStatement(QueryBarcode);
+
+        stmtbarcodr.bindString(1, productList.getBarcode());
+        stmtbarcodr.bindString(2, "N");
+
+        int count_row_barcode = (int) stmtbarcodr.simpleQueryForLong();
+        if (stmtbarcodr != null) stmtbarcodr.close();
+
+        if (count_row_barcode != 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+
     public int check(ProductList productList) {
         String query = "Select count(*) from product_list  where product_text = ?  AND delete_flag = ?  ";
         SQLiteStatement stmt = database.compileStatement(query);
@@ -173,18 +189,18 @@ public class ProductDAO {
         SQLiteStatement stmtbarcodr = database.compileStatement(QueryBarcode);
         stmt.bindString(1, productList.getProductText());
         stmt.bindString(2, "N");
-        stmtbarcodr.bindString(1,productList.getBarcode());
+        stmtbarcodr.bindString(1, productList.getBarcode());
         stmtbarcodr.bindString(2, "N");
         int count_row = (int) stmt.simpleQueryForLong();
         int count_row_barcode = (int) stmtbarcodr.simpleQueryForLong();
         if (stmt != null) stmt.close();
         if (stmtbarcodr != null) stmtbarcodr.close();
 
-        if(count_row != 0 && count_row_barcode != 0){
+        if (count_row != 0 && count_row_barcode != 0) {
             return 2;
-        }else if(count_row_barcode != 0){
-            return  3;
-        }else  if (count_row != 0) {
+        } else if (count_row_barcode != 0) {
+            return 3;
+        } else if (count_row != 0) {
             return 0;
         } else {
             return 1;
@@ -213,6 +229,7 @@ public class ProductDAO {
             return 1;
         }
     }
+
     public void updatereplace(ProductList productList) {
 
         ProductList updateProductList = productList;
@@ -229,7 +246,6 @@ public class ProductDAO {
         String where = "id_product=" + updateProductList.getId();
         this.database.update("product_list", values, where, null);
     }
-
 
 
     public void delete(ProductList productList) {

@@ -61,6 +61,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
     String barcode;
     String Vat;
     String CheckVAT;
+    String BarcodeBefore;
 
     EditText edit_price;
     Double price;
@@ -110,6 +111,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         initInstances(rootView);
         ProductList editProductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         NameProductBefore = editProductList.getProductText();
+        BarcodeBefore = editProductList.getBarcode();
         barcode = editProductList.getBarcode();
         price = editProductList.getProductprice();
         priceCost = editProductList.getCost();
@@ -373,60 +375,175 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
             } else if (NameProductBefore.matches(editText_product.getText().toString())) {
 
-
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
-                alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
-                        + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
-                        + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
-                        + "ราคา          :  " + edit_price.getText().toString() + "\n"
-                        + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
-                        + "ภาษี           :  " + CheckVAT.toString() + "\n"
-                        + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
-                );
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
-                        ProductList eProductList = new ProductList();
-                        eProductList.setId(editproductList.getId());
-                        eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
-                        eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
-                        eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
-                        eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
-                        eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
-                        eProductList.setBarcode(editText_Barcode.getText().toString());
+                ProductList eProductList = new ProductList();
+                eProductList.setId(editproductList.getId());
+                eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                eProductList.setBarcode(editText_Barcode.getText().toString());
+                ProductDAO productDAO = new ProductDAO(getActivity());
+                productDAO.open();
+                ex = productDAO.checkNoName(eProductList);
+                productDAO.close();
+                if (ex == 1) {
 
-                        if (checkbox_vat.isChecked() == true) {
-                            eProductList.setCheckvat("N");
-                            eProductList.setSymbolVat("ไม่มีภาษี");
-                            Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
-                        } else {
-                            eProductList.setCheckvat("Y");
-                            eProductList.setSymbolVat("มีภาษี");
-                            Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+
+                    alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                            + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
+                            + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
+                            + "ราคา          :  " + edit_price.getText().toString() + "\n"
+                            + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
+                            + "ภาษี           :  " + CheckVAT.toString() + "\n"
+                            + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
+                    );
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                            ProductList eProductList = new ProductList();
+                            eProductList.setId(editproductList.getId());
+                            eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                            eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                            eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
+                            eProductList.setBarcode(editText_Barcode.getText().toString());
+
+                            if (checkbox_vat.isChecked() == true) {
+                                eProductList.setCheckvat("N");
+                                eProductList.setSymbolVat("ไม่มีภาษี");
+
+                            } else {
+                                eProductList.setCheckvat("Y");
+                                eProductList.setSymbolVat("มีภาษี");
+
+                            }
+
+                            ProductDAO productDAO = new ProductDAO(getActivity());
+                            productDAO.open();
+                            productDAO.updatereplace(eProductList);
+                            productDAO.close();
+                            getActivity().finish();
                         }
+                    });
+                    alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogder.show();
 
-                        ProductDAO productDAO = new ProductDAO(getActivity());
-                        productDAO.open();
-                        productDAO.updatereplace(eProductList);
-                        productDAO.close();
-                        getActivity().finish();
-                    }
-                });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                alertDialogder.show();
+                } else if (editText_Barcode.getText().toString().matches("")) {
 
-            }
+                    alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                            + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
+                            + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
+                            + "ราคา          :  " + edit_price.getText().toString() + "\n"
+                            + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
+                            + "ภาษี           :  " + CheckVAT.toString() + "\n"
+                            + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
+                    );
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                            ProductList eProductList = new ProductList();
+                            eProductList.setId(editproductList.getId());
+                            eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                            eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                            eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
+                            eProductList.setBarcode(editText_Barcode.getText().toString());
 
+                            if (checkbox_vat.isChecked() == true) {
+                                eProductList.setCheckvat("N");
+                                eProductList.setSymbolVat("ไม่มีภาษี");
+                                Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                            } else {
+                                eProductList.setCheckvat("Y");
+                                eProductList.setSymbolVat("มีภาษี");
+                                Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+                            }
 
+                            ProductDAO productDAO = new ProductDAO(getActivity());
+                            productDAO.open();
+                            productDAO.updatereplace(eProductList);
+                            productDAO.close();
+                            getActivity().finish();
+                        }
+                    });
+                    alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogder.show();
+                } else if (BarcodeBefore.matches(editText_Barcode.getText().toString())) {
+                    alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                            + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
+                            + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
+                            + "ราคา          :  " + edit_price.getText().toString() + "\n"
+                            + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
+                            + "ภาษี           :  " + CheckVAT.toString() + "\n"
+                            + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
+                    );
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                            ProductList eProductList = new ProductList();
+                            eProductList.setId(editproductList.getId());
+                            eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                            eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                            eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                            eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                            eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
+                            eProductList.setBarcode(editText_Barcode.getText().toString());
 
-            else {
+                            if (checkbox_vat.isChecked() == true) {
+                                eProductList.setCheckvat("N");
+                                eProductList.setSymbolVat("ไม่มีภาษี");
+                                Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                            } else {
+                                eProductList.setCheckvat("Y");
+                                eProductList.setSymbolVat("มีภาษี");
+                                Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+                            }
+
+                            ProductDAO productDAO = new ProductDAO(getActivity());
+                            productDAO.open();
+                            productDAO.updatereplace(eProductList);
+                            productDAO.close();
+                            getActivity().finish();
+                        }
+                    });
+                    alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogder.show();
+                } else {
+                    alertDialogder.setTitle("มีข้อมูล 'Barcode' ซ้ำในระบบ");
+                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alertDialogder.show();
+                }
+
+            } else {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
                 ProductList eProductList = new ProductList();
@@ -486,17 +603,28 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     alertDialogder.show();
 
                 } else if (ex == 2) {
+                    if (editText_Barcode.getText().toString().matches("")) {
+                        alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + editText_product.getText().toString());
+                        alertDialogder.setNegativeButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                    alertDialogder.setTitle("มีข้อมูล 'Barcode' และ 'ชื่อสินค้า' ซ้ำในระบบ");
-                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    alertDialogder.show();
+                        alertDialogder.show();
+                    } else {
 
+                        alertDialogder.setTitle("มีข้อมูล 'Barcode' และ 'ชื่อสินค้า' ซ้ำในระบบ");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialogder.show();
 
+                    }
                 } else if (ex == 0) {
 
                     alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + editText_product.getText().toString());
@@ -510,16 +638,109 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     alertDialogder.show();
 
                 } else if (ex == 3) {
-                    alertDialogder.setTitle("มีข้อมูล 'Barcode' ซ้ำในระบบ");
-                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    if (BarcodeBefore.matches(editText_Barcode.getText().toString())) {
 
-                    alertDialogder.show();
+                        alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                                + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
+                                + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
+                                + "ราคา          :  " + edit_price.getText().toString() + "\n"
+                                + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
+                                + "ภาษี           :  " + CheckVAT.toString() + "\n"
+                                + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
+                        );
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                                ProductList eProductList = new ProductList();
+                                eProductList.setId(editproductList.getId());
+                                eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                                eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                                eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
+                                eProductList.setBarcode(editText_Barcode.getText().toString());
+                                if (checkbox_vat.isChecked() == true) {
+                                    eProductList.setCheckvat("N");
+                                    eProductList.setSymbolVat("ไม่มีภาษี");
 
+                                } else {
+                                    eProductList.setCheckvat("Y");
+                                    eProductList.setSymbolVat("มีภาษี");
+
+                                }
+                                ProductDAO productDAO = new ProductDAO(getActivity());
+                                productDAO.open();
+                                productDAO.updatereplace(eProductList);
+                                productDAO.close();
+                                getActivity().finish();
+                            }
+                        });
+                        alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialogder.show();
+                    } else if (editText_Barcode.getText().toString().matches("")) {
+
+                        alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                                + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
+                                + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
+                                + "ราคา          :  " + edit_price.getText().toString() + "\n"
+                                + "ราคาต้นทุน : " + edit_priceCost.getText().toString() + "\n"
+                                + "ภาษี           :  " + CheckVAT.toString() + "\n"
+                                + "Barcode      :  " + editText_Barcode.getText().toString() + "\n"
+                        );
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
+                                ProductList eProductList = new ProductList();
+                                eProductList.setId(editproductList.getId());
+                                eProductList.setUnitList(new UnitList(mSelectedUnit.getId(), mSelectedUnit.getUnitText()));
+                                eProductList.setGroupList(new GroupList(mSelectedGroup.getId(), mSelectedGroup.getGroupText()));
+                                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                                eProductList.setProductText(Util_String.getGennerlateString(editText_product.getText().toString()));
+                                eProductList.setProductprice(Double.valueOf(edit_price.getText().toString().replaceAll(",", "")));
+                                eProductList.setCost(Double.valueOf(edit_priceCost.getText().toString().replaceAll(",", "")));
+                                eProductList.setBarcode(editText_Barcode.getText().toString());
+                                if (checkbox_vat.isChecked() == true) {
+                                    eProductList.setCheckvat("N");
+                                    eProductList.setSymbolVat("ไม่มีภาษี");
+
+                                } else {
+                                    eProductList.setCheckvat("Y");
+                                    eProductList.setSymbolVat("มีภาษี");
+
+                                }
+                                ProductDAO productDAO = new ProductDAO(getActivity());
+                                productDAO.open();
+                                productDAO.updatereplace(eProductList);
+                                productDAO.close();
+                                getActivity().finish();
+                            }
+                        });
+                        alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialogder.show();
+                    } else {
+                        alertDialogder.setTitle("มีข้อมูล 'Barcode' ซ้ำในระบบ");
+                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        alertDialogder.show();
+                    }
                 }
 
             }
@@ -529,7 +750,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         } else if (btn_delete == v) {
 
             AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-
             alertDialogder.setTitle("คุณต้องการที่จะลบสินค้า : " + NameProductBefore + "  หรือไม่ ?");
             alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                 @Override

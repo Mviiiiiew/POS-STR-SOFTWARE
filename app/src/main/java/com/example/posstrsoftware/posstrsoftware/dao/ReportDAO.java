@@ -42,12 +42,10 @@ public class ReportDAO {
     }
 
 
-
-
     public ArrayList<ReportList> getAllPrintReportProduct(String input_date) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('"+input_date+"' AS DECIMAL)  AND CAST('"+input_date+"' AS DECIMAL);;", null);
+        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('" + input_date + "' AS DECIMAL)  AND CAST('" + input_date + "' AS DECIMAL);;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -64,10 +62,10 @@ public class ReportDAO {
         return reportLists;
     }
 
-    public ArrayList<ReportList> getAllPrintReportProductOneTwo( String input_date_from,String input_date_to) {
+    public ArrayList<ReportList> getAllPrintReportProductOneTwo(String input_date_from, String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('"+input_date_from+"' AS DECIMAL)  AND CAST('"+input_date_to+"' AS DECIMAL);;", null);
+        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('" + input_date_from + "' AS DECIMAL)  AND CAST('" + input_date_to + "' AS DECIMAL);;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -84,10 +82,10 @@ public class ReportDAO {
         return reportLists;
     }
 
-    public ArrayList<ReportList> getAllPrintReportProductTwoOne( String input_date_from,String input_date_to) {
+    public ArrayList<ReportList> getAllPrintReportProductTwoOne(String input_date_from, String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('"+input_date_to+"' AS DECIMAL)  AND CAST('"+input_date_from+"' AS DECIMAL);;", null);
+        Cursor cursor = database.rawQuery("SELECT *  FROM viewProductReport WHERE CAST(replace(doc_date,'-','')  AS DECIMAL) between CAST('" + input_date_to + "' AS DECIMAL)  AND CAST('" + input_date_from + "' AS DECIMAL);;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -103,15 +101,12 @@ public class ReportDAO {
         cursor.close();
         return reportLists;
     }
-
-
-
 
 
     public ArrayList<ReportList> getAllReportList(String input_date) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date+"' as decimal)  and cast('"+input_date+"' as decimal);", null);
+        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -132,11 +127,10 @@ public class ReportDAO {
     }
 
 
-
-    public ArrayList<ReportList> getAllReportListOneTwo(String input_date_from,String input_date_to) {
+    public ArrayList<ReportList> getAllReportListOneTwo(String input_date_from, String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_from+"' as decimal)  and cast('"+input_date_to+"' as decimal);", null);
+        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -155,10 +149,11 @@ public class ReportDAO {
         cursor.close();
         return reportLists;
     }
-    public ArrayList<ReportList> getAllReportListTwoOne(String input_date_from,String input_date_to) {
+
+    public ArrayList<ReportList> getAllReportListTwoOne(String input_date_from, String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('"+input_date_to+"' as decimal)  and cast('"+input_date_from +"' as decimal);", null);
+        Cursor cursor = database.rawQuery("select *,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal);", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ReportList mReportList = new ReportList();
@@ -177,11 +172,9 @@ public class ReportDAO {
         cursor.close();
         return reportLists;
     }
-
 
 
     public void exportDataBaseProduct(String input_date) {
-
 
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
 
@@ -196,13 +189,17 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where " +
+                    "cast(replace(doc_date,'-','')  as decimal) " +
+                    "between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
 
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
-                String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
+                String arrStr[] = {curCSV.getString(0), curCSV.getString(1),
+                        curCSV.getString(2), curCSV.getString(3),
+                        curCSV.getString(4), curCSV.getString(5),
+                        curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -215,7 +212,7 @@ public class ReportDAO {
         }
     }
 
-    public void exportDataBaseProductOneTwo(String input_date_from,String input_date_to) {
+    public void exportDataBaseProductOneTwo(String input_date_from, String input_date_to) {
 
 
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
@@ -237,7 +234,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -249,7 +246,8 @@ public class ReportDAO {
             Log.e("Error:", sqlEx.getMessage(), sqlEx);
         }
     }
-    public void exportDataBaseProductTwoOne(String input_date_from,String input_date_to) {
+
+    public void exportDataBaseProductTwoOne(String input_date_from, String input_date_to) {
 
 
         File exportDir = new File(Environment.getExternalStorageDirectory(), "");
@@ -265,13 +263,13 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from  + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
 
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5),curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -303,7 +301,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -334,7 +332,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -346,8 +344,6 @@ public class ReportDAO {
             Log.e("Error:", sqlEx.getMessage(), sqlEx);
         }
     }
-
-
 
 
     public void exportDataBaseBetweenDailyTwoOne(String input_date_from, String input_date_to) {
@@ -368,7 +364,7 @@ public class ReportDAO {
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6),curCSV.getString(7),curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -380,12 +376,6 @@ public class ReportDAO {
             Log.e("Error:", sqlEx.getMessage(), sqlEx);
         }
     }
-
-
-
-
-
-
 
 
 }

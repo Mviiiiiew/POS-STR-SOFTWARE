@@ -75,6 +75,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_conclude, container, false);
 
         Intent intent = getActivity().getIntent();
@@ -101,6 +102,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initInstances(View rootView) {
+
         // Init 'View' instance(s) with rootView.findViewById here
         btt_RePrint = (ButtonRectangle)rootView.findViewById(R.id.btt_RePrint);
         btn_manual = (ButtonRectangle) rootView.findViewById(R.id.btn_manual);
@@ -222,7 +224,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
             productSaleDAO.close();
             Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
             // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-           getActivity().finishAffinity();
+            getActivity().finishAffinity();
             startActivity(intent);
         } else if (btn_barcode == v) {
             ProductSaleList productSaleList = new ProductSaleList();
@@ -248,7 +250,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
                 TotalAllNoDiscount();
                 EndText();
                 Linefeed();
-                Toast.makeText(getActivity(),"0.0",Toast.LENGTH_SHORT).show();
+
             }else{
                 //discount
 
@@ -258,7 +260,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
                 TotalAllx();
                 EndText();
                 Linefeed();
-                Toast.makeText(getActivity(),"WOW",Toast.LENGTH_SHORT).show();
+
             }
 
                            /*HeadMaster();
