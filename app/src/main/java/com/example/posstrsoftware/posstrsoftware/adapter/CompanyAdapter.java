@@ -74,5 +74,7 @@ public class CompanyAdapter extends BaseAdapter {
         txt_Name_VATRate.setText(companyList.getVATRate().toString());
 
         return v;
+
+
     }
 }

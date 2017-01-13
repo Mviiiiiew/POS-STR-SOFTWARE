@@ -21,6 +21,14 @@ private int sale_masterid ;
     private  Double SumSaleAmt;
     private  String PrintProductDate;
 
+    private int xSumAmount ;
+    private  Double xSumSaleAmt;
+    private  Double xSumCost;
+    private  Double xSumVat;
+    private  Double xSumDisc;
+    private  Double xSumProfit;
+
+
     public String getPrintProductDate() {
         return PrintProductDate;
     }
@@ -141,5 +149,53 @@ private int sale_masterid ;
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getxSumAmount() {
+        return xSumAmount;
+    }
+
+    public void setxSumAmount(int xSumAmount) {
+        this.xSumAmount = xSumAmount;
+    }
+
+    public Double getxSumSaleAmt() {
+        return xSumSaleAmt;
+    }
+
+    public void setxSumSaleAmt(Double xSumSaleAmt) {
+        this.xSumSaleAmt = xSumSaleAmt;
+    }
+
+    public Double getxSumCost() {
+        return xSumCost;
+    }
+
+    public void setxSumCost(Double xSumCost) {
+        this.xSumCost = xSumCost;
+    }
+
+    public Double getxSumVat() {
+        return xSumVat;
+    }
+
+    public void setxSumVat(Double xSumVat) {
+        this.xSumVat = xSumVat;
+    }
+
+    public Double getxSumDisc() {
+        return xSumDisc;
+    }
+
+    public void setxSumDisc(Double xSumDisc) {
+        this.xSumDisc = xSumDisc;
+    }
+
+    public Double getxSumProfit() {
+        return xSumProfit;
+    }
+
+    public void setxSumProfit(Double xSumProfit) {
+        this.xSumProfit = xSumProfit;
     }
 }

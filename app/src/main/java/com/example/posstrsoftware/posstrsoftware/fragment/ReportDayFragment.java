@@ -58,6 +58,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
     Double SumDisCount = 0.0;
     Double SumProfit = 0.0;
 
+
     private PrinterController printerController = null;
 
 
@@ -137,7 +138,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
             } else if (dayOfMonth >= 10 && month < 10) {
-                edit_date_day.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
+                edit_date_day.setText(year + "/" + "0" + (month + 1) + "/" + dayOfMonth);
             } else {
 
                 edit_date_day.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
@@ -165,7 +166,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
             } else if (dayOfMonth >= 10 && month < 10) {
-                edit_date_one.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
+                edit_date_one.setText(year + "/" + "0" + (month + 1) + "/" + dayOfMonth);
             } else {
 
                 edit_date_one.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
@@ -192,7 +193,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             } else if (dayOfMonth < 10 && month >= 10) {
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + "0" + dayOfMonth);
             } else if (dayOfMonth >= 10 && month < 10) {
-                edit_date_two.setText(year + "/" +"0"+ (month + 1) + "/"  + dayOfMonth);
+                edit_date_two.setText(year + "/" + "0" + (month + 1) + "/" + dayOfMonth);
             } else {
 
                 edit_date_two.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
@@ -284,10 +285,8 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                     Underline();
                     Description();
                     Underline();
-                    Conclude();
+                    ConcludeDay();
                     Linefeed();
-
-
 
 
                     break;
@@ -307,22 +306,22 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
                         Underline();
                         DescriptionBetweenOneTwo();
                         Underline();
-                        Conclude();
+                        ConcludeOneTwo();
                         Linefeed();
                     } else if (oneday > twoday) {
                         HeadMasterbetween();
                         Underline();
                         DescriptionBetweenTwoOne();
                         Underline();
-                        Conclude();
+                        ConcludeTwoOne();
                         Linefeed();
-                    } else{
+                    } else {
 
                         HeadMasterbetween();
                         Underline();
                         DescriptionBetweenOneTwo();
                         Underline();
-                        Conclude();
+                        ConcludeOneTwo();
                         Linefeed();
                     }
 
@@ -335,32 +334,131 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
 
 
     }
+    private void ConcludeDay() {
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        dateone = edit_date_day.getText().toString().replaceAll("/", "");
+        ArrayList<ReportList> reportLists = reportDAO.getSumBill(dateone + "", dateone + "");
 
-    private void Conclude() {
+        /*int xSumAmount = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumAmount();
+        Double xSumSaleAmt= reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();
+        Double xSumCost = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumVat = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumDisc = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumProfit =reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+*/
 
-        String mSumAmount = "SumAmount#"+PrintFix.generatePrice(SumAmount+"",22);
-        String mSumPrice = "SumSaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumPrice+"")),21);
-        String mSumCost = "SumCOST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumCost+"")),24);
-        String mSumVAT = "SumVAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumVAT+"")),25);
-        String mSumDisCount = "SumDISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumDisCount+"")),24);
-        String mSumprofit = "SumProfit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(SumProfit+"")),22);
 
-        printerController.PrinterController_Font_Normal_mode();
-        printerController.PrinterController_Linefeed();
-        printerController.PrinterController_Linefeed();
-        printerController.PrinterController_Print(mSumAmount.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(mSumPrice.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(mSumCost.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(mSumVAT.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(mSumDisCount.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
-        printerController.PrinterController_Print(mSumprofit.getBytes());
-        printerController.PrinterController_Print("\n".getBytes());
+        for (ReportList bean : reportLists) {
+            String mSumAmount = "SumAmount#" + PrintFix.generatePrice(bean.getxSumAmount() + "", 22);
+            String mSumPrice = "SumSaleAmt#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumSaleAmt() + "")), 21);
+            String mSumCost = "SumCOST#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumCost() + "")), 24);
+            String mSumVAT = "SumVAT#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumVat() + "")), 25);
+            String mSumDisCount = "SumDISC#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumDisc() + "")), 24);
+            String mSumprofit = "SumProfit#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumProfit() + "")), 22);
 
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Print(mSumAmount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumPrice.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumCost.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumVAT.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumDisCount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumprofit.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+        }
+        reportDAO.close();
+    }
+
+    private void ConcludeOneTwo() {
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        dateone = edit_date_one.getText().toString().replaceAll("/", "");
+        Log.d(dateone, "Date1");
+        datetwo = edit_date_two.getText().toString().replaceAll("/", "");
+        ArrayList<ReportList> reportLists = reportDAO.getSumBill(dateone + "", datetwo + "");
+        /*int xSumAmount = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumAmount();
+        Double xSumSaleAmt= reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();
+        Double xSumCost = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumVat = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumDisc = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumProfit =reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+*/
+
+
+        for (ReportList bean : reportLists) {
+            String mSumAmount = "SumAmount#" + PrintFix.generatePrice(bean.getxSumAmount() + "", 22);
+            String mSumPrice = "SumSaleAmt#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumSaleAmt() + "")), 21);
+            String mSumCost = "SumCOST#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumCost() + "")), 24);
+            String mSumVAT = "SumVAT#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumVat() + "")), 25);
+            String mSumDisCount = "SumDISC#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumDisc() + "")), 24);
+            String mSumprofit = "SumProfit#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumProfit() + "")), 22);
+
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Print(mSumAmount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumPrice.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumCost.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumVAT.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumDisCount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumprofit.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+        }
+        reportDAO.close();
+    }
+    private void ConcludeTwoOne() {
+        ReportDAO reportDAO = new ReportDAO(getActivity());
+        reportDAO.open();
+        dateone = edit_date_one.getText().toString().replaceAll("/", "");
+        Log.d(dateone, "Date1");
+        datetwo = edit_date_two.getText().toString().replaceAll("/", "");
+        ArrayList<ReportList> reportLists = reportDAO.getSumBillTwoOne(dateone + "", datetwo + "");
+        /*int xSumAmount = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumAmount();
+        Double xSumSaleAmt= reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();
+        Double xSumCost = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumVat = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumDisc = reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+        Double xSumProfit =reportDAO.getSumBill(dateone + "", datetwo + "").getxSumSaleAmt();;;
+*/
+
+
+        for (ReportList bean : reportLists) {
+            String mSumAmount = "SumAmount#" + PrintFix.generatePrice(bean.getxSumAmount() + "", 22);
+            String mSumPrice = "SumSaleAmt#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumSaleAmt() + "")), 21);
+            String mSumCost = "SumCOST#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumCost() + "")), 24);
+            String mSumVAT = "SumVAT#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumVat() + "")), 25);
+            String mSumDisCount = "SumDISC#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumDisc() + "")), 24);
+            String mSumprofit = "SumProfit#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.valueOf(bean.getxSumProfit() + "")), 22);
+
+            printerController.PrinterController_Font_Normal_mode();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Linefeed();
+            printerController.PrinterController_Print(mSumAmount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumPrice.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumCost.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumVAT.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumDisCount.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+            printerController.PrinterController_Print(mSumprofit.getBytes());
+            printerController.PrinterController_Print("\n".getBytes());
+        }
+        reportDAO.close();
     }
 
     private void DescriptionBetweenTwoOne() {
@@ -368,23 +466,22 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         printerController.PrinterController_Open();
         ReportDAO reportDAO = new ReportDAO(getActivity());
         reportDAO.open();
-        dateone = edit_date_one.getText().toString().replaceAll("/","");
-        Log.d(dateone,"Date1");
-        datetwo = edit_date_two.getText().toString().replaceAll("/","");
-        Log.d(datetwo,"Date2");
-        ArrayList<ReportList> reportLists = reportDAO.getAllReportListTwoOne(dateone+"",datetwo+"");
+        dateone = edit_date_one.getText().toString().replaceAll("/", "");
+        Log.d(dateone, "Date1");
+        datetwo = edit_date_two.getText().toString().replaceAll("/", "");
+        Log.d(datetwo, "Date2");
+        ArrayList<ReportList> reportLists = reportDAO.getAllReportListTwoOne(dateone + "", datetwo + "");
+
 
         for (ReportList bean : reportLists) {
-            String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
-            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
-            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),24);
-            String SumCost = "COST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
-            String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
-            String SumDiscount = "DISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),27);
-            String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
-
-
+            String Date = "Date#" + PrintFix.generatePrice(bean.getDate() + "", 27);
+            String BillNo = "BillNo#" + PrintFix.generatePrice(bean.getBillId() + "", 25);
+            String Amount = "Amount#" + PrintFix.generatePrice(bean.getAmount() + "", 25);
+            String SumPrice = "SaleAmt#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice() + "")), 24);
+            String SumCost = "COST#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost() + "")), 27);
+            String SumVAT = "VAT#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT() + "")), 28);
+            String SumDiscount = "DISC#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount() + "")), 27);
+            String Profit = "Profit#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit() + "")), 25);
 
 
             printerController = PrinterController.getInstance(getActivity());
@@ -409,14 +506,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             printerController.PrinterController_Print(Profit.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
         }
-        for (ReportList bean : reportLists) {
-            SumAmount+=(bean.getAmount());
-            SumPrice += Double.valueOf(bean.getSumPrice());
-            SumCost += Double.valueOf(bean.getSumCost());
-            SumVAT += Double.valueOf(bean.getSumVAT());
-            SumDisCount +=Double.valueOf(bean.getDiscount());
-            SumProfit += Double.valueOf(bean.getProfit());
-        }
+
 
         reportDAO.close();
 
@@ -427,22 +517,22 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         printerController.PrinterController_Open();
         ReportDAO reportDAO = new ReportDAO(getActivity());
         reportDAO.open();
-        dateone = edit_date_one.getText().toString().replaceAll("/","");
-        Log.d(dateone+"","Date1");
-        datetwo = edit_date_two.getText().toString().replaceAll("/","");
-        Log.d(datetwo+"","Date2");
-        ArrayList<ReportList> reportLists = reportDAO.getAllReportListOneTwo(dateone+"",datetwo+"");
+        dateone = edit_date_one.getText().toString().replaceAll("/", "");
+        Log.d(dateone + "", "Date1");
+        datetwo = edit_date_two.getText().toString().replaceAll("/", "");
+        Log.d(datetwo + "", "Date2");
+        ArrayList<ReportList> reportLists = reportDAO.getAllReportListOneTwo(dateone + "", datetwo + "");
 
         for (ReportList bean : reportLists) {
 
-            String Date = "Date#"+PrintFix.generatePrice(bean.getDate()+"",27);
-            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
-            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),24);
-            String SumCost = "COST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
-            String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
-            String SumDiscount = "DISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),27);
-            String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
+            String Date = "Date#" + PrintFix.generatePrice(bean.getDate() + "", 27);
+            String BillNo = "BillNo#" + PrintFix.generatePrice(bean.getBillId() + "", 25);
+            String Amount = "Amount#" + PrintFix.generatePrice(bean.getAmount() + "", 25);
+            String SumPrice = "SaleAmt#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice() + "")), 24);
+            String SumCost = "COST#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost() + "")), 27);
+            String SumVAT = "VAT#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT() + "")), 28);
+            String SumDiscount = "DISC#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount() + "")), 27);
+            String Profit = "Profit#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit() + "")), 25);
 
 
             printerController = PrinterController.getInstance(getActivity());
@@ -466,14 +556,16 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             printerController.PrinterController_Print("\n".getBytes());
             printerController.PrinterController_Print(Profit.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
+
         }
         for (ReportList bean : reportLists) {
-            SumAmount+=(bean.getAmount());
+            SumAmount += (bean.getAmount());
             SumPrice += Double.valueOf(bean.getSumPrice());
             SumCost += Double.valueOf(bean.getSumCost());
             SumVAT += Double.valueOf(bean.getSumVAT());
-            SumDisCount +=Double.valueOf(bean.getDiscount());
+            SumDisCount += Double.valueOf(bean.getDiscount());
             SumProfit += Double.valueOf(bean.getProfit());
+
         }
 
         reportDAO.close();
@@ -492,11 +584,11 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         companyDAO.open();
 
         String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() ;
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName();
         String text3 = "Tel. " + companyDAO.InvoiceMaster().getTelephone();
         String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
         String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();
-        String text6 = "Re.Date# " +edit_date_one.getText().toString()+"-"+edit_date_two.getText().toString() ;
+        String text6 = "Re.Date# " + edit_date_one.getText().toString() + "-" + edit_date_two.getText().toString();
         printerController = PrinterController.getInstance(getActivity());
         printerController.PrinterController_Open();
         printerController.PrinterController_Set_Center();
@@ -547,16 +639,23 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
         ArrayList<ReportList> reportLists = reportDAO.getAllReportList(x);
 
+
         for (ReportList bean : reportLists) {
+            int xSumAmount = 0;
+            Double xSumPrice = 0.0;
+            Double xSumCost = 0.0;
+            Double xSumVAT = 0.0;
+            Double xSumDisCount = 0.0;
+            Double xSumProfit = 0.0;
 
 
-            String BillNo = "BillNo#"+PrintFix.generatePrice(bean.getBillId()+"",25);
-            String Amount = "Amount#"+PrintFix.generatePrice(bean.getAmount()+"",25);
-            String SumPrice = "SaleAmt#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice()+"")),24);
-            String SumCost = "COST#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost()+"")),27);
-            String SumVAT = "VAT#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT()+"")),28);
-            String SumDiscount = "DISC#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount()+"")),27);
-            String Profit = "Profit#"+PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit()+"")),25);
+            String BillNo = "BillNo#" + PrintFix.generatePrice(bean.getBillId() + "", 25);
+            String Amount = "Amount#" + PrintFix.generatePrice(bean.getAmount() + "", 25);
+            String SumPrice = "SaleAmt#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumPrice() + "")), 24);
+            String SumCost = "COST#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumCost() + "")), 27);
+            String SumVAT = "VAT#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getSumVAT() + "")), 28);
+            String SumDiscount = "DISC#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getDiscount() + "")), 27);
+            String Profit = "Profit#" + PrintFix.generatePrice(formatAmount.formatAmountDouble(Double.parseDouble(bean.getProfit() + "")), 25);
 
 
             printerController = PrinterController.getInstance(getActivity());
@@ -578,13 +677,15 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
             printerController.PrinterController_Print("\n".getBytes());
             printerController.PrinterController_Print(Profit.getBytes());
             printerController.PrinterController_Print("\n".getBytes());
+
+
         }
         for (ReportList bean : reportLists) {
-            SumAmount+=(bean.getAmount());
+            SumAmount += (bean.getAmount());
             SumPrice += Double.valueOf(bean.getSumPrice());
             SumCost += Double.valueOf(bean.getSumCost());
             SumVAT += Double.valueOf(bean.getSumVAT());
-            SumDisCount +=Double.valueOf(bean.getDiscount());
+            SumDisCount += Double.valueOf(bean.getDiscount());
             SumProfit += Double.valueOf(bean.getProfit());
         }
 
@@ -604,7 +705,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
         String text1 = "welcome to " + companyDAO.InvoiceMaster().getCompanyName();
-        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName() ;
+        String text2 = "Division " + companyDAO.InvoiceMaster().getDivisionName();
         String text3 = "Tel." + companyDAO.InvoiceMaster().getTelephone();
         String text4 = "TAX ID# " + companyDAO.InvoiceMaster().getTAXID();
         String text5 = "POS# " + companyDAO.InvoiceMaster().getPOSMachineID();

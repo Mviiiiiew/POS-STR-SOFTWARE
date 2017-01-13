@@ -8,12 +8,15 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.example.posstrsoftware.posstrsoftware.model.ReportList;
+import com.opencsv.CSVWriter;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-import au.com.bytecode.opencsv.CSVWriter;
+
 
 /**
  * Created by Wasabi on 11/28/2016.
@@ -150,6 +153,50 @@ public class ReportDAO {
         return reportLists;
     }
 
+    public ArrayList<ReportList> getSumBill(String input_date_from, String input_date_to) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select  sum(bill_discount ),sum(count_amount),sum(PriceSumVat),sum(sum_product_cost)    " +
+                "  ,sum(sum_vat),(sum(PriceSumVat ) - sum(bill_discount) - sum(sum_product_cost)-sum(sum_vat))" +
+                " as profit  from viewmaster_list where cast(replace(doc_date,'-','')  as decimal)" +
+                " between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal);", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setxSumAmount(cursor.getInt(1));
+            mReportList.setxSumDisc(cursor.getDouble(0));
+            mReportList.setxSumSaleAmt(cursor.getDouble(2));
+            mReportList.setxSumCost(cursor.getDouble(3));
+            mReportList.setxSumVat(cursor.getDouble(4));
+            mReportList.setxSumProfit(cursor.getDouble(5));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+    public ArrayList<ReportList> getSumBillTwoOne(String input_date_from, String input_date_to) {
+        ArrayList<ReportList> reportLists = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select  sum(bill_discount ),sum(count_amount),sum(PriceSumVat),sum(sum_product_cost)\n" +
+                ",sum(sum_vat),(sum(PriceSumVat ) - sum(bill_discount) - sum(sum_product_cost)-sum(sum_vat)) as profit" +
+                " from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal);", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ReportList mReportList = new ReportList();
+            mReportList.setxSumAmount(cursor.getInt(1));
+            mReportList.setxSumDisc(cursor.getDouble(0));
+            mReportList.setxSumSaleAmt(cursor.getDouble(2));
+            mReportList.setxSumCost(cursor.getDouble(3));
+            mReportList.setxSumVat(cursor.getDouble(4));
+            mReportList.setxSumProfit(cursor.getDouble(5));
+            reportLists.add(mReportList);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return reportLists;
+    }
+
     public ArrayList<ReportList> getAllReportListTwoOne(String input_date_from, String input_date_to) {
         ArrayList<ReportList> reportLists = new ArrayList<>();
 
@@ -182,16 +229,18 @@ public class ReportDAO {
             exportDir.mkdirs();
         }
 
-        File file = new File(exportDir, "csvReportProduct.csv");
+        File file = new File(exportDir, "csvReportProdu.csv");
 
         try {
 
             file.createNewFile();
-            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+            CSVWriter csvWrite = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
+            csvWrite.flush();
             read();
             Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where " +
                     "cast(replace(doc_date,'-','')  as decimal) " +
-                    "between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
+                    "between cast('" + input_date + "' as decimal)  " +
+                    "and cast('" + input_date + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
 
             while (curCSV.moveToNext()) {
@@ -206,6 +255,7 @@ public class ReportDAO {
 
             csvWrite.close();
             curCSV.close();
+
             close();
         } catch (Exception sqlEx) {
             Log.e("Error:", sqlEx.getMessage(), sqlEx);

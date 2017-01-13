@@ -241,7 +241,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_Name_ENDbillText"
             android:layout_alignLeft="@+id/txt_NameCompany"
-            android:text="ENDbillText"
+            android:text="Bill Ending"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"
@@ -265,7 +265,7 @@
             android:layout_below="@+id/txt_Name_RegisterID"
             android:layout_marginTop="@dimen/layout_marginTop_company"
             android:background="@drawable/btn_default_normal"
-            android:text="ENDbillText"
+            android:text="Bill Ending"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textsize_company"
             android:textStyle="bold"/>

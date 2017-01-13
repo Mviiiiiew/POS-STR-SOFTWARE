@@ -43,7 +43,7 @@
             android:layout_alignTop="@+id/image_company"
             android:layout_toRightOf="@+id/image_company"
             android:paddingLeft="40dp"
-            android:text="Company"
+            android:text="แก้ไขการตั้งค่าบริษัท"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
