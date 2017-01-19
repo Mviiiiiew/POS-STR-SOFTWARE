@@ -87,9 +87,9 @@ public class GroupDAO {
             return 1;
         }
 
-
-
     }
+
+
 
     public int update(GroupList groupList) {
         String query = "Select count(*) from group_list where group_text = ? AND delete_flag = ?";

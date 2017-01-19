@@ -55,7 +55,8 @@
         </activity>
         <activity android:name=".activity.UnitMainActivity">
         </activity>
-        <activity android:name=".activity.GroupMainActivity">
+        <activity android:name=".activity.GroupMainActivity"
+            >
         </activity>
         <activity android:name=".activity.ProductMainActivity">
         </activity>

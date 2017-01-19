@@ -8,4 +8,7 @@ public class Util_String {
     public static String getGennerlateString(String input_value){
         return  input_value.trim().replaceAll("","").replaceAll("'|\"-%","");
     }
+    public static String getGennerlateEmuji(String input_value){
+        return  input_value.trim().replaceAll("","").replaceAll("\\\\","/");
+    }
 }

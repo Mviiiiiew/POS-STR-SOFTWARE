@@ -336,8 +336,46 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
         ProductList editproductList = (ProductList) getActivity().getIntent().getSerializableExtra("editProduct");
         int ex = 0;
         if (v == btn_edit_product) {
+            int GroupId = spinner_group.getSelectedItemPosition();
+            int UnitId = spinner_unit.getSelectedItemPosition();
+            if (GroupId == -1 && UnitId == -1) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาทำรายการเพิ่มกลุ่มสินค้า และ หน่วยสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-            if (editText_product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
+                alertDialogder.show();
+
+
+            } else if (GroupId == -1) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาทำรายการเพิ่มกลุ่มสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (UnitId == -1) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาทำรายการเพิ่มหน่วยสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (editText_product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle(" กรุณาใส่ชื่อสินค้า : ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -373,7 +411,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
-            } else if (NameProductBefore.matches(editText_product.getText().toString())) {
+            } else if (NameProductBefore.equals(editText_product.getText().toString())) {
 
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 ProductList eProductList = new ProductList();

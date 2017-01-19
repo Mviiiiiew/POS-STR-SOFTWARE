@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +103,10 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         editText_Barcode = (EditText) rootView.findViewById(R.id.editText_Barcode);
         spinner_unit = (Spinner) rootView.findViewById(R.id.spinner_unit);
         spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
+        int GroupId = spinner_group.getSelectedItemPosition();
+        Log.d("spinner_group", GroupId + "");
+        int UnitId = spinner_unit.getSelectedItemPosition();
+        Log.d("spinner_unit", UnitId + "");
         editText_Price.addTextChangedListener(this);
         editText_Price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -218,7 +223,46 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
         int ex = 0;
         double price = 0.0;
         if (v == btn_save) {
-            if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
+            int GroupId = spinner_group.getSelectedItemPosition();
+            int UnitId = spinner_unit.getSelectedItemPosition();
+            if (GroupId == -1 && UnitId == -1) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาทำรายการเพิ่มกลุ่มสินค้า และ หน่วยสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+
+            } else if (GroupId == -1) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาทำรายการเพิ่มกลุ่มสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (UnitId == -1) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setTitle("กรุณาทำรายการเพิ่มหน่วยสินค้า");
+                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialogder.show();
+
+            } else if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาใส่ชื่อสินค้า ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -256,7 +300,6 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                 alertDialogder.show();
 
             } else {
-
                 ProductList productList = new ProductList();
                 productList.setProductText(Util_String.getGennerlateString(editText_Product.getText().toString()));
                 productList.setBarcode(editText_Barcode.getText().toString());
@@ -281,7 +324,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                     productDAO.close();
 
 
-                     if (ex == 0) {
+                    if (ex == 0) {
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                         alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
                         alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
@@ -292,9 +335,9 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                         });
 
                         alertDialogder.show();
-                    }else {
-                         getActivity().finish();
-                     }
+                    } else {
+                        getActivity().finish();
+                    }
 
                 } else {
                     productDAO.open();
@@ -351,6 +394,7 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         mSelectedUnit = (UnitList) mSpinnerUnitAdapter.getItem(position);
+
 
     }
 

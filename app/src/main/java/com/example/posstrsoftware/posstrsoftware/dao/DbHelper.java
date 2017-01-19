@@ -161,9 +161,9 @@ public class DbHelper extends SQLiteOpenHelper {
             " order by sale_master_id desc limit 1) group by productsale_text order by productsale_text";
 
     private static final String viewProductSaleReportList = "CREATE VIEW viewProductReport as  select    id_product,doc_date,    productsale_text as  NameProduct" +
-            ",    unit_name as    NameUnit,    count(productsale_text)as Amount ,product_price as product_priceSumVAT" +
+            ",unit_name as  NameUnit,count(productsale_text)as Amount ,product_price as product_priceSumVAT" +
             ",productprice_text as product_priceNoVAT ,sum(product_price) as productAll_priceSumVAT" +
-            " ,sum(productprice_text) as productAll_NoVAT    from transectionBill  group by  productsale_text" +
+            ",sum(productprice_text) as productAll_NoVAT    from transectionBill  group by  productsale_text" +
             ",doc_date order by doc_date asc ";
 
 

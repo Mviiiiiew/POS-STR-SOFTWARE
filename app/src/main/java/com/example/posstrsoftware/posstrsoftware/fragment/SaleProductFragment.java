@@ -129,6 +129,10 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     edit_Amount.setText("");
+
+                }else{
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edit_Amount.getWindowToken(), 0);
                 }
             }
         });

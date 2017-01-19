@@ -123,7 +123,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
         ValueVat = intent.getDoubleExtra("ValueVat", 0.0);
-        Log.d("ValueVat", ValueVat + "");
+        Log.d("ValueVat",ValueVat+"");
         symbol = intent.getStringExtra("symbol");
         Log.d("symbol", symbol);
         processmanual = (intent.getIntExtra("processmanual", 0));
@@ -391,7 +391,7 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                                 TotalAllNoDiscount();
                                 EndText();
                                 Linefeed();
-                                Toast.makeText(getActivity(),"0.0",Toast.LENGTH_SHORT).show();
+
                             }else{
                                 //discount
 
@@ -401,12 +401,12 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                                 TotalAll();
                                 EndText();
                                 Linefeed();
-                                Toast.makeText(getActivity(),"WOW",Toast.LENGTH_SHORT).show();
+
                             }
 
 
 
-                            Toast.makeText(getActivity(), "OK", Toast.LENGTH_LONG).show();
+
                             Intent intent = new Intent(getActivity(), ConcludeActivity.class);
                             intent.putExtra("mTotal", txt_NameTotal.getText().toString());
                             intent.putExtra("mDiscount", txt_Discount.getText().toString());

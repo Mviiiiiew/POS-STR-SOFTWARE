@@ -25,8 +25,11 @@ import com.example.posstrsoftware.posstrsoftware.activity.AddProductActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.FixProductActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.MainActivity;
 import com.example.posstrsoftware.posstrsoftware.adapter.ProductAdapter;
+import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
 import com.example.posstrsoftware.posstrsoftware.dao.ProductDAO;
+import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
+import com.example.posstrsoftware.posstrsoftware.util.Util_String;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -157,6 +160,8 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         if (btn_back == v) {
             getActivity().finish();
         } else if (btn_add_product == v) {
+
+
             Intent intent = new Intent(getActivity(), AddProductActivity.class);
             startActivity(intent);
         }

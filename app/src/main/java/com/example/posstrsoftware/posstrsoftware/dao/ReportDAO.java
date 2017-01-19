@@ -229,7 +229,7 @@ public class ReportDAO {
             exportDir.mkdirs();
         }
 
-        File file = new File(exportDir, "csvReportProdu.csv");
+        File file = new File(exportDir, "csvReportProduct.csv");
 
         try {
 
@@ -237,18 +237,22 @@ public class ReportDAO {
             CSVWriter csvWrite = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
             csvWrite.flush();
             read();
-            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where " +
-                    "cast(replace(doc_date,'-','')  as decimal) " +
-                    "between cast('" + input_date + "' as decimal)  " +
-                    "and cast('" + input_date + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select   doc_date as DATE ,productsale_text as  NameProduct " +
+                    ",unit_name as  NameUnit,\n" +
+                    " count(productsale_text)as Amount ,product_price as SaleAmt\n" +
+                    " ,sum(product_price) as SumSaleAmt   from transectionBill   \n" +
+                    " where cast(replace(doc_date,'-','')  as decimal)  \n" +
+                    " between cast('"+input_date+"' as decimal)   and cast('"+input_date+"' as decimal)  \n" +
+                    " group by  productsale_text , doc_date order by doc_date asc", null);
+
+
             csvWrite.writeNext(curCSV.getColumnNames());
 
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1),
                         curCSV.getString(2), curCSV.getString(3),
-                        curCSV.getString(4), curCSV.getString(5),
-                        curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
+                        curCSV.getString(4), curCSV.getString(5)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -278,13 +282,13 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select   doc_date as DATE,productsale_text as  NameProduct ,unit_name as    NameUnit,  count(productsale_text)as Amount ,product_price as SaleAmt ,sum(product_price) as SumSaleAmt   from transectionBill    where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal) group by  productsale_text ,doc_date order by doc_date asc  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
 
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -313,13 +317,13 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("SELECT * FROM viewProductReport where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select   doc_date as DATE ,productsale_text as  NameProduct ,unit_name as    NameUnit,  count(productsale_text)as Amount ,product_price as SaleAmt ,sum(product_price) as SumSaleAmt   from transectionBill    where cast(replace(doc_date,'-','')  as decimal) between cast('" +input_date_to+ "' as decimal)  and cast('" + input_date_from + "' as decimal) group by  productsale_text,doc_date  order by doc_date asc  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
 
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -346,12 +350,12 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,PriceSumVat ,count_amount,bill_discount,sum_product_cost,sum_vat,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select bill_id as BillNo,doc_date as DATE,PriceSumVat as SaleAmt ,count_amount as Amount,bill_discount as Discount,sum_product_cost as Cost,sum_vat as VAT,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date + "' as decimal)  and cast('" + input_date + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -377,12 +381,12 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,PriceSumVat ,count_amount,bill_discount,sum_product_cost,sum_vat,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select bill_id as BillNo,doc_date as DATE,PriceSumVat as SaleAmt ,count_amount as Amount,bill_discount as Discount,sum_product_cost as Cost,sum_vat as VAT,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7)
                 };
                 csvWrite.writeNext(arrStr);
             }
@@ -409,12 +413,12 @@ public class ReportDAO {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             read();
-            Cursor curCSV = database.rawQuery("select sale_master_id,bill_id,doc_date,PriceSumVat ,count_amount,bill_discount,sum_product_cost,sum_vat,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal)  ", null);
+            Cursor curCSV = database.rawQuery("select bill_id as BillNo,doc_date as DATE,PriceSumVat as SaleAmt ,count_amount as Amount,bill_discount as Discount,sum_product_cost as Cost,sum_vat as VAT,(PriceSumVat - bill_discount - sum_product_cost - sum_vat) as profit from viewmaster_list where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_to + "' as decimal)  and cast('" + input_date_from + "' as decimal)  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to export you can add over here...
                 String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
-                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)
+                        , curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7)
                 };
                 csvWrite.writeNext(arrStr);
             }
