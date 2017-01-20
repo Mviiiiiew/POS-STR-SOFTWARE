@@ -22,6 +22,8 @@ public class CompanyDAO {
         dbHelperCompany = new DbHelper(context);
     }
 
+
+
     public void open() {
         database = dbHelperCompany.getWritableDatabase();
     }
