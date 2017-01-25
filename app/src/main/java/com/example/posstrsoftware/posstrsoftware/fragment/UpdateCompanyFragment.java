@@ -121,7 +121,7 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
         if(btn_UpdateCompany == v) {
             if (editText_Name_VATRate.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                editText_Name_VATRate.setText("7.0");
-                TelephonyManager mngr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+
                 CompanyList companyList = new CompanyList();
                 companyList.setCompanyName(String.valueOf(editText_CompanyName.getText()));
                 companyList.setCompanyAddress(String.valueOf(editText_CompanyAddress.getText()));
@@ -131,7 +131,7 @@ public class UpdateCompanyFragment extends Fragment implements View.OnClickListe
                 companyList.setRegisterID(String.valueOf(editText_Name_RegisterID.getText()));
                 companyList.setENDbillText(String.valueOf(editText_Name_ENDbillText.getText()));
                 companyList.setVATRate(Double.valueOf(editText_Name_VATRate.getText().toString()));
-                companyList.setPOSMachineID(mngr.getDeviceId());
+
                 CompanyDAO companyDAO = new CompanyDAO(getActivity());
                 companyDAO.open();
                 companyDAO.update(companyList);

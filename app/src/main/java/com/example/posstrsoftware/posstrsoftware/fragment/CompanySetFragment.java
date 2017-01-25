@@ -77,8 +77,8 @@ public class CompanySetFragment extends Fragment implements View.OnClickListener
         super.onResume();
         final CompanyDAO companyDAO = new CompanyDAO(getActivity());
         companyDAO.open();
-        final ArrayList<CompanyList> myCompanyLists = companyDAO.getAllCompany();
 
+        final ArrayList<CompanyList> myCompanyLists = companyDAO.getAllCompany();
         companyDAO.close();
         final CompanyAdapter objAdapter = new CompanyAdapter(getActivity(),myCompanyLists);
         listview_Company.setAdapter(objAdapter);

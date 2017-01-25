@@ -1,8 +1,10 @@
 package com.example.posstrsoftware.posstrsoftware.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.CompanySetActivity;
 import com.example.posstrsoftware.posstrsoftware.activity.UpdateCompanyActivity;
+import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
+import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 import com.example.posstrsoftware.posstrsoftware.model.ProductList;
 import com.gc.materialdesign.views.ButtonRectangle;
 
@@ -91,6 +95,13 @@ public class CompanyMainFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        CompanyList companyList = new CompanyList();
+        TelephonyManager mngr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        companyList.setPOSMachineID(mngr.getDeviceId());
+        CompanyDAO companyDAO = new CompanyDAO(getActivity());
+        companyDAO.open();
+        companyDAO.PosMachineID(companyList);
+        companyDAO.close();
 
         Intent intent = new Intent(getActivity(), CompanySetActivity.class);
         startActivity(intent);

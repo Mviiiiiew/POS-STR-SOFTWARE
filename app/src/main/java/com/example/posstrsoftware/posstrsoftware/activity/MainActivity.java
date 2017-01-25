@@ -18,18 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.contentContainer);
-
-        if(fragment instanceof MainFragment == false ) {
-
-            if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentContainer, MainFragment.newInstance())
                         .commit();
 
-            }
-        }
+
+
     }
 
 }

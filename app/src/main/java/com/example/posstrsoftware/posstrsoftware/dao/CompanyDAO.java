@@ -106,10 +106,18 @@ public class CompanyDAO {
         values.put("Telephone", updateCompanyList.getTelephone());
         values.put("TAXID", updateCompanyList.getTAXID());
         values.put("DivisionName", updateCompanyList.getDivisionName());
-        values.put("POSMachineID", updateCompanyList.getPOSMachineID());
         values.put("RegisterID", updateCompanyList.getRegisterID());
         values.put("ENDbillText", updateCompanyList.getENDbillText());
         values.put("VATRate", updateCompanyList.getVATRate());
+
+        this.database.update("company_list", values, "id_company = 1", null);
+
+    }
+    public void PosMachineID(CompanyList companyList) {
+
+        CompanyList updateCompanyList = companyList;
+        ContentValues values = new ContentValues();
+        values.put("POSMachineID", updateCompanyList.getPOSMachineID());
 
         this.database.update("company_list", values, "id_company = 1", null);
 
