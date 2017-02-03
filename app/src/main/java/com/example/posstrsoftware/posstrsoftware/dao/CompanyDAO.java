@@ -58,6 +58,20 @@ public class CompanyDAO {
         cursor.close();
         return companyLists;
     }
+    public int check() {
+
+        String QueryCheckPass = "Select count(*) from PassWordList  where   delete_flag = 'N' ";
+        SQLiteStatement stmtcheckpass = database.compileStatement(QueryCheckPass);
+
+        int count_row_password = (int) stmtcheckpass.simpleQueryForLong();
+        if (stmtcheckpass != null) stmtcheckpass.close();
+
+        if (count_row_password != 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 
     public CompanyList InvoiceMaster() {
         CompanyList companyListsInvoiceMaster = new CompanyList();
@@ -79,6 +93,29 @@ public class CompanyDAO {
 
 
     }
+    public int checkPass(CompanyList companyList) {
+
+        String QueryBarcode = "Select count(*) from PassWordList  where  PASSWORD = ? AND delete_flag = ? ";
+        SQLiteStatement stmtpassword = database.compileStatement(QueryBarcode);
+
+        stmtpassword.bindString(1, String.valueOf(companyList.getPassWord()));
+        stmtpassword.bindString(2, "N");
+
+        int count_row_password = (int) stmtpassword.simpleQueryForLong();
+        if (stmtpassword != null) stmtpassword.close();
+
+        if (count_row_password != 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+    public void Updatepass() {
+
+        this.database.execSQL("UPDATE PassWordList set delete_flag = 'Y'");
+
+    }
+
 
 
     public void add(CompanyList companyList) {
@@ -122,6 +159,7 @@ public class CompanyDAO {
         this.database.update("company_list", values, "id_company = 1", null);
 
     }
+
 }
 
 

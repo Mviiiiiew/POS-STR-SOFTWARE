@@ -120,7 +120,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
 
                 alertDialogder.show();
 
-            }else if(editText_Unit.getText().toString().matches(mUnit)){
+            }else if(editText_Unit.getText().toString().equals(mUnit)){
 
                 UnitList eUnitList = new UnitList();
                 eUnitList.setId(editUnitList.getId());

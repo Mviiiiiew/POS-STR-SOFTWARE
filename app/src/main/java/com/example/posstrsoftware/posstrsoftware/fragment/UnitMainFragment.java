@@ -72,6 +72,8 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
         btn_add_unit.setOnClickListener(this);
 
 
+
+
     }
 
     @Override
@@ -108,7 +110,9 @@ public class UnitMainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
+
         super.onResume();
+
         searchViewUnit.setIconifiedByDefault(false);
         searchViewUnit.setIconified(false);
         searchViewUnit.clearFocus();

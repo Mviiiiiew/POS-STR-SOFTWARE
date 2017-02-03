@@ -6,7 +6,16 @@ import java.io.Serializable;
  * Created by Wasabi on 10/27/2016.
  */
 
-public class CompanyList  implements Serializable{
+public class CompanyList implements Serializable {
+    int PassWord;
+
+    public int getPassWord() {
+        return PassWord;
+    }
+
+    public void setPassWord(int passWord) {
+        PassWord = passWord;
+    }
 
     int id;
     String CompanyName;
@@ -21,7 +30,7 @@ public class CompanyList  implements Serializable{
 
     @Override
     public String toString() {
-        return VATRate+""    ;
+        return VATRate + "";
     }
 
     public int getId() {

@@ -42,7 +42,7 @@ public class SaleMainFragment extends Fragment implements View.OnClickListener {
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btn_Sale = (ButtonRectangle) rootView.findViewById(R.id.btn_Sale);
-        btn_Salebarcode=(ButtonRectangle)rootView.findViewById(R.id.btn_Salebarcode);
+        btn_Salebarcode = (ButtonRectangle) rootView.findViewById(R.id.btn_Salebarcode);
         btn_Salebarcode.setOnClickListener(this);
         btn_Sale.setOnClickListener(this);
         btn_Salebarcode.setRippleSpeed(25);
@@ -81,15 +81,12 @@ public class SaleMainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(btn_Sale == v) {
-
-
+        if (btn_Sale == v) {
             Intent intent = new Intent(getActivity(), SaleProductActivity.class);
             startActivity(intent);
 
-        }else if(btn_Salebarcode == v){
-
-           Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
+        } else if (btn_Salebarcode == v) {
+            Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
             startActivity(intent);
 
         }

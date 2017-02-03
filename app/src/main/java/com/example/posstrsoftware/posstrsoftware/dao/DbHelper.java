@@ -19,6 +19,12 @@ public class DbHelper extends SQLiteOpenHelper {
         this.mContect = context;
     }
 
+    private static final String tablePassWord = "CREATE TABLE PassWordList("
+            + "idPASS INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "PASSWORD TEXT NOT NULL,"
+            + "delete_flag TEXT DEFAULT 'N'"
+            + ");";
+
     private static final String tableUnitCreateSQL = "CREATE TABLE unit_list("
             + "id_unit INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "unit_text TEXT NOT NULL,"
@@ -45,6 +51,7 @@ public class DbHelper extends SQLiteOpenHelper {
             + "GroupName TEXT, "
             + "Symbol_Vat TEXT "
             + ");";
+
     private static final String tableCompanyCreateSQL = "CREATE TABLE company_list("
             + "id_company INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "CompanyName TEXT ,"
@@ -182,9 +189,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(viewmasterList);
         db.execSQL(viewdetailList);
         db.execSQL(viewProductSaleReportList);
+        db.execSQL(tablePassWord);
 
         String insertData = "INSERT INTO company_list (CompanyName,CompanyAddress,Telephone,TAXID,DivisionName,DivisionName,POSMachineID,RegisterID,ENDbillText,VATRate)  VALUES ('CompanyName','CompanyAddress','Telephone','TAXID','DivisionName','DivisionName','POSMachineID','RegisterID','Bill Ending','7');";
         db.execSQL(insertData);
+        String insertPass = "INSERT INTO PassWordList (PASSWORD)  VALUES ('8523');";
+        db.execSQL(insertPass);
 
 
     }

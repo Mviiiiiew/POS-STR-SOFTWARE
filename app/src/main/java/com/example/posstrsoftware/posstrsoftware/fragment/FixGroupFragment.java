@@ -120,7 +120,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
 
                 alertDialogder.show();
 
-            } else if (editText_Group.getText().toString().matches(mGroup)) {
+            } else if (editText_Group.getText().toString().equals(mGroup)) {
                 GroupList eGroupList = new GroupList();
                 eGroupList.setId(editGroupList.getId());
                 eGroupList.setGroupText(Util_String.getGennerlateString(editText_Group.getText().toString()));

@@ -91,9 +91,11 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
+
         searchViewProduct.setIconifiedByDefault(false);
         searchViewProduct.setIconified(false);
         searchViewProduct.clearFocus();
+
         ProductDAO productDAO = new ProductDAO(getActivity());
         productDAO.open();
         final ArrayList<ProductList> myProductList = productDAO.getAllProductList();

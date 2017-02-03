@@ -387,7 +387,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
                 alertDialogder.show();
 
-            } else if (edit_price.getText().toString().matches("") || edit_price.getText().toString().matches("\\.")) {
+            } else if (edit_price.getText().toString().equals("") || edit_price.getText().toString().matches("\\.")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
                 alertDialogder.setTitle("กรุณาใส่ราคาสินค้า ?");
                 alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {

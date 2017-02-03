@@ -90,7 +90,7 @@
         android:background="@drawable/btn_default_normal"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/editText_Product"
-        android:hint="ราคา"
+        android:hint="ราคาขาย"
         android:inputType="numberDecimal"
         android:padding="20dp"
         android:textStyle="bold"

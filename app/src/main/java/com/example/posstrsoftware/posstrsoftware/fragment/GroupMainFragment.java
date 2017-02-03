@@ -80,6 +80,7 @@ public class GroupMainFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onResume() {
         super.onResume();
+
         searchViewGroup.setIconifiedByDefault(false);
         searchViewGroup.setIconified(false);
         searchViewGroup.clearFocus();
