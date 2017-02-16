@@ -234,7 +234,11 @@ public class ReportDAO {
         try {
 
             file.createNewFile();
-            CSVWriter csvWrite = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
+            FileOutputStream os = new FileOutputStream(file);
+            os.write(0xef);
+            os.write(0xbb);
+            os.write(0xbf);
+            CSVWriter csvWrite = new CSVWriter(new OutputStreamWriter(os));
             csvWrite.flush();
             read();
             Cursor curCSV = database.rawQuery("select   doc_date as DATE ,productsale_text as  NameProduct " +
@@ -280,7 +284,12 @@ public class ReportDAO {
         try {
 
             file.createNewFile();
-            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+            FileOutputStream os = new FileOutputStream(file);
+            os.write(0xef);
+            os.write(0xbb);
+            os.write(0xbf);
+            CSVWriter csvWrite = new CSVWriter(new OutputStreamWriter(os));
+            csvWrite.flush();
             read();
             Cursor curCSV = database.rawQuery("select   doc_date as DATE,productsale_text as  NameProduct ,unit_name as    NameUnit,  count(productsale_text)as Amount ,product_price as SaleAmt ,sum(product_price) as SumSaleAmt   from transectionBill    where cast(replace(doc_date,'-','')  as decimal) between cast('" + input_date_from + "' as decimal)  and cast('" + input_date_to + "' as decimal) group by  productsale_text ,doc_date order by doc_date asc  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
@@ -315,7 +324,12 @@ public class ReportDAO {
         try {
 
             file.createNewFile();
-            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+            FileOutputStream os = new FileOutputStream(file);
+            os.write(0xef);
+            os.write(0xbb);
+            os.write(0xbf);
+            CSVWriter csvWrite = new CSVWriter(new OutputStreamWriter(os));
+            csvWrite.flush();
             read();
             Cursor curCSV = database.rawQuery("select   doc_date as DATE ,productsale_text as  NameProduct ,unit_name as    NameUnit,  count(productsale_text)as Amount ,product_price as SaleAmt ,sum(product_price) as SumSaleAmt   from transectionBill    where cast(replace(doc_date,'-','')  as decimal) between cast('" +input_date_to+ "' as decimal)  and cast('" + input_date_from + "' as decimal) group by  productsale_text,doc_date  order by doc_date asc  ", null);
             csvWrite.writeNext(curCSV.getColumnNames());
