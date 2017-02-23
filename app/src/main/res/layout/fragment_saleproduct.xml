@@ -172,7 +172,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:orientation="vertical"
-            android:weightSum="4"
+            android:weightSum="3"
 
             >
 
@@ -182,7 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1.75"
+                android:layout_weight="1.3"
+                android:layout_marginTop="10dp"
                 android:text="ชำระ"
                 android:textSize="20sp"
 
@@ -193,7 +194,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1.35"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:background="#64DD17"
                 android:gravity="center"
                 android:text="เริ่มรายการใหม่"
@@ -207,8 +210,9 @@
                 android:id="@+id/btn_backz"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="#FFD600"
                 android:text="ย้อนกลับ"
                 android:textColor="#000000"

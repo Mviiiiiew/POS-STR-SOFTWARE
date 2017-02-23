@@ -15,18 +15,24 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7">
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"></LinearLayout>
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btt_RePrint"
-                android:background="#EEEEEE"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:background="#EEEEEE"
                 android:text="ปริ้นบิลอีกครั้ง"
                 android:textColor="#757575"
-                android:textSize="20sp"
-                android:layout_height="wrap_content"></com.gc.materialdesign.views.ButtonRectangle>
-
+                android:textSize="20sp"></com.gc.materialdesign.views.ButtonRectangle>
 
 
         </LinearLayout>
@@ -37,202 +43,210 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/txt_Date"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="วันที่"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    android:layout_gravity="center"
 
-                <TextView
-                    android:id="@+id/txt_mDate"
-                    android:layout_width="wrap_content"
-                    android:layout_alignRight="@+id/txt_mTotal"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/txt_Date"
-                    android:text="19.25.25"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    >
 
-                <TextView
-                    android:id="@+id/txt_Total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_Date"
-                    android:layout_marginTop="10dp"
-                    android:text="ราคารวม"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="วันที่"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_mTotal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/txt_Total"
-                    android:layout_below="@+id/txt_mDate"
-                    android:layout_marginRight="80dp"
-                    android:layout_toRightOf="@+id/txt_Total"
-                    android:gravity="end"
-                    android:text="259,500.50"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_mDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/txt_mTotal"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/txt_Date"
+                        android:gravity="end"
+                        android:text="19.25.25"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_ValueVat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_Total"
-                    android:layout_marginTop="10dp"
-                    android:text="ภาษี"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_Total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_Date"
+                        android:layout_marginTop="10dp"
+                        android:text="ราคารวม"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_mValueVat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/txt_ValueVat"
-                    android:layout_below="@+id/txt_mTotal"
-                    android:layout_marginRight="80dp"
-                    android:layout_toRightOf="@+id/txt_Total"
-                    android:gravity="end"
-                    android:text="259,500.50"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_mTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/txt_Total"
+                        android:layout_below="@+id/txt_mDate"
+                        android:layout_marginRight="80dp"
+                        android:layout_toRightOf="@+id/txt_Total"
+                        android:gravity="end"
+                        android:text="259,500.50"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <View
-                    android:id="@+id/view_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@+id/txt_ValueVat"
-                    android:background="@color/colorBlack"
-                    />
+                    <TextView
+                        android:id="@+id/txt_ValueVat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_Total"
+                        android:layout_marginTop="10dp"
+                        android:text="ภาษี"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_Discount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view_black"
-                    android:layout_marginTop="10dp"
-                    android:text="ส่วนลด"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_mValueVat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/txt_ValueVat"
+                        android:layout_below="@+id/txt_mTotal"
+                        android:layout_marginRight="80dp"
+                        android:layout_toRightOf="@+id/txt_Total"
+                        android:gravity="end"
+                        android:text="259,500.50"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_symbolDiscount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view_black"
-                    android:layout_marginTop="10dp"
-                    android:text="Discount"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/txt_Discount"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <View
+                        android:id="@+id/view_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/txt_ValueVat"
+                        android:background="@color/colorBlack"
+                        />
 
-                <TextView
-                    android:id="@+id/txt_mDiscount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/txt_mTotal"
-                    android:layout_alignTop="@+id/txt_Discount"
-                    android:layout_below="@+id/txt_mDate"
-                    android:layout_toRightOf="@+id/txt_symbolDiscount"
-                    android:gravity="end"
-                    android:text="5,500.50"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_Discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_black"
+                        android:layout_marginTop="10dp"
+                        android:text="ส่วนลด"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_TotalAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_Discount"
-                    android:layout_marginTop="10dp"
-                    android:text="ราคาสุทธิ"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_symbolDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_black"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/txt_Discount"
+                        android:text="Discount"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_mTotalAll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/txt_mTotal"
-                    android:layout_alignTop="@+id/txt_TotalAll"
-                    android:layout_below="@+id/txt_mDate"
-                    android:layout_toRightOf="@+id/txt_Total"
-                    android:gravity="end"
-                    android:text="255,500.50"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_mDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/txt_mTotal"
+                        android:layout_alignTop="@+id/txt_Discount"
+                        android:layout_below="@+id/txt_mDate"
+                        android:layout_toRightOf="@+id/txt_symbolDiscount"
+                        android:gravity="end"
+                        android:text="5,500.50"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
+                    <TextView
+                        android:id="@+id/txt_TotalAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_Discount"
+                        android:layout_marginTop="10dp"
+                        android:text="ราคาสุทธิ"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/txt_Cash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_TotalAll"
-                    android:layout_marginTop="10dp"
-                    android:text="รับชำระ"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/txt_mCash"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/txt_mTotal"
-                    android:layout_alignTop="@+id/txt_Cash"
-                    android:layout_below="@+id/txt_mDate"
-                    android:layout_toRightOf="@+id/txt_Total"
-                    android:gravity="end"
-                    android:text="255,500.50"
-                    android:textSize="@dimen/sizetextconclude"
-                    android:textStyle="bold"/>
-
-                <View
-                    android:id="@+id/view_red"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@+id/txt_Cash"
-                    android:background="@color/colorOrange"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_Change"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/txt_mChange"
-                    android:layout_below="@+id/view_red"
-                    android:layout_marginTop="25dp"
-                    android:text="เงินทอน"
-                    android:textSize="35sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/txt_mChange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/txt_mTotal"
-                    android:layout_below="@+id/view_red"
-                    android:layout_marginTop="15dp"
-                    android:padding="8dp"
-                    android:textColor="#000000"
-                    android:gravity="end"
-                    android:text="29,500.50"
-                    android:textSize="45sp"
-                    android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txt_mTotalAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/txt_mTotal"
+                        android:layout_alignTop="@+id/txt_TotalAll"
+                        android:layout_below="@+id/txt_mDate"
+                        android:layout_toRightOf="@+id/txt_Total"
+                        android:gravity="end"
+                        android:text="255,500.50"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
 
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txt_Cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_TotalAll"
+                        android:layout_marginTop="10dp"
+                        android:text="รับชำระ"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_mCash"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/txt_mTotal"
+                        android:layout_alignTop="@+id/txt_Cash"
+                        android:layout_below="@+id/txt_mDate"
+                        android:layout_toRightOf="@+id/txt_Total"
+                        android:gravity="end"
+                        android:text="255,500.50"
+                        android:textSize="@dimen/sizetextconclude"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:id="@+id/view_red"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/txt_Cash"
+                        android:background="@color/colorOrange"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_Change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/txt_mChange"
+                        android:layout_below="@+id/view_red"
+                        android:layout_marginTop="25dp"
+                        android:text="เงินทอน"
+                        android:textSize="35sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_mChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/txt_mTotal"
+                        android:layout_below="@+id/view_red"
+                        android:layout_marginTop="15dp"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="29,500.50"
+                        android:textColor="#000000"
+                        android:textSize="45sp"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+            </FrameLayout>
 
 
         </LinearLayout>
@@ -240,9 +254,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-
-            android:layout_weight="0.3">
+            android:layout_weight="0.3"
+            android:orientation="vertical">
 
         </LinearLayout>
 
@@ -261,15 +274,15 @@
             android:id="@+id/btn_barcode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="1"
-            android:text="เริ่มใหม่ ( Barcode )"
-            android:textSize="20sp"
             android:background="#FAFAFA"
+            android:text="เริ่มใหม่ ( Barcode )"
             android:textColor="#000000"
+            android:textSize="20sp"
 
 
             ></com.gc.materialdesign.views.ButtonRectangle>
@@ -278,14 +291,14 @@
             android:id="@+id/btn_manual"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:background="#FAFAFA"
-            android:textColor="#000000"
             android:text="เริ่มใหม่ ( Manual )"
+            android:textColor="#000000"
             android:textSize="20sp"
 
 

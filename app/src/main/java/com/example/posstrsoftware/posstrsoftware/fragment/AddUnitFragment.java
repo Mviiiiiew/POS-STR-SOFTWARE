@@ -124,13 +124,11 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
                                     dialog.dismiss();
                                 }
                             });
-
                             alertDialogder.show();
                         } else {
                             getActivity().finish();
                         }
             }
-
         }else if (v == btn_back){
            getActivity().finish();
         }

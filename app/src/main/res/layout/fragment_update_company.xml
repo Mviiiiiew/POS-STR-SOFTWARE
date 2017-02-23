@@ -71,15 +71,15 @@
         android:layout_height="match_parent"
         android:background="#263238"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
 
-        <RelativeLayout
+        <LinearLayout
 
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2">
+            android:layout_weight="0.7">
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
         <RelativeLayout
@@ -93,7 +93,7 @@
                 android:id="@+id/txt_NameCompany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="30dp"
                 android:text="Company Name"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
@@ -159,20 +159,6 @@
                 />
 
 
-            <EditText
-                android:id="@+id/editText_Telephone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:layout_alignLeft="@+id/editText_CompanyAddress"
-                android:layout_below="@+id/editText_CompanyAddress"
-                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
-                android:background="@drawable/btn_default_normal"
-                android:hint="Telephone"
-
-                android:textColorHint="#FFFFFF"
-                />
-
             <TextView
                 android:id="@+id/txt_NameTAXID"
                 android:layout_width="wrap_content"
@@ -187,7 +173,7 @@
 
             <EditText
                 android:id="@+id/editText_Name_TAXID"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
@@ -214,7 +200,7 @@
 
             <EditText
                 android:id="@+id/editText_Name_Division"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:inputType="text"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
@@ -241,7 +227,7 @@
 
             <EditText
                 android:id="@+id/editText_Name_RegisterID"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:layout_alignLeft="@+id/editText_CompanyAddress"
@@ -306,17 +292,30 @@
                 android:textColorHint="#FFFFFF"
                 />
 
+            <EditText
+                android:id="@+id/editText_Telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@drawable/btn_default_normal"
+                android:hint="Telephone"
+                android:layout_marginTop="@dimen/layout_marginTop_company_edittext"
+                android:textColorHint="#FFFFFF"
+                android:layout_below="@+id/editText_CompanyAddress"
+               android:layout_alignLeft="@+id/editText_CompanyName"
+                />
+
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
 
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2">
+            android:layout_weight="0.7">
 
 
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
 

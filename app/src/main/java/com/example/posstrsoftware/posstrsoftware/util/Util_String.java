@@ -6,9 +6,7 @@ package com.example.posstrsoftware.posstrsoftware.util;
 
 public class Util_String {
     public static String getGennerlateString(String input_value){
-        return  input_value.trim().replaceAll("","").replaceAll("'|\"-%","");
+        return  input_value.trim().replace(" ","");
     }
-    public static String getGennerlateEmuji(String input_value){
-        return  input_value.trim().replaceAll("","").replaceAll("\\\\","/");
-    }
+
 }

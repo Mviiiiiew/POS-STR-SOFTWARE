@@ -3,16 +3,14 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:background="#263238"
+              android:weightSum="3"
               android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.50"
-        android:paddingTop="30dp"
-
+        android:layout_weight="1"
         >
-
 
 
         <ImageView
@@ -26,7 +24,6 @@
 
 
 
-
     </LinearLayout>
 
 
@@ -34,14 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="vertical"
 
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_SettingCompany"
@@ -57,7 +51,19 @@
 
 
 
-        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+
+        >
+
+
+                />
+
+
 
     </LinearLayout>
 

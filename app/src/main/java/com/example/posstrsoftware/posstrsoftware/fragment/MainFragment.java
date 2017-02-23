@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.posstrsoftware.posstrsoftware.R;
@@ -25,8 +26,10 @@ import com.inthecheesefactory.thecheeselibrary.view.SlidingTabLayout;
  */
 public class MainFragment extends Fragment {
     ViewPager viewPager;
+
     SlidingTabLayout slidingTabLayout;
     TextView Company;
+
 
     public MainFragment() {
         super();
@@ -43,6 +46,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         initInstances(rootView);
         return rootView;
     }
@@ -62,7 +66,7 @@ public class MainFragment extends Fragment {
         CompanyList companyList = new CompanyList();
 
         // Init 'View' instance(s) with rootView.findViewById here
-        Company  =  (TextView)rootView.findViewById(R.id.Company);
+        Company = (TextView) rootView.findViewById(R.id.Company);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
 
 
@@ -92,30 +96,28 @@ public class MainFragment extends Fragment {
 
             @Override
             public CharSequence getPageTitle(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
-                        return "     ขายสินค้า       ";
+                        return "ขายสินค้า";
                     case 1:
-                        return "     ตั้งค่าสินค้า       ";
+                        return "ตั้งค่าสินค้า";
                     case 2:
-                        return "     ตั้งค่าบริษัท       ";
+                        return "ตั้งค่าบริษัท";
                     case 3:
-                        return "      รายงาน        ";
+                        return "รายงาน";
                     case 4:
-                        return "      ติดต่อ       ";
+                        return "ติดต่อ";
                     default:
                         return "";
                 }
             }
         });
 
+
         slidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.slidingTabLayout);
+        slidingTabLayout.setDistributeEvenly(true);
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getActivity(), R.color.colorOrange));
         slidingTabLayout.setViewPager(viewPager);
-
-        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getActivity(),R.color.colorOrange));
-
-
-
 
 
     }

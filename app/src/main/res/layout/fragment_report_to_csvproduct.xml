@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/my_toolbarlayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <include
@@ -18,123 +19,149 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:text="สรุปสินค้าที่ขายไป (.CSV)"
-            android:textSize="30sp"
             android:textColor="@color/colorBlack"
+            android:textSize="30sp"
             android:textStyle="bold"/>
 
     </RelativeLayout>
 
 
-    <RadioGroup
-        android:id="@+id/radiogroup_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:checkedButton="@+id/radio_date_day">
+    <LinearLayout
 
-        <RadioButton
-            android:id="@+id/radio_date_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="  สรุปสินค้าแบบรายวัน"
-            android:textSize="25sp"
-            />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/my_toolbarlayout"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
 
-        <EditText
-            android:id="@+id/edit_date_day"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:gravity="center"
-            android:hint="วัน/เดือน/ปี"
-            android:inputType="date"
-            android:textSize="23sp"
-            android:textStyle="bold"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.4"
+            android:orientation="vertical"
 
-        <RadioButton
-            android:id="@+id/radio_date_between"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="  สรุปสินค้าแบบกำหนดวัน"
-            android:textSize="25sp"
-            />
+            >
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edit_date_one"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:hint="วัน/เดือน/ปี"
-                android:inputType="date"
-                android:textSize="23sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/to"
+            <RadioGroup
+                android:id="@+id/radiogroup_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/edit_date_one"
-                android:layout_toRightOf="@+id/edit_date_one"
-                android:text="   ถึง   "
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_gravity="center"
+                android:checkedButton="@+id/radio_date_day">
 
-            <EditText
-                android:id="@+id/edit_date_two"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/edit_date_one"
-                android:layout_toRightOf="@+id/to"
-                android:gravity="center"
-                android:hint="วัน/เดือน/ปี"
-                android:inputType="date"
-                android:textSize="23sp"
-                android:textStyle="bold"/>
-        </RelativeLayout>
+                <RadioButton
+                    android:id="@+id/radio_date_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  สรุปสินค้าแบบรายวัน"
+                    android:textSize="25sp"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_date_day"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center"
+                    android:hint="วัน/เดือน/ปี"
+                    android:inputType="date"
+                    android:textSize="23sp"
+                    android:textStyle="bold"/>
+
+                <RadioButton
+                    android:id="@+id/radio_date_between"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="  สรุปสินค้าแบบกำหนดวัน"
+                    android:textSize="25sp"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edit_date_one"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:hint="วัน/เดือน/ปี"
+                        android:inputType="date"
+                        android:textSize="23sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/edit_date_one"
+                        android:layout_toRightOf="@+id/edit_date_one"
+                        android:text="   ถึง   "
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/edit_date_two"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/edit_date_one"
+                        android:layout_toRightOf="@+id/to"
+                        android:gravity="center"
+                        android:hint="วัน/เดือน/ปี"
+                        android:inputType="date"
+                        android:textSize="23sp"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
 
 
-    </RadioGroup>
+            </RadioGroup>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2">
 
-        <com.gc.materialdesign.views.ButtonRectangle
-            android:id="@+id/btn_print"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="35dp"
-            android:layout_weight="1"
-            android:background="#0F444F"
-            android:text="บันทึกสรุปสินค้า"
-            android:textSize="30sp">
+        </FrameLayout>
 
-        </com.gc.materialdesign.views.ButtonRectangle>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <com.gc.materialdesign.views.ButtonRectangle
-            android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="35dp"
-            android:layout_weight="1"
-            android:background="#0F444F"
-            android:text="ย้อนกลับ"
-            android:textSize="30sp">
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_print"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#0F444F"
+                android:text="บันทึกสรุปสินค้า"
+                android:textSize="30sp">
 
-        </com.gc.materialdesign.views.ButtonRectangle>
+            </com.gc.materialdesign.views.ButtonRectangle>
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="35dp"
+                android:layout_weight="1"
+                android:background="#0F444F"
+                android:text="ย้อนกลับ"
+                android:textSize="30sp">
+
+            </com.gc.materialdesign.views.ButtonRectangle>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

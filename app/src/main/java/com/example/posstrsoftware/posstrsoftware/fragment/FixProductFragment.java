@@ -138,21 +138,6 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
             checkbox_vat.setChecked(false);
         }
 
-/*
-        final GroupDAO mGroupDAO = new GroupDAO(getActivity());
-        mGroupDAO.open();
-        final ArrayList<GroupList> groupList = mGroupDAO.getAllGroupList();
-        mGroupDAO.close();
-        mSpinnerGroupAdapter = new spinnerGroupAdapter(getActivity(), groupList);
-        spinner_group.setAdapter(mSpinnerGroupAdapter);
-
-       UnitDAO mUnitDAO = new UnitDAO(getActivity());
-        mUnitDAO.open();
-        ArrayList<UnitList> unitList = mUnitDAO.getAllUnitList();
-        mUnitDAO.close();
-        mSpinnerUnitAdapter = new spinnerUnitAdapter(getActivity(), unitList);
-
-    */
 
 
         edit_price.addTextChangedListener(new TextWatcher() {
@@ -428,7 +413,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
 
                     alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
-                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + Util_String.getGennerlateString(editText_product.getText().toString() )+ "\n"
                             + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                             + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                             + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -477,7 +462,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 } else if (editText_Barcode.getText().toString().matches("")) {
 
                     alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
-                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + Util_String.getGennerlateString(editText_product.getText().toString() ) + "\n"
                             + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                             + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                             + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -524,7 +509,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     alertDialogder.show();
                 } else if (BarcodeBefore.matches(editText_Barcode.getText().toString())) {
                     alertDialogder.setTitle("กรุณาตรวจสอบข้อมูลก่อนบันทึก");
-                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + Util_String.getGennerlateString(editText_product.getText().toString() ) + "\n"
                             + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                             + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                             + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -595,7 +580,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 ex = productDAO.check(eProductList);
                 productDAO.close();
                 if (ex == 1) {
-                    alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                    alertDialogder.setMessage("ชื่อสินค้า     :  " + Util_String.getGennerlateString(editText_product.getText().toString() ) + "\n"
                             + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                             + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                             + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -642,7 +627,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
 
                 } else if (ex == 2) {
                     if (editText_Barcode.getText().toString().matches("")) {
-                        alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + editText_product.getText().toString());
+                        alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + Util_String.getGennerlateString(editText_product.getText().toString()));
                         alertDialogder.setNegativeButton("ตกลง", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -665,7 +650,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                     }
                 } else if (ex == 0) {
 
-                    alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + editText_product.getText().toString());
+                    alertDialogder.setTitle("ชื่อสินค้าซ้ำในระบบ\n" + "->" + "  ชื่อสินค้า : " + Util_String.getGennerlateString(editText_product.getText().toString()));
                     alertDialogder.setNegativeButton("ตกลง", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -678,7 +663,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 } else if (ex == 3) {
                     if (BarcodeBefore.matches(editText_Barcode.getText().toString())) {
 
-                        alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                        alertDialogder.setMessage("ชื่อสินค้า     :  " + Util_String.getGennerlateString(editText_product.getText().toString()) + "\n"
                                 + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                                 + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                                 + "ราคา          :  " + edit_price.getText().toString() + "\n"
@@ -724,7 +709,7 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                         alertDialogder.show();
                     } else if (editText_Barcode.getText().toString().matches("")) {
 
-                        alertDialogder.setMessage("ชื่อสินค้า     :  " + editText_product.getText().toString() + "\n"
+                        alertDialogder.setMessage("ชื่อสินค้า     :  " + Util_String.getGennerlateString(editText_product.getText().toString()) + "\n"
                                 + "ชื่อหน่วย     :  " + mSelectedUnit.getUnitText().toString() + "\n"
                                 + "ชื่อกลุ่ม       :  " + mSelectedGroup.getGroupText().toString() + "\n"
                                 + "ราคา          :  " + edit_price.getText().toString() + "\n"

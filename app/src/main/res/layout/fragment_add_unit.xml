@@ -11,7 +11,6 @@
         layout="@layout/toolbar"/>
 
 
-
     <TextView
         android:id="@+id/txt_list"
         android:layout_width="wrap_content"
@@ -25,53 +24,102 @@
         />
 
 
-
-
-    <EditText
-
-        android:id="@+id/editText_Unit"
-        android:hint="  ชื่อหน่วย"
-        android:layout_width="600dp"
-        android:inputType="text"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/my_toolbar"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="50dp"
-        android:padding="20dp"
-        android:textSize="@dimen/txtsize"
-        android:background="@drawable/btn_default_normal"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.6"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2">
+
+                <EditText
+
+                    android:id="@+id/editText_Unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/btn_default_normal"
+                    android:hint="ชื่อกลุ่ม"
+                    android:inputType="text"
+                    android:padding="20dp"
+                    android:textSize="@dimen/txtsize"
+                    android:textStyle="bold"
 
 
-        />
+                    />
+            </LinearLayout>
 
-    <com.gc.materialdesign.views.ButtonRectangle
-        android:id="@+id/btn_save"
-        android:layout_width="150dp"
-        android:textSize="18sp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_Unit"
-        android:layout_marginLeft="20dp"
-        android:background="#311B92"
-        android:layout_toRightOf="@+id/editText_Unit"
-        android:text="@string/save"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        >
 
-    </com.gc.materialdesign.views.ButtonRectangle>
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_save"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="50dp"
+                    android:background="#311B92"
+                    android:text="@string/save"
 
-    <com.gc.materialdesign.views.ButtonRectangle
-        android:id="@+id/btn_back"
-        android:layout_width="140dp"
-        android:textSize="18sp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btn_save"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/btn_save"
-        android:background="#FDD835"
-        android:textColor="#000000"
-        android:text="@string/cancel"
+                    android:textSize="18sp"
 
-        />
+                    >
+
+                </com.gc.materialdesign.views.ButtonRectangle>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/btn_back"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="50dp"
+                    android:background="#FDD835"
+
+                    android:text="@string/cancel"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>
