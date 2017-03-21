@@ -486,11 +486,11 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                             if (checkbox_vat.isChecked() == true) {
                                 eProductList.setCheckvat("N");
                                 eProductList.setSymbolVat("ไม่มีภาษี");
-                                Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
                             } else {
                                 eProductList.setCheckvat("Y");
                                 eProductList.setSymbolVat("มีภาษี");
-                                Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
                             }
 
                             ProductDAO productDAO = new ProductDAO(getActivity());
@@ -533,11 +533,11 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                             if (checkbox_vat.isChecked() == true) {
                                 eProductList.setCheckvat("N");
                                 eProductList.setSymbolVat("ไม่มีภาษี");
-                                Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                             //   Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
                             } else {
                                 eProductList.setCheckvat("Y");
                                 eProductList.setSymbolVat("มีภาษี");
-                                Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
                             }
 
                             ProductDAO productDAO = new ProductDAO(getActivity());
@@ -604,11 +604,11 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                             if (checkbox_vat.isChecked() == true) {
                                 eProductList.setCheckvat("N");
                                 eProductList.setSymbolVat("ไม่มีภาษี");
-                                Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(getActivity(), "N", Toast.LENGTH_LONG).show();
                             } else {
                                 eProductList.setCheckvat("Y");
                                 eProductList.setSymbolVat("มีภาษี");
-                                Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getActivity(), "Y", Toast.LENGTH_LONG).show();
                             }
                             ProductDAO productDAO = new ProductDAO(getActivity());
                             productDAO.open();

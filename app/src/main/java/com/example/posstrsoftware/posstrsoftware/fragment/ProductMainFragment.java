@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.SupportActionModeWrapper;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.AddProductActivity;
@@ -99,8 +101,10 @@ public class ProductMainFragment extends Fragment implements View.OnClickListene
         ProductDAO productDAO = new ProductDAO(getActivity());
         productDAO.open();
         final ArrayList<ProductList> myProductList = productDAO.getAllProductList();
+
         final ProductAdapter objAdapter = new ProductAdapter(getActivity(),myProductList);
         listView_Product.setAdapter(objAdapter);
+        Log.d("sizex","size = "+myProductList.size());
         productDAO.close();
         listView_Product.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

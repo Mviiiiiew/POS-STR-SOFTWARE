@@ -24,9 +24,11 @@ public class ProductSaleAdapter extends BaseAdapter {
     ArrayList<ProductSaleList> mProductSaleLists;
 
     public ProductSaleAdapter(Activity activity,ArrayList<ProductSaleList> mProductSaleLists) {
+
         this.mProductSaleLists = mProductSaleLists;
         this.activity = activity;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
     public  ArrayList<ProductSaleList> getdata(){
         return  mProductSaleLists;
@@ -50,6 +52,7 @@ public class ProductSaleAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View v = convertView;
         if (convertView == null) {
             v = inflater.inflate(R.layout.list_item_productsale, null); }

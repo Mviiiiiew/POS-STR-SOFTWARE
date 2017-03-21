@@ -95,7 +95,9 @@ public class ProductSaleDAO {
 
     public ArrayList<ProductSaleList> getAllProductSaleList() {
         ArrayList<ProductSaleList> ProductSaleList = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(product_price as decimal)) as product_price,count(productsale_text),id_product,sum(CAST(Value_Vat as decimal)) as ValueVat from productsale_list where delete_flag = 'N' group by productsale_text   ;", null);
+        Cursor cursor = database.rawQuery("select productsale_text,sum(CAST(product_price as decimal)) " +
+                "as product_price,count(productsale_text),id_product,sum(CAST(Value_Vat as decimal)) as ValueVat " +
+                "from productsale_list where delete_flag = 'N' group by productsale_text   ;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ProductSaleList mProductSaleList = new ProductSaleList();

@@ -336,7 +336,7 @@ public class ReportProductFragment extends Fragment implements View.OnClickListe
         date = edit_date_day.getText().toString();
         String x = date.replaceAll("/", "");
         Log.d("X",date);
-        Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
         ArrayList<ReportList> reportLists = reportDAO.getAllPrintReportProduct(x);
 
         for (ReportList bean : reportLists) {

@@ -636,7 +636,7 @@ public class ReportDayFragment extends Fragment implements View.OnClickListener 
         reportDAO.open();
         date = edit_date_day.getText().toString();
         String x = date.replaceAll("/", "");
-        Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
         ArrayList<ReportList> reportLists = reportDAO.getAllReportList(x);
 
 

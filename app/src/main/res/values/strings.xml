@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"> POS STR </string>
+    <string name="app_name"> POSAndroid </string>
     <string name="name_title_str_pos_software">STR POS Software</string>
     <string name="my_tb_title">this my toolbar</string>
     <string name="searchable">Searchable</string>

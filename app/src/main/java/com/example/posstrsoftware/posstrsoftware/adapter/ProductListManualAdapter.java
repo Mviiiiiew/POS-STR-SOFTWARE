@@ -57,8 +57,6 @@ public class ProductListManualAdapter extends BaseAdapter implements Filterable 
         ProductList productList = mProductList.get(position);
         textview.setText(productList.getGroupList().getGroupText());
         textview1.setText(productList.getProductText());
-
-
         return v;
     }
 
@@ -68,8 +66,6 @@ public class ProductListManualAdapter extends BaseAdapter implements Filterable 
         if (filter == null) {
             filter = new CustomFilter();
         }
-
-
         return filter;
     }
 
@@ -86,7 +82,6 @@ public class ProductListManualAdapter extends BaseAdapter implements Filterable 
                         filters.add(u);
                     }
                 }
-
                 results.count = filters.size();
                 results.values = filters;
             } else {
