@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/btn_default_normal"
-                    android:hint="ชื่อกลุ่ม"
+                    android:hint="@string/hinthint_unitname"
                     android:inputType="text"
                     android:padding="20dp"
                     android:textSize="@dimen/txtsize"
@@ -82,7 +82,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="50dp"
                     android:background="#311B92"
-                    android:text="@string/save"
+                    android:text="@string/btn_ok"
 
                     android:textSize="18sp"
 
@@ -98,7 +98,6 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="50dp"
                     android:background="#FDD835"
-
                     android:text="@string/cancel"
                     android:textColor="#000000"
                     android:textSize="18sp"

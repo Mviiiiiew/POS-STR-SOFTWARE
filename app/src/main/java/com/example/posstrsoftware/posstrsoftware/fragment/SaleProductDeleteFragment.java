@@ -38,7 +38,6 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
     String mProduct;
 
 
-
     public SaleProductDeleteFragment() {
         super();
     }
@@ -57,7 +56,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         initInstances(rootView);
         Intent intent = getActivity().getIntent();
         mProduct = intent.getStringExtra("mProduct");
-        Log.d("mProductx",mProduct);
+        Log.d("mProductx", mProduct);
 
 
         ProductSaleDAO productSaleDAO = new ProductSaleDAO(getActivity());
@@ -68,48 +67,19 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
         listView_SaleProductDelete.setAdapter(adapter);
 
 
-        listView_SaleProductDelete.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,final int position, long id) {
-                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้าทั้งหมด :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
-                alertDialogder.setTitle("ลบสินค้า 'ทั้งหมด' ");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ProductSaleList productSaleLists1 = new ProductSaleList();
-                        productSaleLists1.setId((int) adapter.getItemId(position));
-                        productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
-                        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
-                        productSaleDAO1.open();
-                        productSaleDAO1.delete_product_name(productSaleLists1);
-                        productSaleDAO1.close();
-                        getActivity().finish();
-                    }
-                });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                alertDialogder.show();
-                return false;
-            }
-        });
         listView_SaleProductDelete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
 
-                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการลบสินค้า :  "+((ProductSaleList)adapter.getItem(position)).getProductSale());
-                alertDialogder.setTitle("ลบสินค้า");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage(getString(R.string.delete_product) + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+                alertDialogder.setTitle(R.string.title_deleteproductx);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
 
-                  ///PRODUCTSALELIST///
+                        ///PRODUCTSALELIST///
                         ProductSaleList productSaleLists1 = new ProductSaleList();
                         productSaleLists1.setId((int) adapter.getItemId(position));
                         productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
@@ -123,25 +93,62 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
 
                     }
                 });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                alertDialogder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 });
+                AlertDialog dialog = alertDialogder.create();
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
 
-                alertDialogder.show();
+
             }
         });
+
+        listView_SaleProductDelete.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
+                alertDialogder.setMessage(getString(R.string.delete_all_product) + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+                alertDialogder.setTitle(R.string.title_deleteproductall);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductSaleList productSaleLists1 = new ProductSaleList();
+                        productSaleLists1.setId((int) adapter.getItemId(position));
+                        productSaleLists1.setProductSale(((ProductSaleList) adapter.getItem(position)).getProductSale());
+                        ProductSaleDAO productSaleDAO1 = new ProductSaleDAO(getActivity());
+                        productSaleDAO1.open();
+                        productSaleDAO1.delete_product_name(productSaleLists1);
+                        productSaleDAO1.close();
+                        getActivity().finish();
+                    }
+                });
+                alertDialogder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = alertDialogder.create();
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
+                return true;
+            }
+        });
+
 
         return rootView;
     }
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        listView_SaleProductDelete = (ListView)rootView.findViewById(R.id.listView_SaleProductDelete);
+        listView_SaleProductDelete = (ListView) rootView.findViewById(R.id.listView_SaleProductDelete);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
-             btn_back.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
 
 
     }
@@ -186,7 +193,7 @@ public class SaleProductDeleteFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(btn_back == v){
+        if (btn_back == v) {
             getActivity().finish();
         }
     }

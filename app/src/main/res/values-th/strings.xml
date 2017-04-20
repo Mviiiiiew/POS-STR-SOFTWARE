@@ -1,0 +1,63 @@
+<resources>
+
+    <string name="save">ตกลง</string>
+    <string name="edit">แก้ไข</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="delete">ลบ</string>
+    <string name="select">select</string>
+    <string name="btn_back">ย้อนกลับ</string>
+    <string name="btn_ok">ตกลง</string>
+    <string name="hinthint_unitname">ชื่อหน่วย</string>
+    <string name="hinttext_groupname">ชื่อกลุ่ม</string>
+    <string name="btn_confirm">ยืนยัน</string>
+    <string name="salesystem">ขายสินค้า</string>
+    <string name="productsetup">ตั้งค่าสินค้า</string>
+    <string name="setupcompany">ตั้งค่าบริษัท</string>
+    <string name="report">รายงาน</string>
+    <string name="setup_company">ตั้งค่าบริษัท</string>
+    <string name="edit_company_data">แก้ไขการตั้งค่าบริษัท</string>
+    <string name="use_barcode">ขายสินค้า (Barcode)</string>
+    <string name="use_touchscreen">ขายสินค้า (Manual)</string>
+    <string name="amount"><![CDATA[จำนวนสินค้า >>]]></string>
+    <string name="qty">จำนวน</string>
+    <string name="price">ราคา</string>
+    <string name="payment">ชำระ</string>
+    <string name="begin">เริ่มรายการใหม่</string>
+    <string name="name">ชื่อสินค้า</string>
+    <string name="confirm_delete">"คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  "</string>
+    <string name="title_deleteproduct">ลบสินค้า</string>
+    <string name="delete_record">รายการลบสินค้า</string>
+    <string name="delete_all_product">"คุณแน่ใจว่าจะทำการลบสินค้าทั้งหมด :  "</string>
+    <string name="title_deleteproductall">"ลบสินค้า 'ทั้งหมด' "</string>
+    <string name="delete_product">"คุณแน่ใจว่าจะทำการลบสินค้า :  "</string>
+    <string name="title_deleteproductx">ลบสินค้า</string>
+    <string name="disc">ส่วนลดรายการสินค้า</string>
+    <string name="setup_disc">ตั้งต่าส่วนลด</string>
+    <string name="new_price">ราคาสุทธิ</string>
+    <string name="discount">ราคาส่วนลด</string>
+    <string name="discpercent">เปอร์เซ็นต์ส่วนลด</string>
+    <string name="discount_volumn">คิดส่วนลดแบบจำนวนเงิน</string>
+    <string name="disc_percentage">คิดส่วนลดแบบเปอร์เซ็นต์</string>
+    <string name="txt_please_enter_qty">กรุณาใส่จำนวน</string>
+    <string name="txt_data">ไม่มีสินค้าภายในระบบ</string>
+    <string name="txt_please_enter_qtysale">กรุณาใส่จำนวนสินค้า 1-100 ชิ้น</string>
+    <string name="txt_beginconfirm">คุณแน่ใจว่าจะทำการเริ่มรายการใหม่?</string>
+    <string name="title_begin">เริ่มรายการใหม่ ?</string>
+    <string name="total">ราคารวม</string>
+    <string name="vat">ภาษี</string>
+    <string name="receive_amt">รับชำระ</string>
+    <string name="clear">ลบ</string>
+    <string name="txt_please_enter_amount">กรุณาใส่จำนวนเงินรับชำระ</string>
+    <string name="txt_receive_amont"><![CDATA["รับชำระมีค่าน้อยกว่าราคารวม -> "]]></string>
+    <string name="re_print">ปริ้นบิลอีกครั้ง</string>
+    <string name="date">วันที่</string>
+    <string name="returnprice">เงินทอน</string>
+    <string name="begin_barcode">เริ่มใหม่ ( Barcode )</string>
+    <string name="begin_manual">เริ่มใหม่ ( Manual )</string>
+    <string name="discpay">ส่วนลด</string>
+    <string name="group">กลุ่ม</string>
+    <string name="description">รายการสินค้า</string>
+    <string name="txt_deletemanual">"คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  "</string>
+
+
+</resources>

@@ -27,7 +27,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="13dp"
         android:layout_toRightOf="@+id/btn_back"
-        android:text="รายการลบสินค้า"
+        android:text="@string/delete_record"
         android:textSize="30sp"
         android:textColor="@color/colorBlack"
         android:textStyle="bold"/>
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="ชื่อสินค้า"
+                    android:text="@string/name"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     />
@@ -77,7 +77,7 @@
                     android:layout_alignTop="@+id/txt_ProductName"
                     android:layout_marginLeft="500dp"
                     android:layout_toRightOf="@+id/txt_ProductName"
-                    android:text="ราคา"
+                    android:text="@string/price"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
 
@@ -88,7 +88,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_toRightOf="@+id/txt_ProductName"
                     android:gravity="end"
-                    android:text="ลบสินค้า"
+                    android:text="@string/delete"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
 

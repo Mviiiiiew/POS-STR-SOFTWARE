@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.2"
+        android:layout_weight="1"
         android:background="@color/colorBlue"
         android:orientation="vertical"
         android:weightSum="2"
@@ -28,9 +28,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
-                android:text="ราคารวม"
+                android:text="@string/total"
                 android:textColor="@color/colorBlack"
-                android:textSize="30sp"
+                android:textSize="@dimen/txtsize_pay"
                 android:textStyle="bold"
                 />
 
@@ -40,15 +40,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/txt_Total"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="70dp"
-                android:layout_toRightOf="@+id/txt_Total"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_toRightOf="@+id/txt_NameTotalall"
                 android:background="#000000"
                 android:gravity="center"
                 android:inputType="text"
-                android:padding="@dimen/padding_pay"
+
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="@dimen/txtsize_pricetotal"/>
 
             <TextView
                 android:id="@+id/txt_NameValueVat"
@@ -57,9 +57,9 @@
                 android:layout_below="@+id/txt_Total"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="@dimen/mg_top"
-                android:text="ภาษี"
+                android:text="@string/vat"
                 android:textColor="@color/colorBlack"
-                android:textSize="30sp"
+                android:textSize="@dimen/txtsize_pay"
                 android:textStyle="bold"
                 />
 
@@ -68,16 +68,16 @@
                 android:id="@+id/txt_ValueVat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignLeft="@+id/txt_Totalall"
                 android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_alignTop="@+id/txt_NameValueVat"
                 android:layout_toRightOf="@+id/txt_NameValueVat"
                 android:background="#000000"
                 android:gravity="center"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
                 android:padding="@dimen/padding_pay"
-                android:textSize="30sp"/>
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/txtsize_pricetotal"/>
 
 
             <TextView
@@ -87,9 +87,9 @@
                 android:layout_below="@+id/txt_NameValueVat"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="@dimen/mg_top"
-                android:text="ส่วนลด"
+                android:text="@string/discpay"
                 android:textColor="@color/colorBlack"
-                android:textSize="30sp"
+                android:textSize="@dimen/txtsize_pay"
                 android:textStyle="bold"
                 />
 
@@ -99,7 +99,7 @@
                 android:id="@+id/txt_Discount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_NameTotal"
+                android:layout_alignLeft="@+id/txt_Totalall"
                 android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_alignTop="@+id/txt_NameDiscount"
                 android:layout_toRightOf="@+id/txt_NameDiscount"
@@ -108,7 +108,7 @@
                 android:inputType="text"
                 android:padding="@dimen/padding_pay"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"/>
+                android:textSize="@dimen/txtsize_pricetotal"/>
 
             <TextView
                 android:id="@+id/txt_NameTotalall"
@@ -117,9 +117,9 @@
                 android:layout_below="@+id/txt_NameDiscount"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="@dimen/mg_top"
-                android:text="ราคาสุทธิ"
+                android:text="@string/new_price"
                 android:textColor="@color/colorBlack"
-                android:textSize="30sp"
+                android:textSize="@dimen/txtsize_pay"
                 android:textStyle="bold"
                 />
 
@@ -128,16 +128,17 @@
                 android:id="@+id/txt_Totalall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_NameTotal"
                 android:layout_alignRight="@+id/txt_NameTotal"
                 android:layout_alignTop="@+id/txt_NameTotalall"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/txt_NameTotalall"
                 android:background="#000000"
-                android:padding="@dimen/padding_pay"
                 android:gravity="center"
                 android:inputType="text"
+                android:padding="@dimen/padding_pay"
                 android:textColor="#FFFFFF"
-                android:textSize="32sp"/>
+                android:textSize="@dimen/txtsize_pricetotal"/>
+
 
             <TextView
                 android:id="@+id/txt_NameCash"
@@ -146,48 +147,47 @@
                 android:layout_alignLeft="@+id/txt_Total"
                 android:layout_below="@+id/txt_NameTotalall"
                 android:layout_marginTop="60dp"
-                android:text="รับชำระ"
+                android:text="@string/receive_amt"
                 android:textColor="@color/colorBlack"
-                android:textSize="30sp"
-                android:textStyle="bold"
-
-
-
-                />
-
-            <EditText
-                android:id="@+id/edit_txt_cash"
-                android:layout_width="250dp"
-                android:layout_height="65dp"
-                android:layout_alignBottom="@+id/txt_NameCash"
-                android:layout_alignLeft="@+id/txt_NameTotal"
-                android:layout_toRightOf="@+id/txt_NameCash"
-                android:background="@color/colorBlack"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="numberDecimal"
-                android:textColor="@color/colorWhite"
                 android:textSize="32sp"
                 android:textStyle="bold"
+
 
                 />
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btn_clear"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/edit_txt_cash"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/edit_txt_cash"
-                android:padding="10dp"
                 android:background="#FFEB3B"
+                android:padding="10dp"
+                android:text="@string/clear"
                 android:textColor="#000000"
-                android:text="ลบ"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                android:textSize="20sp"
                 >
 
             </com.gc.materialdesign.views.ButtonRectangle>
+
+            <EditText
+                android:id="@+id/edit_txt_cash"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
+                android:layout_below="@+id/txt_NameCash"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:background="@color/colorBlack"
+                android:ems="10"
+
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorWhite"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                />
 
 
         </RelativeLayout>
@@ -198,7 +198,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.8"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
@@ -375,7 +375,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:text="จ่าย"
+                    android:text="@string/payment"
                     android:textSize="@dimen/textsize_button">
 
                 </com.gc.materialdesign.views.ButtonRectangle>
@@ -386,8 +386,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:text="ย้อนกลับ"
                     android:background="#FFD600"
+                    android:text="@string/btn_back"
                     android:textColor="#000000"
                     android:textSize="@dimen/textsize_button">
 

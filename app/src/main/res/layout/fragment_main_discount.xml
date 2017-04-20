@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:paddingLeft="30dp"
-            android:text="ส่วนลดรายการสินค้า"
+            android:text="@string/disc"
+            android:layout_centerVertical="true"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -68,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="10dp"
-                        android:text="ราคาสุทธิ"
+                        android:text="@string/new_price"
                         android:textColor="@color/colorBlack"
                         android:textSize="30sp"
                         android:textStyle="bold"
@@ -98,25 +99,17 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.7">
 
-                    <CheckBox
-                        android:id="@+id/checkbox_AutoPay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:freezesText="true"
-                        android:text="ตั้งค่า Auto ราคา"
-                        android:textSize="25sp"/>
+
 
                     <CheckBox
                         android:id="@+id/checkbox_discount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/checkbox_AutoPay"
+
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:freezesText="true"
-                        android:text="ตั้งค่าส่วนลด"
+                        android:text="@string/setup_disc"
                         android:textSize="25sp"/>
 
                     <EditText
@@ -127,7 +120,7 @@
                         android:layout_margin="15dp"
                         android:background="@color/thumbColor"
                         android:gravity="center"
-                        android:hint="ราคาส่วนลด"
+                        android:hint="@string/discount"
                         android:inputType="numberDecimal"
                         android:padding="10dp"
                         android:textSize="20sp"
@@ -141,7 +134,7 @@
                         android:layout_margin="15dp"
                         android:background="@color/thumbColor"
                         android:gravity="center"
-                        android:hint="เปอร์เซ็นต์ส่วนลด"
+                        android:hint="@string/discpercent"
                         android:inputType="number"
                         android:padding="10dp"
                         android:textSize="20sp"
@@ -161,7 +154,7 @@
                             android:id="@+id/radiobutton_cost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="คิดส่วนลดแบบจำนวนเงิน"
+                            android:text="@string/discount_volumn"
                             android:textSize="20sp"/>
 
                         <RadioButton
@@ -169,7 +162,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
-                            android:text="คิดส่วนลดแบบเปอร์เซ็นต์"
+                            android:text="@string/disc_percentage"
                             android:textSize="20sp"/>
                     </RadioGroup>
 
@@ -222,7 +215,7 @@
                         android:layout_marginBottom="20dp"
                         android:layout_weight="0.8"
                         android:background="#FFD600"
-                        android:text="ย้อนกลับ"
+                        android:text="@string/btn_back"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold"

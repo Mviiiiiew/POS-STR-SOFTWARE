@@ -61,6 +61,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="30dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="#031049"
                 android:text="พิมพ์สรุปยอดขายรายวัน"
                 android:textSize="25sp">
@@ -74,6 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="30dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="#626A00"
                 android:text="พิมพ์สรุปยอดขายสินค้า"
                 android:textSize="25sp">

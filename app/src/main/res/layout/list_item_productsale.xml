@@ -18,7 +18,7 @@
             android:paddingLeft="20dp"
             android:text="test"
             android:textColor="@color/colorBlack"
-            android:textSize="30sp"
+            android:textSize="@dimen/txtsize_salebarcode"
             android:textStyle="bold"/>
 
     </LinearLayout>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
            android:layout_gravity="center"
             android:text="test"
-            android:textSize="30sp"
+            android:textSize="@dimen/txtsize_salebarcode"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
 
@@ -59,7 +59,7 @@
             android:layout_gravity="end"
             android:text="test"
             android:textColor="@color/colorBlack"
-            android:textSize="30sp"
+            android:textSize="@dimen/txtsize_salebarcode"
             android:textStyle="bold"/>
 
     </LinearLayout>

@@ -50,7 +50,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     EditText editText_DiscountCost;
     EditText editText_DiscountPercent;
     CheckBox checkbox_discount;
-    CheckBox checkbox_AutoPay;
+    //CheckBox checkbox_AutoPay;
     RadioButton radiobutton_cost;
     String x;
     String discountcost;
@@ -112,7 +112,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         editor.putBoolean("5", checkbox_discount.isChecked());
         editor.putBoolean("6", editText_DiscountCost.isEnabled());
         editor.putBoolean("7", editText_DiscountPercent.isEnabled());
-        editor.putBoolean("8", checkbox_AutoPay.isChecked());
+        //editor.putBoolean("8", checkbox_AutoPay.isChecked());
         editor.putString("discountpercent", (editText_DiscountPercent.getText().toString()));
         editor.putString("discountcost", (editText_DiscountCost.getText().toString()));
 
@@ -130,10 +130,9 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         checkbox_discount.setChecked(sharedPreferences.getBoolean("5", false));
         editText_DiscountCost.setEnabled(sharedPreferences.getBoolean("6", false));
         editText_DiscountPercent.setEnabled(sharedPreferences.getBoolean("7", false));
-        checkbox_AutoPay.setChecked(sharedPreferences.getBoolean("8", false));
+        //checkbox_AutoPay.setChecked(sharedPreferences.getBoolean("8", false));
         editText_DiscountPercent.setText(sharedPreferences.getString("discountpercent", editText_DiscountPercent.getText().toString()));
         editText_DiscountCost.setText(sharedPreferences.getString("discountcost", editText_DiscountCost.getText().toString()));
-
 
 
     }
@@ -143,15 +142,14 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         loadradio();
-        if(checkbox_discount.isChecked() == true){
-            if(radiobutton_cost.isChecked() == true){
+        if (checkbox_discount.isChecked() == true) {
+            if (radiobutton_cost.isChecked() == true) {
                 editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
                 editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
-            }else if(radiobutton_percent.isChecked() == true){
+            } else if (radiobutton_percent.isChecked() == true) {
                 editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
                 editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscOK));
-            }
-            else {
+            } else {
                 editText_DiscountCost.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
                 editText_DiscountPercent.setBackgroundColor(getResources().getColor(R.color.colorDiscNO));
             }
@@ -219,7 +217,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        checkbox_AutoPay = (CheckBox) rootView.findViewById(R.id.checkbox_AutoPay);
+        //checkbox_AutoPay = (CheckBox) rootView.findViewById(R.id.checkbox_AutoPay);
         txt_NameTotal = (TextView) rootView.findViewById(R.id.txt_NameTotal);
         btn_back = (ButtonRectangle) rootView.findViewById(R.id.btn_back);
         radiobutton_cost = (RadioButton) rootView.findViewById(R.id.radiobutton_cost);
@@ -371,72 +369,40 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
             if (checkbox_discount.isChecked() == true) {
                 if (radiobutton_cost.isChecked() == true) {
                     if ((editText_DiscountCost.getText().toString().replaceAll("", "").replaceAll("\\.", "").matches(""))) {
-                        Toast.makeText(getActivity(), "กรุณาใส่จำนวน", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.txt_please_enter_qty, Toast.LENGTH_SHORT).show();
                     } else {
-                        if (checkbox_AutoPay.isChecked() == true) {
-                            PayAutoCost();
-
-                        } else if (checkbox_AutoPay.isChecked() == false) {
-                            PayCost();
-                        }
-
-                        //     Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
+                        PayCost();
                     }
+
+                    //     Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
+
 
                 } else if (radiobutton_percent.isChecked() == true) {
                     if (editText_DiscountPercent.getText().toString().replaceAll("", "").matches("")) {
-                        Toast.makeText(getActivity(), "กรุณาใส่จำนวน", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.txt_please_enter_qty, Toast.LENGTH_SHORT).show();
                     } else {
-                        if (checkbox_AutoPay.isChecked() == true) {
-                            PayAutoPercent();
-                        } else if (checkbox_AutoPay.isChecked() == false) {
-                            PayPercent();
-                        }
+
+                        PayPercent();
 
 
                         //   Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
             } else if (checkbox_discount.isChecked() == false) {
-
-                if (checkbox_AutoPay.isChecked() == true) {
-                    payAuto();
-                } else if (checkbox_AutoPay.isChecked() == false) {
-                    pay();
-                }
-
+                pay();
                 //Toast.makeText(getActivity(), totalall.toString(), Toast.LENGTH_SHORT).show();
 
             }
         }
-    }
-
-    private void payAuto() {
-        totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
-        TotalSumVat = totalall;
-        Log.d("VAT",TotalSumVat+"");
-        String u = "0.0";
-        discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
-        Intent intent = new Intent(getActivity(), PayMainActivity.class);
-        intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
-        intent.putExtra("discountcost", u);
-        intent.putExtra("totalall", TotalSumVat.toString());
-        intent.putExtra("discountpercent", u);
-        intent.putExtra("discount", u);
-        intent.putExtra("symbol", "0.00");
-        intent.putExtra("processmanual", processmanual);
-        intent.putExtra("processbarcode", processbarcode);
-        intent.putExtra("ValueVat", ValueVat);
-
-
-        startActivity(intent);
 
     }
+
+
 
     private void pay() {
         totalall = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         TotalSumVat = totalall;
-        Log.d("VAT",TotalSumVat+"");
+        Log.d("VAT", TotalSumVat + "");
         String u = "0.0";
         discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
@@ -474,6 +440,26 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         startActivity(intent);
     }
 
+
+    private void PayCost() {
+        A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
+        B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
+        totalall = A - B;
+        discountcost = String.valueOf(editText_DiscountCost.getText());
+        String totalcost = String.valueOf(totalall);
+        Intent intent = new Intent(getActivity(), PayMainActivity.class);
+        intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
+        intent.putExtra("discountcost", editText_DiscountCost.getText().toString().replace(",", ""));
+        intent.putExtra("totalall", totalcost);
+        intent.putExtra("discount", B.toString());
+        intent.putExtra("symbol", "Cost");
+        intent.putExtra("processmanual", processmanual);
+        intent.putExtra("processbarcode", processbarcode);
+        intent.putExtra("ValueVat", ValueVat);
+        startActivity(intent);
+    }
+
+
     private void PayAutoPercent() {
         A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         B = Double.valueOf(editText_DiscountPercent.getText().toString());
@@ -496,12 +482,13 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         startActivity(intent);
     }
 
-    private void PayCost() {
+    private void PayAutoCost() {
         A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
         B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
         totalall = A - B;
         discountcost = String.valueOf(editText_DiscountCost.getText());
-        String totalcost = String.valueOf(totalall);
+
+        String totalcost = String.valueOf(CostPercent.parserFormat(totalall));
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
         intent.putExtra("discountcost", editText_DiscountCost.getText().toString().replace(",", ""));
@@ -513,25 +500,26 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
         intent.putExtra("ValueVat", ValueVat);
         startActivity(intent);
     }
-
-    private void PayAutoCost() {
-        A = Double.valueOf(txt_NameTotal.getText().toString().replace(",", ""));
-        B = Double.valueOf(editText_DiscountCost.getText().toString().replace(",", ""));
-        totalall = A - B;
-        discountcost = String.valueOf(editText_DiscountCost.getText());
-
-
-        String totalcost = String.valueOf(CostPercent.parserFormat(totalall));
+    private void payAuto() {
+        totalall = CostPercent.parserFormat(Double.valueOf(txt_NameTotal.getText().toString().replace(",", "")));
+        TotalSumVat = totalall;
+        Log.d("VAT", TotalSumVat + "");
+        String u = "0.0";
+        discountpercent = String.valueOf(editText_DiscountPercent.getText() + " %");
         Intent intent = new Intent(getActivity(), PayMainActivity.class);
         intent.putExtra("totalx", txt_NameTotal.getText().toString().replace(",", ""));
-        intent.putExtra("discountcost", editText_DiscountCost.getText().toString().replace(",", ""));
-        intent.putExtra("totalall", totalcost);
-        intent.putExtra("discount", B.toString());
-        intent.putExtra("symbol", "Cost");
+        intent.putExtra("discountcost", u);
+        intent.putExtra("totalall", TotalSumVat.toString());
+        intent.putExtra("discountpercent", u);
+        intent.putExtra("discount", u);
+        intent.putExtra("symbol", "0.00");
         intent.putExtra("processmanual", processmanual);
         intent.putExtra("processbarcode", processbarcode);
-        intent.putExtra("ValueVat",ValueVat);
+        intent.putExtra("ValueVat", ValueVat);
+
+
         startActivity(intent);
+
     }
 
 

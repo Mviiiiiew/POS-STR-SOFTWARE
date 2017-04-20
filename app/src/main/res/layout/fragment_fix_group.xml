@@ -67,7 +67,7 @@
                     android:layout_marginLeft="50dp"
                     android:inputType="text"
                     android:layout_marginTop="50dp"
-                    android:hint="ชื่อกลุ่ม"
+                    android:hint="@string/hinttext_groupname"
                     android:background="@drawable/btn_default_normal"
                     android:textSize="@dimen/txtsize"
                     android:textStyle="bold"
@@ -94,7 +94,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/editText_Group"
                     android:textSize="@dimen/txtsize_fix"
-                    android:text="ยืนยัน"
+                    android:text="@string/btn_ok"
 
                     >
 

@@ -161,20 +161,19 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                 ProductSaleAdapter adapter = new ProductSaleAdapter(getActivity(), productSaleLists);
 
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setMessage("คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  " + ((ProductSaleList) adapter.getItem(position)).getProductSale());
+                alertDialogder.setMessage(getString(R.string.confirm_delete) + ((ProductSaleList) adapter.getItem(position)).getProductSale());
                 mProduct = ((ProductSaleList) adapter.getItem(position)).getProductSale();
             //    Log.d("mProduct", mProduct);
-                alertDialogder.setTitle("ลบสินค้า");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.title_deleteproduct);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity(), SaleProductDeleteActivity.class);
                         intent.putExtra("mProduct", mProduct);
-
                         startActivity(intent);
                     }
                 });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                alertDialogder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -248,9 +247,9 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
 
             if (btn_clear == v) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setMessage("คุณแน่ใจว่าจะทำการเริ่มรายการใหม่");
-                alertDialogder.setTitle("เริ่มรายการใหม่ ?");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setMessage(R.string.txt_beginconfirm);
+                alertDialogder.setTitle(R.string.title_begin);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ProductSaleList productSaleList = new ProductSaleList();
@@ -264,7 +263,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                         txt_cost.setText("0.00");
                     }
                 });
-                alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                alertDialogder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -294,7 +293,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
             VarAmount = Integer.parseInt(edit_Amount.getText().toString());
         }
         if (VarAmount > 100) {
-            Toast.makeText(getActivity(), "กรุณาใส่จำนวนสินค้า 1-100 ชิ้น", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.txt_please_enter_qtysale, Toast.LENGTH_LONG).show();
             edit_Barcode.setText("");
             edit_Amount.setText("1");
         } else {
@@ -332,8 +331,8 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
                     if(T == 0){
                         Log.d("ID",T+"");
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                        alertDialogder.setTitle("ไม่มีสินค้าภายในระบบ !!");
-                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        alertDialogder.setTitle(R.string.txt_data);
+                        alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();

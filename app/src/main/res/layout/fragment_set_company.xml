@@ -38,7 +38,7 @@
         android:layout_alignTop="@+id/image_company"
         android:layout_toRightOf="@+id/image_company"
         android:paddingLeft="40dp"
-        android:text="ตั้งค่าบริษัท"
+        android:text="@string/setup_company"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -82,7 +82,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:background="#EEEEEE"
-        android:text="แก้ไข"
+        android:text="@string/edit"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000000">

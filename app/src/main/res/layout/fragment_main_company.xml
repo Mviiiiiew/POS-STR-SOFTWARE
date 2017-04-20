@@ -44,7 +44,7 @@
                 android:background="#FF5722"
                 android:textColor="#FFFFFF"
                 android:layout_gravity="center"
-                android:text="ตั้งค่าบริษัท"
+                android:text="@string/setup_company"
                 android:textSize="20sp"
 
                 />

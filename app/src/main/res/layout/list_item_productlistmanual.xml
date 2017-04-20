@@ -21,7 +21,7 @@
             android:padding="2dp"
             android:text="Gruop"
             android:textColor="@color/colorBlack"
-            android:textSize="23sp"
+            android:textSize="@dimen/txt_salemanual"
             android:textStyle="bold"
 
             />
@@ -44,7 +44,7 @@
             android:layout_toRightOf="@+id/txt_Group"
             android:padding="2dp"
             android:text="Product"
-            android:textSize="23sp"
+            android:textSize="@dimen/txt_salemanual"
             android:textStyle="bold"/>
 
 

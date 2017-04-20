@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 public class ConcludeFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_manual;
     ButtonRectangle btn_barcode;
-    ButtonRectangle btt_RePrint;
+    Button btt_RePrint;
     private PrinterController printerController = null;
     TextView txt_mDate;
     TextView txt_mTotal;
@@ -104,7 +105,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
     private void initInstances(View rootView) {
 
         // Init 'View' instance(s) with rootView.findViewById here
-        btt_RePrint = (ButtonRectangle)rootView.findViewById(R.id.btt_RePrint);
+        btt_RePrint = (Button)rootView.findViewById(R.id.btt_RePrint);
         btn_manual = (ButtonRectangle) rootView.findViewById(R.id.btn_manual);
         btn_barcode = (ButtonRectangle) rootView.findViewById(R.id.btn_barcode);
         txt_mTotal = (TextView) rootView.findViewById(R.id.txt_mTotal);
@@ -115,7 +116,7 @@ public class ConcludeFragment extends Fragment implements View.OnClickListener {
         txt_mChange = (TextView)rootView.findViewById(R.id.txt_mChange);
         txt_mValueVat = (TextView) rootView.findViewById(R.id.txt_mValueVat);
         txt_symbolDiscount = (TextView)rootView.findViewById(R.id.txt_symbolDiscount);
-        btt_RePrint.setRippleSpeed(40);
+
         btn_barcode.setRippleSpeed(40);
         btn_manual.setRippleSpeed(40);
         btt_RePrint.setOnClickListener(this);

@@ -43,7 +43,7 @@
             android:layout_alignTop="@+id/image_company"
             android:layout_toRightOf="@+id/image_company"
             android:paddingLeft="40dp"
-            android:text="แก้ไขการตั้งค่าบริษัท"
+            android:text="@string/edit_company_data"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -58,7 +58,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="5dp"
             android:background="@color/colorWhite"
-            android:text="ยืนยัน"
+            android:text="@string/btn_ok"
             android:textSize="20sp"
             android:textColor="#000000">
 

@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="0.9"
             android:orientation="vertical"
             android:weightSum="2">
 
@@ -24,15 +24,20 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.3"></LinearLayout>
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btt_RePrint"
-                android:layout_width="match_parent"
+            <Button
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/btt_RePrint"
+                android:padding="10dp"
                 android:layout_margin="20dp"
                 android:background="#EEEEEE"
-                android:text="ปริ้นบิลอีกครั้ง"
+                android:text="@string/re_print"
                 android:textColor="#757575"
-                android:textSize="20sp"></com.gc.materialdesign.views.ButtonRectangle>
+                android:textSize="20sp"
+                />
+
+
 
 
         </LinearLayout>
@@ -59,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="วันที่"
+                        android:text="@string/date"
                         android:textSize="@dimen/sizetextconclude"
                         android:textStyle="bold"/>
 
@@ -81,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_Date"
                         android:layout_marginTop="10dp"
-                        android:text="ราคารวม"
+                        android:text="@string/total"
                         android:textSize="@dimen/sizetextconclude"
                         android:textStyle="bold"/>
 
@@ -104,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_Total"
                         android:layout_marginTop="10dp"
-                        android:text="ภาษี"
+                        android:text="@string/vat"
                         android:textSize="@dimen/sizetextconclude"
                         android:textStyle="bold"/>
 
@@ -135,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/view_black"
                         android:layout_marginTop="10dp"
-                        android:text="ส่วนลด"
+                        android:text="@string/disc"
                         android:textSize="@dimen/sizetextconclude"
                         android:textStyle="bold"/>
 
@@ -170,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_Discount"
                         android:layout_marginTop="10dp"
-                        android:text="ราคาสุทธิ"
+                        android:text="@string/new_price"
                         android:textSize="@dimen/sizetextconclude"
                         android:textStyle="bold"/>
 
@@ -194,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_TotalAll"
                         android:layout_marginTop="10dp"
-                        android:text="รับชำระ"
+                        android:text="@string/receive_amt"
                         android:textSize="@dimen/sizetextconclude"
                         android:textStyle="bold"/>
 
@@ -226,7 +231,7 @@
                         android:layout_alignBottom="@+id/txt_mChange"
                         android:layout_below="@+id/view_red"
                         android:layout_marginTop="25dp"
-                        android:text="เงินทอน"
+                        android:text="@string/returnprice"
                         android:textSize="35sp"
                         android:textStyle="bold"/>
 
@@ -254,7 +259,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.1"
             android:orientation="vertical">
 
         </LinearLayout>
@@ -280,7 +285,7 @@
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:background="#FAFAFA"
-            android:text="เริ่มใหม่ ( Barcode )"
+            android:text="@string/begin_barcode"
             android:textColor="#000000"
             android:textSize="20sp"
 
@@ -297,7 +302,7 @@
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:background="#FAFAFA"
-            android:text="เริ่มใหม่ ( Manual )"
+            android:text="@string/begin_manual"
             android:textColor="#000000"
             android:textSize="20sp"
 
