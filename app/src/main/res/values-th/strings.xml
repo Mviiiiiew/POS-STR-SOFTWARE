@@ -58,6 +58,37 @@
     <string name="group">กลุ่ม</string>
     <string name="description">รายการสินค้า</string>
     <string name="txt_deletemanual">"คุณต้องการไปยังรายการลบสินค้าหรือไม่ :  "</string>
+    <string name="add_unit">เพิ่มหน่วยสินค้า</string>
+    <string name="add_product_group">เพิ่มกลุ่มสินค้า</string>
+    <string name="add_product">เพิ่มรายการสินค้า</string>
+    <string name="edit_product_unit">รายการหน่วยนับ</string>
+    <string name="edit_group_name">แก้ไขชื่อกลุ่ม</string>
+    <string name="group_data">รายการกลุ่ม</string>
+    <string name="unit_data">รายการหน่วยนับ</string>
+    <string name="edit_product_data">แก้ไขข้อมูลสินค้า</string>
+    <string name="edit_unit_name">แก้ไขชื่อหน่วยนับ</string>
+    <string name="txt_pls_ent_group_name">กรุณาใส่ชื่อกลุ่ม : ?</string>
+    <string name="txt_duplicate">มีข้อมูลซ้ำในระบบ</string>
+    <string name="txt_pls_confrim_dle_group">"คุณแน่ใจว่าจะทำการลบกลุ่มสินค้า "</string>
+    <string name="txt_pls_confirm_del_unit">"คุณต้องการที่จะลบหน่วย: "</string>
+    <string name="txt_pls_ent_unit_name">กรุณาใส่ชื่อหน่วยนับ : ?</string>
+    <string name="unit">หน่วย</string>
+    <string name="cost">ต้นทุน</string>
+    <string name="barcode">Barcode</string>
+    <string name="no_vat">ไม่มีภาษี</string>
+    <string name="txt_pls_setup_group_and_unit">กรุณาทำรายการเพิ่มกลุ่มสินค้า และ หน่วยสินค้า</string>
+    <string name="txt_pls_setup_group">กรุณาทำรายการเพิ่มกลุ่มสินค้า</string>
+    <string name="txt_pls_setup_unit">กรุณาทำรายการเพิ่มหน่วยสินค้า</string>
+    <string name="txt_pls_enter_product_name">กรุณาใส่ชื่อสินค้า ?</string>
+    <string name="txt_pls_enter_price">กรุณาใส่ราคาสินค้า ?</string>
+    <string name="txt_pls_enter_cost">กรุณาใส่ราคาต้นทุน หรือ 0  ?</string>
+    <string name="txt_duplicate_product_name">มีข้อมูล ชื่อสินค้า ซ้ำในระบบ</string>
+    <string name="txt_duplicate_barcode_and_name">มีข้อมูล Barcode และ ชื่อสินค้า ซ้ำในระบบ</string>
+    <string name="txt_duplicate_barcode">มีข้อมูล Barcode ซ้ำในระบบ</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="txt_pls_check_information">กรุณาตรวจสอบข้อมูลก่อนบันทึก</string>
+    <string name="txt_pls_confrim_del_product">"คุณต้องการที่จะลบสินค้า : "</string>
 
 
 </resources>

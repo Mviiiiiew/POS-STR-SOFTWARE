@@ -63,7 +63,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="เพิ่มหน่วยสินค้า"
+            android:text="@string/add_unit"
             android:textSize="@dimen/textsize_productset"
             android:layout_margin="10dp"
             android:textStyle="bold"
@@ -76,7 +76,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="เพิ่มกลุ่มสินค้า"
+            android:text="@string/add_product_group"
             android:textSize="@dimen/textsize_productset"
             android:textStyle="bold"
 
@@ -89,7 +89,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="เพิ่มรายการสินค้า"
+            android:text="@string/add_product"
             android:textSize="@dimen/textsize_productset"
             android:textStyle="bold"
             />

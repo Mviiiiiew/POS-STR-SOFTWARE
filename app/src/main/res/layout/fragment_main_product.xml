@@ -41,7 +41,7 @@
         android:layout_alignTop="@+id/btn_back"
         android:layout_toRightOf="@+id/image_product"
         android:paddingLeft="40dp"
-        android:text="รายการสินค้า"
+        android:text="@string/description"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"

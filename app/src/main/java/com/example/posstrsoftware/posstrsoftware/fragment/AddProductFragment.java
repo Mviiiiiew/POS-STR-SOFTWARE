@@ -227,8 +227,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
             int UnitId = spinner_unit.getSelectedItemPosition();
             if (GroupId == -1 && UnitId == -1) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาทำรายการเพิ่มกลุ่มสินค้า และ หน่วยสินค้า");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_setup_group_and_unit);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -240,8 +240,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             } else if (GroupId == -1) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาทำรายการเพิ่มกลุ่มสินค้า");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_setup_group);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -252,8 +252,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             } else if (UnitId == -1) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาทำรายการเพิ่มหน่วยสินค้า");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_setup_unit);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -264,8 +264,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             } else if (editText_Product.getText().toString().trim().replaceAll("", "").replaceAll("\\.", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาใส่ชื่อสินค้า ?");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_enter_product_name);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -277,8 +277,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             } else if (editText_Price.getText().toString().matches("") || editText_Price.getText().toString().matches("\\.")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาใส่ราคาสินค้า ?");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_enter_price);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -289,8 +289,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
             } else if (editText_Cost.getText().toString().matches("") || editText_Cost.getText().toString().matches("\\.")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาใส่ราคาต้นทุน หรือ 0 ?");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_enter_cost);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -310,11 +310,11 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                 if (checkbox_vat.isChecked() == true) {
                     productList.setCheckvat("N");
-                    productList.setSymbolVat("ไม่มีภาษี");
+                    productList.setSymbolVat(getString(R.string.no));
 
                 } else {
                     productList.setCheckvat("Y");
-                    productList.setSymbolVat("มีภาษี");
+                    productList.setSymbolVat(getString(R.string.yes));
 
                 }
                 ProductDAO productDAO = new ProductDAO(getActivity());
@@ -326,8 +326,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                     if (ex == 0) {
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                        alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
-                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        alertDialogder.setTitle(R.string.txt_duplicate_product_name);
+                        alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -345,8 +345,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                     productDAO.close();
                     if (ex == 2) {
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                        alertDialogder.setTitle("มีข้อมูล 'Barcode' และ 'ชื่อสินค้า' ซ้ำในระบบ");
-                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        alertDialogder.setTitle(R.string.txt_duplicate_barcode_and_name);
+                        alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -357,8 +357,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
 
                     } else if (ex == 3) {
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                        alertDialogder.setTitle("มีข้อมูล 'Barcode' ซ้ำในระบบ");
-                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        alertDialogder.setTitle(R.string.txt_duplicate_barcode);
+                        alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -368,8 +368,8 @@ public class AddProductFragment extends Fragment implements View.OnClickListener
                         alertDialogder.show();
                     } else if (ex == 0) {
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                        alertDialogder.setTitle("มีข้อมูล 'ชื่อสินค้า' ซ้ำในระบบ");
-                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        alertDialogder.setTitle(R.string.txt_duplicate_product_name);
+                        alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();

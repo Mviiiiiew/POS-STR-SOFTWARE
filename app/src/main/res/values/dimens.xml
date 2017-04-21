@@ -25,4 +25,5 @@
     <dimen name="txt_salemanual">23sp</dimen>
     <dimen name="txtsize_payment">18sp</dimen>
     <dimen name="txtsize_salebarcode">30sp</dimen>
+    <dimen name="textsize_dialogFix">25sp</dimen>
 </resources>

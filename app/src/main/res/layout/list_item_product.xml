@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:textColor="@color/test"
-            android:text="ชื่อสินค้า"
+            android:text="@string/name"
             android:textSize="@dimen/textSize_Adapter"
             android:textStyle="bold"
 
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Name"
                 android:layout_below="@+id/txt_Name"
-                android:text="ราคา"
+                android:text="@string/price"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Price"
                 android:layout_below="@+id/txt_Price"
-                android:text="หน่วย"
+                android:text="@string/unit"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"
 
@@ -106,7 +106,7 @@
                 android:textColor="@color/test"
                 android:layout_alignLeft="@+id/txt_Unit"
                 android:layout_below="@+id/txt_Unit"
-                android:text="กลุ่ม"
+                android:text="@string/group"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"
 
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Group"
                 android:layout_below="@+id/txt_Group"
-                android:text="ราคาต้นทุน"
+                android:text="@string/cost"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"
 
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Group"
                 android:layout_below="@+id/txt_Cost"
-                android:text="Barcode"
+                android:text="@string/barcode"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"
 
@@ -181,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txt_Group"
                 android:layout_below="@+id/txt_Barcode"
-                android:text="ภาษี"
+                android:text="@string/vat"
                 android:textSize="@dimen/textSize_Adapter"
                 android:textStyle="bold"
 

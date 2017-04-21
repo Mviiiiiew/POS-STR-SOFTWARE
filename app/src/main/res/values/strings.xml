@@ -64,6 +64,37 @@
     <string name="group">GROUP</string>
     <string name="description">DESCRIPTION</string>
     <string name="txt_deletemanual">"PLEASE CONFIRM PRODUCT DELETION :  "</string>
+    <string name="add_unit">ADD UNIT</string>
+    <string name="add_product_group">ADD PRODUCT GROUP</string>
+    <string name="add_product">ADD PRODUCT</string>
+    <string name="edit_product_unit">UNIT DATA</string>
+    <string name="edit_group_name">EDIT GROUP NAME</string>
+    <string name="group_data">GROUP DATA</string>
+    <string name="unit_data">UNIT DATA</string>
+    <string name="edit_product_data">EDIT PRODUCT DATA</string>
+    <string name="edit_unit_name">EDIT UNIT NAME</string>
+    <string name="txt_pls_ent_group_name">PLEASE ENTER GROUP NAME : ?</string>
+    <string name="txt_duplicate">DUPLICATE</string>
+    <string name="txt_pls_confrim_dle_group">"PLEASE CONFIRM DELETE GROUP NAME "</string>
+    <string name="txt_pls_confirm_del_unit">"PLEASE CONFIRM DELETE UNIT NAME: "</string>
+    <string name="txt_pls_ent_unit_name">PLEASE ENTER UNIT NAME : ?</string>
+    <string name="unit">UNIT</string>
+    <string name="cost">COST</string>
+    <string name="barcode">Barcode</string>
+    <string name="no_vat">No VAT</string>
+    <string name="txt_pls_setup_group_and_unit">PLEASE SETUP PRODUCT GROUP/ UNIT</string>
+    <string name="txt_pls_setup_group">PLEASE SETUP PRODUCT GROUP</string>
+    <string name="txt_pls_setup_unit">PLEASE SETUP PRODUCT UNIT</string>
+    <string name="txt_pls_enter_product_name">PLEASE ENTER PRODUCT NAME ?</string>
+    <string name="txt_pls_enter_price">PLEASE ENTER PRICE ?</string>
+    <string name="txt_pls_enter_cost">PLEASE ENTER COST or 0 ?</string>
+    <string name="txt_duplicate_product_name">DUPLICATE (PRODUCT NAME)</string>
+    <string name="txt_duplicate_barcode_and_name">DUPLICATE (BARCODE AND PRODUCT NAME)</string>
+    <string name="txt_duplicate_barcode">DUPLICATE (BARCODE)</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="txt_pls_check_information">Please check the information.</string>
+    <string name="txt_pls_confrim_del_product">"PLEASE CONFIRM DELETE PRODUCT : "</string>
 
 
 </resources>

@@ -58,7 +58,6 @@ public class MainFragment extends Fragment {
         companyDAO.open();
         Company.setText(companyDAO.InvoiceMaster().getCompanyName().toString());
 
-
         companyDAO.close();
     }
 
@@ -87,6 +86,7 @@ public class MainFragment extends Fragment {
                         return null;
                 }
             }
+
 
             @Override
             public int getCount() {

@@ -110,8 +110,8 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
         if (v == btn_edit_unit) {
             if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาใส่หน่วยนับ : ?");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_ent_unit_name);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -141,8 +141,8 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
                 unitDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setTitle("มีข้อมูล 'หน่วยนับ' ซ้ำในระบบ");
-                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    alertDialogder.setTitle(R.string.txt_duplicate);
+                    alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -159,8 +159,8 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
             getActivity().finish();
         } else if (btn_delete == v) {
             AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-            alertDialogder.setTitle("คุณต้องการที่จะลบหน่วย : "+ mUnit +"  หรือไม่ ?" );
-            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+            alertDialogder.setTitle(getString(R.string.txt_pls_confirm_del_unit)+ mUnit  );
+            alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     UnitList editUnitList = (UnitList) getActivity().getIntent().getSerializableExtra("editUnit");
@@ -171,7 +171,7 @@ public class FixUnitFragment extends Fragment implements View.OnClickListener {
                     getActivity().finish();
                 }
             });
-            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+            alertDialogder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                dialog.dismiss();

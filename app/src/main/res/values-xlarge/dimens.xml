@@ -3,4 +3,5 @@
     <dimen name="txt_salemanual">15sp</dimen>
     <dimen name="txtsize_payment">18sp</dimen>
     <dimen name="txtsize_salebarcode">25sp</dimen>
+    <dimen name="textsize_dialogFix">15sp</dimen>
 </resources>

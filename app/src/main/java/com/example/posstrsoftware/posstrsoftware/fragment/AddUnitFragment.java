@@ -99,8 +99,8 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
                     if (editText_Unit.getText().toString().trim().replaceAll("", "").matches("")) {
 
                         AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                        alertDialogder.setTitle("กรุณาใส่ชื่อหน่วยนับ : ?");
-                        alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                        alertDialogder.setTitle(R.string.txt_pls_ent_unit_name);
+                        alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -117,8 +117,8 @@ public class AddUnitFragment extends Fragment implements View.OnClickListener {
                         unitDAO.close();
                         if (ex == 0) {
                             AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                            alertDialogder.setTitle("มีข้อมูล 'หน่วยนับ' ซ้ำในระบบ");
-                            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            alertDialogder.setTitle(R.string.txt_duplicate);
+                            alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();

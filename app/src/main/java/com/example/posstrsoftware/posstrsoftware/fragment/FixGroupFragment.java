@@ -110,8 +110,8 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         if (v == btn_edit_group) {
             if (editText_Group.getText().toString().trim().replaceAll("", "").matches("")) {
                 AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                alertDialogder.setTitle("กรุณาใส่ชื่อกลุ่ม : ?");
-                alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                alertDialogder.setTitle(R.string.txt_pls_ent_group_name);
+                alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -139,8 +139,8 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
                 groupDAO.close();
                 if (ex == 0) {
                     AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-                    alertDialogder.setTitle("มีข้อมูล 'กลุ่ม' ซ้ำในระบบ");
-                    alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    alertDialogder.setTitle(R.string.txt_duplicate);
+                    alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -160,8 +160,8 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
         else if (btn_delete == v) {
 
             AlertDialog.Builder alertDialogder = new AlertDialog.Builder(getActivity());
-            alertDialogder.setTitle("คุณต้องการที่จะลบกลุ่ม : " + mGroup + "  หรือไม่ ?");
-            alertDialogder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+            alertDialogder.setTitle(getString(R.string.txt_pls_confrim_dle_group) + mGroup );
+            alertDialogder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     GroupList editGroupList = (GroupList) getActivity().getIntent().getSerializableExtra("editGroup");
@@ -172,7 +172,7 @@ public class FixGroupFragment extends Fragment implements View.OnClickListener {
                     getActivity().finish();
                 }
             });
-            alertDialogder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+            alertDialogder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();

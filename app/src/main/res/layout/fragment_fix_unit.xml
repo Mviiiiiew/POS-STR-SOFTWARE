@@ -26,7 +26,7 @@
         android:layout_alignTop="@+id/btn_back"
         android:layout_marginLeft="@dimen/mg_left_fix_toolbar"
         android:layout_toRightOf="@+id/btn_back"
-        android:text="แก้ไขหน่วยนับ"
+        android:text="@string/edit_unit_name"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
