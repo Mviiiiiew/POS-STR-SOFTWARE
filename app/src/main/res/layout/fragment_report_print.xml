@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/btn_back"
-            android:text="พิมพ์รายงาน"
+            android:text="@string/print_report"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -39,11 +39,75 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_below="@+id/my_toolbarlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/my_toolbarlayout"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:weightSum="3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+
+            ></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btn_Report_Print_day"
+                    android:layout_width="320dp"
+                    android:layout_height="150dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:text="@string/daily_report"
+                    android:textSize="@dimen/textsize_productset"
+                    android:background="#031049"
+                    android:gravity="center"
+                    android:textColor="@color/mdtp_white"
+                    />
+
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btn_Report_Print_product"
+                    android:layout_width="320dp"
+                    android:layout_height="150dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/sale_report"
+                    android:textSize="@dimen/textsize_productset"
+                    android:background="#626A00"
+                    android:textColor="@color/mdtp_white"
+                    />
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,50 +115,6 @@
             android:layout_weight="0.75"
 
             ></LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5">
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Report_Print_day"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="30dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="#031049"
-                android:text="พิมพ์สรุปยอดขายรายวัน"
-                android:textSize="25sp">
-
-            </com.gc.materialdesign.views.ButtonRectangle>
-
-
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Report_Print_product"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="30dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="#626A00"
-                android:text="พิมพ์สรุปยอดขายสินค้า"
-                android:textSize="25sp">
-
-            </com.gc.materialdesign.views.ButtonRectangle>
-
-
-
-        </LinearLayout>
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75"
-
-        ></LinearLayout>
     </LinearLayout>
 
 

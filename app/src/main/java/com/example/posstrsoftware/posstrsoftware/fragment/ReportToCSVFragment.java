@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.posstrsoftware.posstrsoftware.R;
@@ -18,8 +19,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
  * Created by nuuneoi on 11/16/2014.
  */
 public class ReportToCSVFragment extends Fragment implements View.OnClickListener {
-    ButtonRectangle btn_Report_CSV_day;
-    ButtonRectangle btn_Report_CSV_product;
+    Button btn_Report_CSV_day;
+    Button btn_Report_CSV_product;
     ImageButton btn_back;
 
     public ReportToCSVFragment() {
@@ -44,13 +45,14 @@ public class ReportToCSVFragment extends Fragment implements View.OnClickListene
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btn_back = (ImageButton)rootView.findViewById(R.id.btn_back);
-        btn_Report_CSV_day = (ButtonRectangle)rootView.findViewById(R.id.btn_Report_CSV_day);
-        btn_Report_CSV_product = (ButtonRectangle)rootView.findViewById(R.id.btn_Report_CSV_product);
-        btn_Report_CSV_day.setRippleSpeed(40);
-        btn_Report_CSV_product.setRippleSpeed(40);
+        btn_Report_CSV_day = (Button) rootView.findViewById(R.id.btn_Report_CSV_day);
+        btn_Report_CSV_product = (Button)rootView.findViewById(R.id.btn_Report_CSV_product);
+       // btn_Report_CSV_day.setRippleSpeed(40);
+        //btn_Report_CSV_product.setRippleSpeed(40);
         btn_Report_CSV_product.setOnClickListener(this);
         btn_Report_CSV_day.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+
     }
 
     @Override

@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/btn_back"
-            android:text="บันทึกรายงาน (.CSV)"
+            android:text="@string/save_report"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -48,38 +48,60 @@
 
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"></LinearLayout>
+            android:layout_weight="0.75">
+
+        </LinearLayout>
 
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Report_CSV_day"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="30dp"
-                android:layout_weight="1"
-                android:background="#7A1D14"
-                android:text="บันทึกสรุปยอดขายรายวัน"
-                android:textSize="25sp">
-            </com.gc.materialdesign.views.ButtonRectangle>
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btn_Report_CSV_day"
+                    android:layout_width="320dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:text="@string/product_sale_summary_by_day"
+                    android:textSize="@dimen/textsize_productset"
+                    android:background="#7A1D14"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/mdtp_white"
+                    />
 
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Report_CSV_product"
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="30dp"
-                android:layout_weight="1"
-                android:background="#0E414B"
-                android:text="บันทึกสรุปยอดขายสินค้า"
-                android:textSize="25sp">
+                android:layout_weight="1">
 
-            </com.gc.materialdesign.views.ButtonRectangle>
+                <Button
+                    android:id="@+id/btn_Report_CSV_product"
+                    android:layout_width="320dp"
+                    android:layout_height="150dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/product_sale_summary_by_product"
+                    android:textSize="@dimen/textsize_productset"
+                    android:background="#0E414B"
+                    android:textColor="@color/mdtp_white"
+                    />
+
+
+
+            </FrameLayout>
+
 
         </LinearLayout>
 

@@ -95,6 +95,21 @@
     <string name="no">No</string>
     <string name="txt_pls_check_information">Please check the information.</string>
     <string name="txt_pls_confrim_del_product">"PLEASE CONFIRM DELETE PRODUCT : "</string>
+    <string name="print_report">PRINT REPORT</string>
+    <string name="save_report">SAVE REPORT</string>
+    <string name="sale_report">SALE REPORT</string>
+    <string name="daily_report">DAILY REPORT</string>
+    <string name="product_sale_summary_by_day">PRODUCT SALE SUMMARY BY DAY</string>
+    <string name="product_sale_summary_by_product">PRODUCT SALE SUMMARY BY PRODUCT</string>
+    <string name="daily_sale_summary">DAILY SALE SUMMARY BY DAY</string>
+    <string name="date_month_year">DD/MM/YY</string>
+    <string name="daily_sale_summary_by_period">DAILY SALE SUMMARY BY PERIOD</string>
+    <string name="to">to</string>
+    <string name="daily_sale_summary_by_day">DAILY SALE SUMMARY BY DAY</string>
+    <string name="product_sale_summary_by_period">PRODUCT SALE SUMMARY BY PERIOD</string>
+    <string name="report_transaction">REPORT TRANSACTION</string>
+    <string name="product_sale_summary_by_day_csv">PRODUCT SALE SUMMARY BY DAY (.CSV)</string>
+    <string name="report_transaction_csv">REPORT TRANSACTION (.CSV)</string>
 
 
 </resources>

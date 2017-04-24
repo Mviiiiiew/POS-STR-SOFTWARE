@@ -4,4 +4,8 @@
     <dimen name="txtsize_payment">18sp</dimen>
     <dimen name="txtsize_salebarcode">25sp</dimen>
     <dimen name="textsize_dialogFix">15sp</dimen>
+    <dimen name="textsize_productset">15sp</dimen>
+    <dimen name="textsize_report_title">25sp</dimen>
+    <dimen name="textsize_report_date">23sp</dimen>
+    <dimen name="textsizetitle">30sp</dimen>
 </resources>

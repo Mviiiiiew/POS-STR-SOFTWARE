@@ -325,10 +325,13 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 productDAO.close();
 
                 if (ex == 1) {
+                    //Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
                     NameMatchesEx1(alertDialogder);
                 } else if (editText_Barcode.getText().toString().matches("")) {
+                  //  Toast.makeText(getActivity(), "2", Toast.LENGTH_SHORT).show();
                     NameMatchesBarcodeEmpty(alertDialogder);
                 } else if (BarcodeBefore.matches(editText_Barcode.getText().toString())) {
+                 //   Toast.makeText(getActivity(), "3", Toast.LENGTH_SHORT).show();
                     NameMatchesBarcodematches(alertDialogder);
 
                 } else {
@@ -686,8 +689,9 @@ public class FixProductFragment extends Fragment implements View.OnClickListener
                 dialog.dismiss();
             }
         });
-        alertDialogder.show();
         alertDialogder.setView(view);
+        alertDialogder.show();
+
     }
 
     private void NameMatchesEx1(AlertDialog.Builder alertDialogder) {

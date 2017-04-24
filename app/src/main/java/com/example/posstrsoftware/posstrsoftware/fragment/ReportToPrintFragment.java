@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.posstrsoftware.posstrsoftware.R;
@@ -20,8 +21,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
  * Created by nuuneoi on 11/16/2014.
  */
 public class ReportToPrintFragment extends Fragment implements View.OnClickListener {
-    ButtonRectangle btn_Report_Print_day;
-    ButtonRectangle btn_Report_Print_product;
+    Button btn_Report_Print_day;
+    Button btn_Report_Print_product;
     ImageButton btn_back;
 
     public ReportToPrintFragment() {
@@ -46,10 +47,9 @@ public class ReportToPrintFragment extends Fragment implements View.OnClickListe
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
         btn_back = (ImageButton)rootView.findViewById(R.id.btn_back);
-        btn_Report_Print_day = (ButtonRectangle)rootView.findViewById(R.id.btn_Report_Print_day);
-        btn_Report_Print_product = (ButtonRectangle)rootView.findViewById(R.id.btn_Report_Print_product);
-        btn_Report_Print_day.setRippleSpeed(40);
-        btn_Report_Print_product.setRippleSpeed(40);
+        btn_Report_Print_day = (Button)rootView.findViewById(R.id.btn_Report_Print_day);
+        btn_Report_Print_product = (Button)rootView.findViewById(R.id.btn_Report_Print_product);
+
         btn_Report_Print_product.setOnClickListener(this);
         btn_Report_Print_day.setOnClickListener(this);
         btn_back.setOnClickListener(this);

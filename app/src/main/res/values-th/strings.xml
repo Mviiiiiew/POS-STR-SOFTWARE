@@ -89,6 +89,21 @@
     <string name="no">No</string>
     <string name="txt_pls_check_information">กรุณาตรวจสอบข้อมูลก่อนบันทึก</string>
     <string name="txt_pls_confrim_del_product">"คุณต้องการที่จะลบสินค้า : "</string>
+    <string name="print_report">พิมพ์รายงาน</string>
+    <string name="save_report">บันทึกรายงาน(.CSV)</string>
+    <string name="sale_report">พิมพ์สรุปยอดขายสินค้า</string>
+    <string name="daily_report">พิมพ์สรุปยอดขายรายวัน</string>
+    <string name="product_sale_summary_by_day">บันทึกสรุปยอดขายรายวัน</string>
+    <string name="product_sale_summary_by_product">บันทึกสรุปยอดขายสินค้า</string>
+    <string name="daily_sale_summary">สรุปรายวัน</string>
+    <string name="date_month_year">วัน/เดือน/ปี</string>
+    <string name="daily_sale_summary_by_period">สรุปรายวันแบบกำหนดวัน</string>
+    <string name="to">ถึง</string>
+    <string name="daily_sale_summary_by_day">สรุปสินค้าแบบรายวัน</string>
+    <string name="product_sale_summary_by_period">สรุปสินค้าแบบกำหนดวัน</string>
+    <string name="report_transaction">สรุปสินค้าที่ขายไป</string>
+    <string name="product_sale_summary_by_day_csv">สรุปยอดขายรายวัน (.CSV)</string>
+    <string name="report_transaction_csv">สรุปสินค้าที่ขายไป (.CSV)</string>
 
 
 </resources>
