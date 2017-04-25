@@ -9,20 +9,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:paddingTop="30dp"
 
         >
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_store_white_48dp"/>
 
 
     </LinearLayout>
@@ -36,41 +26,41 @@
         android:weightSum="2"
 
         >
+
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Sale"
-                android:layout_width="320dp"
-                android:layout_height="150dp"
+            <ImageButton
+                android:id="@+id/image_btn_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/use_barcode"
-                android:textSize="@dimen/textsize_productset"
+                android:radius="8dp"
 
-                />
+                android:src="@drawable/barcode"/>
+
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/btn_Salebarcode"
-
-                android:layout_width="320dp"
-                android:layout_height="150dp"
+            <ImageButton
+                android:id="@+id/image_btn_salemanual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/use_touchscreen"
-                android:textSize="@dimen/textsize_productset"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:background="@drawable/corner"
+                android:src="@drawable/cart"/>
 
-                />
 
         </FrameLayout>
-
 
 
     </LinearLayout>
@@ -78,7 +68,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1.2"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/use_barcode"
+                android:textColor="@color/mdtp_white"
+                android:textSize="15sp"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/use_touchscreen"
+                android:textColor="@color/mdtp_white"
+                android:textSize="15sp"
+                />
+
+        </FrameLayout>
 
     </LinearLayout>
 

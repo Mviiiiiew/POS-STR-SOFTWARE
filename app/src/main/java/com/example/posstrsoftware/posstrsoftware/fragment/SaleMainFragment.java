@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.activity.SaleProductActivity;
@@ -17,8 +18,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
  * Created by nuuneoi on 11/16/2014.
  */
 public class SaleMainFragment extends Fragment implements View.OnClickListener {
-    ButtonRectangle btn_Sale;
-    ButtonRectangle btn_Salebarcode;
+    ImageButton image_btn_barcode;
+    ImageButton image_btn_salemanual;
 
     public SaleMainFragment() {
         super();
@@ -41,12 +42,11 @@ public class SaleMainFragment extends Fragment implements View.OnClickListener {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
-        btn_Sale = (ButtonRectangle) rootView.findViewById(R.id.btn_Sale);
-        btn_Salebarcode = (ButtonRectangle) rootView.findViewById(R.id.btn_Salebarcode);
-        btn_Salebarcode.setOnClickListener(this);
-        btn_Sale.setOnClickListener(this);
-        btn_Salebarcode.setRippleSpeed(25);
-        btn_Sale.setRippleSpeed(25);
+        image_btn_barcode = (ImageButton) rootView.findViewById(R.id.image_btn_barcode);
+        image_btn_salemanual = (ImageButton) rootView.findViewById(R.id.image_btn_salemanual);
+        image_btn_barcode.setOnClickListener(this);
+        image_btn_salemanual.setOnClickListener(this);
+
     }
 
     @Override
@@ -81,11 +81,11 @@ public class SaleMainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (btn_Sale == v) {
+        if (image_btn_barcode == v) {
             Intent intent = new Intent(getActivity(), SaleProductActivity.class);
             startActivity(intent);
 
-        } else if (btn_Salebarcode == v) {
+        } else if (image_btn_salemanual == v) {
             Intent intent = new Intent(getActivity(), SaleProductManualActivity.class);
             startActivity(intent);
 
