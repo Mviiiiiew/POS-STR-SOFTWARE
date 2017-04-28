@@ -38,6 +38,10 @@ import java.util.ArrayList;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+/**
+ * หน้าสรุปบิลในแต่ละครั้ง
+ * */
 public class ConcludeFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_manual;
     ButtonRectangle btn_barcode;

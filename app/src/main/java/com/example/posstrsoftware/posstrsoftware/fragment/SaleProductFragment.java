@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -52,7 +53,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
     ListView listView_SaleProduct;
     ImageButton btn_back;
     EditText edit_Barcode;
-    ButtonRectangle btn_clear;
+    Button btn_clear;
     TextView txt_cost;
     ButtonRectangle btn_backz;
     EditText edit_Amount;
@@ -90,7 +91,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         edit_Barcode = (EditText) rootView.findViewById(R.id.edit_Barcode);
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
-        btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
+        btn_clear = (Button) rootView.findViewById(R.id.btn_clear);
         btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
         edit_Amount = (EditText) rootView.findViewById(R.id.edit_Amount);
         edit_Amount.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -100,7 +101,7 @@ public class SaleProductFragment extends Fragment implements View.OnClickListene
         btn_back.setOnClickListener(this);
         edit_Barcode.setOnEditorActionListener(this);
         btn_Pay.setRippleSpeed(15);
-        btn_clear.setRippleSpeed(15);
+
         btn_backz.setRippleSpeed(40);
         edit_Barcode.setShowSoftInputOnFocus(false);
 

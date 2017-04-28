@@ -22,7 +22,11 @@ import com.gc.materialdesign.views.ButtonRectangle;
 
 /**
  * Created by nuuneoi on 11/16/2014.
+
  */
+/**
+ * เพิ่มกลุ่ม
+ * */
 public class AddGroupFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_back;
     EditText editText_Group;

@@ -194,8 +194,7 @@
                 android:textSize="20sp"
 
                 ></com.gc.materialdesign.views.ButtonRectangle>
-
-            <com.gc.materialdesign.views.ButtonRectangle
+            <Button
                 android:id="@+id/btn_clear"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -203,13 +202,14 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:textStyle="bold"
                 android:background="#64DD17"
                 android:gravity="center"
                 android:text="@string/begin"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="20sp"/>
 
-                ></com.gc.materialdesign.views.ButtonRectangle>
+
 
 
             <com.gc.materialdesign.views.ButtonRectangle
@@ -217,9 +217,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.7"
                 android:background="#FFD600"
+                android:textStyle="bold"
                 android:text="@string/btn_back"
                 android:textColor="#000000"
                 android:textSize="20sp"

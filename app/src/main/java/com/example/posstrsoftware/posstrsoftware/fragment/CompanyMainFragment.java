@@ -25,6 +25,11 @@ import java.io.Serializable;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+
+/**
+ * หน้าหลักข้อมูลบริษัท
+ * */
 public class CompanyMainFragment extends Fragment implements View.OnClickListener {
 
     ButtonRectangle btn_SettingCompany;

@@ -28,6 +28,9 @@ import java.util.ArrayList;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+/**
+ * เแก้ไขกลุ่ม
+ * */
 public class FixGroupFragment extends Fragment implements View.OnClickListener {
     ImageButton btn_back;
     EditText editText_Group;

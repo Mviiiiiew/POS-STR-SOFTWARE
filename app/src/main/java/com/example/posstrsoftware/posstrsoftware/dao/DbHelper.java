@@ -94,29 +94,7 @@ public class DbHelper extends SQLiteOpenHelper {
             + " Symbol_Vat  TEXT, "
             + " Value_Vat  TEXT "
             + ");";
-    private static final String tablesale_masterCreateSQL = "CREATE TABLE sale_master("
-            + "sale_master_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + "sale_doc_id TEXT,"
-            + "sale_doc_date TEXT ,"
-            + "discount TEXT ,"
-            + "id_company TEXT DEFAULT 1"
-            + ");";
-    private static final String tablesale_detailCreateSQL = "CREATE TABLE sale_detail("
-            + "sale_detail_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + "sale_master_id INTEGER,"
-            + "line_no TEXT ,"
-            + "product_id TEXT ,"
-            + "product_name TEXT ,"
-            + "unit_id TEXT ,"
-            + "group_id TEXT ,"
-            + "group_name TEXT, "
-            + "product_amount TEXT ,"
-            + "product_price TEXT ,"
-            + "product_price_total TEXT ,"
-            + "product_price_total_vat TEXT ,"
-            + "product_cost TEXT ,"
-            + "product_cost_total TEXT "
-            + ");";
+
 
     private static final String tabletransectionBillCreateSQL = "CREATE TABLE transectionBill("
             + "id_productsale INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -183,8 +161,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(tableProductSaleCreateSQL);
         db.execSQL(tableReportCreateSQL);
         db.execSQL(viewProductList);
-        db.execSQL(tablesale_masterCreateSQL);
-        db.execSQL(tablesale_detailCreateSQL);
         db.execSQL(tabletransectionBillCreateSQL);
         db.execSQL(viewmasterList);
         db.execSQL(viewdetailList);

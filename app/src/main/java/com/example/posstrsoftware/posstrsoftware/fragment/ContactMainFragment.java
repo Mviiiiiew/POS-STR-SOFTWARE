@@ -12,6 +12,10 @@ import com.example.posstrsoftware.posstrsoftware.R;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+/**
+ * ไม่ได้ใช้
+ * */
 public class ContactMainFragment extends Fragment {
 
     public ContactMainFragment() {

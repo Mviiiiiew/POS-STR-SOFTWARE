@@ -24,6 +24,10 @@ import com.gc.materialdesign.views.ButtonRectangle;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+/**
+ * แก้ไขหน่วยสินค้า
+ * */
 public class FixUnitFragment extends Fragment implements View.OnClickListener {
 
     EditText editText_Unit;

@@ -44,6 +44,11 @@ import java.util.Locale;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+
+/**
+ *  แก้ไขสินค้า
+ * */
 public class FixProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     ImageButton btn_back;
     EditText editText_product;

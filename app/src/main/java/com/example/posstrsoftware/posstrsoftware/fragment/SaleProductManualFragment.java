@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -53,7 +54,7 @@ import java.util.List;
 public class SaleProductManualFragment extends Fragment implements View.OnClickListener {
     ListView listview_salemanual;
     ListView listView_SaleProductmanual;
-    ButtonRectangle btn_clear;
+    Button btn_clear;
     ButtonRectangle btn_backz;
     SearchView searchViewProduct;
     TextView txt_cost;
@@ -93,7 +94,7 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         searchViewProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
         searchViewProduct.setQueryHint("Search..");
         btn_backz = (ButtonRectangle) rootView.findViewById(R.id.btn_backz);
-        btn_clear = (ButtonRectangle) rootView.findViewById(R.id.btn_clear);
+        btn_clear = (Button) rootView.findViewById(R.id.btn_clear);
         btn_Pay = (ButtonRectangle) rootView.findViewById(R.id.btn_Pay);
         btn_back = (ImageButton) rootView.findViewById(R.id.btn_back);
         txt_cost = (TextView) rootView.findViewById(R.id.txt_cost);
@@ -120,7 +121,6 @@ public class SaleProductManualFragment extends Fragment implements View.OnClickL
         btn_backz.setOnClickListener(this);
         btn_back.setOnClickListener(this);
         btn_Pay.setRippleSpeed(40);
-        btn_clear.setRippleSpeed(40);
         btn_backz.setRippleSpeed(40);
 
 

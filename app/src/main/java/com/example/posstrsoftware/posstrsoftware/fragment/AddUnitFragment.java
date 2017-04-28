@@ -24,6 +24,11 @@ import com.gc.materialdesign.views.ButtonRectangle;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+
+/**
+ * เพิ่มหน่วย
+ * */
 public class AddUnitFragment extends Fragment implements View.OnClickListener {
     EditText editText_Unit;
     ButtonRectangle btn_save;

@@ -41,6 +41,10 @@ import static com.example.posstrsoftware.posstrsoftware.util.VAT.VATRATE;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+/**
+ * หน้าจอส่วนลดสินค้าในการขายแต่ละครั้ง
+ * */
 public class DiscountMainFragment extends Fragment implements View.OnClickListener {
 
     RadioGroup rgRadiogroup;

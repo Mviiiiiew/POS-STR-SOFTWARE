@@ -30,6 +30,10 @@ import java.util.List;
 /**
  * Created by nuuneoi on 11/16/2014.
  */
+
+/**
+ * เพิ่มข้อมูลบริษัท
+ * */
 public class CompanySetFragment extends Fragment implements View.OnClickListener {
     ButtonRectangle btn_UpdateCompany;
     ListView listview_Company;
