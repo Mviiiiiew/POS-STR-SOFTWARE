@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Created by nuuneoi on 11/16/2014.
  */
 /**
- * เแก้ไขกลุ่ม
+ * เแก้ไขกลุ่มสินค้า
  * */
 public class FixGroupFragment extends Fragment implements View.OnClickListener {
     ImageButton btn_back;
