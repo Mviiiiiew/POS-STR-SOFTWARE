@@ -399,7 +399,6 @@ public class PayMainFragment extends Fragment implements View.OnClickListener {
                             productSaleDAO1.close();
 
                             if (txtdiscount.matches("0.0")) {
-
                                 //No discount
 
                                 HeadMaster();
