@@ -60,7 +60,7 @@ public class CompanyDAO {
     }
     public int check() {
 
-        String QueryCheckPass = "Select count(*) from PassWordList  where   delete_flag = 'N' ";
+        String QueryCheckPass =   "Select count(*) from PassWordList  where   delete_flag = 'N' ";
         SQLiteStatement stmtcheckpass = database.compileStatement(QueryCheckPass);
 
         int count_row_password = (int) stmtcheckpass.simpleQueryForLong();
