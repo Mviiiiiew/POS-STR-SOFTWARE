@@ -14,7 +14,7 @@ import com.example.posstrsoftware.posstrsoftware.model.GroupList;
 import java.util.ArrayList;
 
 /**
- * Created by Wasabi on 10/17/2016.ewerwerwerewrwer
+ * Created by Wasabi on 10/17/2016.ewerwerwerewrwerewrwerwer
  */
 
 public class GroupDAO {
