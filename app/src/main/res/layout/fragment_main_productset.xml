@@ -69,6 +69,7 @@
             android:textStyle="bold"
             />
 
+
         <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/btn_Set_Group"
             android:layout_width="0dp"

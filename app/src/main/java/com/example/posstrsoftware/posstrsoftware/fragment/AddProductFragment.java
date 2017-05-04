@@ -44,7 +44,7 @@ import java.util.Locale;
 
 
 /**
- * เพิ่มสินค้า
+ * เพิ่มสินค้า--
  * */
 public class AddProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher {
     EditText editText_Product;

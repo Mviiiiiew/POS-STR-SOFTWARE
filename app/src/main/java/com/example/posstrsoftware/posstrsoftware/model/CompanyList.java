@@ -8,6 +8,15 @@ import java.io.Serializable;
 
 public class CompanyList implements Serializable {
     int PassWord;
+    String PassWordInsert;
+
+    public String getPassWordInsert() {
+        return PassWordInsert;
+    }
+
+    public void setPassWordInsert(String passWordInsert) {
+        PassWordInsert = passWordInsert;
+    }
 
     public int getPassWord() {
         return PassWord;

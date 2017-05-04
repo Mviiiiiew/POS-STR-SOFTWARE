@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +14,16 @@ import android.widget.Toast;
 
 import com.example.posstrsoftware.posstrsoftware.R;
 import com.example.posstrsoftware.posstrsoftware.dao.CompanyDAO;
+import com.example.posstrsoftware.posstrsoftware.dao.GroupDAO;
 import com.example.posstrsoftware.posstrsoftware.model.CompanyList;
 
 public class PassWordActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_Ok;
     EditText edit_pass;
     Button btn_cancel;
+    String PasswordInsert;
+    int x;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -32,13 +37,31 @@ public class PassWordActivity extends AppCompatActivity implements View.OnClickL
         companyDAO.open();
         ps = companyDAO.check();
         companyDAO.close();
+        Date();
+        CreatePassWord();
         if (ps == 1) {
+
             Intent intent = new Intent(this, MainActivity.class);
             this.finishAffinity();
             startActivity(intent);
+
         }
 
+        CompanyList companyList = new CompanyList();
+        companyList.setPassWordInsert(PasswordInsert);
+        CompanyDAO companyDAO1 = new CompanyDAO(this);
+        companyDAO1.open();
+        companyDAO1.addPassWord(companyList);
+        companyDAO1.close();
 
+
+
+    }
+
+    private void CreatePassWord() {
+        x = Integer.parseInt(Date());
+        PasswordInsert = String.valueOf(((2*x+31680)*3)+7);
+        Log.d("Datexx",PasswordInsert+"");
     }
 
     private void initInstants() {
@@ -50,10 +73,19 @@ public class PassWordActivity extends AppCompatActivity implements View.OnClickL
         edit_pass.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 edit_pass.setText("");
                 return false;
+
             }
         });
+    }
+    private String Date() {
+        java.text.DateFormat df = new java.text.SimpleDateFormat("yyyyMMdd");
+
+        String date = df.format(java.util.Calendar.getInstance().getTime());
+
+        return date;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

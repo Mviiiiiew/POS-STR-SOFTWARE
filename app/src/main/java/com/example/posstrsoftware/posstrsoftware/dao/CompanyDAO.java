@@ -110,12 +110,22 @@ public class CompanyDAO {
             return 1;
         }
     }
+
     public void Updatepass() {
 
         this.database.execSQL("UPDATE PassWordList set delete_flag = 'Y'");
 
     }
 
+
+    public void addPassWord(CompanyList companyList) {
+
+        ContentValues values = new ContentValues();
+        values.put("PASSWORD", companyList.getPassWordInsert());
+
+        this.database.update("PassWordList",values, "idPASS = 1", null);
+
+    }
 
 
     public void add(CompanyList companyList) {

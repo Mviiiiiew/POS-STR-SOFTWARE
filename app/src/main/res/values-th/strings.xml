@@ -36,6 +36,8 @@
     <string name="new_price">ราคาสุทธิ</string>
     <string name="discount">ราคาส่วนลด</string>
     <string name="discpercent">เปอร์เซ็นต์ส่วนลด</string>
+
+
     <string name="discount_volumn">คิดส่วนลดแบบจำนวนเงิน</string>
     <string name="disc_percentage">คิดส่วนลดแบบเปอร์เซ็นต์</string>
     <string name="txt_please_enter_qty">กรุณาใส่จำนวน</string>
