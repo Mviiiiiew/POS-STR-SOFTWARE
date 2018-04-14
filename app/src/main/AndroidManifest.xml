@@ -44,6 +44,11 @@
         </receiver>
 
         <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
 
         </activity>
         <activity
@@ -121,11 +126,7 @@
         <activity android:name=".activity.ReportToPrintActivity">
         </activity>
         <activity android:name=".activity.PassWordActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 

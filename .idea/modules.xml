@@ -2,21 +2,22 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE1.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE10.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE10.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE16.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE16.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE17.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE17.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE19.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE19.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE24.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE24.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE3.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE32.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE32.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE4.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE5.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE6.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARE7.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARE7.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWAREBackup3.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWAREBackup3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/POSSTRSoftware.iml" filepath="$PROJECT_DIR$/POSSTRSoftware.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE1.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE1.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE10.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE10.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE16.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE16.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE17.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE17.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE19.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE19.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE24.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE24.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE3.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE3.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE32.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE32.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE4.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE4.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE5.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE5.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE6.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE6.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE7.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWARE7.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWAREBackup3.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POS-STR-SOFTWAREBackup3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POS-STR-SOFTWARETest.iml" filepath="$PROJECT_DIR$/POS-STR-SOFTWARETest.iml" />
+      <module fileurl="file://C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POSSTRSoftware.iml" filepath="C:\Users\MAN\AndroidStudioProjects\POS-STR-SOFTWARETest\POSSTRSoftware.iml" />
       <module fileurl="file://$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" filepath="$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

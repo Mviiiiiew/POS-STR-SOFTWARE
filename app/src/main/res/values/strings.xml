@@ -110,6 +110,7 @@
     <string name="report_transaction">REPORT TRANSACTION</string>
     <string name="product_sale_summary_by_day_csv">PRODUCT SALE SUMMARY BY DAY (.CSV)</string>
     <string name="report_transaction_csv">REPORT TRANSACTION (.CSV)</string>
+    <string name="discPercent">Between 0 - 100 (%)</string>
 
 
 </resources>

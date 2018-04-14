@@ -278,7 +278,7 @@ public class DiscountMainFragment extends Fragment implements View.OnClickListen
                     double number = Double.valueOf(added_number);
 
                     if (number > 100.0) {
-                        Toast.makeText(getActivity(), "กำหนดอยู่ในช่วง 0 - 100 (%)", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.discPercent, Toast.LENGTH_SHORT).show();
                         editText_DiscountPercent.setText("");
                     }
                 }

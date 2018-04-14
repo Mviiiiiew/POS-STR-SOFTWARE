@@ -106,6 +106,7 @@
     <string name="report_transaction">สรุปสินค้าที่ขายไป</string>
     <string name="product_sale_summary_by_day_csv">สรุปยอดขายรายวัน (.CSV)</string>
     <string name="report_transaction_csv">สรุปสินค้าที่ขายไป (.CSV)</string>
+    <string name="discPercent">กำหนดอยู่ในช่วง 0 - 100 (%)</string>
 
 
 </resources>
